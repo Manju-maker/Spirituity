@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "272701560663",
+    "firebase_url": "https://spirituity-aeabd.firebaseio.com",
+    "project_id": "spirituity-aeabd",
+    "storage_bucket": "spirituity-aeabd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272701560663:android:6e7349c184abc76f2e1012",
+        "android_client_info": {
+          "package_name": "com.spirituity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272701560663-l140s5ioee0fpidarv318f8mml25hsa5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spirituity",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "272701560663-ce31l6rahu7667p4htmkp5run62pfs6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWKi8WWsSzYsYJ0eNkoydeDvbTPCfO7u8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272701560663-ce31l6rahu7667p4htmkp5run62pfs6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

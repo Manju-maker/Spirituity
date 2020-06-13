@@ -1,0 +1,955 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00E356F31AD99517003FC87E /* SpirituityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SpirituityTests.m */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
+		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* SpirituityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SpirituityTests.m */; };
+		39B30A68057E440CB72E4783 /* AvenirNextLTPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2534057B4CAE468E86759A6F /* AvenirNextLTPro-Bold.otf */; };
+		DBDB8500B7E64B14911B5D8B /* AvenirNextLTPro-It.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95BD2512B330484EAD7EC539 /* AvenirNextLTPro-It.otf */; };
+		70EF32CA159F405EAEEC7263 /* AvenirNextLTPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7185E3BA6351484EAE3F7C7A /* AvenirNextLTPro-Regular.otf */; };
+		64DBB686BEB145F4B5CB3D64 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE1DBE93CE5541FABA169F4E /* Quicksand-Bold.ttf */; };
+		DD4A6AC5EACA4BADA4684BF7 /* AvenirNextLTPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B657B6452BF4C1FB785BC54 /* AvenirNextLTPro-Bold.otf */; };
+		42AE101DDBAA412F83AD1BB3 /* AvenirNextLTPro-BoldCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = E22D8FA8B65547F094438591 /* AvenirNextLTPro-BoldCond.otf */; };
+		3FF6C3B7140B4A1F8FF58EE3 /* AvenirNextLTPro-BoldCondItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 820D8B954F384F8589EEAE13 /* AvenirNextLTPro-BoldCondItalic.otf */; };
+		63714BB21D9840558C9A16EF /* AvenirNextLTPro-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1DD4E1B8ED814E28BAD438E9 /* AvenirNextLTPro-BoldItalic.otf */; };
+		6ACE48539E9E4BF98F2D8026 /* AvenirNextLTPro-CondItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD972C60587249F89E66A6F2 /* AvenirNextLTPro-CondItalic.otf */; };
+		3CAA7E33C9604743A03F1815 /* AvenirNextLTPro-CondRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 12ECD69B0468435CAA758FB5 /* AvenirNextLTPro-CondRegular.otf */; };
+		9AE3C69C287A427B819EC09F /* AvenirNextLTPro-Demi.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF17E1405B940D188C1D300 /* AvenirNextLTPro-Demi.otf */; };
+		42971D079656493A8F3081A5 /* AvenirNextLTPro-DemiCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5CD073B7064C4327A528AB56 /* AvenirNextLTPro-DemiCond.otf */; };
+		0FDF9E3B3BD040F6B8494386 /* AvenirNextLTPro-DemiCondItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A55D773AD122457C991D5C27 /* AvenirNextLTPro-DemiCondItalic.otf */; };
+		BE1C3F5A186D416A8EBE8E88 /* AvenirNextLTPro-DemiItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D155BB9F5A22444381D063DB /* AvenirNextLTPro-DemiItalic.otf */; };
+		097563C44F4247459BAC0229 /* AvenirNextLTPro-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78CC36C430DB4D5BBC652A55 /* AvenirNextLTPro-Heavy.otf */; };
+		AE70C69269C74D62A9F829AC /* AvenirNextLTPro-HeavyCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = F88EC1A0A1964E3E84752B00 /* AvenirNextLTPro-HeavyCond.otf */; };
+		067A9C36ED2A437DAB62600E /* AvenirNextLTPro-HeavyCondItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDF066D5AFC2408D925EC5F7 /* AvenirNextLTPro-HeavyCondItalic.otf */; };
+		345CB6933DE348728150E287 /* AvenirNextLTPro-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = BAB7AF27D9864354A5E87AE6 /* AvenirNextLTPro-HeavyItalic.otf */; };
+		28175E609C284FDB84B89C78 /* AvenirNextLTPro-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B0BA2CD812D441183034081 /* AvenirNextLTPro-Italic.otf */; };
+		4468C5FF39AF437794C6B6F7 /* AvenirNextLTPro-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE83C9E6F2844AB39BCF4883 /* AvenirNextLTPro-Light.otf */; };
+		0AB0BD0065434CD49151D353 /* AvenirNextLTPro-LightCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 607078F7CCCD420B99B213F8 /* AvenirNextLTPro-LightCond.otf */; };
+		DC3CB9A672794E1D97CE8290 /* AvenirNextLTPro-LightCondItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65DFE23B48AC4B01BA619B80 /* AvenirNextLTPro-LightCondItalic.otf */; };
+		35087FFDC0394B8296076FDB /* AvenirNextLTPro-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 361318DB55FE4E2EA69AB4D5 /* AvenirNextLTPro-LightItalic.otf */; };
+		56169D3074E2491F90E69219 /* AvenirNextLTPro-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 487A25EBE266469AB2356FDB /* AvenirNextLTPro-Medium.otf */; };
+		854F597BAA1442359323E885 /* AvenirNextLTPro-MediumCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 959EE22E97EB41C1AB046FAF /* AvenirNextLTPro-MediumCond.otf */; };
+		B5B8EF5A65964D2D93FE74D5 /* AvenirNextLTPro-MediumCondItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = BADB0D8F50574FF4882EF97F /* AvenirNextLTPro-MediumCondItalic.otf */; };
+		60AB18175880449085B04BF1 /* AvenirNextLTPro-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EBA54BF3E479451D9CEB850D /* AvenirNextLTPro-MediumItalic.otf */; };
+		BB8B6AF1C16C40B4B89C526C /* AvenirNextLTPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0456C0B10D7E423E8EF46278 /* AvenirNextLTPro-Regular.otf */; };
+		7573DB1B635C49198E493982 /* AvenirNextLTPro-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78E0450B49F049188805BED9 /* AvenirNextLTPro-Thin.otf */; };
+		AC3B5C06649A4875AA26EEC7 /* AvenirNextLTPro-ThinCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = BBE096B43814477B90420336 /* AvenirNextLTPro-ThinCond.otf */; };
+		97CF7C4D169D48D594C7A1B1 /* AvenirNextLTPro-ThinCondItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00E97750687F4C49B69788B0 /* AvenirNextLTPro-ThinCondItalic.otf */; };
+		E9AFE2DE4BA348A6B561DC25 /* AvenirNextLTPro-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E418D1448D044825A338BAEC /* AvenirNextLTPro-ThinItalic.otf */; };
+		D2ABEDF76D2245C9849FFA94 /* AvenirNextLTPro-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 235A527F47FA4EA9A35A4E7A /* AvenirNextLTPro-Ultralight.otf */; };
+		2671A576ACA34D01A203EC52 /* AvenirNextLTPro-UltralightCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E9BBF2954414CACAA2173B3 /* AvenirNextLTPro-UltralightCond.otf */; };
+		3E50703FADEE41338A96A0B8 /* AvenirNextLTPro-UltralightCondItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE9CBE514CDF4E138C5258E9 /* AvenirNextLTPro-UltralightCondItalic.otf */; };
+		FC1DF159978843EE99382200 /* AvenirNextLTPro-UltralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD3BF7C69EC0425DBC965C8E /* AvenirNextLTPro-UltralightItalic.otf */; };
+		9AEBA18695994BC18DA43F64 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907F2D939CB84F9ABD25A4E3 /* Quicksand-Bold.ttf */; };
+		7BE430A44ED24B9DBE21F582 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B737C54AE7C349E4B3D06193 /* Quicksand-Light.ttf */; };
+		838BF82363734DBB8B2A96F5 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6965600334384322B82CAD72 /* Quicksand-Medium.ttf */; };
+		EFBB5E0828514A05A02162FD /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7842F6DE470B43F3BB112962 /* Quicksand-Regular.ttf */; };
+		EFAA5A68F66E41C6ABEE6123 /* Quicksand-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA9FDC5B23A3493BA9A047C6 /* Quicksand-SemiBold.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = Spirituity;
+		};
+		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
+			remoteInfo = "Spirituity-tvOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		00E356EE1AD99517003FC87E /* SpirituityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpirituityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* SpirituityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpirituityTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Spirituity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spirituity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Spirituity/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Spirituity/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Spirituity/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Spirituity/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Spirituity/main.m; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* Spirituity-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spirituity-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* Spirituity-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Spirituity-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		2534057B4CAE468E86759A6F /* AvenirNextLTPro-Bold.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Bold.otf"; path = "../assets/fonts/AvenirNextLTPro-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		95BD2512B330484EAD7EC539 /* AvenirNextLTPro-It.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-It.otf"; path = "../assets/fonts/AvenirNextLTPro-It.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7185E3BA6351484EAE3F7C7A /* AvenirNextLTPro-Regular.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Regular.otf"; path = "../assets/fonts/AvenirNextLTPro-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BE1DBE93CE5541FABA169F4E /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; name = "Quicksand-Bold.ttf"; path = "../assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6B657B6452BF4C1FB785BC54 /* AvenirNextLTPro-Bold.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Bold.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E22D8FA8B65547F094438591 /* AvenirNextLTPro-BoldCond.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-BoldCond.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-BoldCond.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		820D8B954F384F8589EEAE13 /* AvenirNextLTPro-BoldCondItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-BoldCondItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-BoldCondItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1DD4E1B8ED814E28BAD438E9 /* AvenirNextLTPro-BoldItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-BoldItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-BoldItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DD972C60587249F89E66A6F2 /* AvenirNextLTPro-CondItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-CondItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-CondItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		12ECD69B0468435CAA758FB5 /* AvenirNextLTPro-CondRegular.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-CondRegular.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-CondRegular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2DF17E1405B940D188C1D300 /* AvenirNextLTPro-Demi.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Demi.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-Demi.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5CD073B7064C4327A528AB56 /* AvenirNextLTPro-DemiCond.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-DemiCond.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-DemiCond.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A55D773AD122457C991D5C27 /* AvenirNextLTPro-DemiCondItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-DemiCondItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-DemiCondItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D155BB9F5A22444381D063DB /* AvenirNextLTPro-DemiItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-DemiItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-DemiItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		78CC36C430DB4D5BBC652A55 /* AvenirNextLTPro-Heavy.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Heavy.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-Heavy.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F88EC1A0A1964E3E84752B00 /* AvenirNextLTPro-HeavyCond.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-HeavyCond.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-HeavyCond.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CDF066D5AFC2408D925EC5F7 /* AvenirNextLTPro-HeavyCondItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-HeavyCondItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-HeavyCondItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BAB7AF27D9864354A5E87AE6 /* AvenirNextLTPro-HeavyItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-HeavyItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-HeavyItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8B0BA2CD812D441183034081 /* AvenirNextLTPro-Italic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Italic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-Italic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AE83C9E6F2844AB39BCF4883 /* AvenirNextLTPro-Light.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Light.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		607078F7CCCD420B99B213F8 /* AvenirNextLTPro-LightCond.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-LightCond.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-LightCond.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		65DFE23B48AC4B01BA619B80 /* AvenirNextLTPro-LightCondItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-LightCondItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-LightCondItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		361318DB55FE4E2EA69AB4D5 /* AvenirNextLTPro-LightItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-LightItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-LightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		487A25EBE266469AB2356FDB /* AvenirNextLTPro-Medium.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Medium.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		959EE22E97EB41C1AB046FAF /* AvenirNextLTPro-MediumCond.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-MediumCond.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-MediumCond.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BADB0D8F50574FF4882EF97F /* AvenirNextLTPro-MediumCondItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-MediumCondItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-MediumCondItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EBA54BF3E479451D9CEB850D /* AvenirNextLTPro-MediumItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-MediumItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-MediumItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0456C0B10D7E423E8EF46278 /* AvenirNextLTPro-Regular.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Regular.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		78E0450B49F049188805BED9 /* AvenirNextLTPro-Thin.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Thin.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BBE096B43814477B90420336 /* AvenirNextLTPro-ThinCond.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-ThinCond.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-ThinCond.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		00E97750687F4C49B69788B0 /* AvenirNextLTPro-ThinCondItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-ThinCondItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-ThinCondItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E418D1448D044825A338BAEC /* AvenirNextLTPro-ThinItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-ThinItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-ThinItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		235A527F47FA4EA9A35A4E7A /* AvenirNextLTPro-Ultralight.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-Ultralight.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-Ultralight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4E9BBF2954414CACAA2173B3 /* AvenirNextLTPro-UltralightCond.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-UltralightCond.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-UltralightCond.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CE9CBE514CDF4E138C5258E9 /* AvenirNextLTPro-UltralightCondItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-UltralightCondItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-UltralightCondItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AD3BF7C69EC0425DBC965C8E /* AvenirNextLTPro-UltralightItalic.otf */ = {isa = PBXFileReference; name = "AvenirNextLTPro-UltralightItalic.otf"; path = "../App/Assets/fonts/AvenirNextLTPro-UltralightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		907F2D939CB84F9ABD25A4E3 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; name = "Quicksand-Bold.ttf"; path = "../App/Assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B737C54AE7C349E4B3D06193 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; name = "Quicksand-Light.ttf"; path = "../App/Assets/fonts/Quicksand-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6965600334384322B82CAD72 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; name = "Quicksand-Medium.ttf"; path = "../App/Assets/fonts/Quicksand-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7842F6DE470B43F3BB112962 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; name = "Quicksand-Regular.ttf"; path = "../App/Assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CA9FDC5B23A3493BA9A047C6 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; name = "Quicksand-SemiBold.ttf"; path = "../App/Assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00E356EB1AD99517003FC87E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E4781E0B4A5D006451C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48D1E0B4A5D006451C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00E356EF1AD99517003FC87E /* SpirituityTests */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F21AD99517003FC87E /* SpirituityTests.m */,
+				00E356F01AD99517003FC87E /* Supporting Files */,
+			);
+			path = SpirituityTests;
+			sourceTree = "<group>";
+		};
+		00E356F01AD99517003FC87E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F11AD99517003FC87E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		13B07FAE1A68108700A75B9A /* Spirituity */ = {
+			isa = PBXGroup;
+			children = (
+				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
+				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				13B07FB71A68108700A75B9A /* main.m */,
+			);
+			name = Spirituity;
+			sourceTree = "<group>";
+		};
+		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				13B07FAE1A68108700A75B9A /* Spirituity */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* SpirituityTests */,
+				83CBBA001A601CBA00E9B192 /* Products */,
+				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				D5B46F55486E46E3AC7A5CE2 /* Resources */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
+		};
+		83CBBA001A601CBA00E9B192 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A /* Spirituity.app */,
+				00E356EE1AD99517003FC87E /* SpirituityTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* Spirituity-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* Spirituity-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D5B46F55486E46E3AC7A5CE2 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				2534057B4CAE468E86759A6F /* AvenirNextLTPro-Bold.otf */,
+				95BD2512B330484EAD7EC539 /* AvenirNextLTPro-It.otf */,
+				7185E3BA6351484EAE3F7C7A /* AvenirNextLTPro-Regular.otf */,
+				BE1DBE93CE5541FABA169F4E /* Quicksand-Bold.ttf */,
+				6B657B6452BF4C1FB785BC54 /* AvenirNextLTPro-Bold.otf */,
+				E22D8FA8B65547F094438591 /* AvenirNextLTPro-BoldCond.otf */,
+				820D8B954F384F8589EEAE13 /* AvenirNextLTPro-BoldCondItalic.otf */,
+				1DD4E1B8ED814E28BAD438E9 /* AvenirNextLTPro-BoldItalic.otf */,
+				DD972C60587249F89E66A6F2 /* AvenirNextLTPro-CondItalic.otf */,
+				12ECD69B0468435CAA758FB5 /* AvenirNextLTPro-CondRegular.otf */,
+				2DF17E1405B940D188C1D300 /* AvenirNextLTPro-Demi.otf */,
+				5CD073B7064C4327A528AB56 /* AvenirNextLTPro-DemiCond.otf */,
+				A55D773AD122457C991D5C27 /* AvenirNextLTPro-DemiCondItalic.otf */,
+				D155BB9F5A22444381D063DB /* AvenirNextLTPro-DemiItalic.otf */,
+				78CC36C430DB4D5BBC652A55 /* AvenirNextLTPro-Heavy.otf */,
+				F88EC1A0A1964E3E84752B00 /* AvenirNextLTPro-HeavyCond.otf */,
+				CDF066D5AFC2408D925EC5F7 /* AvenirNextLTPro-HeavyCondItalic.otf */,
+				BAB7AF27D9864354A5E87AE6 /* AvenirNextLTPro-HeavyItalic.otf */,
+				8B0BA2CD812D441183034081 /* AvenirNextLTPro-Italic.otf */,
+				AE83C9E6F2844AB39BCF4883 /* AvenirNextLTPro-Light.otf */,
+				607078F7CCCD420B99B213F8 /* AvenirNextLTPro-LightCond.otf */,
+				65DFE23B48AC4B01BA619B80 /* AvenirNextLTPro-LightCondItalic.otf */,
+				361318DB55FE4E2EA69AB4D5 /* AvenirNextLTPro-LightItalic.otf */,
+				487A25EBE266469AB2356FDB /* AvenirNextLTPro-Medium.otf */,
+				959EE22E97EB41C1AB046FAF /* AvenirNextLTPro-MediumCond.otf */,
+				BADB0D8F50574FF4882EF97F /* AvenirNextLTPro-MediumCondItalic.otf */,
+				EBA54BF3E479451D9CEB850D /* AvenirNextLTPro-MediumItalic.otf */,
+				0456C0B10D7E423E8EF46278 /* AvenirNextLTPro-Regular.otf */,
+				78E0450B49F049188805BED9 /* AvenirNextLTPro-Thin.otf */,
+				BBE096B43814477B90420336 /* AvenirNextLTPro-ThinCond.otf */,
+				00E97750687F4C49B69788B0 /* AvenirNextLTPro-ThinCondItalic.otf */,
+				E418D1448D044825A338BAEC /* AvenirNextLTPro-ThinItalic.otf */,
+				235A527F47FA4EA9A35A4E7A /* AvenirNextLTPro-Ultralight.otf */,
+				4E9BBF2954414CACAA2173B3 /* AvenirNextLTPro-UltralightCond.otf */,
+				CE9CBE514CDF4E138C5258E9 /* AvenirNextLTPro-UltralightCondItalic.otf */,
+				AD3BF7C69EC0425DBC965C8E /* AvenirNextLTPro-UltralightItalic.otf */,
+				907F2D939CB84F9ABD25A4E3 /* Quicksand-Bold.ttf */,
+				B737C54AE7C349E4B3D06193 /* Quicksand-Light.ttf */,
+				6965600334384322B82CAD72 /* Quicksand-Medium.ttf */,
+				7842F6DE470B43F3BB112962 /* Quicksand-Regular.ttf */,
+				CA9FDC5B23A3493BA9A047C6 /* Quicksand-SemiBold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00E356ED1AD99517003FC87E /* SpirituityTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SpirituityTests" */;
+			buildPhases = (
+				00E356EA1AD99517003FC87E /* Sources */,
+				00E356EB1AD99517003FC87E /* Frameworks */,
+				00E356EC1AD99517003FC87E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00E356F51AD99517003FC87E /* PBXTargetDependency */,
+			);
+			name = SpirituityTests;
+			productName = SpirituityTests;
+			productReference = 00E356EE1AD99517003FC87E /* SpirituityTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		13B07F861A680F5B00A75B9A /* Spirituity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Spirituity" */;
+			buildPhases = (
+				FD10A7F022414F080027D42C /* Start Packager */,
+				13B07F871A680F5B00A75B9A /* Sources */,
+				13B07F8C1A680F5B00A75B9A /* Frameworks */,
+				13B07F8E1A680F5B00A75B9A /* Resources */,
+				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Spirituity;
+			productName = "Spirituity";
+			productReference = 13B07F961A680F5B00A75B9A /* Spirituity.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2D02E47A1E0B4A5D006451C7 /* Spirituity-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Spirituity-tvOS" */;
+			buildPhases = (
+				FD10A7F122414F3F0027D42C /* Start Packager */,
+				2D02E4771E0B4A5D006451C7 /* Sources */,
+				2D02E4781E0B4A5D006451C7 /* Frameworks */,
+				2D02E4791E0B4A5D006451C7 /* Resources */,
+				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Spirituity-tvOS";
+			productName = "Spirituity-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* Spirituity-tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2D02E48F1E0B4A5D006451C7 /* Spirituity-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Spirituity-tvOSTests" */;
+			buildPhases = (
+				2D02E48C1E0B4A5D006451C7 /* Sources */,
+				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
+				2D02E48E1E0B4A5D006451C7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
+			);
+			name = "Spirituity-tvOSTests";
+			productName = "Spirituity-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* Spirituity-tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83CBB9F71A601CBA00E9B192 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 940;
+				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					00E356ED1AD99517003FC87E = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					2D02E47A1E0B4A5D006451C7 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					2D02E48F1E0B4A5D006451C7 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+					};
+				};
+			};
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Spirituity" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83CBB9F61A601CBA00E9B192;
+			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13B07F861A680F5B00A75B9A /* Spirituity */,
+				00E356ED1AD99517003FC87E /* SpirituityTests */,
+				2D02E47A1E0B4A5D006451C7 /* Spirituity-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* Spirituity-tvOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00E356EC1AD99517003FC87E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F8E1A680F5B00A75B9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				39B30A68057E440CB72E4783 /* AvenirNextLTPro-Bold.otf in Resources */,
+				DBDB8500B7E64B14911B5D8B /* AvenirNextLTPro-It.otf in Resources */,
+				70EF32CA159F405EAEEC7263 /* AvenirNextLTPro-Regular.otf in Resources */,
+				64DBB686BEB145F4B5CB3D64 /* Quicksand-Bold.ttf in Resources */,
+				DD4A6AC5EACA4BADA4684BF7 /* AvenirNextLTPro-Bold.otf in Resources */,
+				42AE101DDBAA412F83AD1BB3 /* AvenirNextLTPro-BoldCond.otf in Resources */,
+				3FF6C3B7140B4A1F8FF58EE3 /* AvenirNextLTPro-BoldCondItalic.otf in Resources */,
+				63714BB21D9840558C9A16EF /* AvenirNextLTPro-BoldItalic.otf in Resources */,
+				6ACE48539E9E4BF98F2D8026 /* AvenirNextLTPro-CondItalic.otf in Resources */,
+				3CAA7E33C9604743A03F1815 /* AvenirNextLTPro-CondRegular.otf in Resources */,
+				9AE3C69C287A427B819EC09F /* AvenirNextLTPro-Demi.otf in Resources */,
+				42971D079656493A8F3081A5 /* AvenirNextLTPro-DemiCond.otf in Resources */,
+				0FDF9E3B3BD040F6B8494386 /* AvenirNextLTPro-DemiCondItalic.otf in Resources */,
+				BE1C3F5A186D416A8EBE8E88 /* AvenirNextLTPro-DemiItalic.otf in Resources */,
+				097563C44F4247459BAC0229 /* AvenirNextLTPro-Heavy.otf in Resources */,
+				AE70C69269C74D62A9F829AC /* AvenirNextLTPro-HeavyCond.otf in Resources */,
+				067A9C36ED2A437DAB62600E /* AvenirNextLTPro-HeavyCondItalic.otf in Resources */,
+				345CB6933DE348728150E287 /* AvenirNextLTPro-HeavyItalic.otf in Resources */,
+				28175E609C284FDB84B89C78 /* AvenirNextLTPro-Italic.otf in Resources */,
+				4468C5FF39AF437794C6B6F7 /* AvenirNextLTPro-Light.otf in Resources */,
+				0AB0BD0065434CD49151D353 /* AvenirNextLTPro-LightCond.otf in Resources */,
+				DC3CB9A672794E1D97CE8290 /* AvenirNextLTPro-LightCondItalic.otf in Resources */,
+				35087FFDC0394B8296076FDB /* AvenirNextLTPro-LightItalic.otf in Resources */,
+				56169D3074E2491F90E69219 /* AvenirNextLTPro-Medium.otf in Resources */,
+				854F597BAA1442359323E885 /* AvenirNextLTPro-MediumCond.otf in Resources */,
+				B5B8EF5A65964D2D93FE74D5 /* AvenirNextLTPro-MediumCondItalic.otf in Resources */,
+				60AB18175880449085B04BF1 /* AvenirNextLTPro-MediumItalic.otf in Resources */,
+				BB8B6AF1C16C40B4B89C526C /* AvenirNextLTPro-Regular.otf in Resources */,
+				7573DB1B635C49198E493982 /* AvenirNextLTPro-Thin.otf in Resources */,
+				AC3B5C06649A4875AA26EEC7 /* AvenirNextLTPro-ThinCond.otf in Resources */,
+				97CF7C4D169D48D594C7A1B1 /* AvenirNextLTPro-ThinCondItalic.otf in Resources */,
+				E9AFE2DE4BA348A6B561DC25 /* AvenirNextLTPro-ThinItalic.otf in Resources */,
+				D2ABEDF76D2245C9849FFA94 /* AvenirNextLTPro-Ultralight.otf in Resources */,
+				2671A576ACA34D01A203EC52 /* AvenirNextLTPro-UltralightCond.otf in Resources */,
+				3E50703FADEE41338A96A0B8 /* AvenirNextLTPro-UltralightCondItalic.otf in Resources */,
+				FC1DF159978843EE99382200 /* AvenirNextLTPro-UltralightItalic.otf in Resources */,
+				9AEBA18695994BC18DA43F64 /* Quicksand-Bold.ttf in Resources */,
+				7BE430A44ED24B9DBE21F582 /* Quicksand-Light.ttf in Resources */,
+				838BF82363734DBB8B2A96F5 /* Quicksand-Medium.ttf in Resources */,
+				EFBB5E0828514A05A02162FD /* Quicksand-Regular.ttf in Resources */,
+				EFAA5A68F66E41C6ABEE6123 /* Quicksand-SemiBold.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E4791E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		FD10A7F022414F080027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F122414F3F0027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00E356EA1AD99517003FC87E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00E356F31AD99517003FC87E /* SpirituityTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13B07F871A680F5B00A75B9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E4771E0B4A5D006451C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
+				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D02E48C1E0B4A5D006451C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DCD954D1E0B4F2C00145EB5 /* SpirituityTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* Spirituity */;
+			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2D02E47A1E0B4A5D006451C7 /* Spirituity-tvOS */;
+			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				13B07FB21A68108700A75B9A /* Base */,
+			);
+			name = LaunchScreen.xib;
+			path = Spirituity;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		00E356F61AD99517003FC87E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SpirituityTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spirituity.app/Spirituity";
+			};
+			name = Debug;
+		};
+		00E356F71AD99517003FC87E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = SpirituityTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spirituity.app/Spirituity";
+			};
+			name = Release;
+		};
+		13B07F941A680F5B00A75B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = NO;
+				INFOPLIST_FILE = Spirituity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = Spirituity;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		13B07F951A680F5B00A75B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Spirituity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = Spirituity;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		2D02E4971E0B4A5E006451C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Spirituity-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Spirituity-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		2D02E4981E0B4A5E006451C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Spirituity-tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Spirituity-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
+		2D02E4991E0B4A5E006451C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Spirituity-tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Spirituity-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spirituity-tvOS.app/Spirituity-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Debug;
+		};
+		2D02E49A1E0B4A5E006451C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Spirituity-tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.Spirituity-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spirituity-tvOS.app/Spirituity-tvOS";
+				TVOS_DEPLOYMENT_TARGET = 10.1;
+			};
+			name = Release;
+		};
+		83CBBA201A601CBA00E9B192 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		83CBBA211A601CBA00E9B192 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SpirituityTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00E356F61AD99517003FC87E /* Debug */,
+				00E356F71AD99517003FC87E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Spirituity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13B07F941A680F5B00A75B9A /* Debug */,
+				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Spirituity-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D02E4971E0B4A5E006451C7 /* Debug */,
+				2D02E4981E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Spirituity-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D02E4991E0B4A5E006451C7 /* Debug */,
+				2D02E49A1E0B4A5E006451C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Spirituity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CBBA201A601CBA00E9B192 /* Debug */,
+				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
+}
