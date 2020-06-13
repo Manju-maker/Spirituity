@@ -9,6 +9,7 @@ import {
   QB_14_18,
   QM_13_21,
   spacing,
+  QR_14_18,
 } from './fonts';
 import {colors} from './colors';
 
@@ -24,6 +25,7 @@ const {
   hexYellow,
   brightWhite,
   lightGrey,
+  offBlack,
   white,
 } = colors;
 
@@ -47,6 +49,10 @@ const styles = StyleSheet.create({
     color: lightBlack,
     ...AR_12_18,
   },
+  bottomText: {
+    color: offBlack,
+    ...QR_14_18,
+  },
   boldText_14: {
     color: greyBlack,
     ...QB_14_18,
@@ -63,6 +69,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     ...QB_13,
+    letterSpacing: 1,
     color: brightWhite,
   },
   or: {
@@ -85,9 +92,14 @@ const styles = StyleSheet.create({
     left: 20,
   },
   colorsText: {
+    ...QB_14_18,
+    color: purple,
+  },
+  colorTextRegular: {
     ...AB_14,
     color: purple,
   },
+
   boldText: {
     color: black,
     ...QB_24,

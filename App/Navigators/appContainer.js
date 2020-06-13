@@ -15,10 +15,11 @@ import ResetPassword from '../Screens/ResetPassword/resetPassword';
 import AsyncStorage from '@react-native-community/async-storage';
 import Events from 'react-native-simple-events';
 
-import {isLogin} from '../Store/actions/userAction';
+import {login} from '../Store/actions/userAction';
 
 const Stack = createStackNavigator();
-function AppContainer({token, navigation}) {
+function AppContainer({userInfo, navigation}) {
+  let {token = null} = userInfo;
   useEffect(() => {
     AsyncStorage.multiGet(['token', 'showAgeModal']).then(res => {
       console.log('resposneeeee', res);
@@ -27,14 +28,14 @@ function AppContainer({token, navigation}) {
       }
       if (res[0][1] != null) {
         let token1 = res[0][1];
-        Store.dispatch(isLogin(JSON.parse(token1)));
+        Store.dispatch(login(JSON.parse(token1)));
       }
     });
   }, []);
 
   return (
     <NavigationContainer>
-      {console.log('Tokennnn>>>>', token)}
+      {console.log('Tokennnn>>>>', userInfo)}
       {token ? (
         <Stack.Navigator
           initialRouteName="HomeScreen"
@@ -58,7 +59,7 @@ function AppContainer({token, navigation}) {
   );
 }
 const mapStateToProps = state => {
-  return {token: state.reducer.token};
+  return {userInfo: state.reducer};
 };
 
 export default connect(mapStateToProps)(AppContainer);

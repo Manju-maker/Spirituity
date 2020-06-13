@@ -16,6 +16,7 @@ import CallApi from '../../utils/callApi';
 import Store from '../../Store/index';
 import {OtpVerifyAndSignup, login} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
+import {WavesSVG, CircleSVG} from '../../Components/allSVG';
 
 function OTP({navigation, ...restProps}) {
   console.log('Propssssssssssssssssssssssss', restProps);
@@ -97,6 +98,28 @@ function OTP({navigation, ...restProps}) {
   return (
     <View style={styles.container}>
       <Loader visible={isLoading} />
+      <View
+        style={{
+          position: 'absolute',
+          transform: [{translateX: -57}],
+          left: 0,
+          height: 100,
+          width: 100,
+          top: 50,
+        }}>
+        <WavesSVG />
+      </View>
+      <View
+        style={{
+          position: 'absolute',
+          transform: [{translateX: 13}],
+          right: 0,
+          height: 100,
+          width: 100,
+          top: 50,
+        }}>
+        <CircleSVG />
+      </View>
       <View style={{flex: 1, marginHorizontal: 0}}>
         <Text
           style={[
@@ -107,20 +130,12 @@ function OTP({navigation, ...restProps}) {
         </Text>
 
         <View style={{flex: 1, marginVertical: spacing(40)}}>
-          <ImageBackground
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: spacing(30),
-            }}
-            resizeMode={'contain'}
-            source={require('../../Assets/images/verifyMobileNo.png')}>
-            <Text
-              style={[
-                styles.regularText,
-                {textAlign: 'center', paddingVertical: 30},
-              ]}>{`OTP has been sent to you on your \n mobile phone. Please enter it below`}</Text>
-          </ImageBackground>
+          <Text
+            style={[
+              styles.regularText,
+              {textAlign: 'center', paddingVertical: 30},
+            ]}>{`OTP has been sent to you on your \n mobile phone. Please enter it below`}</Text>
+
           <View style={{flex: 1, marginHorizontal: 8, marginTop: spacing(50)}}>
             <View
               style={{

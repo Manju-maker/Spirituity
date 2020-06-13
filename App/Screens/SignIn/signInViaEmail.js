@@ -13,7 +13,7 @@ import {
 import {connect} from 'react-redux';
 
 import Store from '../../Store/index';
-import {signinViaEmail, login} from '../../Store/actions/userAction';
+import {signinViaEmail, isLogin, login} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import getImage from '../../utils/getImage';
@@ -22,6 +22,7 @@ import CheckArrowSVG from '../../Components/checkArrowSVG';
 import HidePasswordSVG from '../../Components/hidePasswordSVG';
 import {checkField} from '../../utils/validation';
 import Loader from '../../Components/loader';
+import Snackbar from '../../Components/snackbar';
 const height = Dimensions.get('window').height / 4;
 
 function SignInViaEmail({navigation, ...restProps}) {
@@ -57,12 +58,18 @@ function SignInViaEmail({navigation, ...restProps}) {
   useEffect(() => {
     console.log('otpRESPONSE of token>>>>>>>>', token);
     console.log('otpRESPONSE of emaillll>>>>>>>>', signupResponse);
-    if (signupResponse && signupResponse.status == true) {
+    if (
+      signupResponse &&
+      signupResponse.data &&
+      signupResponse.data.status == true
+    ) {
       let {token} = signupResponse.response;
       console.log('toknnnnnnnnnnnnnn>>>>>>', token);
       AsyncStorage.setItem('token', token).then(res => {
         Store.dispatch(login(token));
       });
+    } else if (signupResponse && signupResponse.status === 401) {
+      Snackbar({message: 'Invalid email or password', height: 30});
     }
   }, [signupResponse, token]);
 
@@ -177,6 +184,14 @@ function SignInViaEmail({navigation, ...restProps}) {
               </View>
               <Text style={{color: 'red'}}>{passwordError}</Text>
             </View>
+            <Text
+              onPress={() => navigation.navigate('ForgotPassword')}
+              style={[
+                styles.colorsText,
+                {color: 'blue', textAlign: 'center', marginBottom: 20},
+              ]}>
+              Forgot Password
+            </Text>
           </View>
 
           <SigningButton

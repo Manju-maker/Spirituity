@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Svg, {
   Defs,
+  ClipPath,
   G,
   Path,
   Circle,
@@ -40,30 +41,165 @@ export function CheckArrowSVG(props) {
 
 export function CircleSVG(props) {
   return (
-    <Svg width={160} height={137} viewBox="0 0 160 137" {...props}>
+    <Svg width="160pt" height="137pt" viewBox="0 0 160 137" {...props}>
       <Defs>
-        <Path
-          id="prefix__a"
-          d="M24.35 12.908c0 6.63-5.372 12.003-12 12.003-6.627 0-12-5.374-12-12.003C.35 6.28 5.724.911 12.35.911c6.628 0 12 5.368 12 11.997"
-        />
-      </Defs>
-      <G fill="none" fillRule="evenodd">
-        <Path
-          fill="#DE4161"
-          d="M156.568 81.216a5.709 5.709 0 11-9.683-6.05 5.709 5.709 0 019.683 6.05M129.801 64.49a5.71 5.71 0 11-9.683-6.051 5.71 5.71 0 019.683 6.051m-26.767-16.726a5.709 5.709 0 11-9.683-6.05 5.709 5.709 0 019.683 6.05M76.266 31.037a5.71 5.71 0 11-9.683-6.052 5.71 5.71 0 019.684 6.053M49.498 14.311a5.708 5.708 0 11-9.682-6.05 5.709 5.709 0 119.682 6.05m91.486 91.845a5.709 5.709 0 11-9.683-6.05 5.707 5.707 0 017.866-1.813 5.706 5.706 0 011.817 7.863M114.217 89.43a5.71 5.71 0 01-9.683-6.05 5.706 5.706 0 017.865-1.814 5.706 5.706 0 011.818 7.864M87.449 72.704a5.709 5.709 0 11-9.682-6.05 5.706 5.706 0 017.865-1.814 5.706 5.706 0 011.817 7.864M60.681 55.978a5.71 5.71 0 01-9.683-6.05c1.671-2.675 5.193-3.485 7.867-1.814s3.487 5.19 1.816 7.864"
-        />
-        <G transform="rotate(32 -25.592 54.644)">
-          <Mask id="prefix__b" fill="#fff">
-            <Use xlinkHref="#prefix__a" />
-          </Mask>
-          <G stroke="#DE4161" strokeLinecap="square" mask="url(#prefix__b)">
-            <Path d="M-3.93 22.759L9.221-4.204m-9.34 28.822L13.033-2.346M3.476 26.37L16.628-.592M7.071 28.125L20.223 1.16m-9.422 28.783L23.951 2.98m-9.34 28.822L27.763 4.838M17.307 33.117L30.458 6.154M20.903 34.87l13.15-26.964" />
+        <ClipPath id="prefix__g">
+          <Path d="M65 22h13v12H65zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__h">
+          <Path d="M76.266 31.04a5.714 5.714 0 01-7.868 1.815 5.714 5.714 0 01-1.816-7.867 5.708 5.708 0 017.867-1.816 5.707 5.707 0 011.817 7.867" />
+        </ClipPath>
+        <ClipPath id="prefix__i">
+          <Path d="M38 5h13v12H38zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__j">
+          <Path d="M49.5 14.313a5.714 5.714 0 01-7.867 1.816 5.708 5.708 0 01-1.817-7.867 5.707 5.707 0 017.868-1.817 5.714 5.714 0 011.816 7.867" />
+        </ClipPath>
+        <ClipPath id="prefix__k">
+          <Path d="M76 63h11v13H76zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__l">
+          <Path d="M87.45 72.703a5.707 5.707 0 01-7.868 1.817 5.713 5.713 0 01-1.816-7.868 5.71 5.71 0 017.867-1.812 5.706 5.706 0 011.816 7.863" />
+        </ClipPath>
+        <ClipPath id="prefix__m">
+          <Path d="M50 47h12v12H50zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__n">
+          <Path d="M60.68 55.977a5.702 5.702 0 01-7.864 1.816A5.706 5.706 0 0151 49.926a5.705 5.705 0 017.863-1.813 5.703 5.703 0 011.817 7.864" />
+        </ClipPath>
+        <ClipPath id="prefix__o">
+          <Path d="M16 27h25v25H16zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__p">
+          <Path d="M38.879 45.715c-3.516 5.62-10.918 7.332-16.54 3.82-5.62-3.512-7.327-10.914-3.816-16.539 3.516-5.621 10.915-7.324 16.536-3.812 5.62 3.511 7.332 10.91 3.82 16.53" />
+        </ClipPath>
+        <ClipPath id="prefix__b">
+          <Path d="M22.879 18.715c-3.516 5.62-10.918 7.332-16.54 3.82C.72 19.023-.987 11.621 2.524 5.996 6.04.375 13.438-1.328 19.06 2.184c5.62 3.511 7.332 10.91 3.82 16.53" />
+        </ClipPath>
+        <ClipPath id="prefix__c">
+          <Path d="M0 2h25v23H0zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__d">
+          <Path d="M22.879 18.715c-3.516 5.62-10.918 7.332-16.54 3.82C.72 19.023-.987 11.621 2.524 5.996 6.04.375 13.438-1.328 19.06 2.184c5.62 3.511 7.332 10.91 3.82 16.53" />
+        </ClipPath>
+        <ClipPath id="prefix__e">
+          <Path d="M0 5h25v20H0zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__f">
+          <Path d="M22.879 18.715c-3.516 5.62-10.918 7.332-16.54 3.82C.72 19.023-.987 11.621 2.524 5.996 6.04.375 13.438-1.328 19.06 2.184c5.62 3.511 7.332 10.91 3.82 16.53" />
+        </ClipPath>
+        <ClipPath id="prefix__a">
+          <Path d="M0 0h25v25H0z" />
+        </ClipPath>
+        <ClipPath id="prefix__r">
+          <Path d="M61 88h12v13H61zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__s">
+          <Path d="M71.863 97.648a5.714 5.714 0 01-7.867 1.817 5.714 5.714 0 01-1.816-7.867 5.71 5.71 0 019.684 6.05" />
+        </ClipPath>
+        <G id="prefix__q" clipPath="url(#prefix__a)">
+          <G
+            clipPath="url(#prefix__b)"
+            clipRule="evenodd"
+            fill="none"
+            strokeLinecap="square"
+            stroke="#de4161"
+            strokeMiterlimit={10}>
+            <Path
+              d="M.389 16.136L25.83.238"
+              transform="translate(-6.713 -4.05)"
+            />
+            <Path
+              d="M.388 16.134L25.83.236"
+              transform="translate(-4.466 -.455)"
+            />
+            <Path
+              d="M.39 16.133L25.83.238"
+              transform="translate(-2.347 2.938)"
+            />
+            <Path
+              d="M.387 16.135L25.83.237"
+              transform="translate(-.227 6.33)"
+            />
+            <Path
+              d="M.388 16.133L25.83.238"
+              transform="translate(1.971 9.848)"
+            />
+            <Path
+              d="M.387 16.135L25.83.236"
+              transform="translate(4.218 13.443)"
+            />
+          </G>
+          <G clipPath="url(#prefix__c)">
+            <G clipPath="url(#prefix__d)" clipRule="evenodd">
+              <Path
+                d="M.388 16.134L25.828.235"
+                transform="translate(5.808 15.988)"
+                fill="none"
+                strokeLinecap="square"
+                stroke="#de4161"
+                strokeMiterlimit={10}
+              />
+            </G>
+          </G>
+          <G clipPath="url(#prefix__e)">
+            <G clipPath="url(#prefix__f)" clipRule="evenodd">
+              <Path
+                d="M.389 16.136L25.83.237"
+                transform="translate(7.927 19.38)"
+                fill="none"
+                strokeLinecap="square"
+                stroke="#de4161"
+                strokeMiterlimit={10}
+              />
+            </G>
           </G>
         </G>
-        <Path
-          fill="#DE4161"
-          d="M125.398 131.1a5.709 5.709 0 11-9.683-6.05 5.709 5.709 0 019.683 6.05m-26.767-16.727a5.71 5.71 0 11-9.683-6.05 5.71 5.71 0 019.683 6.05M71.863 97.647a5.709 5.709 0 11-9.683-6.05 5.709 5.709 0 019.683 6.05"
-        />
+      </Defs>
+      <G clipPath="url(#prefix__g)">
+        <G clipPath="url(#prefix__h)" clipRule="evenodd">
+          <Path
+            d="M68.02 13.258l18.16 11.347L74.832 42.77 56.668 31.418zm0 0"
+            fill="#de4161"
+          />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__i)">
+        <G clipPath="url(#prefix__j)" clipRule="evenodd">
+          <Path
+            d="M41.25-3.469L59.414 7.88 48.062 26.043l-18.16-11.352zm0 0"
+            fill="#de4161"
+          />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__k)">
+        <G clipPath="url(#prefix__l)" clipRule="evenodd">
+          <Path
+            d="M79.2 54.926l18.163 11.347-11.347 18.165-18.164-11.352zm0 0"
+            fill="#de4161"
+          />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__m)">
+        <G clipPath="url(#prefix__n)" clipRule="evenodd">
+          <Path
+            d="M52.434 38.2l18.16 11.347L59.246 67.71 41.082 56.359zm0 0"
+            fill="#de4161"
+          />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__o)">
+        <G clipPath="url(#prefix__p)" clipRule="evenodd">
+          <Use xlinkHref="#prefix__q" transform="translate(16 27)" />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__r)">
+        <G clipPath="url(#prefix__s)" clipRule="evenodd">
+          <Path
+            d="M63.617 79.867l18.16 11.348-11.347 18.164-18.164-11.352zm0 0"
+            fill="#de4161"
+          />
+        </G>
       </G>
     </Svg>
   );
@@ -214,14 +350,20 @@ export const HidePasswordSVG = () => {
 
 export function WavesSVG(props) {
   return (
-    <Svg width={84} height={83} viewBox="0 0 84 83" {...props}>
-      <Path
-        d="M4 72.656c0-7.51 6.135-13.562 13.621-13.437l.5.008c7.45.124 13.57-5.871 13.622-13.343l.01-1.35c.051-7.435 6.112-13.415 13.524-13.345l.729.007c7.51.071 13.613-6.064 13.524-13.598C59.439 9.91 65.787 3.712 73.448 4.01M13.437 82.122c0-7.51 6.136-13.562 13.622-13.438l.5.009c7.45.124 13.57-5.871 13.62-13.344l.01-1.35c.052-7.434 6.113-13.414 13.526-13.344l.728.007c7.51.07 13.613-6.064 13.524-13.598-.09-7.689 6.257-13.886 13.918-13.588"
+    <Svg width={112} height="83pt" viewBox="0 0 84 83" {...props}>
+      <Defs>
+        <ClipPath id="prefix__a">
+          <Path d="M43 0h41v83H43zm0 0" />
+        </ClipPath>
+      </Defs>
+      <G
+        clipPath="url(#prefix__a)"
         fill="none"
-        fillRule="evenodd"
-        stroke="#6727B4"
         strokeWidth={6.4}
-      />
+        stroke="#6727b4"
+        strokeMiterlimit={10}>
+        <Path d="M4 72.656c0-7.511 6.137-13.562 13.621-13.437l.5.008c7.45.125 13.57-5.872 13.621-13.344l.012-1.348c.05-7.437 6.11-13.418 13.523-13.347l.727.007c7.512.07 13.613-6.062 13.527-13.597C59.438 9.91 65.79 3.71 73.45 4.012M13.438 82.121c0-7.508 6.136-13.562 13.62-13.437l.5.007c7.45.125 13.57-5.87 13.622-13.343L41.19 54c.051-7.434 6.11-13.414 13.524-13.344l.726.004c7.512.074 13.614-6.062 13.524-13.597-.09-7.688 6.258-13.887 13.922-13.586" />
+      </G>
     </Svg>
   );
 }

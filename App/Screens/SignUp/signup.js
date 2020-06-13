@@ -8,13 +8,6 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {
-  LoginManager,
-  AccessToken,
-  GraphRequestManager,
-  GraphRequest,
-} from 'react-native-fbsdk';
-
-import {
   CircleSVG,
   HidePasswordSVG,
   CheckArrowSVG,
@@ -31,7 +24,7 @@ import {getOtp} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import Loader from '../../Components/loader';
-import {GoogleSignUp} from '../../Components/socialSignin';
+import {GoogleSignUp, FacebookSignUp} from '../../Components/socialSignin';
 
 let {purple, offWhite} = colors;
 
@@ -107,89 +100,39 @@ function SignUp({navigation, userInfo}) {
         mobile: phoneNumber,
       };
       navigation.navigate('OTP', data);
-    } else if (otpResponse && otpResponse.data.status == false) {
+    } else if (
+      otpResponse &&
+      otpResponse.data.status == false &&
+      otpResponse.status === 409
+    ) {
       Snackbar({
-        message:
-          otpResponse.data &&
-          otpResponse.data.statusMessage &&
-          otpResponse.data.statusMessage,
+        message: 'This Number or email is already in use',
         height: 50,
       });
     }
   }, [otpResponse]);
 
   let facebookLogin = () => {
-    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
-      function(result) {
-        if (result.isCancelled) {
-          console.log('Login cancelled');
-        } else {
-          console.log(
-            'Login success with permissions: ' +
-              result.grantedPermissions.toString(),
-          );
-          AccessToken.getCurrentAccessToken().then(data => {
-            const {accessToken} = data;
-
-            const responseInfoCallback = (error, result) => {
-              if (error) {
-                console.log('Error>>>>', error);
-              } else {
-                let {first_name, last_name, email} = result;
-
-                // setState({
-                //   ...state,
-                //   firstName: first_name,
-                //   lastName: last_name,
-                //   email: email,
-                // });
-
-                [
-                  {field: 'firstName', value: first_name},
-                  {field: 'lastName', value: last_name},
-                  {field: 'email', value: email},
-                ].map(item => {
-                  setData(item.field, item.value);
-                });
-
-                console.log('result from face book>>>', result);
-              }
-            };
-            const infoRequest = new GraphRequest(
-              '/me',
-              {
-                accessToken: accessToken,
-                parameters: {
-                  fields: {
-                    string: 'email,name,first_name,last_name,picture',
-                  },
-                },
-              },
-              responseInfoCallback,
-            );
-
-            new GraphRequestManager().addRequest(infoRequest).start();
-          });
-        }
-      },
-      function(error) {
-        console.log('Login fail with error: ' + error);
-      },
-    );
-    console.warn('facebooklogin');
+    FacebookSignUp()
+      .then(res => {
+        console.log('res', res);
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
   };
   let googleLogin = () => {
     GoogleSignUp()
       .then(res => {
-        console.log('responseee>>>>>>>>>', res);
+        console.log('response', res);
       })
       .catch(err => {
-        console.log('err>>>>>>>>>', err);
+        console.log('err', err);
       });
   };
 
   let SignIn = () => {
-    navigation.navigate('SignIn');
+    navigation.navigate('OTP');
   };
   let checkValidation = () => {
     if (
@@ -280,6 +223,7 @@ function SignUp({navigation, userInfo}) {
       <View
         style={{
           position: 'absolute',
+          transform: [{translateX: -57}],
           left: 0,
           height: 100,
           width: 100,
@@ -290,6 +234,7 @@ function SignUp({navigation, userInfo}) {
       <View
         style={{
           position: 'absolute',
+          transform: [{translateX: 13}],
           right: 0,
           height: 100,
           width: 100,
@@ -303,14 +248,10 @@ function SignUp({navigation, userInfo}) {
             Let's Get Started
           </Text>
           <Text style={styles.regularText}>Sign up to start building</Text>
-          <Text style={styles.regularText}> your cloud bar</Text>
+          <Text style={styles.regularText}> your CloudBar</Text>
         </View>
         <View style={{flex: 1, marginBottom: 19}}>
-          <View
-            style={[
-              styles.textInputWrapper,
-              {borderWidth: 2, borderColor: 'red'},
-            ]}>
+          <View style={[styles.textInputWrapper]}>
             <Text style={[styles.text, styles.marB_9]}>Phone number</Text>
             <View
               style={[
@@ -367,7 +308,7 @@ function SignUp({navigation, userInfo}) {
                 style={{flex: 1}}
                 placeholder="Enter full name"
                 value={firstName}
-                autoCapitalize={'words'}
+                autoCapitalize="characters"
                 onFocus={() => onFocused('firstName')}
                 onBlur={() => onBlur('firstName')}
                 onChangeText={text => setData('firstName', text)}
@@ -493,7 +434,8 @@ function SignUp({navigation, userInfo}) {
             </TouchableOpacity>
             <Text style={styles.text_12_B}>I agree with the</Text>
             <TouchableOpacity>
-              <Text style={styles.colorsText}>{` Terms & Condition`}</Text>
+              <Text
+                style={styles.colorTextRegular}>{` Terms & Conditions`}</Text>
             </TouchableOpacity>
           </View>
           <View style={[styles.rowViewWrapperEnd, styles.marB_20]}>
@@ -541,7 +483,7 @@ function SignUp({navigation, userInfo}) {
           ]}
         />
         <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
-          <Text style={[styles.text]}>You have an account already?</Text>
+          <Text style={[styles.bottomText]}>You have an account already?</Text>
           <TouchableOpacity style={styles.marL_8} onPress={() => SignIn()}>
             <Text style={styles.colorsText}>Sign In</Text>
           </TouchableOpacity>

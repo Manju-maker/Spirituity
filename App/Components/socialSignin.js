@@ -1,5 +1,11 @@
 import React from 'react';
 import {GoogleSignin} from 'react-native-google-signin';
+import {
+  LoginManager,
+  AccessToken,
+  GraphRequestManager,
+  GraphRequest,
+} from 'react-native-fbsdk';
 
 GoogleSignin.configure({
   scopes: ['https://www.googleapis.com/auth/drive.readonly'],
@@ -34,4 +40,51 @@ function GoogleSignUp() {
   });
 }
 
-export {GoogleSignUp};
+function FacebookSignUp() {
+  return new Promise((resolve, reject) => {
+    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+      function(result) {
+        if (result.isCancelled) {
+          console.log('Login cancelled');
+        } else {
+          console.log(
+            'Login success with permissions: ' +
+              result.grantedPermissions.toString(),
+          );
+          AccessToken.getCurrentAccessToken().then(data => {
+            const {accessToken} = data;
+
+            const responseInfoCallback = (error, result) => {
+              if (error) {
+                console.log('Error>>>>', error);
+                reject(error);
+              } else {
+                console.log('result from face book>>>', result);
+                resolve(result);
+              }
+            };
+            const infoRequest = new GraphRequest(
+              '/me',
+              {
+                accessToken: accessToken,
+                parameters: {
+                  fields: {
+                    string: 'email,name,first_name,last_name,picture',
+                  },
+                },
+              },
+              responseInfoCallback,
+            );
+
+            new GraphRequestManager().addRequest(infoRequest).start();
+          });
+        }
+      },
+      function(error) {
+        console.log('Login fail with error: ' + error);
+      },
+    );
+  });
+}
+
+export {GoogleSignUp, FacebookSignUp};

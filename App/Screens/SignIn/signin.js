@@ -141,7 +141,10 @@ function SignIn({navigation, ...restProps}) {
                 <Text style={{color: 'red'}}>{phoneNumberError}</Text>
                 <Text
                   onPress={() => navigation.navigate('SignInViaEmail')}
-                  style={{color: 'blue', textAlign: 'center'}}>
+                  style={[
+                    styles.colorsText,
+                    {color: 'blue', textAlign: 'center'},
+                  ]}>
                   Sign In via Email
                 </Text>
               </View>
@@ -158,8 +161,8 @@ function SignIn({navigation, ...restProps}) {
               disable={disable}
             />
 
-            <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
-              <Text style={[styles.text]}>Don't have an account?</Text>
+            <View style={[styles.rowViewWrapperCenter]}>
+              <Text style={[styles.bottomText]}>Don't have an account?</Text>
               <TouchableOpacity
                 style={styles.marL_8}
                 onPress={() => navigation.navigate('SignUp')}>
