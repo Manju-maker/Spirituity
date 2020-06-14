@@ -13,11 +13,17 @@ import {
   CheckArrowSVG,
   WavesSVG,
 } from '../../Components/allSVG';
-import {checkField, validPassword} from '../../utils/validation';
+import {
+  checkField,
+  validPassword,
+  calculatePasswordScore,
+  formatText,
+} from '../../utils/validation';
 import Snackbar from '../../Components/snackbar';
 import {
   GoogleFacebookLogin,
   SigningButton,
+  InputField,
 } from '../../ReusableComponents/commonComponent';
 import Store from '../../Store/index';
 import {getOtp} from '../../Store/actions/userAction';
@@ -30,14 +36,14 @@ let {purple, offWhite} = colors;
 
 function SignUp({navigation, userInfo}) {
   const [progress, setProgress] = useState([-1, -1, -1, -1]);
-  let eleRef = useRef([]);
-
   const [boolState, setBoolState] = useState({
     isOver18: false,
     isChecked: false,
     isPasswordHide: true,
   });
   const {isOver18, isChecked, isPasswordHide} = boolState;
+
+  let eleRef = useRef([]);
 
   let changeState = (key, value) => {
     setBoolState({...boolState, [key]: !value});
@@ -54,10 +60,8 @@ function SignUp({navigation, userInfo}) {
     firstNameError: '',
     phoneNumberError: '',
     lastNameError: '',
-    isFocused: false,
     disable: true,
     countryCode: '+91',
-    capitalize: 'sentences',
   });
   const {
     email,
@@ -65,7 +69,6 @@ function SignUp({navigation, userInfo}) {
     firstName,
     password,
     lastName,
-    isFocused,
     passwordError,
     emailError,
     firstNameError,
@@ -73,23 +76,20 @@ function SignUp({navigation, userInfo}) {
     lastNameError,
     countryCode,
     disable,
-    capitalize,
   } = state;
 
   let {isLoading = false, otpResponse} = userInfo;
 
   let signUp = () => {
     let data = {
-      mobile: phoneNumber,
+      mobile: phoneNumber.replace(/\s/g, ''),
       country_code: countryCode,
       type: 'signup',
     };
-
     Store.dispatch(getOtp(data));
   };
 
   useEffect(() => {
-    console.log('otp res>>>>>>>>>>>>>>>>>>>>>>>>>>', otpResponse);
     if (otpResponse && otpResponse.status == true) {
       let data = {
         firstName,
@@ -132,7 +132,7 @@ function SignUp({navigation, userInfo}) {
   };
 
   let SignIn = () => {
-    navigation.navigate('OTP');
+    navigation.navigate('SignIn');
   };
   let checkValidation = () => {
     if (
@@ -148,45 +148,20 @@ function SignUp({navigation, userInfo}) {
     }
     return true;
   };
-  let setData = (key, text) => {
+  let setData = async (key, text) => {
     let isValid = checkField(key, text.trim());
     if (key == 'password') {
       isValid = validPassword(key, text.trim());
-      let a = [-1, -1, -1, -1];
-      if (text.length > 0) {
-        if (!isValid.includes('1 digit')) {
-          a.pop();
-          a.unshift(0);
-        }
-
-        if (!isValid.includes('1 special character')) {
-          a.pop();
-          a.unshift(0);
-        }
-
-        if (!isValid.includes('1 capital alphabet')) {
-          a.pop();
-          a.unshift(0);
-        }
-
-        if (!isValid.includes('min 8 characters')) {
-          a.pop();
-          a.unshift(0);
-        }
-      } else {
-        a = [-1, -1, -1, -1];
-      }
+      let calculateScore = calculatePasswordScore(text, isValid);
       if (isValid.length == 0) {
         isValid = true;
       }
-
-      setProgress(a);
-    } else {
-      isValid = checkField(key, text.trim());
+      setProgress(calculateScore);
     }
+    let formatedText = await formatText(text, key);
     setState({
       ...state,
-      [key]: text,
+      [key]: formatedText,
       [`${key}Error`]: isValid,
     });
   };
@@ -194,7 +169,6 @@ function SignUp({navigation, userInfo}) {
     let isValidInput = checkValidation();
     setState({...state, disable: isValidInput});
   }, [
-    isFocused,
     passwordError,
     emailError,
     firstNameError,
@@ -215,31 +189,41 @@ function SignUp({navigation, userInfo}) {
   let onBlur = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
+  let commonStyle = {position: 'absolute', height: 100, width: 100, top: 50};
+  let checkArrowStyle = {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 20,
+    height: 20,
+    borderColor: colors.offWhite,
+    borderRadius: 4,
+    borderWidth: 1,
+    marginRight: 9,
+  };
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
-      keyboardShouldPersistTaps={'always'}>
+      keyboardShouldPersistTaps={'always'}
+      showsVerticalScrollIndicator={false}>
       <Loader visible={isLoading} />
       <View
-        style={{
-          position: 'absolute',
-          transform: [{translateX: -57}],
-          left: 0,
-          height: 100,
-          width: 100,
-          top: 50,
-        }}>
+        style={[
+          commonStyle,
+          {
+            transform: [{translateX: -57}],
+            left: 0,
+          },
+        ]}>
         <WavesSVG />
       </View>
       <View
-        style={{
-          position: 'absolute',
-          transform: [{translateX: 13}],
-          right: 0,
-          height: 100,
-          width: 100,
-          top: 50,
-        }}>
+        style={[
+          commonStyle,
+          {
+            transform: [{translateX: 13}],
+            right: 0,
+          },
+        ]}>
         <CircleSVG />
       </View>
       <View style={styles.signinChildContainer}>
@@ -251,7 +235,114 @@ function SignUp({navigation, userInfo}) {
           <Text style={styles.regularText}> your CloudBar</Text>
         </View>
         <View style={{flex: 1, marginBottom: 19}}>
-          <View style={[styles.textInputWrapper]}>
+          {[
+            {
+              header: 'Phone number',
+              code: countryCode,
+              field: 'phoneNumber',
+              placeHolder: 'Enter phone number',
+              value: phoneNumber,
+              keyboardType: 'number-pad',
+              autoCapitalize: 'none',
+              error: phoneNumberError,
+            },
+            {
+              header: 'First Name',
+              placeHolder: 'Enter FirstName',
+              value: firstName,
+              field: 'firstName',
+              autoCapitalize: 'none',
+              error: firstNameError,
+            },
+            {
+              header: 'Last Name',
+              placeHolder: 'Enter LastName',
+              value: lastName,
+              field: 'lastName',
+              autoCapitalize: 'none',
+              error: lastNameError,
+            },
+            {
+              header: 'Email address',
+              placeHolder: 'Enter email address',
+              value: email,
+              field: 'email',
+              autoCapitalize: 'none',
+              error: emailError,
+            },
+            {
+              header: 'Password',
+              placeHolder: '* * * * *',
+              value: password,
+              field: 'password',
+              autoCapitalize: 'none',
+              error: passwordError,
+            },
+          ].map((item, index) => {
+            return (
+              <View style={[styles.textInputWrapper]} key={index}>
+                <Text style={[styles.text, styles.marB_9]}>{item.header}</Text>
+                <View
+                  style={[
+                    styles.inputBox,
+                    {
+                      flexDirection: 'row',
+                      paddingLeft: 0,
+                      alignItems: 'center',
+                      paddingHorizontal: 5,
+                    },
+                  ]}
+                  ref={ref => setRef(ref, item.field)}>
+                  {item.field === 'phoneNumber' && (
+                    <TextInput
+                      value={countryCode}
+                      style={{
+                        width: 60,
+                        textAlign: 'center',
+                        borderRightWidth: 1,
+                        borderRightColor: offWhite,
+                      }}
+                    />
+                  )}
+                  <TextInput
+                    style={[{flex: 1, paddingLeft: 16}]}
+                    placeholder={item.placeHolder}
+                    value={item.value}
+                    secureTextEntry={
+                      item.field === 'password' ? isPasswordHide : false
+                    }
+                    autoCapitalize={item.autoCapitalize}
+                    onFocus={() => onFocused(item.field)}
+                    onBlur={() => onBlur(item.field)}
+                    maxLength={item.field === 'phoneNumber' ? 12 : undefined}
+                    keyboardType={
+                      item.field === 'phoneNumber' ? 'number-pad' : undefined
+                    }
+                    onChangeText={text => setData(item.field, text)}
+                  />
+                  {item.field === 'password' && (
+                    <TouchableOpacity
+                      style={{marginHorizontal: 14}}
+                      activeOpacity={0.8}
+                      onPress={() =>
+                        changeState('isPasswordHide', isPasswordHide)
+                      }>
+                      <HidePasswordSVG />
+                    </TouchableOpacity>
+                  )}
+                  <Text>
+                    {item.error === true && item.field != 'password' && (
+                      <CheckArrowSVG />
+                    )}
+                  </Text>
+                </View>
+                {item.field != 'password' && item.error != true && (
+                  <Text style={{color: 'red'}}>{item.error}</Text>
+                )}
+              </View>
+            );
+          })}
+          {/* <View style={[styles.textInputWrapper]}>
             <Text style={[styles.text, styles.marB_9]}>Phone number</Text>
             <View
               style={[
@@ -281,18 +372,13 @@ function SignUp({navigation, userInfo}) {
                 onBlur={() => onBlur('phoneNumber')}
                 keyboardType={'number-pad'}
                 onChangeText={text => setData('phoneNumber', text)}
-                maxLength={10}
               />
               <Text>{phoneNumberError === true && <CheckArrowSVG />}</Text>
             </View>
-            {/* {phoneNumberError ? (
-              <Text style={{color: 'red'}}>{phoneNumberError}</Text>
-            ) : (
-              ''
-            )} */}
-          </View>
+            <Text style={{color: 'red'}}>{phoneNumberError}</Text>
+          </View> */}
 
-          <View style={[styles.textInputWrapper]}>
+          {/* <View style={[styles.textInputWrapper]}>
             <Text style={[styles.text, styles.marB_9]}>First Name</Text>
             <View
               style={[
@@ -306,9 +392,9 @@ function SignUp({navigation, userInfo}) {
               ref={ref => setRef(ref, 'firstName')}>
               <TextInput
                 style={{flex: 1}}
-                placeholder="Enter full name"
+                placeholder="Enter FirstName"
+                autoCapitalize={'none'}
                 value={firstName}
-                autoCapitalize="characters"
                 onFocus={() => onFocused('firstName')}
                 onBlur={() => onBlur('firstName')}
                 onChangeText={text => setData('firstName', text)}
@@ -316,8 +402,8 @@ function SignUp({navigation, userInfo}) {
               <Text>{firstNameError === true && <CheckArrowSVG />}</Text>
             </View>
             <Text style={{color: 'red'}}>{firstNameError}</Text>
-          </View>
-          <View style={styles.textInputWrapper}>
+          </View> */}
+          {/* <View style={styles.textInputWrapper}>
             <Text style={[styles.text, styles.marB_9]}>Last Name</Text>
             <View
               style={[
@@ -331,7 +417,8 @@ function SignUp({navigation, userInfo}) {
               ref={ref => setRef(ref, 'lastName')}>
               <TextInput
                 style={{flex: 1}}
-                placeholder="Enter last name"
+                autoCapitalize={'none'}
+                placeholder="Enter LastName"
                 value={lastName}
                 onFocus={() => onFocused('lastName')}
                 onBlur={() => onBlur('lastName')}
@@ -340,9 +427,9 @@ function SignUp({navigation, userInfo}) {
               <Text>{lastNameError === true && <CheckArrowSVG />}</Text>
             </View>
             <Text style={{color: 'red'}}>{lastNameError}</Text>
-          </View>
+          </View> */}
 
-          <View style={styles.textInputWrapper}>
+          {/* <View style={styles.textInputWrapper}>
             <Text style={[styles.text, styles.marB_9]}>Email address</Text>
             <View
               style={[
@@ -356,8 +443,10 @@ function SignUp({navigation, userInfo}) {
               ref={ref => setRef(ref, 'email')}>
               <TextInput
                 style={{flex: 1}}
+                ref={ref => setRef(ref, 'emailText')}
                 placeholder="Enter email address"
-                value={email}
+                autoCapitalize="none"
+                keyboardType={'email-address'}
                 onFocus={() => onFocused('email')}
                 onBlur={() => onBlur('email')}
                 onChangeText={text => setData('email', text)}
@@ -365,8 +454,8 @@ function SignUp({navigation, userInfo}) {
               <Text>{emailError === true && <CheckArrowSVG />}</Text>
             </View>
             <Text style={[{color: 'red'}]}>{emailError}</Text>
-          </View>
-          <Text style={[styles.text, styles.marB_9]}>Password</Text>
+          </View> */}
+          {/* <Text style={[styles.text, styles.marB_9]}>Password</Text>
           <View
             style={[
               styles.inputBox,
@@ -392,14 +481,10 @@ function SignUp({navigation, userInfo}) {
               onPress={() => changeState('isPasswordHide', isPasswordHide)}>
               <HidePasswordSVG />
             </TouchableOpacity>
-          </View>
+          </View> */}
           <View
             style={[
               styles.rowViewWrapperCenter,
-              {
-                marginVertical: 10,
-                justifyContent: 'space-between',
-              },
             ]}>
             {progress.map((item, index) => {
               return (
@@ -409,6 +494,7 @@ function SignUp({navigation, userInfo}) {
                     flex: 1,
                     height: 2,
                     borderRadius: 2,
+                    marginRight: 2,
                     backgroundColor: item == -1 ? offWhite : 'green',
                   }}
                 />
@@ -418,16 +504,7 @@ function SignUp({navigation, userInfo}) {
           <Text style={{color: 'red'}}>{passwordError}</Text>
           <View style={[styles.rowViewWrapperEnd, styles.marV_24]}>
             <TouchableOpacity
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: 16,
-                height: 16,
-                borderColor: colors.offWhite,
-                borderRadius: 4,
-                borderWidth: 1,
-                marginRight: 9,
-              }}
+              style={checkArrowStyle}
               activeOpacity={1}
               onPress={() => changeState('isChecked', isChecked)}>
               {isChecked && <CheckArrowSVG />}
@@ -440,16 +517,7 @@ function SignUp({navigation, userInfo}) {
           </View>
           <View style={[styles.rowViewWrapperEnd, styles.marB_20]}>
             <TouchableOpacity
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: 16,
-                height: 16,
-                borderColor: colors.offWhite,
-                borderRadius: 4,
-                borderWidth: 1,
-                marginRight: 9,
-              }}
+              style={checkArrowStyle}
               activeOpacity={1}
               onPress={() => changeState('isOver18', isOver18)}>
               {isOver18 && <CheckArrowSVG />}

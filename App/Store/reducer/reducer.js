@@ -10,10 +10,10 @@ import {
 } from '../../utils/constant';
 let initialState = {
   user: '',
-  token: null,
   isLoading: false,
   otpResponse: null,
   signupResponse: null,
+  loginResponse: null,
 };
 
 export const reducer = (state, action) => {
@@ -23,7 +23,7 @@ export const reducer = (state, action) => {
     case LOGIN_SUCCESS:
       return {...state, token: action.payload};
     case LOGIN_SUCCESSS:
-      return {...state, signupResponse: action.payload};
+      return {...state, loginResponse: action.payload};
     case LOGIN_FAILED:
       return {...state, signupResponse: action.payload};
     case OTP_REQUEST_SUCCESS:

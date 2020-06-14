@@ -3,12 +3,18 @@ import {Text, View, TouchableOpacity} from 'react-native';
 import styles from '../../Themes/styles';
 import CallApi from '../../utils/callApi';
 
-function Timer({onRefresh = () => {}, refreshFocus = () => {}, data = {}}) {
+function Timer({
+  onRefresh = () => {},
+  refreshFocus = () => {},
+  data = {},
+  isExpired = () => {},
+}) {
   const [timeLeft, setTimeLeft] = useState(0);
   const [minutes, setMinutes] = useState(3);
   useEffect(() => {
     if (timeLeft == 0) {
       if (minutes == 0) {
+        isExpired(true);
         return;
       }
       setTimeLeft(59);

@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 function HomeScreen() {
   const logout = () => {
-    AsyncStorage.removeItem('token').then(res => {
+    AsyncStorage.removeItem('userInfo').then(res => {
       console.log('logut>>>', res);
       Store.dispatch(login(res));
     });

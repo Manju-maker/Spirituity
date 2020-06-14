@@ -1,6 +1,7 @@
+import {upperFirst} from 'lodash';
+
 function checkField(field, data) {
   if (data === '') {
-    console.log('insise dataaa', data);
     if (field == 'phoneNumber') field = 'Phone Number';
     if (field == 'firstName') field = 'Firstname';
     if (field == 'lastName') field = 'Lastname';
@@ -12,13 +13,33 @@ function checkField(field, data) {
     if (!isValidEmailFormat(data)) {
       return 'Enter valid email address';
     }
+    return true;
   }
 
   if (field === 'phoneNumber') {
-    return isValidPhoneNumber(data);
+    return isValidPhoneNumber(data.replace(/\s/g, ''));
   }
   return true;
 }
+
+let passwordScore = score => {
+  score.pop();
+  score.unshift(0);
+};
+
+function calculatePasswordScore(text, isValid) {
+  let score = [-1, -1, -1, -1];
+  if (text.length > 0) {
+    if (!isValid.includes('1 digit')) passwordScore(score);
+    if (!isValid.includes('1 special character')) passwordScore(score);
+    if (!isValid.includes('1 capital alphabet')) passwordScore(score);
+    if (!isValid.includes('min 8 characters')) passwordScore(score);
+  } else {
+    score = [-1, -1, -1, -1];
+  }
+  return score;
+}
+
 function validPassword(field, data) {
   let finalMessage = '';
   if (data === '') {
@@ -76,26 +97,50 @@ function isValidEmailFormat(email) {
   return re.test(email);
 }
 
-function isValidPasswordFormat(password) {
-  var re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%?=*&]).{8,20})/;
-  return re.test(password);
-}
+// function isValidPasswordFormat(password) {
+//   var re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%?=*&]).{8,20})/;
+//   return re.test(password);
+// }
 
-function isValidFullname(name) {
-  if (name.length == 0) return 'fullname cannot be empty';
-  if (name.length <= 1) return `${name} length should be greater than 1`;
+// function isValidFullname(name) {
+//   if (name.length == 0) return 'fullname cannot be empty';
+//   if (name.length <= 1) return `${name} length should be greater than 1`;
+//   return true;
+// }
+function isValidPhoneNumber(number) {
+  if (number.length != 10) {
+    return 'Phone number should be of 10 digit';
+  }
+  if (!/^[89]\d{9}$/.test(number)) {
+    return 'Phone Number must start with 8 or 9';
+  }
   return true;
 }
-function isValidPhoneNumber(number) {
-  if (/^[0-9]*$/.test(number)) {
-    if (number.length != 10) return 'Phone number should be of 10 digit';
-    return true;
-  }
-  return 'Please enter valid Phone number';
-}
+
+let formatText = (text, field) => {
+  let finalText = '';
+  return new Promise((resolve, reject) => {
+    if (field === 'firstName' || field === 'lastName') {
+      finalText = upperFirst(text);
+      resolve(finalText);
+    } else if (field === 'email') {
+      finalText = text.toLowerCase();
+      resolve(finalText);
+    } else if (field === 'phoneNumber') {
+      finalText = text
+        .replace(/[^\dA-Z]/g, '')
+        .replace(/(.{4})/g, '$1 ')
+        .trim();
+      resolve(finalText);
+    }
+    resolve(text);
+  });
+};
 
 export {
-  isValidFullname,
+  formatText,
+  calculatePasswordScore,
+  // isValidFullname,
   checkField,
   isValidPhoneNumber,
   isValidEmailFormat,

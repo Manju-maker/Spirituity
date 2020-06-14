@@ -5,6 +5,7 @@ import {
   TextInput,
   ImageBackground,
   AsyncStorage,
+  ScrollView,
 } from 'react-native';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
@@ -16,10 +17,10 @@ import CallApi from '../../utils/callApi';
 import Store from '../../Store/index';
 import {OtpVerifyAndSignup, login} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
-import {WavesSVG, CircleSVG} from '../../Components/allSVG';
+import {SquareSVG, StrawSvg} from '../../Components/allSVG';
+import {getLastUpdateTime} from 'react-native-device-info';
 
 function OTP({navigation, ...restProps}) {
-  console.log('Propssssssssssssssssssssssss', restProps);
   let {
     firstName = '',
     lastName = '',
@@ -32,6 +33,7 @@ function OTP({navigation, ...restProps}) {
   let eleRef = useRef([]);
   let {purple, offWhite} = colors;
   const [state, setState] = useState({one: '', two: '', three: '', four: ''});
+  const [otpArray, setOtpArray] = useState(['', '', '', '']);
   const {one, two, three, four} = state;
   let setRef = (ref, field) => {
     eleRef.current[field] = ref;
@@ -81,101 +83,134 @@ function OTP({navigation, ...restProps}) {
     ) {
       onSubmit(one, two, three, four);
     }
-  }, [one, two, three, four]);
+  }, [otpArray]);
 
-  let handleChange = (text, field) => {
-    setState({...state, [field]: text});
-    if (text.length === 1) {
-      if (field === 'one') {
+  let handleChange = (text, index) => {
+    const otpArrayCopy = otpArray.concat();
+    otpArrayCopy[index] = text;
+    setOtpArray(otpArrayCopy);
+    if (text != '') {
+      if (index === 0) {
         eleRef.current['two'].focus();
-      } else if (field === 'two') {
+      } else if (index === 1) {
         eleRef.current['three'].focus();
-      } else if (field === 'three') {
+      } else if (index === 2) {
         eleRef.current['four'].focus();
       }
     }
   };
+  let onOtpKeyPress = (index, field) => {
+    return ({nativeEvent: {key: value}}) => {
+      if (value === 'Backspace' && otpArray[index] === '') {
+        if (index === 1) {
+          eleRef.current['one'].focus();
+        } else if (index === 2) {
+          eleRef.current['two'].focus();
+        } else if (index === 3) {
+          eleRef.current['three'].focus();
+        }
+        if (index > 0) {
+          const otpArrayCopy = otpArray.concat();
+          otpArrayCopy[index - 1] = ''; // clear the previous box which will be in focus
+          setOtpArray(otpArrayCopy);
+        }
+      }
+    };
+  };
   return (
-    <View style={styles.container}>
-      <Loader visible={isLoading} />
-      <View
-        style={{
-          position: 'absolute',
-          transform: [{translateX: -57}],
-          left: 0,
-          height: 100,
-          width: 100,
-          top: 50,
-        }}>
-        <WavesSVG />
-      </View>
-      <View
-        style={{
-          position: 'absolute',
-          transform: [{translateX: 13}],
-          right: 0,
-          height: 100,
-          width: 100,
-          top: 50,
-        }}>
-        <CircleSVG />
-      </View>
-      <View style={{flex: 1, marginHorizontal: 0}}>
-        <Text
-          style={[
-            styles.boldText,
-            {position: 'absolute', top: spacing(50), alignSelf: 'center'},
-          ]}>
-          Verify Mobile Number
-        </Text>
-
-        <View style={{flex: 1, marginVertical: spacing(40)}}>
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1}}
+      keyboardShouldPersistTaps={'always'}>
+      <View style={[styles.container]}>
+        <Loader visible={isLoading} />
+        <View
+          style={{
+            position: 'absolute',
+            transform: [{translateX: 30}],
+            left: -40,
+            height: 100,
+            width: 100,
+            top: spacing(120),
+          }}>
+          <StrawSvg />
+        </View>
+        <View
+          style={{
+            position: 'absolute',
+            right: -65,
+            height: 100,
+            width: 100,
+            top: spacing(140),
+          }}>
+          <SquareSVG />
+        </View>
+        <View
+          style={{
+            marginTop: spacing(110),
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={[styles.boldText, {textAlign: 'center'}]}>
+            Verify Mobile Number
+          </Text>
           <Text
             style={[
               styles.regularText,
-              {textAlign: 'center', paddingVertical: 30},
-            ]}>{`OTP has been sent to you on your \n mobile phone. Please enter it below`}</Text>
-
-          <View style={{flex: 1, marginHorizontal: 8, marginTop: spacing(50)}}>
-            <View
-              style={{
-                flexDirection: 'row',
-                height: 53,
-                justifyContent: 'center',
-              }}>
-              {[
-                {field: 'one', value: one, focus: true},
-                {field: 'two', value: two, focus: false},
-                {field: 'three', value: three, focus: false},
-                {field: 'four', value: four, focus: false},
-              ].map(item => {
-                return (
-                  <TextInput
-                    autoFocus={item.focus}
-                    value={item.value}
-                    style={styles.otpInput}
-                    maxLength={1}
-                    onFocus={() => onFocus(item.field)}
-                    onBlur={() => onBlur(item.field)}
-                    onChangeText={text => handleChange(text, item.field)}
-                    ref={ref => setRef(ref, item.field)}
-                  />
-                );
-              })}
-            </View>
-            <Timer
-              onRefresh={() =>
-                setState({...state, one: '', two: '', three: '', four: ''})
-              }
-              refreshFocus={() => {
-                eleRef.current['one'].focus();
-              }}
-              data={{country_code: countryCode, mobile, type: 'signup'}}
-            />
+              {
+                textAlign: 'center',
+                marginTop: 12,
+                marginHorizontal: spacing(44),
+              },
+            ]}>{`OTP has been sent to you on your  mobile phone. Please enter it below`}</Text>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            marginTop: spacing(40),
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              height: 53,
+              justifyContent: 'center',
+            }}>
+            {[
+              {field: 'one', value: one, focus: true},
+              {field: 'two', value: two, focus: false},
+              {field: 'three', value: three, focus: false},
+              {field: 'four', value: four, focus: false},
+            ].map((item, index) => {
+              return (
+                <TextInput
+                  autoFocus={item.focus}
+                  value={otpArray[index]}
+                  style={styles.otpInput}
+                  maxLength={1}
+                  onKeyPress={onOtpKeyPress(index, item.field)}
+                  keyboardType={'number-pad'}
+                  onFocus={() => onFocus(item.field)}
+                  onBlur={() => onBlur(item.field)}
+                  onChangeText={text => handleChange(text, index)}
+                  ref={ref => setRef(ref, item.field)}
+                />
+              );
+            })}
           </View>
+          <Timer
+            onRefresh={() =>
+              setState({...state, one: '', two: '', three: '', four: ''})
+            }
+            refreshFocus={() => {
+              eleRef.current['one'].focus();
+            }}
+            data={{country_code: countryCode, mobile, type: 'signup'}}
+            isExpired={(expired) => {
+              console.log('time expired',expired);
+            }}
+          />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

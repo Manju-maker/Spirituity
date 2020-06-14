@@ -13,14 +13,12 @@ class AgeVerifyModal extends Component {
     this.state = {modalVisible: false};
   }
   componentDidMount() {
-    console.log('onside did mouont');
     Events.on('showAgeVerifyModal', 'myId', this.onShow);
   }
   componentWillUnmount() {
     Events.rm('showAgeVerifyModal', 'myId');
   }
   onShow = data => {
-    console.log('dataaa', data);
     this.setState({modalVisible: true});
   };
   onClick = () => {
@@ -31,8 +29,7 @@ class AgeVerifyModal extends Component {
     return (
       <Modal
         animationType={'fade'}
-        visible={this.state.modalVisible}
-        transparent={true}>
+        visible={this.state.modalVisible}>
         <View
           style={{
             justifyContent: 'center',

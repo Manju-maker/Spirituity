@@ -21,7 +21,7 @@ const Stack = createStackNavigator();
 function AppContainer({userInfo, navigation}) {
   let {token = null} = userInfo;
   useEffect(() => {
-    AsyncStorage.multiGet(['token', 'showAgeModal']).then(res => {
+    AsyncStorage.multiGet(['userInfo', 'showAgeModal']).then(res => {
       console.log('resposneeeee', res);
       if (res[1][1] == null) {
         Events.trigger('showAgeVerifyModal', {show: true});

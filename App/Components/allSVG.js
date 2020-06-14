@@ -367,3 +367,58 @@ export function WavesSVG(props) {
     </Svg>
   );
 }
+
+export function SquareSVG(props) {
+  return (
+    <Svg width={49} height={80} viewBox="0 0 49 80" {...props}>
+      <Defs>
+        <ClipPath id="prefix__a">
+          <Path d="M0 0h36v80H0zm0 0" />
+        </ClipPath>
+      </Defs>
+      <G
+        clipPath="url(#prefix__a)"
+        fill="none"
+        strokeWidth={5.76}
+        strokeMiterlimit={10}>
+        <Path
+          d="M30.691 67.46l-18.28 8.493L4 57.493 22.281 49zm0 0"
+          stroke="#d89dff"
+        />
+        <Path d="M24 3l21.168 13.348-10.547 20.32" stroke="#f48a6b" />
+      </G>
+    </Svg>
+  );
+}
+
+export function StrawSvg(props) {
+  return (
+    <Svg width={64} height={64} viewBox="0 0 64 48" {...props}>
+      <Defs>
+        <ClipPath id="prefix__a">
+          <Path d="M11 14h24v34H11zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__b">
+          <Path d="M1.43 24.887l10.574 22.988 22.992-10.578-10.578-22.988zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__c">
+          <Path d="M11 0h53v48H11zm0 0" />
+        </ClipPath>
+      </Defs>
+      <G clipPath="url(#prefix__a)">
+        <G clipPath="url(#prefix__b)" clipRule="evenodd">
+          <Path d="M-3.57 9.309h43.566v43.566H-3.57zm0 0" fill="#f5d164" />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__c)">
+        <Path
+          d="M1.906 1.617l24.18 28.492 27.602-14.246 7.726 14.246"
+          fill="none"
+          strokeWidth={5}
+          stroke="#fceee2"
+          strokeMiterlimit={10}
+        />
+      </G>
+    </Svg>
+  );
+}

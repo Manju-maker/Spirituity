@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
-
+import {get} from 'lodash';
 import Store from '../../Store/index';
 import {signinViaEmail, isLogin, login} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
@@ -28,7 +28,7 @@ const height = Dimensions.get('window').height / 4;
 function SignInViaEmail({navigation, ...restProps}) {
   let {purple, offWhite} = colors;
   let {userInfo} = restProps;
-  let {isLoading = false, signupResponse, token} = userInfo;
+  let {isLoading = false, loginResponse} = userInfo;
   let eleRef = useRef([]);
   let [state, setState] = useState({
     email: '',
@@ -56,22 +56,18 @@ function SignInViaEmail({navigation, ...restProps}) {
   };
 
   useEffect(() => {
-    console.log('otpRESPONSE of token>>>>>>>>', token);
-    console.log('otpRESPONSE of emaillll>>>>>>>>', signupResponse);
-    if (
-      signupResponse &&
-      signupResponse.data &&
-      signupResponse.data.status == true
-    ) {
-      let {token} = signupResponse.response;
-      console.log('toknnnnnnnnnnnnnn>>>>>>', token);
-      AsyncStorage.setItem('token', token).then(res => {
-        Store.dispatch(login(token));
-      });
-    } else if (signupResponse && signupResponse.status === 401) {
+    console.log('otpRESPONSE of emaillll>>>>>>>>', loginResponse);
+    if (loginResponse && loginResponse.status == true) {
+      let {response: userInfo} = loginResponse;
+      let {token, data} = userInfo;
+      console.log('userInfouserInfouserInfo', userInfo);
+      let userData = {data, token};
+      AsyncStorage.setItem('userInfo', JSON.stringify(userData));
+      Store.dispatch(login(userData));
+    } else if (loginResponse && loginResponse.status === 401) {
       Snackbar({message: 'Invalid email or password', height: 30});
     }
-  }, [signupResponse, token]);
+  }, [loginResponse]);
 
   useEffect(() => {
     if (emailError === true && passwordError === true) {
