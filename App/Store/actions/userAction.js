@@ -4,6 +4,7 @@ import {
   GET_OTP,
   SHOW_LOADING,
   SIGNUP_REQUEST,
+  FORGOT_PASSWORD_REQUEST,
 } from '../../utils/constant';
 
 const login = payload => {
@@ -45,5 +46,19 @@ const signinViaEmail = payload => {
     payload,
   };
 };
+const forgot = payload => {
+  return {
+    type: FORGOT_PASSWORD_REQUEST,
+    payload,
+  };
+};
 
-export {login, isLogin, getOtp, isLoading, OtpVerifyAndSignup, signinViaEmail};
+export {
+  login,
+  isLogin,
+  getOtp,
+  isLoading,
+  OtpVerifyAndSignup,
+  signinViaEmail,
+  forgot,
+};

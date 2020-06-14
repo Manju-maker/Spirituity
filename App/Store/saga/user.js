@@ -11,6 +11,9 @@ import {
   SIGNUP_FAILED,
   LOGIN_FAILED,
   LOGIN_SUCCESSS,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_FAILED,
 } from '../../utils/constant';
 import CallApi from '../../utils/callApi';
 
@@ -84,10 +87,44 @@ export function* signup(payload) {
     });
   }
 }
+
+export function* forgot(payload) {
+  try {
+    console.log('poyload of payloadd>>>', payload);
+    yield put({type: SHOW_LOADING, payload: true});
+    const response = yield call(
+      CallApi,
+      'post',
+      'users/forget',
+      payload.payload,
+      headers,
+    );
+    console.log(
+      'response of forgot emaillllll++++++++++++++++++++++++++++++',
+      response,
+    );
+    yield put({type: FORGOT_PASSWORD_SUCCESS, payload: response.data});
+  } catch (err) {
+    console.log(
+      'err of forgpt email>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+      payload,
+    );
+    console.log(
+      'err of forgpt email>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+      err.response,
+    );
+    yield put({type: SHOW_LOADING, payload: false});
+    yield put({
+      type: FORGOT_PASSWORD_FAILED,
+      payload: {data: err.response.data, status: err.response.status},
+    });
+  }
+}
 export default function* root() {
   yield all([
     takeLatest(LOGIN_REQUEST, login),
     takeLatest(GET_OTP, getOtp),
     takeLatest(SIGNUP_REQUEST, signup),
+    takeLatest(FORGOT_PASSWORD_REQUEST, forgot),
   ]);
 }
