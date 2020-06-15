@@ -28,7 +28,7 @@ export const reducer = (state, action) => {
     case LOGIN_SUCCESSS:
       return {...state, loginResponse: action.payload};
     case LOGIN_FAILED:
-      return {...state, signupResponse: action.payload};
+      return {...state, loginResponse: action.payload};
     case OTP_REQUEST_SUCCESS:
       return {...state, otpResponse: action.payload};
     case OTP_REQUEST_FAILED:

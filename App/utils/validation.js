@@ -6,6 +6,7 @@ function checkField(field, data) {
     if (field == 'firstName') field = 'Firstname';
     if (field == 'lastName') field = 'Lastname';
     if (field == 'email') field = 'Email';
+    if (field == 'password') field = 'Password';
 
     return `${field} cannot be empty`;
   }

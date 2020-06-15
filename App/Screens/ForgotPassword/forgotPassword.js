@@ -23,6 +23,7 @@ import {SigningButton} from '../../ReusableComponents/commonComponent';
 import {checkField} from '../../utils/validation';
 import {SnackBar} from '../../Components/snackbar1';
 import {forgot} from '../../Store/actions/userAction';
+import {formatText} from '../../utils/validation';
 const height = Dimensions.get('window').height / 4;
 
 function ForgotPassword({navigation, ...restProps}) {
@@ -33,9 +34,17 @@ function ForgotPassword({navigation, ...restProps}) {
     emailError: '',
     phoneNumber: '',
     phoneNumberError: '',
+    countryCode: '+91',
     disable: true,
   });
-  let {email, emailError, phoneNumber, phoneNumberError, disable} = state;
+  let {
+    email,
+    emailError,
+    phoneNumber,
+    phoneNumberError,
+    countryCode,
+    disable,
+  } = state;
 
   let {forgotEmail = ''} = restProps.userInfo;
 
@@ -53,9 +62,10 @@ function ForgotPassword({navigation, ...restProps}) {
     console.log('userinfooo>>>>>>>>', forgotEmail);
   }, [forgotEmail]);
 
-  let setData = (field, text) => {
+  let setData = async (field, text) => {
     let isValid = checkField(field, text.trim());
-    setState({...state, [field]: text, [`${field}Error`]: isValid});
+    let formatedText = await formatText(text, field);
+    setState({...state, [field]: formatedText, [`${field}Error`]: isValid});
   };
   let setRef = (ref, field) => {
     eleRef.current[field] = ref;
@@ -112,7 +122,7 @@ function ForgotPassword({navigation, ...restProps}) {
           <Text style={[styles.boldText, styles.mar_13]}>Forgot Password</Text>
         </View>
 
-        <View style={{flex: 1, marginHorizontal: 20}}>
+        <View style={{flex: 1, marginTop: 20}}>
           <View style={styles.textInputWrapper}>
             <Text style={[styles.text, styles.marB_9]}>Email address</Text>
             <View
@@ -156,7 +166,7 @@ function ForgotPassword({navigation, ...restProps}) {
               ]}
               ref={ref => setRef(ref, 'phoneNumber')}>
               <TextInput
-                value={'+65'}
+                value={countryCode}
                 style={{
                   width: 60,
                   textAlign: 'center',
@@ -172,7 +182,7 @@ function ForgotPassword({navigation, ...restProps}) {
                 onBlur={() => onBlur('phoneNumber')}
                 keyboardType={'number-pad'}
                 onChangeText={text => setData('phoneNumber', text)}
-                maxLength={8}
+                maxLength={12}
               />
               <Text>{phoneNumberError === true && <CheckArrowSVG />}</Text>
             </View>

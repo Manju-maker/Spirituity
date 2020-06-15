@@ -36,7 +36,7 @@ function SignInViaEmail({navigation, ...restProps}) {
     password: '',
     passwordError: '',
     isPasswordHide: true,
-    disable: false,
+    disable: true,
   });
   let {
     email,
