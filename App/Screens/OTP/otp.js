@@ -20,7 +20,10 @@ function OTP({navigation, ...restProps}) {
     email = '',
     password = '',
     mobile = '',
-  } = restProps.route && restProps.route.params && restProps.route.params;
+    type = '',
+  } =
+    (restProps.route && restProps.route.params && restProps.route.params) || {};
+  console.log('typeeeeee>>>>>>>>>>>>>>>', type);
   let {userInfo} = restProps;
   let eleRef = useRef([]);
   let {purple, offWhite} = colors;
@@ -56,7 +59,11 @@ function OTP({navigation, ...restProps}) {
     if (signupResponse && signupResponse.Success) {
       let token = {token: 1};
       AsyncStorage.setItem('token', JSON.stringify(token)).then(res => {
-        Store.dispatch(login(token));
+        if (type === 'signup') {
+          Store.dispatch();
+        } else {
+          Store.dispatch(login(token));
+        }
       });
     } else if (signupResponse && !signupResponse.Success) {
       showSnackBar({message: 'Invalid otp'});

@@ -19,14 +19,13 @@ import {
   FORGOT_PASSWORD_FAILED,
 } from '../../utils/constant';
 import CallApi from '../../utils/callApi';
-import {yellow} from 'color-name';
 
 let headers = {
   'content-type': 'application/json',
   token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
 };
 
-export function* login(payload) {
+export function* loginViaEmail(payload) {
   try {
     yield put({type: SHOW_LOADING, payload: true});
     const response = yield call(
@@ -36,8 +35,11 @@ export function* login(payload) {
       payload.payload,
       headers,
     );
+    console.log('response of login', response);
     yield put({type: LOGIN_SUCCESSS, payload: response.data});
   } catch (err) {
+    console.log('errr of login', err.response);
+
     yield put({type: SHOW_LOADING, payload: false});
     yield put({
       type: LOGIN_FAILED,
@@ -104,7 +106,6 @@ export function* resendOtp(payload) {
   }
 }
 
-
 export function* forgot(payload) {
   try {
     console.log('poyload of payloadd>>>', payload);
@@ -139,7 +140,7 @@ export function* forgot(payload) {
 }
 export default function* root() {
   yield all([
-    takeLatest(LOGIN_REQUEST, login),
+    takeLatest(LOGIN_REQUEST, loginViaEmail),
     takeLatest(GET_OTP, getOtp),
     takeLatest(SIGNUP_REQUEST, signup),
     takeLatest(RESEND_OTP, resendOtp),

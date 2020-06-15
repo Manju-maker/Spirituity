@@ -112,9 +112,9 @@ function isValidPhoneNumber(number) {
   if (number.length != 10) {
     return 'Phone number should be of 10 digit';
   }
-  if (!/^[89]\d{9}$/.test(number)) {
-    return 'Phone Number must start with 8 or 9';
-  }
+  // if (!/^[89]\d{9}$/.test(number)) {
+  //   return 'Phone Number must start with 8 or 9';
+  // }
   return true;
 }
 

@@ -4,7 +4,7 @@ import NetInfo from '@react-native-community/netinfo';
 
 import Events from 'react-native-simple-events';
 import SnackBar from 'rn-snackbar';
-import CrossSVG from './crossSVG';
+import CrossSVG from './allSVG';
 import styles from '../Themes/styles';
 
 export const showSnackBar = (data = {}) => {
@@ -87,7 +87,9 @@ const Snackbar = (data = {}) => {
                 marginRight: 12,
               }}>
               {ok ? (
-                <Text style={[styles.buttonText, {marginRight: 5,flex:1}]}>OK</Text>
+                <Text style={[styles.buttonText, {marginRight: 5, flex: 1}]}>
+                  OK
+                </Text>
               ) : (
                 <CrossSVG />
               )}

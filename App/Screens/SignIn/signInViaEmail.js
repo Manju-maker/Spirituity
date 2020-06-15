@@ -18,11 +18,10 @@ import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import getImage from '../../utils/getImage';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
-import CheckArrowSVG from '../../Components/checkArrowSVG';
-import HidePasswordSVG from '../../Components/hidePasswordSVG';
+import {CheckArrowSVG, HidePasswordSVG} from '../../Components/allSVG';
 import {checkField} from '../../utils/validation';
 import Loader from '../../Components/loader';
-import { showSnackBar } from '../../Components/snackbar';
+import {showSnackBar} from '../../Components/snackbar';
 const height = Dimensions.get('window').height / 4;
 
 function SignInViaEmail({navigation, ...restProps}) {
@@ -57,15 +56,15 @@ function SignInViaEmail({navigation, ...restProps}) {
 
   useEffect(() => {
     console.log('otpRESPONSE of emaillll>>>>>>>>', loginResponse);
-    if (loginResponse && loginResponse.status == true) {
+    if (loginResponse != null && loginResponse.status == true) {
       let {response: userInfo} = loginResponse;
       let {token, data} = userInfo;
       console.log('userInfouserInfouserInfo', userInfo);
       let userData = {data, token};
       AsyncStorage.setItem('userInfo', JSON.stringify(userData));
       Store.dispatch(login(userData));
-    } else if (loginResponse && loginResponse.status === 401) {
-      showSnackBar({message: 'Invalid email or password'});
+    } else if (loginResponse != null && loginResponse.status === 401) {
+      showSnackBar({message: 'Invalid email or password', height: 30});
     }
   }, [loginResponse]);
 
