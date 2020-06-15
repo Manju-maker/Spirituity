@@ -22,7 +22,7 @@ import CheckArrowSVG from '../../Components/checkArrowSVG';
 import HidePasswordSVG from '../../Components/hidePasswordSVG';
 import {checkField} from '../../utils/validation';
 import Loader from '../../Components/loader';
-import Snackbar from '../../Components/snackbar';
+import { showSnackBar } from '../../Components/snackbar';
 const height = Dimensions.get('window').height / 4;
 
 function SignInViaEmail({navigation, ...restProps}) {
@@ -65,7 +65,7 @@ function SignInViaEmail({navigation, ...restProps}) {
       AsyncStorage.setItem('userInfo', JSON.stringify(userData));
       Store.dispatch(login(userData));
     } else if (loginResponse && loginResponse.status === 401) {
-      Snackbar({message: 'Invalid email or password', height: 30});
+      showSnackBar({message: 'Invalid email or password'});
     }
   }, [loginResponse]);
 

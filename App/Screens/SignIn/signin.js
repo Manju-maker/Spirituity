@@ -18,7 +18,7 @@ import {colors} from '../../Themes/colors';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
 import {checkField} from '../../utils/validation';
 
-import Snackbar from '../../Components/snackbar';
+import {showSnackBar} from '../../Components/snackbar';
 import {getOtp} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
 
@@ -51,13 +51,14 @@ function SignIn({navigation, ...restProps}) {
     console.log('Otp res>>>>>>>>>>>>>>>>>>>>>>>', otpResponse);
     if (otpResponse && otpResponse.status == true) {
       navigation.navigate('OTP');
-    } else if (otpResponse && otpResponse.data.status == false) {
-      Snackbar({
-        message:
-          otpResponse.data &&
-          otpResponse.data.statusMessage &&
-          otpResponse.data.statusMessage,
-        height: 50,
+    } else if (
+      otpResponse &&
+      otpResponse.data.status == false &&
+      otpResponse != null
+    ) {
+      let {statusMessage} = otpResponse.data;
+      showSnackBar({
+        message: statusMessage,
       });
     }
   }, [otpResponse]);
