@@ -1,24 +1,16 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  ImageBackground,
-  AsyncStorage,
-  ScrollView,
-} from 'react-native';
+// import RNOtpVerify from 'react-native-otp-verify';
+import {View, Text, TextInput, AsyncStorage, ScrollView} from 'react-native';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import Timer from './timer';
 import {spacing} from '../../Themes/fonts';
-import Snackbar from '../../Components/snackbar';
+import {showSnackBar} from '../../Components/snackbar';
 import {connect} from 'react-redux';
-import CallApi from '../../utils/callApi';
 import Store from '../../Store/index';
 import {OtpVerifyAndSignup, login} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
 import {SquareSVG, StrawSvg} from '../../Components/allSVG';
-import {getLastUpdateTime} from 'react-native-device-info';
 
 function OTP({navigation, ...restProps}) {
   let {
@@ -33,7 +25,9 @@ function OTP({navigation, ...restProps}) {
   let eleRef = useRef([]);
   let {purple, offWhite} = colors;
   const [state, setState] = useState({one: '', two: '', three: '', four: ''});
+  const [maxLimit, setMaxLimit] = useState(0);
   const [otpArray, setOtpArray] = useState(['', '', '', '']);
+  const [stopTime, setExpired] = useState(false);
   const {one, two, three, four} = state;
   let setRef = (ref, field) => {
     eleRef.current[field] = ref;
@@ -46,42 +40,57 @@ function OTP({navigation, ...restProps}) {
   };
 
   let {isLoading = false, signupResponse} = userInfo;
+  // useEffect(() => {
+  //     RNOtpVerify.getOtp()
+  //       .then(p => RNOtpVerify.addListener(otpHandler))
+  //       .catch(p => console.log(p));
+  // }, []);
+  // let otpHandler = message => {
+  //   console.log('otp message>>>>>', message);
+  //   const otp = /(\d{4})/g.exec(message)[1];
+  //   this.setState({otp});
+  //   RNOtpVerify.removeListener();
+  //   Keyboard.dismiss();
+  // };
   useEffect(() => {
-    console.log('resp[onse>>>>>>>>>>>>>', signupResponse);
-
     if (signupResponse && signupResponse.Success) {
       let token = {token: 1};
       AsyncStorage.setItem('token', JSON.stringify(token)).then(res => {
         Store.dispatch(login(token));
       });
     } else if (signupResponse && !signupResponse.Success) {
-      Snackbar({message: 'Invalid otp', height: 30});
+      showSnackBar({message: 'Invalid otp'});
     }
   }, [signupResponse]);
 
-  let onSubmit = (one, two, three, four) => {
-    let otp = one + two + three + four;
+  let onSubmit = () => {
+    let otp = otpArray[0] + otpArray[1] + otpArray[2] + otpArray[3];
     let data = {
       first_name: firstName,
       last_name: lastName,
       password,
-      mobile,
+      mobile: mobile.replace(/\s/g, ''),
       email,
       otp: parseInt(otp),
       country_code: countryCode,
     };
-
-    Store.dispatch(OtpVerifyAndSignup(data));
+    if (stopTime === false) {
+      Store.dispatch(OtpVerifyAndSignup(data));
+    } else {
+      showSnackBar({message: 'Otp Expired'});
+    }
   };
 
+  let validateOtp = otp => {
+    let final = otp.every(item => {
+      return item.length >= 1;
+    });
+    return final;
+  };
   useEffect(() => {
-    if (
-      one.length === 1 &&
-      two.length === 1 &&
-      three.length === 1 &&
-      four.length === 1
-    ) {
-      onSubmit(one, two, three, four);
+    let valid = validateOtp(otpArray);
+    if (valid) {
+      onSubmit();
     }
   }, [otpArray]);
 
@@ -197,16 +206,18 @@ function OTP({navigation, ...restProps}) {
             })}
           </View>
           <Timer
-            onRefresh={() =>
-              setState({...state, one: '', two: '', three: '', four: ''})
-            }
+            onRefresh={() => {
+              setMaxLimit(maxLimit + 1);
+              setOtpArray(['', '', '', '']);
+              setExpired(false);
+            }}
             refreshFocus={() => {
               eleRef.current['one'].focus();
             }}
+            setLimit={() => setMaxLimit(0)}
+            maxLimit={maxLimit}
             data={{country_code: countryCode, mobile, type: 'signup'}}
-            isExpired={(expired) => {
-              console.log('time expired',expired);
-            }}
+            isExpired={value => setExpired(value)}
           />
         </View>
       </View>

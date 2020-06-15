@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.react.otp.RNReactNativeOtpPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.faizal.OtpVerify.RNOtpVerifyPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;

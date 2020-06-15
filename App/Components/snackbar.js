@@ -1,64 +1,102 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
+
 import Events from 'react-native-simple-events';
 import SnackBar from 'rn-snackbar';
 import CrossSVG from './crossSVG';
 import styles from '../Themes/styles';
 
-const Snackbar = (data = {}) => {
-  let {message, height = 80, ok = false} = data;
-  console.log('ok', ok);
-  SnackBar.show('Making the world happier', {
-    style: {marginBottom: 12, marginHorizontal: 12, borderRadius: 8},
-    duration: 3000,
-    buttonColor: 'blue',
-    textColor: 'yellow',
-    confirmText: 'Learn more',
-    id: 'CUSTOM_ID',
-    tapToClose: true,
-    onConfirm: () => {
-      console.log('Thank you');
-      SnackBar.dismiss();
-    },
-    cancelText: 'No thanks',
-    onCancel: () => {
-      console.log('Hope to see you again');
-      SnackBar.dismiss();
-    },
-    renderContent: () => (
-      <View
-        style={{
-          height: height,
-          borderRadius: 8,
+export const showSnackBar = (data = {}) => {
+  Events.trigger('showSnackBar', data);
+};
 
-          backgroundColor: 'rgb(250,114,104)',
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
+const Snackbar = (data = {}) => {
+  let [isConnected, setIsConnected] = useState(false);
+  useEffect(() => {
+    let unsubscribe = NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+    });
+    Events.on('showSnackBar', '123456789', showSnack);
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isConnected == false) {
+      showSnack({
+        message: 'No Internet Connection , Please Check',
+      });
+    }
+  }, [isConnected]);
+
+  let showSnack = (data = {}) => {
+    let {message, height = 80, ok = false, duration = 3000} = data;
+    SnackBar.show('Making the world happier', {
+      style: {marginBottom: 12, marginHorizontal: 12, borderRadius: 8},
+      duration,
+      buttonColor: 'blue',
+      textColor: 'yellow',
+      confirmText: 'Learn more',
+      id: 'CUSTOM_ID',
+      tapToClose: true,
+      onConfirm: () => {
+        console.log('Thank you');
+        SnackBar.dismiss();
+      },
+      cancelText: 'No thanks',
+      onCancel: () => {
+        console.log('Hope to see you again');
+        SnackBar.dismiss();
+      },
+      renderContent: () => (
         <View
           style={{
-            flex: 1,
-            marginLeft: 23,
-            marginRight: 40,
+            height: height,
+            borderRadius: 8,
+
+            backgroundColor: 'rgb(250,114,104)',
           }}>
-          <Text
+          <View
             style={{
-              color: 'white',
-              fontFamily: 'AvenirNext-Regular',
-              fontSize: 12,
-              lineHeight: 16,
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
             }}>
-            {message}
-          </Text>
+            <View
+              style={{
+                flex: 1,
+                marginLeft: 23,
+                marginRight: 40,
+              }}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'AvenirNext-Regular',
+                  fontSize: 12,
+                  lineHeight: 16,
+                }}>
+                {message}
+              </Text>
+            </View>
+            <View
+              style={{
+                marginTop: 12,
+                alignSelf: 'flex-start',
+                marginRight: 12,
+              }}>
+              {ok ? (
+                <Text style={[styles.buttonText, {marginRight: 5,flex:1}]}>OK</Text>
+              ) : (
+                <CrossSVG />
+              )}
+            </View>
+          </View>
         </View>
-        {ok ? (
-          <Text style={[styles.buttonText, {marginRight: 5}]}>OK</Text>
-        ) : (
-          <CrossSVG />
-        )}
-      </View>
-    ),
-  });
+      ),
+    });
+  };
 
   return <View />;
 };

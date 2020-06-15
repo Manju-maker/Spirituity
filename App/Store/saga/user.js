@@ -11,8 +11,12 @@ import {
   SIGNUP_FAILED,
   LOGIN_FAILED,
   LOGIN_SUCCESSS,
+  RESEND_OTP_SUCCESS,
+  RESND_OTP_FAILED,
+  RESEND_OTP,
 } from '../../utils/constant';
 import CallApi from '../../utils/callApi';
+import {yellow} from 'color-name';
 
 let headers = {
   'content-type': 'application/json',
@@ -30,9 +34,7 @@ export function* login(payload) {
       headers,
     );
     yield put({type: LOGIN_SUCCESSS, payload: response.data});
-    console.log('responseeeeeee of loginnnnnnnnn>>', response);
   } catch (err) {
-    console.log('Login inside try err of login', err.response);
     yield put({type: SHOW_LOADING, payload: false});
     yield put({
       type: LOGIN_FAILED,
@@ -51,11 +53,9 @@ export function* getOtp(payload) {
       payload.payload,
       headers,
     );
-    console.log('responseeee of get otppp>>>>>>>>>>>>>>>>>>>>>', response);
     yield put({type: OTP_REQUEST_SUCCESS, payload: response.data});
   } catch (err) {
     yield put({type: SHOW_LOADING, payload: false});
-    console.log('errr>>>>', err.response);
     yield put({
       type: OTP_REQUEST_FAILED,
       payload: {data: err.response.data, status: err.response.status},
@@ -72,11 +72,8 @@ export function* signup(payload) {
       payload.payload,
       headers,
     );
-    console.log('responseeeee of signupppppppppppppppp', response);
-
     yield put({type: SIGNUP_SUCCESS, payload: {Success: true}});
   } catch (err) {
-    console.log('err of signup', err.response);
     yield put({type: SHOW_LOADING, payload: false});
     yield put({
       type: SIGNUP_FAILED,
@@ -84,10 +81,31 @@ export function* signup(payload) {
     });
   }
 }
+export function* resendOtp(payload) {
+  try {
+    yield put({type: SHOW_LOADING, payload: true});
+    const response = yield call(
+      CallApi,
+      'put',
+      'users/otp/resend',
+      payload.payload,
+      headers,
+    );
+    yield put({type: RESEND_OTP_SUCCESS, payload: response.data});
+  } catch (error) {
+    yield put({type: SHOW_LOADING, payload: false});
+    yield put({
+      type: RESND_OTP_FAILED,
+      payload: {data: error.response.data, status: error.response.status},
+    });
+  }
+}
+
 export default function* root() {
   yield all([
     takeLatest(LOGIN_REQUEST, login),
     takeLatest(GET_OTP, getOtp),
     takeLatest(SIGNUP_REQUEST, signup),
+    takeLatest(RESEND_OTP, resendOtp),
   ]);
 }

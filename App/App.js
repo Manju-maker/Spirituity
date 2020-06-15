@@ -5,7 +5,6 @@ import AppContainer from '../App/Navigators/appContainer';
 import {Provider} from 'react-redux';
 import Store from './Store/index';
 import Snackbar from './Components/snackbar';
-import NoNetworkModal from './Components/noNetworkModal';
 import AgeVerifyModal from './Components/ageVerifyModal';
 
 export default function App() {
@@ -16,7 +15,7 @@ export default function App() {
   }, []);
   return (
     <Provider store={Store}>
-      <NoNetworkModal />
+      <Snackbar />
       <AppContainer />
       <AgeVerifyModal />
     </Provider>

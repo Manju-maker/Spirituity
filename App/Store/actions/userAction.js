@@ -4,6 +4,7 @@ import {
   GET_OTP,
   SHOW_LOADING,
   SIGNUP_REQUEST,
+  RESEND_OTP
 } from '../../utils/constant';
 
 const login = payload => {
@@ -46,4 +47,19 @@ const signinViaEmail = payload => {
   };
 };
 
-export {login, isLogin, getOtp, isLoading, OtpVerifyAndSignup, signinViaEmail};
+const resendOtp = payload => {
+  return {
+    type: RESEND_OTP,
+    payload,
+  };
+};
+
+export {
+  login,
+  isLogin,
+  getOtp,
+  isLoading,
+  OtpVerifyAndSignup,
+  signinViaEmail,
+  resendOtp,
+};

@@ -19,7 +19,7 @@ import {
   calculatePasswordScore,
   formatText,
 } from '../../utils/validation';
-import Snackbar from '../../Components/snackbar';
+import {showSnackBar} from '../../Components/snackbar';
 import {
   GoogleFacebookLogin,
   SigningButton,
@@ -97,7 +97,7 @@ function SignUp({navigation, userInfo}) {
         countryCode,
         email,
         password,
-        mobile: phoneNumber,
+        mobile: phoneNumber.replace(/\s/g, ''),
       };
       navigation.navigate('OTP', data);
     } else if (
@@ -105,9 +105,16 @@ function SignUp({navigation, userInfo}) {
       otpResponse.data.status == false &&
       otpResponse.status === 409
     ) {
-      Snackbar({
+      showSnackBar({
         message: 'This Number or email is already in use',
-        height: 50,
+      });
+    } else if (
+      otpResponse &&
+      otpResponse.data.status == false &&
+      otpResponse.status === 400
+    ) {
+      showSnackBar({
+        message: 'Something went Wrong',
       });
     }
   }, [otpResponse]);
@@ -482,10 +489,7 @@ function SignUp({navigation, userInfo}) {
               <HidePasswordSVG />
             </TouchableOpacity>
           </View> */}
-          <View
-            style={[
-              styles.rowViewWrapperCenter,
-            ]}>
+          <View style={[styles.rowViewWrapperCenter]}>
             {progress.map((item, index) => {
               return (
                 <View
