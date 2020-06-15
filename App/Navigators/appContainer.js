@@ -24,7 +24,12 @@ function AppContainer({userInfo, navigation}) {
     AsyncStorage.multiGet(['userInfo', 'showAgeModal']).then(res => {
       console.log('resposneeeee', res);
       if (res[1][1] == null) {
-        Events.trigger('showAgeVerifyModal', {show: true});
+        Events.trigger('showConfirmationModal', {
+          header: 'Age Verification',
+          message: 'This app requires you to be 18 years or older',
+          buttonText: 'I’M OVER 18',
+          showExit: true,
+        });
       }
       if (res[0][1] != null) {
         let token1 = res[0][1];

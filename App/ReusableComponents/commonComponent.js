@@ -40,7 +40,13 @@ function GoogleFacebookLogin(props) {
     </>
   );
 }
-function SigningButton({click, text, style, disable = false}) {
+function SigningButton({
+  click,
+  text,
+  style,
+  disable = false,
+  showArrow = true,
+}) {
   return (
     <TouchableOpacity
       disabled={disable}
@@ -60,50 +66,10 @@ function SigningButton({click, text, style, disable = false}) {
       <Text style={[styles.buttonText, {marginRight: spacing(10)}]}>
         {text}
       </Text>
-      <ForwardArrowSVG />
+      {showArrow && <ForwardArrowSVG />}
     </TouchableOpacity>
   );
 }
-// function InputField(props) {
-//   let {setRef = () => {},} = props;
-//   return (
-//     <View style={[styles.textInputWrapper]}>
-//       <Text style={[styles.text, styles.marB_9]}>Phone number</Text>
-//       <View
-//         style={[
-//           styles.inputBox,
-//           {
-//             flexDirection: 'row',
-//             paddingLeft: 0,
-//             alignItems: 'center',
-//             paddingHorizontal: 5,
-//           },
-//         ]}
-//         ref={ref => setRef(ref, 'phoneNumber')}>
-//         <TextInput
-//           value={countryCode}
-//           style={{
-//             width: 60,
-//             textAlign: 'center',
-//             borderRightWidth: 1,
-//             borderRightColor: offWhite,
-//           }}
-//         />
-//         <TextInput
-//           style={[{flex: 1, paddingLeft: 16}]}
-//           placeholder="Enter phone number"
-//           value={phoneNumber}
-//           onFocus={() => onFocused('phoneNumber')}
-//           onBlur={() => onBlur('phoneNumber')}
-//           keyboardType={'number-pad'}
-//           onChangeText={text => setData('phoneNumber', text)}
-//         />
-//         <Text>{phoneNumberError === true && <CheckArrowSVG />}</Text>
-//       </View>
-//       <Text style={{color: 'red'}}>{phoneNumberError}</Text>
-//     </View>
-//   );
-// }
 
 function OnBoardingScreen({image, text, navigation}) {
   return (

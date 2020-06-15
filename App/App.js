@@ -5,7 +5,7 @@ import AppContainer from '../App/Navigators/appContainer';
 import {Provider} from 'react-redux';
 import Store from './Store/index';
 import Snackbar from './Components/snackbar';
-import AgeVerifyModal from './Components/ageVerifyModal';
+import ConfimationModal from './Components/ConfimationModal';
 
 export default function App() {
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function App() {
     <Provider store={Store}>
       <Snackbar />
       <AppContainer />
-      <AgeVerifyModal />
+      <ConfimationModal />
     </Provider>
   );
 }
