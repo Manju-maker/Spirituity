@@ -9,16 +9,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
-
+import {
+  CircleSVG,
+  HidePasswordSVG,
+  CheckArrowSVG,
+  WavesSVG,
+} from '../../Components/allSVG';
 import Store from '../../Store/index';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import getImage from '../../utils/getImage';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
-import CheckArrowSVG from '../../Components/checkArrowSVG';
-import HidePasswordSVG from '../../Components/hidePasswordSVG';
 import {checkField} from '../../utils/validation';
 import {SnackBar} from '../../Components/snackbar1';
+import {forgot} from '../../Store/actions/userAction';
+import {formatText} from '../../utils/validation';
 const height = Dimensions.get('window').height / 4;
 
 function ForgotPassword({navigation, ...restProps}) {
@@ -29,9 +34,19 @@ function ForgotPassword({navigation, ...restProps}) {
     emailError: '',
     phoneNumber: '',
     phoneNumberError: '',
+    countryCode: '+91',
     disable: true,
   });
-  let {email, emailError, phoneNumber, phoneNumberError, disable} = state;
+  let {
+    email,
+    emailError,
+    phoneNumber,
+    phoneNumberError,
+    countryCode,
+    disable,
+  } = state;
+
+  let {forgotEmail = ''} = restProps.userInfo;
 
   useEffect(() => {
     console.log('emailErr', emailError, 'phone>>>', phoneNumberError);
@@ -43,9 +58,14 @@ function ForgotPassword({navigation, ...restProps}) {
     }
   }, [emailError, phoneNumberError]);
 
-  let setData = (field, text) => {
+  useEffect(() => {
+    console.log('userinfooo>>>>>>>>', forgotEmail);
+  }, [forgotEmail]);
+
+  let setData = async (field, text) => {
     let isValid = checkField(field, text.trim());
-    setState({...state, [field]: text, [`${field}Error`]: isValid});
+    let formatedText = await formatText(text, field);
+    setState({...state, [field]: formatedText, [`${field}Error`]: isValid});
   };
   let setRef = (ref, field) => {
     eleRef.current[field] = ref;
@@ -57,13 +77,16 @@ function ForgotPassword({navigation, ...restProps}) {
   let onBlur = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
+  let commonStyle = {position: 'absolute', height: 100, width: 100, top: 50};
 
   let changeState = (field, value) => {
     setState({...state, [field]: !value});
   };
 
   let submit = () => {
-    navigation.navigate('ResetPassword');
+    let data = {email};
+    Store.dispatch(forgot(data));
+    // navigation.navigate('ResetPassword');
     // <SnackBar message={'Reset link has been sent to your registered email'} />;
   };
 
@@ -74,24 +97,32 @@ function ForgotPassword({navigation, ...restProps}) {
         marginTop: 10,
         marginBottom: 20,
       }}>
-      <ImageBackground
-        style={{
-          flex: 1,
-          height: 150,
-          justifyContent: 'center',
-        }}
-        resizeMode={'contain'}
-        source={require('../../Assets/images/BG.png')}>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+      <View
+        style={[
+          commonStyle,
+          {
+            transform: [{translateX: -57}],
+            left: 0,
+          },
+        ]}>
+        <WavesSVG />
+      </View>
+      <View
+        style={[
+          commonStyle,
+          {
+            transform: [{translateX: 13}],
+            right: 0,
+          },
+        ]}>
+        <CircleSVG />
+      </View>
+      <View style={styles.signinChildContainer}>
+        <View style={styles.titleContainer}>
           <Text style={[styles.boldText, styles.mar_13]}>Forgot Password</Text>
         </View>
-      </ImageBackground>
-      <View style={{flex: 3, marginHorizontal: 20}}>
-        <View style={{flex: 1}}>
+
+        <View style={{flex: 1, marginTop: 20}}>
           <View style={styles.textInputWrapper}>
             <Text style={[styles.text, styles.marB_9]}>Email address</Text>
             <View
@@ -135,7 +166,7 @@ function ForgotPassword({navigation, ...restProps}) {
               ]}
               ref={ref => setRef(ref, 'phoneNumber')}>
               <TextInput
-                value={'+65'}
+                value={countryCode}
                 style={{
                   width: 60,
                   textAlign: 'center',
@@ -151,7 +182,7 @@ function ForgotPassword({navigation, ...restProps}) {
                 onBlur={() => onBlur('phoneNumber')}
                 keyboardType={'number-pad'}
                 onChangeText={text => setData('phoneNumber', text)}
-                maxLength={8}
+                maxLength={12}
               />
               <Text>{phoneNumberError === true && <CheckArrowSVG />}</Text>
             </View>
@@ -174,4 +205,8 @@ function ForgotPassword({navigation, ...restProps}) {
   );
 }
 
-export default ForgotPassword;
+const mapStateToProps = state => {
+  return {userInfo: state.reducer};
+};
+
+export default connect(mapStateToProps)(ForgotPassword);

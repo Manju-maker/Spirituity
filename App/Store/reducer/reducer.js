@@ -9,6 +9,8 @@ import {
   LOGIN_SUCCESSS,
   RESEND_OTP_SUCCESS,
   RESND_OTP_FAILED,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILED,
 } from '../../utils/constant';
 let initialState = {
   user: '',
@@ -17,6 +19,7 @@ let initialState = {
   signupResponse: null,
   loginResponse: null,
   resendOtpResponse: null,
+  forgotEmail: null,
 };
 
 export const reducer = (state, action) => {
@@ -28,7 +31,7 @@ export const reducer = (state, action) => {
     case LOGIN_SUCCESSS:
       return {...state, loginResponse: action.payload};
     case LOGIN_FAILED:
-      return {...state, signupResponse: action.payload};
+      return {...state, loginResponse: action.payload};
     case OTP_REQUEST_SUCCESS:
       return {...state, otpResponse: action.payload};
     case OTP_REQUEST_FAILED:
@@ -37,6 +40,10 @@ export const reducer = (state, action) => {
       return {...state, signupResponse: action.payload};
     case SIGNUP_FAILED:
       return {...state, signupResponse: action.payload};
+    case FORGOT_PASSWORD_SUCCESS:
+      return {...state, forgotEmail: action.payload};
+    case FORGOT_PASSWORD_FAILED:
+      return {...state, forgotEmail: action.payload};
     case SHOW_LOADING:
       return {...state, isLoading: action.payload};
     case RESND_OTP_FAILED:
