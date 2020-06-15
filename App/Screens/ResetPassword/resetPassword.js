@@ -12,7 +12,7 @@ import {
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
-import HidePasswordSVG from '../../Components/hidePasswordSVG';
+import {HidePasswordSVG} from '../../Components/allSVG';
 import {checkField, validPassword} from '../../utils/validation';
 import {showSnackBar} from '../../Components/snackbar1';
 import {formatPhoneNumber} from 'react-phone-number-input';

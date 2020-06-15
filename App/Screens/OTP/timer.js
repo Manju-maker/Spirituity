@@ -20,11 +20,12 @@ function Timer({
   const [timeLeft, setTimeLeft] = useState(0);
   const [minutes, setMinutes] = useState(3);
   const [disable, setDisable] = useState(false);
-  console.log('userInfouserInfouserInfouserInfo', userInfo);
+  const [message, setMessage] = useState('OTP Expires in ');
   useEffect(() => {
     if (timeLeft == 0) {
       if (minutes == 0) {
         if (maxLimit === 4) {
+          setMessage('OTP Expires in');
           isExpired(false);
           setDisable(false);
           setLimit();
@@ -48,18 +49,6 @@ function Timer({
   }, [userInfo]);
 
   let resendOTP = () => {
-    // let headers = {
-    //   'content-type': 'application/json',
-    //   token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
-    // };
-
-    // CallApi('put', 'users/otp/resend', data, headers)
-    //   .then(res => {
-    //     console.log('response of otp resend', res);
-    //   })
-    //   .catch(err => {
-    //     console.log('errrrrrrrr>>>>>>>>', err.response);
-    //   });
     Store.dispatch(resendOtp(data));
     onRefresh();
     refreshFocus();
@@ -67,6 +56,7 @@ function Timer({
     setTimeLeft(0);
   };
   let extendsTime = () => {
+    setMessage('You have exceed the limit.. Please wait for');
     isExpired(true);
     setDisable(true);
     setMinutes(15);
@@ -77,7 +67,8 @@ function Timer({
     <>
       <View style={{marginTop: 29, alignItems: 'center'}}>
         <Text style={styles.text_12}>
-          OTP Expires in {minutes}:{timeLeft < 10 ? `0${timeLeft}` : timeLeft}
+          {message}
+          {minutes}:{timeLeft < 10 ? `0${timeLeft}` : timeLeft}
         </Text>
       </View>
 

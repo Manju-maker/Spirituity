@@ -1,11 +1,13 @@
 import React from 'react';
 import {TouchableOpacity, Text, View, ImageBackground} from 'react-native';
 import styles, {centerText} from '../Themes/styles';
-import ForwardArrowSVG from '../Components/forwardArrowSVG';
-import FacebookSVG from '../Components/facebookSVG';
-import GoogleSVG from '../Components/googleSVG';
 import getImage from '../utils/getImage';
-import BarzWhiteSVG from '../Components/barzWhiteSVG';
+import {
+  BarzWhiteSVG,
+  FacebookSVG,
+  GoogleSVG,
+  ForwardArrowSVG,
+} from '../Components/allSVG';
 import {colors} from '../Themes/colors';
 import {spacing} from '../Themes/fonts';
 
