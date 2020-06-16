@@ -134,6 +134,11 @@ const QR_14_18 = {
   lineHeight: 18,
   fontFamily: 'Quicksand-Regular',
 };
+const QB_16_20 = {
+  fontSize: scale(16),
+  lineHeight: 20,
+  fontFamily: 'Quicksand-Bold',
+};
 export {
   AR_12_18,
   QB_13,
@@ -144,4 +149,5 @@ export {
   QB_14_18,
   QM_13_21,
   QR_14_18,
+  QB_16_20,
 };

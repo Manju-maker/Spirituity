@@ -9,6 +9,8 @@ import Svg, {
   Use,
   Rect,
   Polyline,
+  LinearGradient,
+  Stop,
 } from 'react-native-svg';
 
 export function BarzWhiteSVG(props) {
@@ -419,6 +421,160 @@ export function StrawSvg(props) {
           strokeMiterlimit={10}
         />
       </G>
+    </Svg>
+  );
+}
+
+export function SearchSVG(props) {
+  return (
+    <Svg width={18} height={18} viewBox="0 0 18 18" {...props}>
+      <Path
+        d="M12.806 13l3.325 3.625M12.285 3.529c2.5 2.538 2.5 6.654 0 9.192a6.334 6.334 0 01-9.055 0c-2.5-2.538-2.5-6.654 0-9.192a6.334 6.334 0 019.055 0"
+        fill="none"
+        fillRule="evenodd"
+        stroke="#FFF"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      />
+    </Svg>
+  );
+}
+
+export function NotificationSVG(props) {
+  return (
+    <Svg width={16} height={17} viewBox="0 0 16 17" {...props}>
+      <Path
+        d="M7.436.6C4.823.6 2.707 2.749 2.707 5.4c0 5.6-2.364 7.2-2.364 7.2h14.185s-2.364-1.6-2.364-7.2c0-2.651-2.117-4.8-4.728-4.8zm1.363 15.2a1.573 1.573 0 01-1.363.797 1.574 1.574 0 01-1.364-.797"
+        fill="none"
+        fillRule="evenodd"
+        stroke="#FFF"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+      />
+    </Svg>
+  );
+}
+
+export function BarzWalletSVG(props) {
+  return (
+    <Svg width={56} height={55} viewBox="0 0 56 55" {...props}>
+      <Defs>
+        <LinearGradient
+          id="prefix__b"
+          x1="100%"
+          x2="15.805%"
+          y1="11.719%"
+          y2="100%">
+          <Stop offset="0%" stopColor="#FB8F66" />
+          <Stop offset="100%" stopColor="#7033FF" />
+        </LinearGradient>
+        <LinearGradient
+          id="prefix__c"
+          x1="50%"
+          x2="100%"
+          y1="100%"
+          y2="27.515%">
+          <Stop offset="0%" stopColor="#A355C7" />
+          <Stop offset="100%" stopColor="#FFA36E" />
+        </LinearGradient>
+        <Circle id="prefix__a" cx={24.923} cy={24.923} r={24.923} />
+      </Defs>
+      <G fill="none" fillRule="evenodd" transform="translate(3.5 3)">
+        <Mask id="prefix__e" fill="#fff">
+          <Use xlinkHref="#prefix__a" />
+        </Mask>
+        <Use
+          fill="url(#prefix__b)"
+          stroke="url(#prefix__c)"
+          strokeWidth={4.154}
+          xlinkHref="#prefix__a"
+        />
+        <G filter="url(#prefix__d)" mask="url(#prefix__e)">
+          <G fill="#FFF">
+            <G filter="url(#prefix__f)" transform="translate(24.892 18.692)">
+              <Path d="M2.239 7.856h.868c.692 0 1.302-.4 1.302-1.705 0-1.37-.46-1.628-.977-1.628-.719 0-1.193.581-1.193.581v2.752zM2.225.013v3.411s.8-.684 1.818-.684c1.492 0 2.686.827 2.686 3.359 0 2.52-1.763 3.528-3.636 3.528H1.004C.366 9.627 0 9.304 0 8.748V.013h2.225zm7.821 8.082h1.094v-.939s-.432-.347-1.31-.347c-.473 0-.798.219-.798.617 0 .412.284.67 1.014.67m-.595-2.69c1.095 0 1.69.335 1.69.335v-.373c0-.592-.406-.85-1.136-.85-1.432 0-2.337.554-2.337.554l-.595-1.634s1.284-.72 3.135-.72c1.973 0 3.027.759 3.027 2.495v3.539c0 .553-.351.875-.987.875H9.87c-2.027 0-2.986-.811-2.986-2.175 0-1.338 1.081-2.046 2.567-2.046m9.455-2.496h-4.618c-.682 0-1.017.371-1.017.96 0 .294.134.614.362.87l2.957 3.262 1.47 1.625h.377c.683 0 1.004-.371 1.004-.96 0-.32-.147-.652-.361-.895l-2.905-3.224h2.73V2.91z" />
+            </G>
+            <Path
+              fillRule="nonzero"
+              d="M8.279 28.258v-3.801c0-.73.432-1.032 1.1-1.032h.406v4.833h2.107v-4.833h.393c.668 0 1.1.302 1.1 1.032v3.801h2.16V24.47c0-2.077-1.14-2.82-3.26-2.82h-2.84c-1.039 0-1.869.185-2.44.628-.573.444-.886 1.15-.886 2.192v3.788h2.16zm9.211 2.367c1.466 0 2.356-.516 2.736-1.775l2.16-7.2h-2.16l-.93 3.978-1.112-3.978h-2.292l2.252 6.457-.17.466c-.092.302-.341.416-.668.416h-.367v1.636h.55z"
+            />
+          </G>
+        </G>
+      </G>
+    </Svg>
+  );
+}
+export function VodkaSVG(props) {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" {...props}>
+      <G fill="none" fillRule="evenodd">
+        <Path
+          fill="#FFF"
+          fillRule="nonzero"
+          d="M14 6.91V2.406c0-.223-.224-.406-.5-.406h-3c-.276 0-.5.183-.5.407V6.91c-1.661.03-3 1.106-3 2.424v14.26c0 .224.224.407.5.407h9c.276 0 .5-.183.5-.407V9.333c0-1.325-1.354-2.406-3-2.424zM16 23H8v-4h8v4zm0-5H8v-4h8v4zm0-4H8V9.77c0-.923.929-1.673 2.099-1.674l.429-.02c.265-.013.472-.198.472-.422V3h2v4.654c0 .224.207.41.472.422l.457.021c1.142 0 2.071.75 2.071 1.673V14z"
+        />
+        <Path stroke="#FFF" strokeLinecap="square" d="M10.5.5h3" />
+      </G>
+    </Svg>
+  );
+}
+
+export function BrandySVG(props) {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" {...props}>
+      <Path
+        d="M2.84 9.5h18.32m-16.71 11h15.1M14 3.5v1.617h0c0 .653.369 1.25.953 1.543l5.126 2h0a3.44 3.44 0 011.915 3.254h0a20.852 20.852 0 01-3.743 10.792h0a1.732 1.732 0 01-1.453.8H7.2h0a1.732 1.732 0 01-1.453-.8h0a20.856 20.856 0 01-3.741-10.793h0a3.439 3.439 0 011.915-3.254l5.126-2h0c.584-.292.953-.889.953-1.542V3.5M15.811.915h0A1.002 1.002 0 0015 .5H9h0a1 1 0 00-.949 1.316l.334 1h0a1 1 0 00.948.684h5.334a1 1 0 00.948-.684l.334-1h0a1 1 0 00-.138-.901h0z"
+        fill="none"
+        fillRule="evenodd"
+        stroke="#FFF"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+
+export function WhiskeySVG(props) {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" {...props}>
+      <G
+        fill="none"
+        fillRule="evenodd"
+        stroke="#FFF"
+        strokeLinecap="round"
+        strokeLinejoin="round">
+        <Path d="M10 23.5H2.723h0a1.5 1.5 0 01-1.478-1.24h0A57.365 57.365 0 01.5 14.5c0-3 5-3.5 5-5.5V3.5m3 0V9c0 .83.861 1.4 1.869 2M8.5 3.5h-3V1h0A.5.5 0 016 .5h2a.5.5 0 01.5.5v2.5z" />
+        <Path d="M4 20.5a.5.5 0 01-.5-.5v-4a.5.5 0 01.5-.5h6a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4zm19-8h0a.5.5 0 01.5.5v8.847c0 .909-1.209 1.653-2.129 1.653H14.68c-.921 0-2.18-.744-2.18-1.653V13h0a.5.5 0 01.5-.5h10zm-10.49 4H23.5" />
+        <Path d="M15.25 18.5h0a.25.25 0 10.25.25h0a.25.25 0 00-.25-.25m5.5 0h0a.25.25 0 10.25.25h0a.25.25 0 00-.25-.25M18 21h0a.25.25 0 10.25.25h0A.25.25 0 0018 21" />
+      </G>
+    </Svg>
+  );
+}
+
+export function RumSVG(props) {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" {...props}>
+      <Path
+        d="M13 13.5v2.389h0a3.072 3.072 0 002.406 3.054h0A3 3 0 0019 16v-2.5h0a.5.5 0 00-.5-.5h-5 0a.5.5 0 00-.5.5s0 0 0 0h0zm3 5.5v4.5m-2.5 0h5M13 10.862h0a.999.999 0 00-.232-.64l-2.036-2.444h0a.999.999 0 01-.232-.64V1.5h0a1 1 0 00-1-1h-1 0a1 1 0 00-1 1s0 0 0 0v5.638h0c0 .234-.082.46-.232.64l-2.036 2.444h0a.999.999 0 00-.232.64V22.5h0a1 1 0 001 1h5.5m-4-20h3"
+        fill="none"
+        fillRule="evenodd"
+        stroke="#FFF"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+
+export function GinSVG(props) {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" {...props}>
+      <Path
+        d="M13.998 7.025V3.5a.5.5 0 00-.5-.5h-3a.5.5 0 00-.5.5v3.525c-1.661.037-3 1.357-3 2.975v13.5a.5.5 0 00.5.5h9a.5.5 0 00.5-.5V10c0-1.627-1.354-2.953-3-2.975zm2 15.975h-8v-5h8v5zm0-6h-8v-6h8v6zm-8-5.014V10c0-1.09.929-1.976 2.099-1.977l.429-.024a.5.5 0 00.472-.499V4h2v3.5a.5.5 0 00.472.499l.457.025c1.142 0 2.071.886 2.071 1.976v1.986h-8zM10.498 0h3a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-3a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5z"
+        fill="#FFF"
+      />
     </Svg>
   );
 }
