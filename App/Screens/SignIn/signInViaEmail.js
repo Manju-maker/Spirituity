@@ -13,7 +13,7 @@ import {
 import {connect} from 'react-redux';
 import {get} from 'lodash';
 import Store from '../../Store/index';
-import {signinViaEmail, isLogin, login} from '../../Store/actions/userAction';
+import {signinViaEmail, login} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import getImage from '../../utils/getImage';
@@ -22,6 +22,7 @@ import {CheckArrowSVG, HidePasswordSVG} from '../../Components/allSVG';
 import {checkField} from '../../utils/validation';
 import Loader from '../../Components/loader';
 import {showSnackBar} from '../../Components/snackbar';
+import BackgroundImage from '../../Components/backgroundImage';
 const height = Dimensions.get('window').height / 4;
 
 function SignInViaEmail({navigation, ...restProps}) {
@@ -55,11 +56,9 @@ function SignInViaEmail({navigation, ...restProps}) {
   };
 
   useEffect(() => {
-    console.log('otpRESPONSE of emaillll>>>>>>>>', loginResponse);
     if (loginResponse != null && loginResponse.status == true) {
       let {response: userInfo} = loginResponse;
       let {token, data} = userInfo;
-      console.log('userInfouserInfouserInfo', userInfo);
       let userData = {data, token};
       AsyncStorage.setItem('userInfo', JSON.stringify(userData));
       Store.dispatch(login(userData));
@@ -102,17 +101,18 @@ function SignInViaEmail({navigation, ...restProps}) {
       <View
         style={{
           flex: 1,
-          marginTop: 10,
           marginBottom: 20,
+          borderColor: 'red',
+          borderWidth: 3,
         }}>
-        <ImageBackground
+        <View
           style={{
             flex: 1,
-            height: 150,
             justifyContent: 'center',
-          }}
-          resizeMode={'contain'}
-          source={require('../../Assets/images/BG.png')}>
+            marginTop: 43,
+            marginBottom: 30,
+          }}>
+          <BackgroundImage top={0} />
           <View
             style={{
               justifyContent: 'center',
@@ -122,63 +122,66 @@ function SignInViaEmail({navigation, ...restProps}) {
               Enter your Email
             </Text>
           </View>
-        </ImageBackground>
+        </View>
         <View style={{flex: 2, marginHorizontal: 20}}>
           <View style={{flex: 1}}>
-            <View style={styles.textInputWrapper}>
-              <Text style={[styles.text, styles.marB_9]}>Email address</Text>
-              <View
-                style={[
-                  styles.inputBox,
-                  {
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingHorizontal: 5,
-                  },
-                ]}
-                ref={ref => setRef(ref, 'email')}>
-                <TextInput
-                  style={{flex: 1}}
-                  placeholder="Enter email address"
-                  value={email}
-                  onFocus={() => onFocus('email')}
-                  onBlur={() => onBlur('email')}
-                  onChangeText={text => setData('email', text)}
-                />
-                <Text>{emailError === true && <CheckArrowSVG />}</Text>
-              </View>
-              <Text style={{color: 'red'}}>{emailError}</Text>
-            </View>
-            <View style={styles.textInputWrapper}>
-              <Text style={[styles.text, styles.marB_9]}>Password</Text>
-              <View
-                style={[
-                  styles.inputBox,
-                  {
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingHorizontal: 5,
-                  },
-                ]}
-                ref={ref => setRef(ref, 'password')}>
-                <TextInput
-                  style={{flex: 1}}
-                  placeholder="* * * * *"
-                  value={password}
-                  secureTextEntry={isPasswordHide}
-                  onFocus={() => onFocus('password')}
-                  onBlur={() => onBlur('password')}
-                  onChangeText={text => setData('password', text)}
-                />
-                <TouchableOpacity
-                  style={{marginHorizontal: 14}}
-                  activeOpacity={0.8}
-                  onPress={() => changeState('isPasswordHide', isPasswordHide)}>
-                  <HidePasswordSVG />
-                </TouchableOpacity>
-              </View>
-              <Text style={{color: 'red'}}>{passwordError}</Text>
-            </View>
+            {[
+              {
+                header: 'Email address',
+                placeHolder: 'Enter email address',
+                value: email,
+                field: 'email',
+                autoCapitalize: 'none',
+                error: emailError,
+              },
+              {
+                header: 'Password',
+                placeHolder: '* * * * *',
+                value: password,
+                field: 'password',
+                autoCapitalize: 'none',
+                error: passwordError,
+              },
+            ].map((item, index) => {
+              return (
+                <View style={styles.textInputWrapper}>
+                  <Text style={[styles.text, styles.marB_9]}>
+                    {item.header}
+                  </Text>
+                  <View
+                    style={[
+                      styles.inputBox,
+                      {
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingHorizontal: 5,
+                      },
+                    ]}
+                    ref={ref => setRef(ref, item.field)}>
+                    <TextInput
+                      style={{flex: 1}}
+                      placeholder="* * * * *"
+                      value={item.value}
+                      secureTextEntry={isPasswordHide}
+                      onFocus={() => onFocus(item.field)}
+                      onBlur={() => onBlur(item.field)}
+                      onChangeText={text => setData(item.field, text)}
+                    />
+                    {item.field === 'password' && (
+                      <TouchableOpacity
+                        style={{marginHorizontal: 14}}
+                        activeOpacity={0.8}
+                        onPress={() =>
+                          changeState('isPasswordHide', isPasswordHide)
+                        }>
+                        <HidePasswordSVG />
+                      </TouchableOpacity>
+                    )}
+                  </View>
+                  <Text style={{color: 'red'}}>{item.error}</Text>
+                </View>
+              );
+            })}
             <Text
               onPress={() => navigation.navigate('ForgotPassword')}
               style={[
@@ -187,6 +190,14 @@ function SignInViaEmail({navigation, ...restProps}) {
               ]}>
               Forgot Password
             </Text>
+            <View style={[styles.rowViewWrapperCenter]}>
+              <Text style={[styles.bottomText]}>Don't have an account?</Text>
+              <TouchableOpacity
+                style={styles.marL_8}
+                onPress={() => navigation.navigate('SignUp')}>
+                <Text style={styles.colorsText}>Sign Up</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <SigningButton

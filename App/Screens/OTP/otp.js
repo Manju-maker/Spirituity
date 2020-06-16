@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
-// import RNOtpVerify from 'react-native-otp-verify';
+import RNOtpVerify from 'react-native-otp-verify';
 import {View, Text, TextInput, AsyncStorage, ScrollView} from 'react-native';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
@@ -8,7 +8,12 @@ import {spacing} from '../../Themes/fonts';
 import {showSnackBar} from '../../Components/snackbar';
 import {connect} from 'react-redux';
 import Store from '../../Store/index';
-import {OtpVerifyAndSignup, login} from '../../Store/actions/userAction';
+import {
+  OtpVerifyAndSignup,
+  login,
+  signinViaOtp,
+  forgetViaOtp
+} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
 import {SquareSVG, StrawSvg} from '../../Components/allSVG';
 
@@ -42,11 +47,11 @@ function OTP({navigation, ...restProps}) {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
 
-  let {isLoading = false, signupResponse} = userInfo;
+  let {isLoading = false, signResponseViaOtp} = userInfo;
   // useEffect(() => {
-  //     RNOtpVerify.getOtp()
-  //       .then(p => RNOtpVerify.addListener(otpHandler))
-  //       .catch(p => console.log(p));
+  //   RNOtpVerify.getOtp()
+  //     .then(p => RNOtpVerify.addListener(otpHandler))
+  //     .catch(p => console.log(p));
   // }, []);
   // let otpHandler = message => {
   //   console.log('otp message>>>>>', message);
@@ -56,33 +61,50 @@ function OTP({navigation, ...restProps}) {
   //   Keyboard.dismiss();
   // };
   useEffect(() => {
-    if (signupResponse && signupResponse.Success) {
-      let token = {token: 1};
-      AsyncStorage.setItem('token', JSON.stringify(token)).then(res => {
-        if (type === 'signup') {
-          Store.dispatch();
-        } else {
-          Store.dispatch(login(token));
-        }
-      });
-    } else if (signupResponse && !signupResponse.Success) {
-      showSnackBar({message: 'Invalid otp'});
+    if (signResponseViaOtp != null) {
+      if (signResponseViaOtp && signResponseViaOtp.status === true) {
+        let {response: userInfo} = signResponseViaOtp;
+        let {token, data} = userInfo;
+        let userData = {data, token};
+        AsyncStorage.setItem('userInfo', JSON.stringify(userData));
+        Store.dispatch(login(userData));
+      } else if (signResponseViaOtp && signResponseViaOtp.status === 400) {
+        showSnackBar({message: 'Invalid otp'});
+      } else {
+        showSnackBar({message: 'Something went Wrong!'});
+      }
     }
-  }, [signupResponse]);
+  }, [signResponseViaOtp]);
 
   let onSubmit = () => {
     let otp = otpArray[0] + otpArray[1] + otpArray[2] + otpArray[3];
-    let data = {
-      first_name: firstName,
-      last_name: lastName,
-      password,
-      mobile: mobile.replace(/\s/g, ''),
-      email,
-      otp: parseInt(otp),
-      country_code: countryCode,
-    };
     if (stopTime === false) {
-      Store.dispatch(OtpVerifyAndSignup(data));
+      if (type === 'SignUp') {
+        let data = {
+          first_name: firstName,
+          last_name: lastName,
+          password,
+          mobile,
+          email,
+          otp: parseInt(otp),
+          country_code: countryCode,
+        };
+        Store.dispatch(OtpVerifyAndSignup(data));
+      } else if (type === 'SignIn') {
+        let data = {
+          mobile,
+          country_code: '+91',
+          otp: parseInt(otp),
+        };
+        Store.dispatch(signinViaOtp(data));
+      } else if (type === 'Forget') {
+        let data = {
+          mobile,
+          country_code: '+91',
+          otp: parseInt(otp),
+        };
+        Store.dispatch(forgetViaOtp(data));
+      }
     } else {
       showSnackBar({message: 'Otp Expired'});
     }

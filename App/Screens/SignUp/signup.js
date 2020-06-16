@@ -26,11 +26,12 @@ import {
   InputField,
 } from '../../ReusableComponents/commonComponent';
 import Store from '../../Store/index';
-import {getOtp} from '../../Store/actions/userAction';
+import {getOtp, resetOtpResponse} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import Loader from '../../Components/loader';
 import {GoogleSignUp, FacebookSignUp} from '../../Components/socialSignin';
+import BackgroundImage from '../../Components/backgroundImage';
 
 let {purple, offWhite} = colors;
 
@@ -98,6 +99,7 @@ function SignUp({navigation, userInfo}) {
         email,
         password,
         mobile: phoneNumber.replace(/\s/g, ''),
+        type: 'SignUp',
       };
       navigation.navigate('OTP', data);
     } else if (
@@ -139,6 +141,7 @@ function SignUp({navigation, userInfo}) {
   };
 
   let SignIn = () => {
+    Store.dispatch(resetOtpResponse());
     navigation.navigate('SignIn');
   };
   let checkValidation = () => {
@@ -196,7 +199,6 @@ function SignUp({navigation, userInfo}) {
   let onBlur = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
-  let commonStyle = {position: 'absolute', height: 100, width: 100, top: 50};
   let checkArrowStyle = {
     justifyContent: 'center',
     alignItems: 'center',
@@ -213,26 +215,7 @@ function SignUp({navigation, userInfo}) {
       keyboardShouldPersistTaps={'always'}
       showsVerticalScrollIndicator={false}>
       <Loader visible={isLoading} />
-      <View
-        style={[
-          commonStyle,
-          {
-            transform: [{translateX: -57}],
-            left: 0,
-          },
-        ]}>
-        <WavesSVG />
-      </View>
-      <View
-        style={[
-          commonStyle,
-          {
-            transform: [{translateX: 13}],
-            right: 0,
-          },
-        ]}>
-        <CircleSVG />
-      </View>
+      <BackgroundImage />
       <View style={styles.signinChildContainer}>
         <View style={styles.titleContainer}>
           <Text style={[styles.boldText, styles.marB_13]}>

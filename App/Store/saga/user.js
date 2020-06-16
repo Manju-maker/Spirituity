@@ -1,9 +1,11 @@
 import {all, put, takeLatest, call} from 'redux-saga/effects';
 import {
   LOGIN_REQUEST,
-  LOGIN_SUCCESS,
+  OTP_REQUEST_STATUS, /// chedked
   SIGNUP_REQUEST,
-  GET_OTP,
+  LOGIN_SUCCESS,
+  SIGNUP_REQUEST_MOBILE, /// checked
+  GET_OTP, /// checked
   OTP_REQUEST_SUCCESS,
   OTP_REQUEST_FAILED,
   SHOW_LOADING,
@@ -14,9 +16,15 @@ import {
   RESEND_OTP_SUCCESS,
   RESND_OTP_FAILED,
   RESEND_OTP,
-  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_STATUS,
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_FAILED,
+  LOGIN_REQUEST_MOBLE_STATUS, //// checked
+  LOGIN_REQUEST_MOBILE, /// checked
+  LOGIN_STATUS, /// checked
+  GET_OTP_FORGET, //// checked
+  FORGET_OTP_REQUEST_STATUS, /// checked
+  FORGET_VIA_OTP, /// checked
 } from '../../utils/constant';
 import CallApi from '../../utils/callApi';
 
@@ -35,20 +43,18 @@ export function* loginViaEmail(payload) {
       payload.payload,
       headers,
     );
-    console.log('response of login', response);
-    yield put({type: LOGIN_SUCCESSS, payload: response.data});
+    yield put({type: LOGIN_STATUS, payload: response.data});
   } catch (err) {
-    console.log('errr of login', err.response);
-
     yield put({type: SHOW_LOADING, payload: false});
     yield put({
-      type: LOGIN_FAILED,
+      type: LOGIN_STATUS,
       payload: {data: err.response.data, status: err.response.status},
     });
   }
 }
 
 export function* getOtp(payload) {
+  //// checked >>>
   try {
     yield put({type: SHOW_LOADING, payload: true});
     const response = yield call(
@@ -58,16 +64,17 @@ export function* getOtp(payload) {
       payload.payload,
       headers,
     );
-    yield put({type: OTP_REQUEST_SUCCESS, payload: response.data});
+    yield put({type: OTP_REQUEST_STATUS, payload: response.data});
   } catch (err) {
     yield put({type: SHOW_LOADING, payload: false});
     yield put({
-      type: OTP_REQUEST_FAILED,
+      type: OTP_REQUEST_STATUS,
       payload: {data: err.response.data, status: err.response.status},
     });
   }
 }
-export function* signup(payload) {
+export function* signupViaOtp(payload) {
+  //// checked
   try {
     yield put({type: SHOW_LOADING, payload: true});
     const response = yield call(
@@ -77,11 +84,11 @@ export function* signup(payload) {
       payload.payload,
       headers,
     );
-    yield put({type: SIGNUP_SUCCESS, payload: {Success: true}});
+    yield put({type: LOGIN_REQUEST_MOBLE_STATUS, payload: {Success: true}});
   } catch (err) {
     yield put({type: SHOW_LOADING, payload: false});
     yield put({
-      type: SIGNUP_FAILED,
+      type: LOGIN_REQUEST_MOBLE_STATUS,
       payload: {data: err.response.data, status: err.response.status},
     });
   }
@@ -121,7 +128,7 @@ export function* forgot(payload) {
       'response of forgot emaillllll++++++++++++++++++++++++++++++',
       response,
     );
-    yield put({type: FORGOT_PASSWORD_SUCCESS, payload: response.data});
+    yield put({type: FORGOT_PASSWORD_STATUS, payload: response.data});
   } catch (err) {
     console.log(
       'err of forgpt email>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
@@ -138,12 +145,77 @@ export function* forgot(payload) {
     });
   }
 }
+export function* loginViaOtp(payload) {
+  //// checked
+  try {
+    console.log('loginVia OTP', payload);
+    yield put({type: SHOW_LOADING, payload: true});
+    const response = yield call(
+      CallApi,
+      'post',
+      'users/signin/otp-verify',
+      payload.payload,
+      headers,
+    );
+    console.log(
+      'responseresponseresponseresponseresponse inside saga',
+      response,
+    );
+    yield put({type: LOGIN_REQUEST_MOBLE_STATUS, payload: response.data});
+  } catch (err) {
+    console.log('Error for otp verify>>>>', err);
+    yield put({type: SHOW_LOADING, payload: false});
+    yield put({
+      type: LOGIN_REQUEST_MOBLE_STATUS,
+      payload: {data: err.response.data, status: err.response.status},
+    });
+  }
+}
+export function* getOtpForget(payload) {
+  try {
+    yield put({type: SHOW_LOADING, payload: true});
+    const response = yield call(
+      CallApi,
+      'post',
+      'users/otp',
+      payload.payload,
+      headers,
+    );
+    yield put({type: FORGET_OTP_REQUEST_STATUS, payload: response.data});
+  } catch (error) {
+    yield put({type: SHOW_LOADING, payload: true});
+    yield put({
+      type: FORGET_OTP_REQUEST_STATUS,
+      payload: {data: err.response.data, status: err.response.status},
+    });
+  }
+}
+
+export function* forgetViaOtp(payload) {       ///// update as u get route 
+  try {
+    yield put({type: SHOW_LOADING, payload: true});
+    const response = yield call(
+      CallApi,
+      'post',
+      'users/otp',
+      payload.payload,
+      headers,
+    );
+    yield put({type: FORGET_VIA_OTP_STATUS, payload: response.data});
+  } catch (error) {
+    yield put({type: SHOW_LOADING, payload: true});
+    yield put({type: FORGET_VIA_OTP_STATUS, payload: response.data});
+  }
+}
 export default function* root() {
   yield all([
     takeLatest(LOGIN_REQUEST, loginViaEmail),
-    takeLatest(GET_OTP, getOtp),
-    takeLatest(SIGNUP_REQUEST, signup),
+    takeLatest(LOGIN_REQUEST_MOBILE, loginViaOtp), /// checked
+    takeLatest(GET_OTP, getOtp), ////// done checked
+    takeLatest(SIGNUP_REQUEST_MOBILE, signupViaOtp), //// checked
     takeLatest(RESEND_OTP, resendOtp),
     takeLatest(FORGOT_PASSWORD_REQUEST, forgot),
+    takeLatest(GET_OTP_FORGET, getOtpForget), /// checked
+    takeLatest(FORGET_VIA_OTP, forgetViaOtp), /// checked
   ]);
 }

@@ -15,7 +15,9 @@ import {SigningButton} from '../../ReusableComponents/commonComponent';
 import {HidePasswordSVG} from '../../Components/allSVG';
 import {checkField, validPassword} from '../../utils/validation';
 import {showSnackBar} from '../../Components/snackbar1';
+import {updatePassword} from "../../Store/actions/userAction"
 import {formatPhoneNumber} from 'react-phone-number-input';
+import Store from '../../Store';
 
 function ResetPassword({navigation, ...restProps}) {
   let {purple, offWhite, transparent} = colors;
@@ -105,6 +107,10 @@ function ResetPassword({navigation, ...restProps}) {
 
   let submit = () => {
     if (newPassword === confirmPassword) {
+      let data = {
+        mobile:"8077968014",
+      }
+      Store.dispatch(updatePassword())
       showSnackBar({message: 'Password successfully updated'});
     } else {
       showSnackBar({message: 'Password mismatched'});
@@ -113,6 +119,7 @@ function ResetPassword({navigation, ...restProps}) {
   console.log('errrrrrrr', newPasswordError);
 
   return (
+    <ScrollView contentContainerStyle={{flexGrow:1}} keyboardShouldPersistTaps={"always"}>
     <View
       style={{
         flex: 1,
@@ -234,6 +241,7 @@ function ResetPassword({navigation, ...restProps}) {
         />
       </View>
     </View>
+    </ScrollView>
   );
 }
 

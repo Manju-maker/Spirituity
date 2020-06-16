@@ -4,7 +4,7 @@ import NetInfo from '@react-native-community/netinfo';
 
 import Events from 'react-native-simple-events';
 import SnackBar from 'rn-snackbar';
-import CrossSVG from './allSVG';
+import {CrossSVG} from './allSVG';
 import styles from '../Themes/styles';
 
 export const showSnackBar = (data = {}) => {
@@ -12,7 +12,7 @@ export const showSnackBar = (data = {}) => {
 };
 
 const Snackbar = (data = {}) => {
-  let [isConnected, setIsConnected] = useState(false);
+  let [isConnected, setIsConnected] = useState(true);
   useEffect(() => {
     let unsubscribe = NetInfo.addEventListener(state => {
       setIsConnected(state.isConnected);
@@ -25,6 +25,7 @@ const Snackbar = (data = {}) => {
 
   useEffect(() => {
     if (isConnected == false) {
+      console.log('isConnected', isConnected);
       showSnack({
         message: 'No Internet Connection , Please Check',
       });
