@@ -10,6 +10,7 @@ import {
   QM_13_21,
   spacing,
   QR_14_18,
+  QB_16_20,
 } from './fonts';
 import {colors} from './colors';
 
@@ -125,6 +126,10 @@ const styles = StyleSheet.create({
   boardingTitle: {
     ...QM_13_21,
     color: lightPeach,
+  },
+  boldWhiteText16: {
+    ...QB_16_20,
+    color: brightWhite,
   },
 
   otpInput: {

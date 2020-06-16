@@ -1,24 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  Button,
-  ImageBackground,
-  Image,
-  View,
-  Modal,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, Button, ImageBackground, View} from 'react-native';
 import {connect} from 'react-redux';
-
-import {CheckArrowSVG} from '../../Components/allSVG';
 import {login} from '../../Store/actions/userAction';
 import Store from '../../Store/index';
-import styles from '../../Themes/styles';
-
-import {BarzWhiteSVG} from '../../Components/allSVG';
 import {spacing} from '../../Themes/fonts';
 import TabNavigator from '../../Navigators/tabNavigator';
+import styles from '../../Themes/styles';
+
+import Swiper from 'react-native-swiper';
 import AsyncStorage from '@react-native-community/async-storage';
+import {
+  SearchSVG,
+  NotificationSVG,
+  BarzWalletSVG,
+  VodkaSVG,
+  BrandySVG,
+  WhiskeySVG,
+  RumSVG,
+  GinSVG,
+} from '../../Components/allSVG';
 
 function HomeScreen() {
   const [visible, setVisibility] = useState(false);
@@ -33,89 +33,152 @@ function HomeScreen() {
     <ImageBackground
       style={{flex: 1}}
       source={require('../../Assets/images/homescreen.png')}>
-      <Button title="L" onPress={() => logout()} />
       <View
         style={{
-          width: '100%',
-          height: 50,
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-          backgroundColor: 'red',
-        }}
-      />
-      <TouchableOpacity
-        activeOpacity={0.9}
-        onPress={() => setVisibility(true)}
-        style={{
-          width: '100%',
-          alignItems: 'center',
-          position: 'absolute',
-          top: 70,
-        }}
-      />
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={visible}
-        onRequestClose={() => setVisibility(false)}>
+          flex: 1,
+          marginTop: 48,
+          marginHorizontal: 24,
+          // backgroundColor: 'blue',
+        }}>
         <View
           style={{
-            flex: 1,
-            backgroundColor: 'rgba(0,0,0,0.2)',
             justifyContent: 'center',
-            alignItems: 'center',
+            flexDirection: 'row',
+            marginBottom: 18,
           }}>
           <View
             style={{
-              width: '100%',
-              height: 300,
-              position: 'absolute',
-              bottom: 0,
+              justifyContent: 'center',
             }}>
-            <View style={{flex: 1, backgroundColor: 'white'}}>
-              <ImageBackground
+            <SearchSVG />
+          </View>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+            }}>
+            <BarzWalletSVG />
+          </View>
+
+          <View
+            style={{
+              justifyContent: 'center',
+            }}>
+            <NotificationSVG />
+          </View>
+          <View />
+        </View>
+        <View style={{flex: 1, borderColor: 'green', borderWidth: 2}}>
+          <Swiper
+            dot={
+              <View
                 style={{
-                  flex: 1,
-                  alignItems: 'center',
-                  paddingTop: 30,
-                  marginVertical: 10,
-                  marginHorizontal: 10,
-                  borderRadius: 10,
+                  backgroundColor: 'rgba(255,255,255,.3)',
+                  width: 6,
+                  height: 6,
+                  borderRadius: 3,
+                  marginLeft: 5,
+                  marginRight: 5,
                 }}
-                resizeMode={'stretch'}
-                source={require('../../Assets/images/homescreen.png')}>
-                <View style={{alignItems: 'center', marginTop: spacing(50)}}>
-                  <BarzWhiteSVG />
-                  <Text style={styles.boardingTitle}> Your Barz Anywhere</Text>
-                </View>
-                <View style={{alignItems: 'center', marginTop: spacing(50)}}>
+              />
+            }
+            activeDot={
+              <View
+                style={{
+                  backgroundColor: '#fff',
+                  width: 18,
+                  height: 6,
+                  borderRadius: 3,
+                  marginLeft: 5,
+                  marginRight: 5,
+                }}
+              />
+            }
+            paginationStyle={{
+              marginBottom: spacing(10),
+            }}
+            loop={false}>
+            {[
+              {clr: 'red'},
+              {clr: 'yellow'},
+              {clr: 'pink'},
+              {clr: 'green'},
+              {clr: 'purple'},
+              {clr: 'white'},
+              {clr: 'orange'},
+            ].map(item => {
+              return (
+                <View
+                  style={{
+                    width: '100%',
+                    height: 134,
+                    backgroundColor: item.clr,
+                    borderRadius: 8,
+                  }}
+                />
+              );
+            })}
+          </Swiper>
+        </View>
+        <View style={{flex: 1}}>
+          <Text
+            style={[styles.boldWhiteText16, {marginLeft: 5, marginBottom: 13}]}>
+            Build your CloudBar
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              marginHorizontal: 2,
+              borderColor: 'yellow',
+              borderWidth: 2,
+            }}>
+            {[
+              {drink: 'Vodka'},
+              {drink: 'Brandy'},
+              {drink: 'Whiskey'},
+              {drink: 'Rum'},
+              {drink: 'Gin'},
+            ].map(item => {
+              return (
+                <View
+                  style={{
+                    width: 52,
+                    marginHorizontal: 7,
+                    height: 78,
+                    borderWidth: 1,
+                    borderColor: 'pink',
+                  }}>
+                  <View
+                    style={{
+                      width: 52,
+                      height: 52,
+                      borderRadius: 8,
+                      borderColor: 'white',
+                      borderWidth: 1,
+                      marginBottom: 4,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <VodkaSVG />
+                  </View>
                   <Text
-                    style={[
-                      styles.boldTextWhite,
-                      styles.marH_53,
-                      {textAlign: 'center'},
-                    ]}>
-                    Build your Cloud Bar anytime, anywhere
+                    style={{
+                      textAlign: 'center',
+                      color: '#ffffff',
+                      fontSize: 10,
+                    }}>
+                    {item.drink}
                   </Text>
                 </View>
-              </ImageBackground>
-            </View>
+              );
+            })}
           </View>
         </View>
-      </Modal>
-
-      {/* <Image
-        style={{position: 'absolute', bottom: 0, width: '100%'}}
-        source={require('../../Assets/images/bottomTab.png')}
-      />
-      <View
-        style={{position: 'absolute', bottom: 0, height: 50, width: '100%'}}>
-        <Image
-          style={{height: 40, width: 40}}
-          source={require('../../Assets/images/home.png')}
-        />
-      </View> */}
+      </View>
+      <View style={{position: 'absolute', bottom: 0}}>
+        <Button title="L" onPress={() => logout()} />
+      </View>
     </ImageBackground>
   );
 }
