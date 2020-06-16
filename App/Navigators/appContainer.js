@@ -19,7 +19,8 @@ import {login} from '../Store/actions/userAction';
 
 const Stack = createStackNavigator();
 function AppContainer({userInfo, navigation}) {
-  let {token = null} = userInfo;
+  let {loginResponse: data} = userInfo;
+  let {token} = data || {};
   useEffect(() => {
     AsyncStorage.multiGet(['userInfo', 'showAgeModal']).then(res => {
       console.log('resposneeeee', res);

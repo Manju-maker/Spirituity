@@ -9,22 +9,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {
-  CircleSVG,
-  HidePasswordSVG,
-  CheckArrowSVG,
-  WavesSVG,
-} from '../../Components/allSVG';
+import {CircleSVG, CheckArrowSVG, WavesSVG} from '../../Components/allSVG';
 import Store from '../../Store/index';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
-import getImage from '../../utils/getImage';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
 import {checkField} from '../../utils/validation';
-import {SnackBar} from '../../Components/snackbar1';
-import {forgot, getOtpForFoget} from '../../Store/actions/userAction';
+import {showSnackBar} from '../../Components/snackbar';
+import {SHOW_LOADING} from '../../utils/constant';
+import CallApi from '../../utils/callApi';
 import {formatText} from '../../utils/validation';
-const height = Dimensions.get('window').height / 4;
 
 function ForgotPassword({navigation, ...restProps}) {
   let {purple, offWhite} = colors;
@@ -47,19 +41,15 @@ function ForgotPassword({navigation, ...restProps}) {
     disable,
   } = state;
 
-  let {forgotEmailResponse = '', forgetOtpResponse = ''} = restProps.userInfo;
-
   useEffect(() => {
     if (showEmailField === true && emailError === true) {
       setState({...state, disable: false});
     } else if (showEmailField === false && phoneNumberError === true) {
       setState({...state, disable: false});
+    } else {
+      setState({...state, disable: true});
     }
   }, [emailError, phoneNumberError, showEmailField]);
-
-  useEffect(() => {
-    console.log('server response>>>>>>>>>>>>>>>>', forgotEmailResponse);
-  }, [forgotEmailResponse]);
 
   let setData = async (field, text) => {
     let isValid = checkField(field, text.trim());
@@ -78,40 +68,87 @@ function ForgotPassword({navigation, ...restProps}) {
   };
   let commonStyle = {position: 'absolute', height: 100, width: 100, top: 50};
 
-  let changeState = (field, value) => {
-    setState({...state, [field]: !value});
+  let callService = (method, route, data) => {
+    let headers = {
+      'content-type': 'application/json',
+      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+    };
+    Store.dispatch({type: SHOW_LOADING, payload: true});
+    CallApi(method, route, data, headers)
+      .then(res => {
+        Store.dispatch({type: SHOW_LOADING, payload: false});
+        if (res.status === 200) {
+          console.log('response>>>>>', res.data);
+          if (showEmailField === false) {
+            let data = {
+              country_code: countryCode,
+              mobile: phoneNumber.replace(/\s/g, ''),
+              type: 'reset',
+            };
+            navigation.navigate('OTP', data);
+          } else {
+            showSnackBar({
+              message: 'Email sent successfully.',
+            });
+          }
+        }
+      })
+      .catch(error => {
+        let {data, status} = error.response || {};
+        console.log('ERrpr>>>>>>', data, 'status>>>>', status);
+        Store.dispatch({type: SHOW_LOADING, payload: false});
+        if (status === 404) {
+          showSnackBar({
+            message: 'Mobile number not found.',
+          });
+        } else if (error.message === 'Network Error') {
+          showSnackBar({
+            message: 'No Internet Connection,Please check!',
+          });
+        } else {
+          showSnackBar({message: 'Something Went Wrong'});
+        }
+      });
   };
-
   let submit = () => {
     let data = {};
     if (showEmailField === true) {
       data = {email};
-      Store.dispatch(forgot(data));
+      // Store.dispatch(forgot(data));
+      callService('post', 'users/reset-password/email', data);
     } else if (showEmailField === false) {
       let data = {
         mobile: phoneNumber.replace(/\s/g, ''),
         country_code: countryCode,
         type: 'reset',
       };
-      Store.dispatch(getOtpForFoget(data));
+      // Store.dispatch(getOtpForFoget(data));
+      callService('post', 'users/otp', data);
     }
     console.log('data >>>>>>>>>>>>>>>>>>>>', data);
-    // Store.dispatch(forgot(data));
-    // navigation.navigate('ResetPassword');
-    // <SnackBar message={'Reset link has been sent to your registered email'} />;
   };
 
-  useEffect(() => {
-    console.log('forgetOtpResponse>>>>', forgetOtpResponse);
-    if (forgetOtpResponse && forgetOtpResponse.status == true) {
-      let data = {
-        countryCode,
-        mobile: phoneNumber.replace(/\s/g, ''),
-        type: 'Forget',
-      };
-      navigation.navigate('OTP', data);
-    }
-  }, [forgetOtpResponse]);
+  // useEffect(() => {
+  //   console.log('forgetPassword email Response>>>>', forgetResponse);
+  //   if (forgetResponse != null) {
+  //     if (forgetResponse && forgetResponse.status == true) {
+  //       if (showEmailField === true) {
+  //         showSnackBar({message: forgetResponse.statusMessage});
+  //       } else if (showEmailField === false) {
+  //         let data = {
+  //           countryCode,
+  //           mobile: phoneNumber.replace(/\s/g, ''),
+  //           type: 'Forget',
+  //         };
+  //         navigation.navigate('OTP', data);
+  //       }
+  //     } else if (forgetResponse && forgetResponse.status === 404) {
+  //       showSnackBar({message: 'Email id not found.'});
+  //     } else {
+  //       showSnackBar({message: 'Something Went Wrong'});
+  //     }
+  //   }
+  // }, [forgetResponse]);
 
   return (
     <ScrollView
@@ -194,11 +231,6 @@ function ForgotPassword({navigation, ...restProps}) {
                 <Text style={{color: 'red'}}>{emailError}</Text>
               </View>
             )}
-            {/* <View style={[styles.rowViewWrapperCenter, {marginBottom: 20}]}>
-              <View style={[styles.or, styles.marR_15]} />
-              <Text style={styles.text_12}>OR</Text>
-              <View style={[styles.or, styles.marL_15]} />
-            </View> */}
             {!showEmailField && (
               <View style={styles.textInputWrapper}>
                 <Text style={[styles.text, styles.marB_9]}>Phone number</Text>

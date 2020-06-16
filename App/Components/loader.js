@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Modal} from 'react-native';
-
+import {LoaderSvg} from '../Components/allSVG';
 const Loader = props => {
   let {visible} = props;
   console.log('Visible', visible);
@@ -11,7 +11,7 @@ const Loader = props => {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'rgba(0,0,0,.7)',
+          backgroundColor: 'rgba(0,0,0,0.5)',
         }}>
         <View
           style={{
@@ -20,8 +20,9 @@ const Loader = props => {
             borderRadius: 8,
             justifyContent: 'center',
             alignItems: 'center',
+            backgroundColor: 'rgb(255,255,255)',
           }}>
-          <Text>Loader</Text>
+          <LoaderSvg />
         </View>
       </View>
     </Modal>

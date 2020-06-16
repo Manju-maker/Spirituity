@@ -6,6 +6,7 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
+import {SHOW_LOADING} from '../../utils/constant';
 import {connect} from 'react-redux';
 import {
   CircleSVG,
@@ -19,6 +20,7 @@ import {
   calculatePasswordScore,
   formatText,
 } from '../../utils/validation';
+import CallApi from '../../utils/callApi';
 import {showSnackBar} from '../../Components/snackbar';
 import {
   GoogleFacebookLogin,
@@ -79,7 +81,7 @@ function SignUp({navigation, userInfo}) {
     disable,
   } = state;
 
-  let {isLoading = false, otpResponse} = userInfo;
+  let {isLoading = false} = userInfo;
 
   let signUp = () => {
     let data = {
@@ -87,39 +89,43 @@ function SignUp({navigation, userInfo}) {
       country_code: countryCode,
       type: 'signup',
     };
-    Store.dispatch(getOtp(data));
+    let headers = {
+      'content-type': 'application/json',
+      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+    };
+    Store.dispatch({type: SHOW_LOADING, payload: true});
+    CallApi('post', 'users/otp', data, headers)
+      .then(response => {
+        Store.dispatch({type: SHOW_LOADING, payload: false});
+        if (response.status === 200) {
+          let data = {
+            firstName,
+            lastName,
+            country_code: countryCode,
+            email,
+            password,
+            mobile: phoneNumber.replace(/\s/g, ''),
+            type: 'signup',
+          };
+          navigation.navigate('OTP', data);
+        }
+      })
+      .catch(error => {
+        let {status} = error.response || {};
+        Store.dispatch({type: SHOW_LOADING, payload: false});
+        if (status === 409) {
+          showSnackBar({
+            message: 'This Number or email is already in use',
+          });
+        } else if (error.message === 'Network Error') {
+          showSnackBar({
+            message: 'No Internet Connection,Please check!',
+          });
+        } else {
+          showSnackBar({message: 'Something Went Wrong'});
+        }
+      });
   };
-
-  useEffect(() => {
-    if (otpResponse && otpResponse.status == true) {
-      let data = {
-        firstName,
-        lastName,
-        countryCode,
-        email,
-        password,
-        mobile: phoneNumber.replace(/\s/g, ''),
-        type: 'SignUp',
-      };
-      navigation.navigate('OTP', data);
-    } else if (
-      otpResponse &&
-      otpResponse.data.status == false &&
-      otpResponse.status === 409
-    ) {
-      showSnackBar({
-        message: 'This Number or email is already in use',
-      });
-    } else if (
-      otpResponse &&
-      otpResponse.data.status == false &&
-      otpResponse.status === 400
-    ) {
-      showSnackBar({
-        message: 'Something went Wrong',
-      });
-    }
-  }, [otpResponse]);
 
   let facebookLogin = () => {
     FacebookSignUp()
@@ -141,7 +147,6 @@ function SignUp({navigation, userInfo}) {
   };
 
   let SignIn = () => {
-    Store.dispatch(resetOtpResponse());
     navigation.navigate('SignIn');
   };
   let checkValidation = () => {

@@ -4,25 +4,28 @@ import {
   View,
   TextInput,
   AsyncStorage,
-  ImageBackground,
   Dimensions,
   ScrollView,
-  ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {get} from 'lodash';
+
 import Store from '../../Store/index';
-import {signinViaEmail, login} from '../../Store/actions/userAction';
+import {login} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
+
 import {colors} from '../../Themes/colors';
-import getImage from '../../utils/getImage';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
-import {CheckArrowSVG, HidePasswordSVG} from '../../Components/allSVG';
+import {HidePasswordSVG} from '../../Components/allSVG';
+
+import {SHOW_LOADING} from '../../utils/constant';
 import {checkField} from '../../utils/validation';
 import Loader from '../../Components/loader';
+
 import {showSnackBar} from '../../Components/snackbar';
 import BackgroundImage from '../../Components/backgroundImage';
+import CallApi from '../../utils/callApi';
+
 const height = Dimensions.get('window').height / 4;
 
 function SignInViaEmail({navigation, ...restProps}) {
@@ -49,23 +52,43 @@ function SignInViaEmail({navigation, ...restProps}) {
 
   let signIn = () => {
     let data = {email, password};
-
-    Store.dispatch(signinViaEmail(data));
-
-    // navigation.navigate('ForgotPassword');
+    let headers = {
+      'content-type': 'application/json',
+      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+    };
+    Store.dispatch({type: SHOW_LOADING, payload: true});
+    CallApi('post', 'users/signin', data, headers)
+      .then(res => {
+        Store.dispatch({type: SHOW_LOADING, payload: false});
+        if (res.status === 200) {
+          let {response} = res.data;
+          let {data, token} = response;
+          let userData = {data, token};
+          AsyncStorage.setItem('userInfo', JSON.stringify(userData));
+          Store.dispatch(login(userData));
+        }
+      })
+      .catch(error => {
+        let {data, status} = error.response || {};
+        console.log('data', data, 'status', status);
+        Store.dispatch({type: SHOW_LOADING, payload: false});
+        if (status === 401) {
+          showSnackBar({
+            message: 'Password is not Valid',
+          });
+        } else if (status === 404) {
+          showSnackBar({
+            message: 'Email id not found.',
+          });
+        } else if (error.message === 'Network Error') {
+          showSnackBar({
+            message: 'No Internet Connection,Please check!',
+          });
+        } else {
+          showSnackBar({message: 'Something Went Wrong'});
+        }
+      });
   };
-
-  useEffect(() => {
-    if (loginResponse != null && loginResponse.status == true) {
-      let {response: userInfo} = loginResponse;
-      let {token, data} = userInfo;
-      let userData = {data, token};
-      AsyncStorage.setItem('userInfo', JSON.stringify(userData));
-      Store.dispatch(login(userData));
-    } else if (loginResponse != null && loginResponse.status === 401) {
-      showSnackBar({message: 'Invalid email or password', height: 30});
-    }
-  }, [loginResponse]);
 
   useEffect(() => {
     if (emailError === true && passwordError === true) {
@@ -102,8 +125,6 @@ function SignInViaEmail({navigation, ...restProps}) {
         style={{
           flex: 1,
           marginBottom: 20,
-          borderColor: 'red',
-          borderWidth: 3,
         }}>
         <View
           style={{
@@ -144,7 +165,7 @@ function SignInViaEmail({navigation, ...restProps}) {
               },
             ].map((item, index) => {
               return (
-                <View style={styles.textInputWrapper}>
+                <View style={styles.textInputWrapper} key={index}>
                   <Text style={[styles.text, styles.marB_9]}>
                     {item.header}
                   </Text>
@@ -160,9 +181,11 @@ function SignInViaEmail({navigation, ...restProps}) {
                     ref={ref => setRef(ref, item.field)}>
                     <TextInput
                       style={{flex: 1}}
-                      placeholder="* * * * *"
+                      placeholder={item.placeHolder}
                       value={item.value}
-                      secureTextEntry={isPasswordHide}
+                      secureTextEntry={
+                        item.field === 'password' ? isPasswordHide : undefined
+                      }
                       onFocus={() => onFocus(item.field)}
                       onBlur={() => onBlur(item.field)}
                       onChangeText={text => setData(item.field, text)}

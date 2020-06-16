@@ -6,13 +6,15 @@ import {colors} from '../../Themes/colors';
 import Timer from './timer';
 import {spacing} from '../../Themes/fonts';
 import {showSnackBar} from '../../Components/snackbar';
+import CallApi from '../../utils/callApi';
 import {connect} from 'react-redux';
 import Store from '../../Store/index';
+import {SHOW_LOADING} from '../../utils/constant';
 import {
   OtpVerifyAndSignup,
   login,
   signinViaOtp,
-  forgetViaOtp
+  forgetViaOtp,
 } from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
 import {SquareSVG, StrawSvg} from '../../Components/allSVG';
@@ -21,14 +23,13 @@ function OTP({navigation, ...restProps}) {
   let {
     firstName = '',
     lastName = '',
-    countryCode = '',
+    country_code = '',
     email = '',
     password = '',
     mobile = '',
     type = '',
   } =
     (restProps.route && restProps.route.params && restProps.route.params) || {};
-  console.log('typeeeeee>>>>>>>>>>>>>>>', type);
   let {userInfo} = restProps;
   let eleRef = useRef([]);
   let {purple, offWhite} = colors;
@@ -60,26 +61,71 @@ function OTP({navigation, ...restProps}) {
   //   RNOtpVerify.removeListener();
   //   Keyboard.dismiss();
   // };
-  useEffect(() => {
-    if (signResponseViaOtp != null) {
-      if (signResponseViaOtp && signResponseViaOtp.status === true) {
-        let {response: userInfo} = signResponseViaOtp;
-        let {token, data} = userInfo;
-        let userData = {data, token};
-        AsyncStorage.setItem('userInfo', JSON.stringify(userData));
-        Store.dispatch(login(userData));
-      } else if (signResponseViaOtp && signResponseViaOtp.status === 400) {
-        showSnackBar({message: 'Invalid otp'});
-      } else {
-        showSnackBar({message: 'Something went Wrong!'});
-      }
-    }
-  }, [signResponseViaOtp]);
+  // useEffect(() => {
+  //   console.log(
+  //     'signResponseViaOtpsignResponseViaOtpsignResponseViaOtpsignResponseViaOtp',
+  //     signResponseViaOtp,
+  //   );
+  //   if (signResponseViaOtp != null) {
+  //     if (signResponseViaOtp && signResponseViaOtp.status === true) {
+  //       let {response: userInfo} = signResponseViaOtp;
+  //       let {token, data} = userInfo;
+  //       let userData = {data, token};
+  //       AsyncStorage.setItem('userInfo', JSON.stringify(userData));
+  //       Store.dispatch(login(userData));
+  //     } else if (signResponseViaOtp && signResponseViaOtp.status === 400) {
+  //       showSnackBar({message: 'Invalid otp'});
+  //     } else {
+  //       showSnackBar({message: 'Something went Wrong!'});
+  //     }
+  //   }
+  // }, [signResponseViaOtp]);
+
+  let callService = (method, route, data, reset = false) => {
+    let headers = {
+      'content-type': 'application/json',
+      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+    };
+    Store.dispatch({type: SHOW_LOADING, payload: true});
+    CallApi(method, route, data, headers)
+      .then(res => {
+        Store.dispatch({type: SHOW_LOADING, payload: false});
+        if (res.status === 200) {
+          if (reset) {
+            let {mobile, country_code, otp} = data;
+            let dataToSend = {mobile, country_code, otp};
+            navigation.navigate('ResetPassword', dataToSend);
+          } else {
+            let {response} = res.data;
+            let {data, token} = response;
+            let userData = {data, token};
+            AsyncStorage.setItem('userInfo', JSON.stringify(userData));
+            Store.dispatch(login(userData));
+          }
+        }
+      })
+      .catch(error => {
+        console.log('ERrpr>>>>>>', error);
+        let {status} = error.response || {};
+        Store.dispatch({type: SHOW_LOADING, payload: false});
+        if (status === 400) {
+          showSnackBar({
+            message: 'Invalid OTP',
+          });
+        } else if (error.message === 'Network Error') {
+          showSnackBar({
+            message: 'No Internet Connection,Please check!',
+          });
+        } else {
+          showSnackBar({message: 'Something Went Wrong'});
+        }
+      });
+  };
 
   let onSubmit = () => {
     let otp = otpArray[0] + otpArray[1] + otpArray[2] + otpArray[3];
     if (stopTime === false) {
-      if (type === 'SignUp') {
+      if (type === 'signup') {
         let data = {
           first_name: firstName,
           last_name: lastName,
@@ -87,23 +133,28 @@ function OTP({navigation, ...restProps}) {
           mobile,
           email,
           otp: parseInt(otp),
-          country_code: countryCode,
+          country_code: country_code,
         };
-        Store.dispatch(OtpVerifyAndSignup(data));
-      } else if (type === 'SignIn') {
+        // Store.dispatch(OtpVerifyAndSignup(data));
+        callService('post', 'users/signup', data);
+      } else if (type === 'signin') {
         let data = {
           mobile,
           country_code: '+91',
           otp: parseInt(otp),
         };
-        Store.dispatch(signinViaOtp(data));
-      } else if (type === 'Forget') {
+        console.log('sign iva otp>>>>>>>>>>>');
+        // Store.dispatch(signinViaOtp(data));
+        callService('post', 'users/signin/otp-verify', data);
+      } else if (type === 'reset') {
         let data = {
           mobile,
-          country_code: '+91',
+          country_code: country_code,
           otp: parseInt(otp),
         };
-        Store.dispatch(forgetViaOtp(data));
+        navigation.navigate('ResetPassword', data);
+        // Store.dispatch(forgetViaOtp(data));
+        // callService('post', 'users/otp', data, true); //// api will be provided to verify otp
       }
     } else {
       showSnackBar({message: 'Otp Expired'});
@@ -245,7 +296,7 @@ function OTP({navigation, ...restProps}) {
             }}
             setLimit={() => setMaxLimit(0)}
             maxLimit={maxLimit}
-            data={{country_code: countryCode, mobile, type: 'signup'}}
+            data={{country_code, mobile, type}}
             isExpired={value => setExpired(value)}
           />
         </View>

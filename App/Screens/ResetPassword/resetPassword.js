@@ -4,22 +4,25 @@ import {
   View,
   TextInput,
   ImageBackground,
-  Dimensions,
   ScrollView,
   TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
 import {HidePasswordSVG} from '../../Components/allSVG';
-import {checkField, validPassword} from '../../utils/validation';
-import {showSnackBar} from '../../Components/snackbar1';
-import {updatePassword} from "../../Store/actions/userAction"
-import {formatPhoneNumber} from 'react-phone-number-input';
+import {validPassword, calculatePasswordScore} from '../../utils/validation';
+import {login} from "../../Store/actions/userAction"
+import {SHOW_LOADING} from '../../utils/constant';
+import {showSnackBar} from '../../Components/snackbar';
 import Store from '../../Store';
+import CallApi from '../../utils/callApi';
 
 function ResetPassword({navigation, ...restProps}) {
+  let {mobile, country_code, otp} =
+    (restProps.route && restProps.route.params && restProps.route.params) || {};
   let {purple, offWhite, transparent} = colors;
   let eleRef = useRef([]);
   const [progress, setProgress] = useState([-1, -1, -1, -1]);
@@ -28,7 +31,8 @@ function ResetPassword({navigation, ...restProps}) {
     newPasswordError: '',
     confirmPassword: '',
     confirmPasswordError: '',
-    isPasswordHide: true,
+    isNewPasswordHide: true,
+    isConfirmPasswordHide: true,
     disable: true,
   });
   let {
@@ -36,17 +40,12 @@ function ResetPassword({navigation, ...restProps}) {
     newPasswordError,
     confirmPassword,
     confirmPasswordError,
-    isPasswordHide,
+    isNewPasswordHide,
+    isConfirmPasswordHide,
     disable,
   } = state;
 
   useEffect(() => {
-    console.log(
-      'nrewPSsrd',
-      newPasswordError,
-      'confirmPdjn',
-      confirmPasswordError,
-    );
     if (newPasswordError === true && confirmPasswordError === true) {
       setState({...state, disable: false});
     } else {
@@ -56,33 +55,13 @@ function ResetPassword({navigation, ...restProps}) {
 
   let setData = (field, text) => {
     let isValid = validPassword(field, text.trim());
-    let a = [-1, -1, -1, -1];
     if (field == 'newPassword') {
-      if (text.length > 0) {
-        if (!isValid.includes('1 digit')) {
-          a.pop();
-          a.unshift(0);
-        }
-
-        if (!isValid.includes('1 special character')) {
-          a.pop();
-          a.unshift(0);
-        }
-
-        if (!isValid.includes('1 capital alphabet')) {
-          a.pop();
-          a.unshift(0);
-        }
-
-        if (!isValid.includes('min 8 characters')) {
-          a.pop();
-          a.unshift(0);
-        }
-      } else {
-        a = [-1, -1, -1, -1];
+      isValid = validPassword(field, text.trim());
+      let calculateScore = calculatePasswordScore(text, isValid);
+      if (isValid.length == 0) {
+        isValid = true;
       }
-
-      setProgress(a);
+      setProgress(calculateScore);
     }
     if (isValid.length == 0) {
       isValid = true;
@@ -108,10 +87,38 @@ function ResetPassword({navigation, ...restProps}) {
   let submit = () => {
     if (newPassword === confirmPassword) {
       let data = {
-        mobile:"8077968014",
-      }
-      Store.dispatch(updatePassword())
-      showSnackBar({message: 'Password successfully updated'});
+        mobile,
+        country_code,
+        otp,
+        password: newPassword,
+      };
+      console.log("data to send to server>>>",data)
+      Store.dispatch({type: SHOW_LOADING, payload: true});
+      CallApi('put', 'users/reset-password/otp', data)
+        .then(res => {
+          Store.dispatch({type: SHOW_LOADING, payload: true});
+          if (res.status === 200) {
+            let {response} = res.data;
+            let {data, token} = response;
+            let userData = {data, token};
+            AsyncStorage.setItem('userInfo', JSON.stringify(userData));
+            Store.dispatch(login(userData));
+          }
+          console.log('response>>>>', res.data);
+        })
+        .catch(error => {
+          console.log('Error>>>>', error);
+          let {data,status} = error.response || {};
+          console.log("Error>>>>>>",data)
+          Store.dispatch({type: SHOW_LOADING, payload: false});
+          if (error.message === 'Network Error') {
+            showSnackBar({
+              message: 'No Internet Connection,Please check!',
+            });
+          } else {
+            showSnackBar({message: 'Something Went Wrong'});
+          }
+        });
     } else {
       showSnackBar({message: 'Password mismatched'});
     }
@@ -119,128 +126,131 @@ function ResetPassword({navigation, ...restProps}) {
   console.log('errrrrrrr', newPasswordError);
 
   return (
-    <ScrollView contentContainerStyle={{flexGrow:1}} keyboardShouldPersistTaps={"always"}>
-    <View
-      style={{
-        flex: 1,
-        marginTop: 10,
-        marginBottom: 20,
-      }}>
-      <ImageBackground
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1}}
+      keyboardShouldPersistTaps={'always'}>
+      <View
         style={{
           flex: 1,
-          height: 150,
-          justifyContent: 'center',
-        }}
-        resizeMode={'contain'}
-        source={require('../../Assets/images/BG.png')}>
-        <View
+          marginTop: 10,
+          marginBottom: 20,
+        }}>
+        <ImageBackground
           style={{
+            flex: 1,
+            height: 150,
             justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text style={[styles.boldText, styles.mar_13]}>Reset Password</Text>
-        </View>
-      </ImageBackground>
-      <View style={{flex: 2, marginHorizontal: 20}}>
-        <View style={{flex: 1}}>
-          <View style={styles.textInputWrapper}>
-            <Text style={[styles.text, styles.marB_9]}>New Psssword</Text>
-            <View
-              style={[
-                styles.inputBox,
-                {
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  paddingHorizontal: 5,
-                },
-              ]}
-              ref={ref => setRef(ref, 'newPassword')}>
-              <TextInput
-                style={{flex: 1}}
-                placeholder="* * * * *"
-                value={newPassword}
-                secureTextEntry={isPasswordHide}
-                onFocus={() => onFocus('newPassword')}
-                onBlur={() => onBlur('newPassword')}
-                onChangeText={text => setData('newPassword', text)}
-              />
-              <TouchableOpacity
-                style={{marginHorizontal: 14}}
-                activeOpacity={0.8}
-                onPress={() => changeState('isPasswordHide', isPasswordHide)}>
-                <HidePasswordSVG />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={[
-                styles.rowViewWrapperCenter,
-                {
-                  marginVertical: 10,
-                  justifyContent: 'space-between',
-                },
-              ]}>
-              {console.log('progress', progress)}
-              {progress.map((item, index) => {
-                return (
-                  <View
-                    key={index}
-                    style={{
-                      flex: 1,
-                      height: 2,
-                      borderRadius: 2,
-                      backgroundColor: item == -1 ? offWhite : 'green',
-                    }}
-                  />
-                );
-              })}
-            </View>
-            <Text style={{color: 'red'}}>{newPasswordError}</Text>
+          }}
+          resizeMode={'contain'}
+          source={require('../../Assets/images/BG.png')}>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={[styles.boldText, styles.mar_13]}>Reset Password</Text>
           </View>
-          <View style={styles.textInputWrapper}>
-            <Text style={[styles.text, styles.marB_9]}>Confirm Password</Text>
-            <View
-              style={[
-                styles.inputBox,
-                {
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  paddingHorizontal: 5,
-                },
-              ]}
-              ref={ref => setRef(ref, 'confirmPassword')}>
-              <TextInput
-                style={{flex: 1}}
-                placeholder="* * * * *"
-                value={confirmPassword}
-                secureTextEntry={isPasswordHide}
-                onFocus={() => onFocus('confirmPassword')}
-                onBlur={() => onBlur('confirmPassword')}
-                onChangeText={text => setData('confirmPassword', text)}
-              />
-              <TouchableOpacity
-                style={{marginHorizontal: 14}}
-                activeOpacity={0.8}
-                onPress={() => changeState('isPasswordHide', isPasswordHide)}>
-                <HidePasswordSVG />
-              </TouchableOpacity>
+        </ImageBackground>
+        <View style={{flex: 2, marginHorizontal: 20}}>
+          <View style={{flex: 1}}>
+            <View style={styles.textInputWrapper}>
+              <Text style={[styles.text, styles.marB_9]}>New Psssword</Text>
+              <View
+                style={[
+                  styles.inputBox,
+                  {
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 5,
+                  },
+                ]}
+                ref={ref => setRef(ref, 'newPassword')}>
+                <TextInput
+                  style={{flex: 1}}
+                  placeholder="* * * * *"
+                  value={newPassword}
+                  secureTextEntry={isNewPasswordHide}
+                  onFocus={() => onFocus('newPassword')}
+                  onBlur={() => onBlur('newPassword')}
+                  onChangeText={text => setData('newPassword', text)}
+                />
+                <TouchableOpacity
+                  style={{marginHorizontal: 14}}
+                  activeOpacity={0.8}
+                  onPress={() => changeState('isNewPasswordHide', isNewPasswordHide)}>
+                  <HidePasswordSVG />
+                </TouchableOpacity>
+              </View>
+              <View
+                style={[
+                  styles.rowViewWrapperCenter,
+                  {
+                    marginVertical: 10,
+                    justifyContent: 'space-between',
+                  },
+                ]}>
+                {console.log('progress', progress)}
+                {progress.map((item, index) => {
+                  return (
+                    <View
+                      key={index}
+                      style={{
+                        flex: 1,
+                        height: 2,
+                        borderRadius: 2,
+                        backgroundColor: item == -1 ? offWhite : 'green',
+                        marginRight: 2,
+                      }}
+                    />
+                  );
+                })}
+              </View>
+              <Text style={{color: 'red'}}>{newPasswordError}</Text>
             </View>
-            <Text style={{color: 'red'}}>{confirmPasswordError}</Text>
+            <View style={styles.textInputWrapper}>
+              <Text style={[styles.text, styles.marB_9]}>Confirm Password</Text>
+              <View
+                style={[
+                  styles.inputBox,
+                  {
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 5,
+                  },
+                ]}
+                ref={ref => setRef(ref, 'confirmPassword')}>
+                <TextInput
+                  style={{flex: 1}}
+                  placeholder="* * * * *"
+                  value={confirmPassword}
+                  secureTextEntry={isConfirmPasswordHide}
+                  onFocus={() => onFocus('confirmPassword')}
+                  onBlur={() => onBlur('confirmPassword')}
+                  onChangeText={text => setData('confirmPassword', text)}
+                />
+                <TouchableOpacity
+                  style={{marginHorizontal: 14}}
+                  activeOpacity={0.8}
+                  onPress={() => changeState('isConfirmPasswordHide', isConfirmPasswordHide)}>
+                  <HidePasswordSVG />
+                </TouchableOpacity>
+              </View>
+              <Text style={{color: 'red'}}>{confirmPasswordError}</Text>
+            </View>
           </View>
-        </View>
 
-        <SigningButton
-          text={'SUBMIT'}
-          click={() => submit()}
-          style={[
-            styles.button,
-            {marginBottom: 0},
-            disable && {backgroundColor: 'gray'},
-          ]}
-          disable={disable}
-        />
+          <SigningButton
+            text={'SUBMIT'}
+            click={() => submit()}
+            style={[
+              styles.button,
+              {marginBottom: 0},
+              disable && {backgroundColor: 'gray'},
+            ]}
+            disable={disable}
+          />
+        </View>
       </View>
-    </View>
     </ScrollView>
   );
 }

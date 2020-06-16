@@ -3,10 +3,10 @@ import {Text, View, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 
 import styles from '../../Themes/styles';
-import CallApi from '../../utils/callApi';
 import {resendOtp} from '../../Store/actions/userAction';
 import Store from '../../Store';
-import {} from '../../Store/actions/userAction';
+import CallApi from '../../utils/callApi';
+// import {} from '../../Store/actions/userAction';
 
 function Timer({
   onRefresh = () => {},
@@ -44,25 +44,36 @@ function Timer({
     return () => clearInterval(intervalId);
   }, [timeLeft, minutes]);
 
-  useEffect(() => {
-    console.log('user Info>>>>', userInfo);
-  }, [userInfo]);
+  let CallService = () => {
+    let headers = {
+      'content-type': 'application/json',
+      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+    };
+    console.log('data for resed >>>', data);
+    CallApi('put', 'users/otp/resend', data, headers)
+      .then(res => {
+        console.log('response for resend otp>>>', res.data);
+      })
+      .catch(error => {
+        console.log('Error for resend otp', error.response.data);
+      });
+  };
 
   let resendOTP = () => {
-    Store.dispatch(resendOtp(data));
+    // Store.dispatch(resendOtp(data));
+    CallService();
     onRefresh();
     refreshFocus();
     setMinutes(3);
     setTimeLeft(0);
   };
   let extendsTime = () => {
-    setMessage('You have exceed the limit.. Please wait for');
+    setMessage('You have exceed the limit.. Please wait for ');
     isExpired(true);
     setDisable(true);
     setMinutes(15);
     setTimeLeft(0);
   };
-  console.log('limit>>>>>>', maxLimit);
   return (
     <>
       <View style={{marginTop: 29, alignItems: 'center'}}>

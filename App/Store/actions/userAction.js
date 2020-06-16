@@ -59,18 +59,18 @@ const isLoading = payload => {
 };
 const OtpVerifyAndSignup = payload => {
   return {
-    type: SIGNUP_REQUEST_MOBILE, ////checked
+    type: SIGNUP_REQUEST_MOBILE, ////checked   ---- done
     payload,
   };
 };
 
-const signinViaEmail = payload => {
+const signinViaEmail = payload => {   //// checked ----- done
   return {
     type: LOGIN_REQUEST,
     payload,
   };
 };
-const forgot = payload => {
+const forgot = payload => {    //// checked ----- done
   return {
     type: FORGOT_PASSWORD_REQUEST,
     payload,
@@ -84,7 +84,7 @@ const resendOtp = payload => {
   };
 };
 const signinViaOtp = payload => {
-  //// checked
+  //// checked    ----- done
   return {
     type: LOGIN_REQUEST_MOBILE,
     payload,

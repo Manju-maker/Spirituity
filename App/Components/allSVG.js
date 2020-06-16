@@ -11,6 +11,57 @@ import Svg, {
   Polyline,
 } from 'react-native-svg';
 
+export function LoaderSvg(props) {
+  return (
+    <Svg width={30} height={37} viewBox="0 0 30 37" {...props}>
+      <Defs>
+        <Path
+          d="M0 26.025L3.391.993C3.468.432 4.231 0 5.147 0h17.907c.918-.002 1.685.43 1.762.993L28.2 26.025c0 4.791-6.313 8.675-14.1 8.675S0 30.816 0 26.025z"
+          id="prefix__a"
+        />
+      </Defs>
+      <G transform="translate(1 1)" fill="none" fillRule="evenodd">
+        <Mask id="prefix__b" fill="#fff">
+          <Use xlinkHref="#prefix__a" />
+        </Mask>
+        <Use
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          xlinkHref="#prefix__a"
+        />
+        <Path
+          d="M-2.05 25.354c2.167-1.324 4.694-1.986 7.582-1.986 4.332 0 11.448 4.636 17.018 4.636 3.713 0 7.546-1.352 11.5-4.055"
+          stroke="#000"
+          mask="url(#prefix__b)"
+        />
+        <Path
+          d="M-2.9 26.768C1.422 24.189 5.814 22.9 10.273 22.9c6.69 0 10.204 3.868 16.251 3.868 4.032 0 7.457-1.062 10.276-3.185"
+          stroke="#000"
+          mask="url(#prefix__b)"
+          transform="matrix(-1 0 0 1 33.9 0)"
+        />
+        <Circle
+          stroke="#000"
+          mask="url(#prefix__b)"
+          cx={13.6}
+          cy={11.6}
+          r={1.6}
+        />
+        <Circle
+          stroke="#000"
+          mask="url(#prefix__b)"
+          cx={17.1}
+          cy={15.5}
+          r={1.2}
+        />
+        <Circle stroke="#000" mask="url(#prefix__b)" cx={13.9} cy={18} r={1} />
+      </G>
+    </Svg>
+  );
+}
+
+
 export function BarzWhiteSVG(props) {
   return (
     <Svg width={86} height={32} viewBox="0 0 86 32" {...props}>

@@ -19,12 +19,13 @@ import {
   FORGOT_PASSWORD_STATUS,
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_FAILED,
-  LOGIN_REQUEST_MOBLE_STATUS, //// checked
+  LOGIN_REQUEST_MOBILE_STATUS, //// checked   //// Checked
   LOGIN_REQUEST_MOBILE, /// checked
   LOGIN_STATUS, /// checked
   GET_OTP_FORGET, //// checked
   FORGET_OTP_REQUEST_STATUS, /// checked
   FORGET_VIA_OTP, /// checked
+  FORGET_VIA_OTP_STATUS, /// checked
 } from '../../utils/constant';
 import CallApi from '../../utils/callApi';
 
@@ -74,6 +75,7 @@ export function* getOtp(payload) {
   }
 }
 export function* signupViaOtp(payload) {
+  ///// done
   //// checked
   try {
     yield put({type: SHOW_LOADING, payload: true});
@@ -84,11 +86,11 @@ export function* signupViaOtp(payload) {
       payload.payload,
       headers,
     );
-    yield put({type: LOGIN_REQUEST_MOBLE_STATUS, payload: {Success: true}});
+    yield put({type: LOGIN_REQUEST_MOBILE_STATUS, payload: {Success: true}});
   } catch (err) {
     yield put({type: SHOW_LOADING, payload: false});
     yield put({
-      type: LOGIN_REQUEST_MOBLE_STATUS,
+      type: LOGIN_REQUEST_MOBILE_STATUS,
       payload: {data: err.response.data, status: err.response.status},
     });
   }
@@ -114,33 +116,26 @@ export function* resendOtp(payload) {
 }
 
 export function* forgot(payload) {
+  //// checked --- done
   try {
     console.log('poyload of payloadd>>>', payload);
     yield put({type: SHOW_LOADING, payload: true});
     const response = yield call(
       CallApi,
       'post',
-      'users/forget',
+      'users/reset-password/email',
       payload.payload,
       headers,
     );
     console.log(
-      'response of forgot emaillllll++++++++++++++++++++++++++++++',
-      response,
+      'responseresponseresponseresponseresponseresponseresponseresponseresponseresponse email ',
+      response.data,
     );
     yield put({type: FORGOT_PASSWORD_STATUS, payload: response.data});
   } catch (err) {
-    console.log(
-      'err of forgpt email>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
-      payload,
-    );
-    console.log(
-      'err of forgpt email>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
-      err.response,
-    );
     yield put({type: SHOW_LOADING, payload: false});
     yield put({
-      type: FORGOT_PASSWORD_FAILED,
+      type: FORGOT_PASSWORD_STATUS,
       payload: {data: err.response.data, status: err.response.status},
     });
   }
@@ -157,16 +152,11 @@ export function* loginViaOtp(payload) {
       payload.payload,
       headers,
     );
-    console.log(
-      'responseresponseresponseresponseresponse inside saga',
-      response,
-    );
-    yield put({type: LOGIN_REQUEST_MOBLE_STATUS, payload: response.data});
+    yield put({type: LOGIN_REQUEST_MOBILE_STATUS, payload: response.data});
   } catch (err) {
-    console.log('Error for otp verify>>>>', err);
     yield put({type: SHOW_LOADING, payload: false});
     yield put({
-      type: LOGIN_REQUEST_MOBLE_STATUS,
+      type: LOGIN_REQUEST_MOBILE_STATUS,
       payload: {data: err.response.data, status: err.response.status},
     });
   }
@@ -191,7 +181,8 @@ export function* getOtpForget(payload) {
   }
 }
 
-export function* forgetViaOtp(payload) {       ///// update as u get route 
+export function* forgetViaOtp(payload) {
+  ///// update as u get route
   try {
     yield put({type: SHOW_LOADING, payload: true});
     const response = yield call(
@@ -204,17 +195,17 @@ export function* forgetViaOtp(payload) {       ///// update as u get route
     yield put({type: FORGET_VIA_OTP_STATUS, payload: response.data});
   } catch (error) {
     yield put({type: SHOW_LOADING, payload: true});
-    yield put({type: FORGET_VIA_OTP_STATUS, payload: response.data});
+    yield put({type: FORGET_VIA_OTP_STATUS, payload: error.response.data});
   }
 }
 export default function* root() {
   yield all([
-    takeLatest(LOGIN_REQUEST, loginViaEmail),
+    takeLatest(LOGIN_REQUEST, loginViaEmail), //// hcecked ---- done
     takeLatest(LOGIN_REQUEST_MOBILE, loginViaOtp), /// checked
     takeLatest(GET_OTP, getOtp), ////// done checked
-    takeLatest(SIGNUP_REQUEST_MOBILE, signupViaOtp), //// checked
+    takeLatest(SIGNUP_REQUEST_MOBILE, signupViaOtp), //// checked   ---- done
     takeLatest(RESEND_OTP, resendOtp),
-    takeLatest(FORGOT_PASSWORD_REQUEST, forgot),
+    takeLatest(FORGOT_PASSWORD_REQUEST, forgot), //// checked ---- done
     takeLatest(GET_OTP_FORGET, getOtpForget), /// checked
     takeLatest(FORGET_VIA_OTP, forgetViaOtp), /// checked
   ]);
