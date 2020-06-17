@@ -11,6 +11,7 @@ import {
   spacing,
   QR_14_18,
   QB_16_20,
+  QB_9_9
 } from './fonts';
 import {colors} from './colors';
 
@@ -31,6 +32,10 @@ const {
 } = colors;
 
 const styles = StyleSheet.create({
+  text_9_B: {
+    ...QB_9_9,
+    color: brightWhite,
+  },
   container: {
     flex: 1,
     backgroundColor: 'white',

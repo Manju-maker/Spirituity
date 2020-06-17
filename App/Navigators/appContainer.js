@@ -5,14 +5,13 @@ import SignUp from '../Screens/SignUp/signup';
 import SignIn from '../Screens/SignIn/signin';
 import OTP from '../Screens/OTP/otp';
 import BoardingScreen from '../Screens/BoardingScreen/boardingScreen';
-import HomeScreen from '../Screens/HomeScreen/homescreen';
-import AppAuthenticate from './appAuthenticate';
 import {connect} from 'react-redux';
 import Store from '../Store/index';
 import SignInViaEmail from '../Screens/SignIn/signInViaEmail';
 import ForgotPassword from '../Screens/ForgotPassword/forgotPassword';
 import ResetPassword from '../Screens/ResetPassword/resetPassword';
 import AsyncStorage from '@react-native-community/async-storage';
+import TabNavigater from "./tabNavigator"
 import Events from 'react-native-simple-events';
 
 import {login} from '../Store/actions/userAction';
@@ -41,12 +40,11 @@ function AppContainer({userInfo, navigation}) {
 
   return (
     <NavigationContainer>
-      {console.log('Tokennnn>>>>', userInfo)}
       {token ? (
         <Stack.Navigator
           initialRouteName="HomeScreen"
           screenOptions={{headerShown: false}}>
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="HomeScreen" component={TabNavigater} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator

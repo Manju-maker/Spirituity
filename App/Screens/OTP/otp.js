@@ -48,38 +48,7 @@ function OTP({navigation, ...restProps}) {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
 
-  let {isLoading = false, signResponseViaOtp} = userInfo;
-  // useEffect(() => {
-  //   RNOtpVerify.getOtp()
-  //     .then(p => RNOtpVerify.addListener(otpHandler))
-  //     .catch(p => console.log(p));
-  // }, []);
-  // let otpHandler = message => {
-  //   console.log('otp message>>>>>', message);
-  //   const otp = /(\d{4})/g.exec(message)[1];
-  //   this.setState({otp});
-  //   RNOtpVerify.removeListener();
-  //   Keyboard.dismiss();
-  // };
-  // useEffect(() => {
-  //   console.log(
-  //     'signResponseViaOtpsignResponseViaOtpsignResponseViaOtpsignResponseViaOtp',
-  //     signResponseViaOtp,
-  //   );
-  //   if (signResponseViaOtp != null) {
-  //     if (signResponseViaOtp && signResponseViaOtp.status === true) {
-  //       let {response: userInfo} = signResponseViaOtp;
-  //       let {token, data} = userInfo;
-  //       let userData = {data, token};
-  //       AsyncStorage.setItem('userInfo', JSON.stringify(userData));
-  //       Store.dispatch(login(userData));
-  //     } else if (signResponseViaOtp && signResponseViaOtp.status === 400) {
-  //       showSnackBar({message: 'Invalid otp'});
-  //     } else {
-  //       showSnackBar({message: 'Something went Wrong!'});
-  //     }
-  //   }
-  // }, [signResponseViaOtp]);
+  let {isLoading = false} = userInfo;
 
   let callService = (method, route, data, reset = false) => {
     let headers = {
@@ -92,6 +61,7 @@ function OTP({navigation, ...restProps}) {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (res.status === 200) {
           if (reset) {
+            console.log("response for otp resest>>>>",res.data)
             let {mobile, country_code, otp} = data;
             let dataToSend = {mobile, country_code, otp};
             navigation.navigate('ResetPassword', dataToSend);
@@ -105,7 +75,7 @@ function OTP({navigation, ...restProps}) {
         }
       })
       .catch(error => {
-        console.log('ERrpr>>>>>>', error);
+        console.log('ERrpr>>>>>>', error.response.data);
         let {status} = error.response || {};
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 400) {
@@ -154,7 +124,7 @@ function OTP({navigation, ...restProps}) {
         };
         navigation.navigate('ResetPassword', data);
         // Store.dispatch(forgetViaOtp(data));
-        // callService('post', 'users/otp', data, true); //// api will be provided to verify otp
+        callService('post', 'users/otp/verify', data, true); //// api will be provided to verify otp
       }
     } else {
       showSnackBar({message: 'Otp Expired'});

@@ -24,7 +24,7 @@ export default function BoardingScreen({navigation}) {
           />
         }
         paginationStyle={{
-          bottom: spacing(240),
+          bottom: spacing(250),
         }}
         loop={false}>
         <OnBoardingScreen

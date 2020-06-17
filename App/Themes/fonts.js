@@ -86,6 +86,11 @@ export const spacing = size => {
 };
 export const scale = value => fontSize(value);
 
+const QB_9_9 = {
+  fontSize: scale(9),
+  lineHeight: 9,
+  fontFamily: 'Quicksand-Bold',
+};
 const AR_12_18 = {
   fontSize: scale(13),
   lineHeight: 18,
@@ -140,6 +145,7 @@ const QB_16_20 = {
   fontFamily: 'Quicksand-Bold',
 };
 export {
+  QB_9_9,
   AR_12_18,
   QB_13,
   AB_14,
