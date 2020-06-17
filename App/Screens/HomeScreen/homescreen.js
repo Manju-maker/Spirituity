@@ -76,7 +76,9 @@ function HomeScreen({navigation}) {
                 </View>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={{justifyContent: 'center', flex: 1}}>
+            <TouchableOpacity
+              style={{justifyContent: 'center', flex: 1}}
+              onPress={() => navigation.navigate('Notification')}>
               <NotificationSVG />
             </TouchableOpacity>
             <View />
@@ -183,6 +185,11 @@ function HomeScreen({navigation}) {
                           marginRight: 8,
                           borderRadius: 7,
                           backgroundColor: 'rgb(255,255,255)',
+                          shadowColor: '#26000000',
+                          shadowOffset: {height: 5, width: 0},
+                          shadowOpacity: 1,
+                          shadowRadius: 1,
+                          elevation: 5,
                         }}>
                         <View
                           style={{

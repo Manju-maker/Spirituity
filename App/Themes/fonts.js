@@ -159,7 +159,7 @@ const AM_10_12 = {
 
 const AM_12_14 = {
   fontSize: scale(12),
-  lineHeight: 14,
+  lineHeight: 16,
   fontFamily: 'AvenirNextLTPro-Medium',
 };
 

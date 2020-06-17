@@ -15,5 +15,6 @@ const colors = {
   transparent: 'rgba(255,255,255,0.05)',
   offBlack: 'rgb(17,36,61)',
   lightWhite: '#ffffff',
+  lightPurple: '#6727B4',
 };
 export {colors};

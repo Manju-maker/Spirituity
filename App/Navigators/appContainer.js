@@ -17,6 +17,7 @@ import Events from 'react-native-simple-events';
 import {login} from '../Store/actions/userAction';
 import Search from '../Screens/Search/search';
 import CloudBar from '../Screens/CloudBar/cloudBar';
+import Notification from '../Screens/Notification/notification';
 
 const Stack = createStackNavigator();
 function AppContainer({userInfo, navigation}) {
@@ -49,6 +50,7 @@ function AppContainer({userInfo, navigation}) {
           <Stack.Screen name="HomeScreen" component={TabNavigater} />
           <Stack.Screen name="Search" component={Search} />
           <Stack.Screen name="CloudBar" component={CloudBar} />
+          <Stack.Screen name="Notification" component={Notification} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator

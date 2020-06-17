@@ -14,6 +14,39 @@ import Svg, {
   Image,
 } from 'react-native-svg';
 
+export function BackArrowBlack(props) {
+  return (
+    <Svg width={22} height={20} viewBox="0 0 22 20" {...props}>
+      <G fill="none" fillRule="evenodd">
+        <Path d="M1 0h20v20H1z" />
+        <Path
+          stroke="#2F0B47"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M1.5 10h19m-14-5l-5 5 5 5"
+        />
+      </G>
+    </Svg>
+  );
+}
+export function QuestionmarkSVG(props) {
+  return (
+    <Svg width={24} height={22} viewBox="0 0 24 22" {...props}>
+      <G fill="none" fillRule="evenodd">
+        <Ellipse cx={12} cy={11} fill="#FFF" opacity={0.15} rx={12} ry={11} />
+        <Path
+          d="M8.338 8.943h0c0-1.628 1.535-2.948 3.428-2.948s3.428 1.32 3.428 2.949c0 1.172-.807 2.233-2.057 2.702h0c-.833.313-1.371 1.02-1.371 1.802v.405m-.042 2.834h0c-.113 0-.205.084-.205.188 0 .103.092.187.205.187.113 0 .204-.084.204-.187h0c0-.104-.091-.188-.204-.188h0"
+          stroke="#FFF"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.846}
+        />
+      </G>
+    </Svg>
+  );
+}
+
 export function CloudCartSVG(props) {
   return (
     <Svg width={14} height={14} viewBox="0 0 14 14" {...props}>

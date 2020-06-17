@@ -93,6 +93,8 @@ function SignInViaEmail({navigation, ...restProps}) {
   useEffect(() => {
     if (emailError === true && passwordError === true) {
       setState({...state, disable: false});
+    } else {
+      setState({...state, disable: true});
     }
   }, [emailError, passwordError]);
 

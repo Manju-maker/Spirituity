@@ -211,7 +211,6 @@ const styles = StyleSheet.create({
   titleText: {
     color: lightWhite,
     ...QB_12_14,
-    ...space,
   },
   viewAll: {
     color: lightWhite,
