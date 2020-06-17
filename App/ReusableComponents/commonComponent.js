@@ -113,7 +113,12 @@ function OnBoardingScreen({image, text, navigation}) {
           onPress={() => navigation.navigate('SignIn')}>
           <Text style={styles.barzButtonText}>SIGN IN</Text>
         </TouchableOpacity>
-        <Text style={styles.barzButtonText}>EXPLORE APP</Text>
+        <Text
+          style={styles.barzButtonText}
+          // onPress={navigation.navigate('HomeScreen')}
+        >
+          EXPLORE APP
+        </Text>
       </View>
     </ImageBackground>
   );

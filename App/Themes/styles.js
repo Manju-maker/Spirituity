@@ -11,11 +11,18 @@ import {
   spacing,
   QR_14_18,
   QB_16_20,
-  QB_9_9
+  QB_9_9,
+  AM_10_12,
+  QB_12_14,
+  QB_10_12,
+  AM_12_14,
+  AR_9_12,
+  AB_11_11,
 } from './fonts';
 import {colors} from './colors';
 
 export const centerText = {alignItems: 'center', justifyContent: 'center'};
+let space = {letterSpacing: 0.4};
 const {
   lightPeach,
   greyBlack,
@@ -29,6 +36,7 @@ const {
   lightGrey,
   offBlack,
   white,
+  lightWhite,
 } = colors;
 
 const styles = StyleSheet.create({
@@ -141,7 +149,7 @@ const styles = StyleSheet.create({
     height: 53,
     width: 53,
     borderRadius: 8,
-    borderColor: colors.offWhite,
+    borderColor: offWhite,
     borderWidth: 1,
     marginHorizontal: 12,
     textAlign: 'center',
@@ -167,6 +175,76 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginLeft: 7,
     marginRight: 7,
+  },
+  activeDot: {
+    backgroundColor: brightWhite,
+    width: 14,
+    height: 6,
+    borderRadius: 3,
+    marginHorizontal: 5,
+  },
+  drinkCategoryStyle: {
+    width: 52,
+    height: 52,
+    borderRadius: 8,
+    borderColor: lightWhite,
+    borderWidth: 1,
+    marginBottom: 4,
+    ...centerText,
+  },
+  drinkCategoryWrapper: {
+    width: 52,
+    height: 78,
+    marginBottom: 7,
+    marginHorizontal: 7,
+  },
+  drinkName: {
+    ...AM_10_12,
+    textAlign: 'center',
+    color: lightWhite,
+  },
+  title: {
+    flexDirection: 'row',
+    marginVertical: 12,
+    justifyContent: 'space-between',
+  },
+  titleText: {
+    color: lightWhite,
+    ...QB_12_14,
+    ...space,
+  },
+  viewAll: {
+    color: lightWhite,
+    ...QB_10_12,
+    marginRight: 8,
+    ...space,
+  },
+  liquorTitle: {
+    ...AM_12_14,
+    textAlign: 'center',
+    marginTop: 3,
+    ...space,
+  },
+  quantity: {
+    ...AR_9_12,
+    color: black,
+    textAlign: 'center',
+    marginTop: 3,
+    ...space,
+  },
+  price: {
+    ...AB_11_11,
+    textAlign: 'center',
+    color: darkBlack,
+    marginVertical: 5,
+  },
+  cloudbarText: {
+    width: 95,
+    height: 24,
+    borderRadius: 10.5,
+    backgroundColor: '#9852eb',
+    flexDirection: 'row',
+    ...centerText,
   },
   barzButton: {
     height: 50,

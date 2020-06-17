@@ -36,7 +36,6 @@ function GoogleSignUp() {
         console.log('Error while checkign play sercices', error);
         reject(err);
       });
-    console.warn('googlelogin');
   });
 }
 

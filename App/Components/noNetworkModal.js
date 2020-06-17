@@ -36,14 +36,11 @@ class NoNetworkModal extends Component {
   componentWillMount() {
     console.log('did mount');
     this.unsubscribe = NetInfo.addEventListener(state => {
-      console.warn('state>>>>', state);
       this.setState({isConnected: state.isConnected});
     });
   }
 
   componentWillReceiveProps(nextprops) {
-    console.warn('prev propsss>>>>>>>>>>>>>>>>', this.props);
-    console.warn('next props>>>>>>>>>>>>>>>>>>>>>', nextprops);
     if (this.props != nextprops) {
     }
   }

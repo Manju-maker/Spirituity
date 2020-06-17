@@ -383,26 +383,8 @@ function SignUp({navigation, userInfo}) {
             style={[styles.button, disable && {backgroundColor: 'gray'}]}
             disable={disable}
           />
-          <View style={[styles.rowViewWrapperCenter, {height: 15}]}>
-            <View style={[styles.or, styles.marR_15]} />
-            <Text style={styles.text_12}>OR</Text>
-            <View style={[styles.or, styles.marL_15]} />
-          </View>
         </View>
-        <GoogleFacebookLogin
-          text={[
-            {
-              text: 'Connect with Facebook',
-              imageName: 'Facebook',
-              click: () => facebookLogin(),
-            },
-            {
-              text: 'Connect with Google',
-              imageName: 'Google',
-              click: () => googleLogin(),
-            },
-          ]}
-        />
+
         <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
           <Text style={[styles.bottomText]}>You have an account already?</Text>
           <TouchableOpacity style={styles.marL_8} onPress={() => SignIn()}>

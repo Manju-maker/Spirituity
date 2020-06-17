@@ -14,5 +14,6 @@ const colors = {
   lightPeach: '#FFA36E',
   transparent: 'rgba(255,255,255,0.05)',
   offBlack: 'rgb(17,36,61)',
+  lightWhite: '#ffffff',
 };
 export {colors};

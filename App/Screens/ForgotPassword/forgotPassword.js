@@ -128,28 +128,6 @@ function ForgotPassword({navigation, ...restProps}) {
     console.log('data >>>>>>>>>>>>>>>>>>>>', data);
   };
 
-  // useEffect(() => {
-  //   console.log('forgetPassword email Response>>>>', forgetResponse);
-  //   if (forgetResponse != null) {
-  //     if (forgetResponse && forgetResponse.status == true) {
-  //       if (showEmailField === true) {
-  //         showSnackBar({message: forgetResponse.statusMessage});
-  //       } else if (showEmailField === false) {
-  //         let data = {
-  //           countryCode,
-  //           mobile: phoneNumber.replace(/\s/g, ''),
-  //           type: 'Forget',
-  //         };
-  //         navigation.navigate('OTP', data);
-  //       }
-  //     } else if (forgetResponse && forgetResponse.status === 404) {
-  //       showSnackBar({message: 'Email id not found.'});
-  //     } else {
-  //       showSnackBar({message: 'Something Went Wrong'});
-  //     }
-  //   }
-  // }, [forgetResponse]);
-
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
@@ -193,14 +171,18 @@ function ForgotPassword({navigation, ...restProps}) {
                 setState({...state, disable: true});
                 setEmailField(true);
               }}>
-              <Text style={styles.colorsText}>Forgot Using Email</Text>
+              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+                Reset Using Email
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
                 setState({...state, disable: true});
                 setEmailField(false);
               }}>
-              <Text style={styles.colorsText}>Forgot Using Mobile Number</Text>
+              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+                Reset Using Mobile Number
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={{flex: 1, marginTop: 20}}>
@@ -281,14 +263,6 @@ function ForgotPassword({navigation, ...restProps}) {
             ]}
             disable={disable}
           />
-          <View style={[styles.rowViewWrapperCenter, {marginTop: 20}]}>
-            <Text style={[styles.bottomText]}>Don't have an account?</Text>
-            <TouchableOpacity
-              style={styles.marL_8}
-              onPress={() => navigation.navigate('ResetPassword')}>
-              <Text style={styles.colorsText}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     </ScrollView>

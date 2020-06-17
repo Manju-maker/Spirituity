@@ -16,8 +16,8 @@ import {SigningButton} from '../../ReusableComponents/commonComponent';
 import {checkField, formatText} from '../../utils/validation';
 
 import {showSnackBar} from '../../Components/snackbar';
-import {SHOW_LOADING} from "../../utils/constant"
-import CallApi from "../../utils/callApi"
+import {SHOW_LOADING} from '../../utils/constant';
+import CallApi from '../../utils/callApi';
 import {getOtp} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
 import BackgroundImage from '../../Components/backgroundImage';
@@ -57,8 +57,8 @@ function SignIn({navigation, ...restProps}) {
         }
       })
       .catch(error => {
-        let {data,status} = error.response || {};
-        console.log("Error in sign in???",data)
+        let {data, status} = error.response || {};
+        console.log('Error in sign in???', data);
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 404) {
           showSnackBar({
@@ -170,12 +170,12 @@ function SignIn({navigation, ...restProps}) {
                     onChangeText={text => setData('phoneNumber', text)}
                   />
                 </View>
-                <Text style={{color: 'red'}}>{phoneNumberError}</Text>
+                {/* <Text style={{color: 'red'}}>{phoneNumberError}</Text> */}
                 <Text
                   onPress={() => navigation.navigate('SignInViaEmail')}
                   style={[
                     styles.colorsText,
-                    {color: 'blue', textAlign: 'center'},
+                    {color: 'blue', textAlign: 'center', marginTop: 20},
                   ]}>
                   Sign In via Email
                 </Text>

@@ -11,10 +11,12 @@ import SignInViaEmail from '../Screens/SignIn/signInViaEmail';
 import ForgotPassword from '../Screens/ForgotPassword/forgotPassword';
 import ResetPassword from '../Screens/ResetPassword/resetPassword';
 import AsyncStorage from '@react-native-community/async-storage';
-import TabNavigater from "./tabNavigator"
+import TabNavigater from './tabNavigator';
 import Events from 'react-native-simple-events';
 
 import {login} from '../Store/actions/userAction';
+import Search from '../Screens/Search/search';
+import CloudBar from '../Screens/CloudBar/cloudBar';
 
 const Stack = createStackNavigator();
 function AppContainer({userInfo, navigation}) {
@@ -45,6 +47,8 @@ function AppContainer({userInfo, navigation}) {
           initialRouteName="HomeScreen"
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="HomeScreen" component={TabNavigater} />
+          <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen name="CloudBar" component={CloudBar} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator

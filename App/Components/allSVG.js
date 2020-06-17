@@ -75,6 +75,21 @@ export function ArrowSVG(props) {
   );
 }
 
+export function EmptyCloudCartSVG(props) {
+  return (
+    <Svg width={34} height={34} viewBox="0 0 34 34" {...props}>
+      <Defs />
+      <G
+        fill="#FFF"
+        stroke="#E2E2E2"
+        filter="url(#prefix__a)"
+        transform="matrix(-1 0 0 1 26.5 6)">
+        <Path d="M16.72 1.658l-1.001 2.498a.427.427 0 01-.407.288H2.482a2.143 2.143 0 00-1.802.98 2.167 2.167 0 00-.214 1.99l2.016 6.814a2.153 2.153 0 001.987 1.328h9.068a2.174 2.174 0 002.033-1.438l3.579-11.574a1.313 1.313 0 00-.768-1.67 1.294 1.294 0 00-1.661.784zM6.179 20.512a1.668 1.668 0 110-2.357c.65.65.65 1.706 0 2.357zm8.888 0c-.65.65-1.706.65-2.357 0a1.666 1.666 0 112.357 0z" />
+      </G>
+    </Svg>
+  );
+}
+
 export function BarzPromotion(props) {
   return (
     <Svg width={375} height={174} viewBox="0 0 375 174" {...props}>

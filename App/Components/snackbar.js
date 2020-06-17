@@ -27,7 +27,7 @@ const Snackbar = (data = {}) => {
     if (isConnected == false) {
       console.log('isConnected', isConnected);
       showSnack({
-        message: 'No Internet Connection , Please Check',
+        message: 'Internet connection is required to proceed',
       });
     }
   }, [isConnected]);

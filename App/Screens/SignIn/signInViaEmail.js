@@ -213,14 +213,6 @@ function SignInViaEmail({navigation, ...restProps}) {
               ]}>
               Forgot Password
             </Text>
-            <View style={[styles.rowViewWrapperCenter]}>
-              <Text style={[styles.bottomText]}>Don't have an account?</Text>
-              <TouchableOpacity
-                style={styles.marL_8}
-                onPress={() => navigation.navigate('SignUp')}>
-                <Text style={styles.colorsText}>Sign Up</Text>
-              </TouchableOpacity>
-            </View>
           </View>
 
           <SigningButton
