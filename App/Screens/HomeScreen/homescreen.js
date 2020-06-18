@@ -6,6 +6,7 @@ import Store from '../../Store/index';
 import {spacing} from '../../Themes/fonts';
 import TabNavigator from '../../Navigators/tabNavigator';
 import styles from '../../Themes/styles';
+import FAQmodal from '../../Components/FAQmodal';
 import {
   BarzPromotion,
   ArrowSVG,
@@ -200,7 +201,10 @@ function HomeScreen({navigation}) {
                             style={{
                               flexDirection: 'row',
                             }}>
-                            <ShortGlassSVG />
+                            <TouchableOpacity
+                              onPress={() => setVisibility(true)}>
+                              <ShortGlassSVG />
+                            </TouchableOpacity>
                             <Image source={item.image} />
                             <GreyArrowSVG />
                           </View>

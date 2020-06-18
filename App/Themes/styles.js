@@ -231,6 +231,10 @@ const styles = StyleSheet.create({
     marginTop: 3,
     ...space,
   },
+  time: {
+    ...AR_9_12,
+    color: '#717171',
+  },
   price: {
     ...AB_11_11,
     textAlign: 'center',

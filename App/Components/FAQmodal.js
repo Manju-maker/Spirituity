@@ -5,7 +5,7 @@ import {colors} from '../Themes/colors';
 import {scale} from '../Themes/fonts';
 import {QuestionmarkSVG} from './allSVG';
 
-function ConfirmationModal() {
+function FAQmodal() {
   const [visible, setVisible] = useState(true);
   return (
     <Modal animationType={'fade'} visible={visible}>
@@ -24,7 +24,7 @@ function ConfirmationModal() {
             paddingVertical: scale(224),
             paddingHorizontal: scale(50),
           }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setVisible(false)}>
             <QuestionmarkSVG />
           </TouchableOpacity>
         </View>
@@ -32,7 +32,7 @@ function ConfirmationModal() {
     </Modal>
   );
 }
-export default ConfirmationModal;
+export default FAQmodal;
 
 //<Text
 // style={[
