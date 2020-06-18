@@ -12,7 +12,147 @@ import Svg, {
   LinearGradient,
   Stop,
   Image,
+  Ellipse
 } from 'react-native-svg';
+
+export function SvgRedeem(props) {
+  return (
+    <Svg width={84} height={70} viewBox="0 0 84 70" {...props}>
+      <Defs>
+        <LinearGradient
+          x1="100%"
+          y1="11.719%"
+          x2="15.805%"
+          y2="100%"
+          id="prefix__b"
+        >
+          <Stop stopColor="#FB8F66" offset="0%" />
+          <Stop stopColor="#7033FF" offset="100%" />
+        </LinearGradient>
+      </Defs>
+      <G
+        filter="url(#prefix__a)"
+        transform="translate(16 8)"
+        fill="none"
+        fillRule="evenodd"
+      >
+        <Circle fill="url(#prefix__b)" cx={26} cy={26} r={26} />
+        <Path
+          d="M12.873 18.281h1.244c.098 0 .178-.08.178-.177v-3.91h3.91c.098 0 .178-.08.178-.178V12.77a.178.178 0 00-.178-.177h-3.999a1.51 1.51 0 00-1.51 1.51v4c0 .097.08.177.177.177zm21.531-4.088h3.91v3.91c0 .098.08.178.178.178h1.244c.098 0 .178-.08.178-.177v-4a1.51 1.51 0 00-1.51-1.51h-4a.178.178 0 00-.177.177v1.245c0 .097.08.177.177.177zm-16.199 24.02h-3.91v-3.91a.178.178 0 00-.178-.178h-1.244a.178.178 0 00-.178.178v3.999c0 .835.676 1.51 1.511 1.51h4c.097 0 .177-.08.177-.177V38.39a.178.178 0 00-.178-.178zm21.531-3.276h-1.244a.178.178 0 00-.178.178v3.91h-3.91a.178.178 0 00-.177.178v1.244c0 .098.08.178.177.178h4a1.51 1.51 0 001.51-1.51v-4a.178.178 0 00-.178-.177z"
+          fill="#6A2896"
+          fillRule="nonzero"
+          opacity={0.496}
+        />
+        <G
+          stroke="#FFF"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.045}
+        >
+          <Path d="M18.902 19.616h3.134v3.134h-3.134zM29.348 19.616h3.134v3.134h-3.134zM18.902 30.063h3.134v3.133h-3.134zM29.348 30.063v3.133h3.134v-3.133h-1.044M24.125 22.228v-2.612h3.134M27.262 21.705v3.657M18.902 27.973h5.223v-2.611M24.125 30.063v3.133h3.134M26.218 30.063h1.044M18.905 24.84h3.134M32.482 24.84h-3.134v1.044M26.218 27.973h6.267" />
+        </G>
+      </G>
+    </Svg>
+  )
+}
+export function SvgAccount(props) {
+  let {customColor} = props
+  return (
+    <Svg width={18} height={20} viewBox="0 0 18 20" {...props}>
+      <G
+        transform="translate(1 1)"
+        strokeWidth={2}
+        stroke={customColor}
+        fill="none"
+        fillRule="evenodd"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <Path d="M15.573 17.365V15.67c0-1.872-2.381-3.748-4.266-3.748H4.48C2.595 11.923 0 13.799 0 15.67v1.694" />
+        <Ellipse cx={7.68} cy={4.659} rx={4.267} ry={4.235} />
+      </G>
+    </Svg>
+  )
+}
+export function IconExplore(props) {
+  let {customColor} = props
+  return (
+    <Svg width={20} height={18} viewBox="0 0 20 18" {...props}>
+      <G
+        transform="translate(1 1)"
+        strokeWidth={2}
+        stroke={customColor}
+        fill="none"
+        fillRule="evenodd"
+      >
+        <Path
+          d="M7 12.5V15M1.442.934A.5.5 0 011.938.5h10.124a.5.5 0 01.5.434L13.5 6a6.5 6.5 0 01-13 0L1.442.934zM4 16h6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path d="M15.5 12.5l2 3" strokeLinecap="square" />
+        <Circle cx={13.5} cy={8.5} r={3.5} />
+      </G>
+    </Svg>
+  )
+}
+
+export function IconPromos(props) {
+  let {customColor} = props
+  return (
+    <Svg width={15} height={15} viewBox="0 0 15 15" {...props}>
+      <G fillRule="nonzero" fill={customColor}>
+        <Path
+          d="M1.9 12.6L13.1 1.4"
+          stroke={customColor}
+          strokeWidth={2.8}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <Path d="M4.085.615a2.1 2.1 0 11-2.97 2.97 2.1 2.1 0 012.97-2.97M14.085 10.615a2.1 2.1 0 11-2.97 2.97 2.1 2.1 0 012.97-2.97" />
+      </G>
+    </Svg>
+  )
+}
+
+export function HomeIcon(props) {
+  let {customColor} = props
+  return (
+    <Svg width={17} height={19} viewBox="0 0 17 19" {...props}>
+      <G fill="none" fillRule="evenodd">
+        <G
+          stroke={customColor}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+        >
+          <Path d="M1.4 7.2l7.2-5.6 7.2 5.6V16a1.6 1.6 0 01-1.6 1.6H3A1.6 1.6 0 011.4 16V7.2z" />
+          <Path d="M6.2 17.6v-8H11v8" />
+        </G>
+        <Path d="M-1 0h19.2v19.2H-1z" />
+      </G>
+    </Svg>
+  )
+}
+export function BottomTabImage(props) {
+  return (
+    <Svg width={375} height={57} viewBox="0 0 375 57" {...props}>
+      <Defs>
+        <LinearGradient x1="50%" y1="0%" x2="50%" y2="69.271%" id="prefix__a">
+          <Stop stopColor="#FFF" stopOpacity={0.881} offset="0%" />
+          <Stop stopColor="#FFF" offset="100%" />
+        </LinearGradient>
+      </Defs>
+      <Path
+        d="M0 6h106.695a51 51 0 0139.178 18.349C158.18 39.116 172.223 46.5 188 46.5c15.663 0 29.461-7.278 41.393-21.833h0A51 51 0 01268.834 6H375v56H0V6z"
+        transform="translate(0 -5)"
+        fill="url(#prefix__a)"
+        stroke="#979797"
+        fillRule="evenodd"
+      />
+    </Svg>
+  )
+}
 
 export function BackArrowBlack(props) {
   return (

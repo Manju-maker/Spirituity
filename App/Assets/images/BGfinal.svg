@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375px" height="57px" viewBox="0 0 375 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
+    <title>BG</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="69.2708333%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.881473995" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Main-App-Barz" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homescreen" transform="translate(0.000000, -1005.000000)" fill="url(#linearGradient-1)" stroke="#979797">
+            <g id="BOTTOM_NAV" transform="translate(0.000000, 1000.000000)">
+                <g id="BOTTOMNAV">
+                    <path d="M0,6 L106.695127,5.99999969 C121.83001,5.99999969 136.18309,12.7221866 145.872786,24.3486426 C158.180343,39.1162142 172.222747,46.5 188,46.5 C203.663368,46.5 217.461015,39.2224264 229.392941,24.6672791 L229.392941,24.6672791 C239.079807,12.8507659 253.554402,6 268.833975,6 L375,6 L375,62 L0,62 L0,6 Z" id="BG"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

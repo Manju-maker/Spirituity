@@ -87,7 +87,9 @@ function HomeScreen({navigation}) {
           <Swiper
             style={{height: 190}}
             activeDot={<View style={styles.activeDot} />}
-            loop={false}>
+            loop={true}
+            autoplay={true}
+            >
             {[
               <BarzPromotion />,
               <BarzPromotion />,
@@ -229,9 +231,6 @@ function HomeScreen({navigation}) {
               </>
             );
           })}
-        </View>
-        <View style={{position: 'absolute', bottom: 0}}>
-          <Button title="L" onPress={() => logout()} />
         </View>
       </ImageBackground>
     </ScrollView>

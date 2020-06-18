@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from 'react';
-import RNOtpVerify from 'react-native-otp-verify';
 import {View, Text, TextInput, AsyncStorage, ScrollView} from 'react-native';
+import SmsRetriever from 'react-native-sms-retriever';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import Timer from './timer';
@@ -61,7 +61,7 @@ function OTP({navigation, ...restProps}) {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (res.status === 200) {
           if (reset) {
-            console.log("response for otp resest>>>>",res.data)
+            console.log('response for otp resest>>>>', res.data);
             let {mobile, country_code, otp} = data;
             let dataToSend = {mobile, country_code, otp};
             navigation.navigate('ResetPassword', dataToSend);
@@ -144,6 +144,20 @@ function OTP({navigation, ...restProps}) {
     }
   }, [otpArray]);
 
+  // useEffect(async () => {
+  //   console.log('itp lisnert>>>');
+  //   try {
+  //     const registered = await SmsRetriever.startSmsRetriever();
+  //     console.log("registeredregisteredregistered",registered)
+  //     if (registered) {
+  //       SmsRetriever.addSmsListener(event => {
+  //         console.log("otp listner",event.message);
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.log(JSON.stringify(error));
+  //   }
+  // }, []);
   let handleChange = (text, index) => {
     const otpArrayCopy = otpArray.concat();
     otpArrayCopy[index] = text;
