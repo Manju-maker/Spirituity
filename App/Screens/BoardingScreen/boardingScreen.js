@@ -24,21 +24,21 @@ export default function BoardingScreen({navigation}) {
           />
         }
         paginationStyle={{
-          bottom: spacing(250),
+          bottom: spacing(270),
         }}
         loop={false}>
         <OnBoardingScreen
-          image={'onBoarding1'}
+          image={"BoardingScreen1"}
           text={'Build your Cloud Bar anytime, anywhere'}
           navigation={navigation}
         />
         <OnBoardingScreen
-          image={'onBoarding2'}
+          image={'BoardingScreen2'}
           text={'Consume your virtual drinks in any partner bars in Singapore'}
           navigation={navigation}
         />
         <OnBoardingScreen
-          image={'onBoarding3'}
+          image={'BoardingScreen3'}
           text={' Singapore is your playground'}
           navigation={navigation}
         />

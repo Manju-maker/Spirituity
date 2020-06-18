@@ -1,5 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, Text, View, ImageBackground} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  View,
+  ImageBackground,
+  Image,
+} from 'react-native';
 import styles, {centerText} from '../Themes/styles';
 import getImage from '../utils/getImage';
 import {
@@ -75,10 +81,7 @@ function SigningButton({
 
 function OnBoardingScreen({image, text, navigation}) {
   return (
-    <ImageBackground
-      style={{flex: 1}}
-      source={getImage(image)}
-      resizeMode="stretch">
+    <ImageBackground style={{flex: 1}} source={getImage(image)}>
       <View style={{alignItems: 'center', marginTop: spacing(50)}}>
         <BarzWhiteSVG />
         <Text style={styles.boardingTitle}> Your Barz Anywhere</Text>
@@ -95,6 +98,30 @@ function OnBoardingScreen({image, text, navigation}) {
           justifyContent: 'flex-end',
           alignItems: 'center',
         }}>
+        <Image
+          source={getImage('wineGlass')}
+          style={{flex: 1, position: 'absolute', bottom: spacing(-67)}}
+        />
+        <Image
+          source={getImage('MultiColor3')}
+          style={{
+            width: 84,
+            height: 84,
+            position: 'absolute',
+            left: 0,
+            top: spacing(280),
+          }}
+        />
+        <Image
+          source={getImage('MultiColor')}
+          style={{
+            width: 49,
+            height: 80,
+            position: 'absolute',
+            top: spacing(160),
+            right: 30,
+          }}
+        />
         <TouchableOpacity
           style={styles.barzButton}
           onPress={() => navigation.navigate('SignUp')}>
