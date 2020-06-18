@@ -27,9 +27,15 @@ import {
   WhiskeySVG,
   RumSVG,
   GinSVG,
+  TaquilaSVG,
+  WineSVG,
+  BeerSVG,
+  NonAlcoholicSVG,
+  MoreSVG,
 } from '../../Components/allSVG';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import getImage from '../../utils/getImage';
+import ShotGlassModal from '../../Components/shotGlassModal';
 
 function HomeScreen({navigation}) {
   const [visible, setVisibility] = useState(false);
@@ -45,6 +51,10 @@ function HomeScreen({navigation}) {
       <ImageBackground
         style={{flex: 1}}
         source={require('../../Assets/images/homescreen.png')}>
+        <ShotGlassModal
+          visible={visible}
+          setVisible={value => setVisibility(value)}
+        />
         <View
           style={{
             flex: 1,
@@ -89,8 +99,7 @@ function HomeScreen({navigation}) {
             style={{height: 190}}
             activeDot={<View style={styles.activeDot} />}
             loop={true}
-            autoplay={true}
-            >
+            autoplay={true}>
             {[
               <BarzPromotion />,
               <BarzPromotion />,
@@ -119,38 +128,39 @@ function HomeScreen({navigation}) {
               ]}>
               Build your CloudBar
             </Text>
-            {[1, 2].map(item => {
-              return (
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                  }}>
-                  {[
-                    {drink: 'Vodka'},
-                    {drink: 'Brandy'},
-                    {drink: 'Whiskey'},
-                    {drink: 'Rum'},
-                    {drink: 'Gin'},
-                  ].map(item => {
-                    return (
-                      <View
-                        style={{
-                          width: 52,
-                          marginHorizontal: 7,
-                          height: 78,
-                          marginBottom: 7,
-                        }}>
-                        <View style={styles.drinkCategoryStyle}>
-                          <VodkaSVG />
-                        </View>
-                        <Text style={styles.drinkName}>{item.drink}</Text>
-                      </View>
-                    );
-                  })}
-                </View>
-              );
-            })}
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+              }}>
+              {[
+                {drink: 'Vodka', image: <VodkaSVG />},
+                {drink: 'Brandy', image: <BrandySVG />},
+                {drink: 'Whiskey', image: <WhiskeySVG />},
+                {drink: 'Rum', image: <RumSVG />},
+                {drink: 'Gin', image: <GinSVG />},
+                {drink: 'Tequila', image: <TaquilaSVG />},
+                {drink: 'Wine', image: <WineSVG />},
+                {drink: 'Beer', image: <BeerSVG />},
+                {drink: 'Non Alcoholic', image: <NonAlcoholicSVG />},
+                {drink: 'Non Alcoholic', image: <MoreSVG />},
+              ].map(item => {
+                return (
+                  <View
+                    style={{
+                      width: 52,
+                      marginHorizontal: 7,
+                      height: 78,
+                      marginBottom: 7,
+                    }}>
+                    <View style={styles.drinkCategoryStyle}>{item.image}</View>
+                    <Text style={styles.drinkName}>{item.drink}</Text>
+                  </View>
+                );
+              })}
+            </View>
           </View>
           {[
             {header: 'Whiskey', showAll: 'View all'},
