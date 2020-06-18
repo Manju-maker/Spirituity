@@ -19,9 +19,10 @@ import {showSnackBar} from '../../Components/snackbar';
 import {SHOW_LOADING} from '../../utils/constant';
 import CallApi from '../../utils/callApi';
 import {formatText} from '../../utils/validation';
+import BackgroundImage from '../../Components/backgroundImage';
 
 function ForgotPassword({navigation, ...restProps}) {
-  let {purple, offWhite} = colors;
+  let {purple, offWhite, disableColor} = colors;
   let eleRef = useRef([]);
   let [state, setState] = useState({
     email: '',
@@ -52,8 +53,8 @@ function ForgotPassword({navigation, ...restProps}) {
   }, [emailError, phoneNumberError, showEmailField]);
 
   let setData = async (field, text) => {
-    let isValid = checkField(field, text.trim());
     let formatedText = await formatText(text, field);
+    let isValid = checkField(field, formatedText.trim());
     setState({...state, [field]: formatedText, [`${field}Error`]: isValid});
   };
   let setRef = (ref, field) => {
@@ -66,7 +67,6 @@ function ForgotPassword({navigation, ...restProps}) {
   let onBlur = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
-  let commonStyle = {position: 'absolute', height: 100, width: 100, top: 50};
 
   let callService = (method, route, data) => {
     let headers = {
@@ -135,56 +135,48 @@ function ForgotPassword({navigation, ...restProps}) {
       <View
         style={{
           flex: 1,
-          marginTop: 10,
           marginBottom: 20,
         }}>
         <View
-          style={[
-            commonStyle,
-            {
-              transform: [{translateX: -57}],
-              left: 0,
-            },
-          ]}>
-          <WavesSVG />
-        </View>
-        <View
-          style={[
-            commonStyle,
-            {
-              transform: [{translateX: 13}],
-              right: 0,
-            },
-          ]}>
-          <CircleSVG />
-        </View>
-        <View style={styles.signinChildContainer}>
-          <View style={styles.titleContainer}>
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            marginTop: 43,
+          }}>
+          <BackgroundImage top={0} />
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
             <Text style={[styles.boldText, styles.mar_13]}>
-              Forgot Password
+              Enter your Email
             </Text>
           </View>
-          <View style={{alignSelf: 'center', marginTop: 30, marginBottom: 30}}>
-            <TouchableOpacity
-              style={{marginBottom: 10}}
-              onPress={() => {
-                setState({...state, disable: true});
-                setEmailField(true);
-              }}>
-              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
-                Reset Using Email
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setState({...state, disable: true});
-                setEmailField(false);
-              }}>
-              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
-                Reset Using Mobile Number
-              </Text>
-            </TouchableOpacity>
-          </View>
+        </View>
+
+        <View style={{alignSelf: 'center', marginBottom: 30}}>
+          <TouchableOpacity
+            style={{marginBottom: 10}}
+            onPress={() => {
+              setState({...state, disable: true});
+              setEmailField(true);
+            }}>
+            <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+              Reset Using Email
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setState({...state, disable: true});
+              setEmailField(false);
+            }}>
+            <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+              Reset Using Mobile Number
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{flex: 1, marginHorizontal: 20}}>
           <View style={{flex: 1, marginTop: 20}}>
             {showEmailField && (
               <View style={styles.textInputWrapper}>
@@ -210,7 +202,9 @@ function ForgotPassword({navigation, ...restProps}) {
                   />
                   <Text>{emailError === true && <CheckArrowSVG />}</Text>
                 </View>
-                <Text style={{color: 'red'}}>{emailError}</Text>
+                <Text style={[styles.regularText, {color: 'red'}]}>
+                  {emailError}
+                </Text>
               </View>
             )}
             {!showEmailField && (
@@ -248,7 +242,9 @@ function ForgotPassword({navigation, ...restProps}) {
                   />
                   <Text>{phoneNumberError === true && <CheckArrowSVG />}</Text>
                 </View>
-                <Text style={{color: 'red'}}>{phoneNumberError}</Text>
+                <Text style={[styles.regularText, {color: 'red'}]}>
+                  {phoneNumberError}
+                </Text>
               </View>
             )}
           </View>
@@ -259,7 +255,7 @@ function ForgotPassword({navigation, ...restProps}) {
             style={[
               styles.button,
               {marginBottom: 0},
-              disable && {backgroundColor: 'gray'},
+              disable && {backgroundColor: disableColor},
             ]}
             disable={disable}
           />

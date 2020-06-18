@@ -98,17 +98,8 @@ function isValidEmailFormat(email) {
   return re.test(email);
 }
 
-// function isValidPasswordFormat(password) {
-//   var re = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%?=*&]).{8,20})/;
-//   return re.test(password);
-// }
-
-// function isValidFullname(name) {
-//   if (name.length == 0) return 'fullname cannot be empty';
-//   if (name.length <= 1) return `${name} length should be greater than 1`;
-//   return true;
-// }
 function isValidPhoneNumber(number) {
+  console.log('numberrrr', number);
   if (number.length != 10) {
     return 'Phone number should be of 10 digit';
   }
@@ -132,7 +123,7 @@ let formatText = (text, field) => {
         .replace(/[^\dA-Z]/g, '')
         .replace(/(.{4})/g, '$1 ')
         .trim();
-      resolve(finalText);
+      resolve(finalText.slice(0, 12));
     }
     resolve(text);
   });

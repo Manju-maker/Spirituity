@@ -6,7 +6,7 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
 } from 'react-native';
 
 import styles from '../../Themes/styles';
@@ -14,7 +14,7 @@ import {colors} from '../../Themes/colors';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
 import {HidePasswordSVG} from '../../Components/allSVG';
 import {validPassword, calculatePasswordScore} from '../../utils/validation';
-import {login} from "../../Store/actions/userAction"
+import {login} from '../../Store/actions/userAction';
 import {SHOW_LOADING} from '../../utils/constant';
 import {showSnackBar} from '../../Components/snackbar';
 import Store from '../../Store';
@@ -23,7 +23,7 @@ import CallApi from '../../utils/callApi';
 function ResetPassword({navigation, ...restProps}) {
   let {mobile, country_code, otp} =
     (restProps.route && restProps.route.params && restProps.route.params) || {};
-  let {purple, offWhite, transparent} = colors;
+  let {purple, offWhite, transparent, disableColor} = colors;
   let eleRef = useRef([]);
   const [progress, setProgress] = useState([-1, -1, -1, -1]);
   let [state, setState] = useState({
@@ -92,7 +92,7 @@ function ResetPassword({navigation, ...restProps}) {
         otp,
         password: newPassword,
       };
-      console.log("data to send to server>>>",data)
+      console.log('data to send to server>>>', data);
       Store.dispatch({type: SHOW_LOADING, payload: true});
       CallApi('put', 'users/reset-password/otp', data)
         .then(res => {
@@ -108,8 +108,8 @@ function ResetPassword({navigation, ...restProps}) {
         })
         .catch(error => {
           console.log('Error>>>>', error);
-          let {data,status} = error.response || {};
-          console.log("Error>>>>>>",data)
+          let {data, status} = error.response || {};
+          console.log('Error>>>>>>', data);
           Store.dispatch({type: SHOW_LOADING, payload: false});
           if (error.message === 'Network Error') {
             showSnackBar({
@@ -177,7 +177,9 @@ function ResetPassword({navigation, ...restProps}) {
                 <TouchableOpacity
                   style={{marginHorizontal: 14}}
                   activeOpacity={0.8}
-                  onPress={() => changeState('isNewPasswordHide', isNewPasswordHide)}>
+                  onPress={() =>
+                    changeState('isNewPasswordHide', isNewPasswordHide)
+                  }>
                   <HidePasswordSVG />
                 </TouchableOpacity>
               </View>
@@ -205,7 +207,9 @@ function ResetPassword({navigation, ...restProps}) {
                   );
                 })}
               </View>
-              <Text style={{color: 'red'}}>{newPasswordError}</Text>
+              <Text style={[styles.regularText, {color: 'red'}]}>
+                {newPasswordError}
+              </Text>
             </View>
             <View style={styles.textInputWrapper}>
               <Text style={[styles.text, styles.marB_9]}>Confirm Password</Text>
@@ -231,11 +235,15 @@ function ResetPassword({navigation, ...restProps}) {
                 <TouchableOpacity
                   style={{marginHorizontal: 14}}
                   activeOpacity={0.8}
-                  onPress={() => changeState('isConfirmPasswordHide', isConfirmPasswordHide)}>
+                  onPress={() =>
+                    changeState('isConfirmPasswordHide', isConfirmPasswordHide)
+                  }>
                   <HidePasswordSVG />
                 </TouchableOpacity>
               </View>
-              <Text style={{color: 'red'}}>{confirmPasswordError}</Text>
+              <Text style={[styles.regularText, {color: 'red'}]}>
+                {confirmPasswordError}
+              </Text>
             </View>
           </View>
 
@@ -245,7 +253,7 @@ function ResetPassword({navigation, ...restProps}) {
             style={[
               styles.button,
               {marginBottom: 0},
-              disable && {backgroundColor: 'gray'},
+              disable && {backgroundColor: disableColor},
             ]}
             disable={disable}
           />

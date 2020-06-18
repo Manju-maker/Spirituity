@@ -161,6 +161,11 @@ const QB_16_20 = {
   lineHeight: 20,
   fontFamily: 'Quicksand-Bold',
 };
+const QB_18_20 = {
+  fontSize: scale(18),
+  lineHeight: 20,
+  fontFamily: 'Quicksand-Bold',
+};
 
 const AM_10_12 = {
   fontSize: scale(10),
@@ -170,7 +175,7 @@ const AM_10_12 = {
 
 const AM_12_14 = {
   fontSize: scale(12),
-  lineHeight: 16,
+  lineHeight: 10,
   fontFamily: 'AvenirNextLTPro-Medium',
 };
 const AM_16_18 = {
@@ -192,13 +197,22 @@ const QB_10_12 = {
 
 const AR_9_12 = {
   fontSize: scale(9),
-  lineHeight: 12,
+  lineHeight: 8,
   fontFamily: 'AvenirNextLTPro-Regular',
 };
 
 const AR_11_18 = {
   fontSize: scale(11),
   lineHeight: 18,
+  fontFamily: 'AvenirNextLTPro-Regular',
+};
+const AR_11_10 = {
+  fontSize: scale(11),
+  lineHeight: 10,
+  fontFamily: 'AvenirNextLTPro-Regular',
+};
+const AR_14 = {
+  fontSize: scale(11),
   fontFamily: 'AvenirNextLTPro-Regular',
 };
 
@@ -224,4 +238,7 @@ export {
   AM_16_18,
   AR_11_11,
   AR_11_18,
+  AR_11_10,
+  QB_18_20,
+  AR_14,
 };

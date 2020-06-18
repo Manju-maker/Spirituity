@@ -55,6 +55,15 @@ function SigningButton({
   disable = false,
   showArrow = true,
 }) {
+  let shadow = !disable
+    ? {
+        shadowColor: 'rgba(0,0,0,0.25)',
+        shadowOffset: {height: 1, width: 1},
+        shadowOpacity: 1,
+        shadowRadius: 1,
+        elevation: 5,
+      }
+    : {};
   return (
     <TouchableOpacity
       disabled={disable}
@@ -62,12 +71,9 @@ function SigningButton({
         {
           marginBottom: spacing(16),
           flexDirection: 'row',
-          shadowColor: 'rgba(0,0,0,0.25)',
-          shadowOffset: {height: 1, width: 1},
-          shadowOpacity: 1,
-          shadowRadius: 1,
-          elevation: 5,
+          ...shadow,
         },
+
         style,
       ]}
       onPress={() => click()}>

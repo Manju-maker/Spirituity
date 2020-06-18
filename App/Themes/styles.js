@@ -22,6 +22,9 @@ import {
   AM_16_18,
   AR_11_11,
   AR_11_18,
+  AR_11_10,
+  QB_18_20,
+  AR_14,
 } from './fonts';
 import {colors} from './colors';
 
@@ -256,6 +259,30 @@ const styles = StyleSheet.create({
   time: {
     ...AR_9_12,
     color: '#717171',
+  },
+  cloudBarTextLight: {
+    ...AR_11_10,
+    color: lightWhite,
+  },
+  cloudBarTextBold: {
+    ...QB_18_20,
+    color: lightWhite,
+  },
+  buildCloudbarButton: {
+    height: spacing(52),
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: lightWhite,
+    ...centerText,
+  },
+  buildCloudbarText: {
+    ...QB_13,
+    letterSpacing: 1,
+    color: lightWhite,
+  },
+  AR_14_white: {
+    ...AR_14,
+    color: lightWhite,
   },
   price: {
     ...AB_11_11,
