@@ -75,7 +75,6 @@ function OTP({navigation, ...restProps}) {
         }
       })
       .catch(error => {
-        console.log('ERrpr>>>>>>', error.response.data);
         let {status} = error.response || {};
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 400) {
@@ -144,20 +143,6 @@ function OTP({navigation, ...restProps}) {
     }
   }, [otpArray]);
 
-  // useEffect(async () => {
-  //   console.log('itp lisnert>>>');
-  //   try {
-  //     const registered = await SmsRetriever.startSmsRetriever();
-  //     console.log("registeredregisteredregistered",registered)
-  //     if (registered) {
-  //       SmsRetriever.addSmsListener(event => {
-  //         console.log("otp listner",event.message);
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.log(JSON.stringify(error));
-  //   }
-  // }, []);
   let handleChange = (text, index) => {
     const otpArrayCopy = otpArray.concat();
     otpArrayCopy[index] = text;

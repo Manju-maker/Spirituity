@@ -6,8 +6,10 @@ const onBoard1 = require('../Assets/images/boarding1.png');
 const wineGlass = require('../Assets/images/wineglass.png');
 const Liquor = require('../Assets/images/liquor.png');
 const wine = require('../Assets/images/wine.png');
+const searchBackGround = require('../Assets/images/search.png');
 
 export {
+  searchBackGround,
   wine,
   Liquor,
   onBoarding1,

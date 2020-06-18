@@ -12,7 +12,7 @@ import Svg, {
   LinearGradient,
   Stop,
   Image,
-  Ellipse
+  Ellipse,
 } from 'react-native-svg';
 
 export function SvgRedeem(props) {
@@ -24,8 +24,7 @@ export function SvgRedeem(props) {
           y1="11.719%"
           x2="15.805%"
           y2="100%"
-          id="prefix__b"
-        >
+          id="prefix__b">
           <Stop stopColor="#FB8F66" offset="0%" />
           <Stop stopColor="#7033FF" offset="100%" />
         </LinearGradient>
@@ -34,8 +33,7 @@ export function SvgRedeem(props) {
         filter="url(#prefix__a)"
         transform="translate(16 8)"
         fill="none"
-        fillRule="evenodd"
-      >
+        fillRule="evenodd">
         <Circle fill="url(#prefix__b)" cx={26} cy={26} r={26} />
         <Path
           d="M12.873 18.281h1.244c.098 0 .178-.08.178-.177v-3.91h3.91c.098 0 .178-.08.178-.178V12.77a.178.178 0 00-.178-.177h-3.999a1.51 1.51 0 00-1.51 1.51v4c0 .097.08.177.177.177zm21.531-4.088h3.91v3.91c0 .098.08.178.178.178h1.244c.098 0 .178-.08.178-.177v-4a1.51 1.51 0 00-1.51-1.51h-4a.178.178 0 00-.177.177v1.245c0 .097.08.177.177.177zm-16.199 24.02h-3.91v-3.91a.178.178 0 00-.178-.178h-1.244a.178.178 0 00-.178.178v3.999c0 .835.676 1.51 1.511 1.51h4c.097 0 .177-.08.177-.177V38.39a.178.178 0 00-.178-.178zm21.531-3.276h-1.244a.178.178 0 00-.178.178v3.91h-3.91a.178.178 0 00-.177.178v1.244c0 .098.08.178.177.178h4a1.51 1.51 0 001.51-1.51v-4a.178.178 0 00-.178-.177z"
@@ -47,16 +45,15 @@ export function SvgRedeem(props) {
           stroke="#FFF"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth={1.045}
-        >
+          strokeWidth={1.045}>
           <Path d="M18.902 19.616h3.134v3.134h-3.134zM29.348 19.616h3.134v3.134h-3.134zM18.902 30.063h3.134v3.133h-3.134zM29.348 30.063v3.133h3.134v-3.133h-1.044M24.125 22.228v-2.612h3.134M27.262 21.705v3.657M18.902 27.973h5.223v-2.611M24.125 30.063v3.133h3.134M26.218 30.063h1.044M18.905 24.84h3.134M32.482 24.84h-3.134v1.044M26.218 27.973h6.267" />
         </G>
       </G>
     </Svg>
-  )
+  );
 }
 export function SvgAccount(props) {
-  let {customColor} = props
+  let {customColor} = props;
   return (
     <Svg width={18} height={20} viewBox="0 0 18 20" {...props}>
       <G
@@ -66,16 +63,15 @@ export function SvgAccount(props) {
         fill="none"
         fillRule="evenodd"
         strokeLinecap="round"
-        strokeLinejoin="round"
-      >
+        strokeLinejoin="round">
         <Path d="M15.573 17.365V15.67c0-1.872-2.381-3.748-4.266-3.748H4.48C2.595 11.923 0 13.799 0 15.67v1.694" />
         <Ellipse cx={7.68} cy={4.659} rx={4.267} ry={4.235} />
       </G>
     </Svg>
-  )
+  );
 }
 export function IconExplore(props) {
-  let {customColor} = props
+  let {customColor} = props;
   return (
     <Svg width={20} height={18} viewBox="0 0 20 18" {...props}>
       <G
@@ -83,8 +79,7 @@ export function IconExplore(props) {
         strokeWidth={2}
         stroke={customColor}
         fill="none"
-        fillRule="evenodd"
-      >
+        fillRule="evenodd">
         <Path
           d="M7 12.5V15M1.442.934A.5.5 0 011.938.5h10.124a.5.5 0 01.5.434L13.5 6a6.5 6.5 0 01-13 0L1.442.934zM4 16h6"
           strokeLinecap="round"
@@ -94,11 +89,11 @@ export function IconExplore(props) {
         <Circle cx={13.5} cy={8.5} r={3.5} />
       </G>
     </Svg>
-  )
+  );
 }
 
 export function IconPromos(props) {
-  let {customColor} = props
+  let {customColor} = props;
   return (
     <Svg width={15} height={15} viewBox="0 0 15 15" {...props}>
       <G fillRule="nonzero" fill={customColor}>
@@ -112,11 +107,11 @@ export function IconPromos(props) {
         <Path d="M4.085.615a2.1 2.1 0 11-2.97 2.97 2.1 2.1 0 012.97-2.97M14.085 10.615a2.1 2.1 0 11-2.97 2.97 2.1 2.1 0 012.97-2.97" />
       </G>
     </Svg>
-  )
+  );
 }
 
 export function HomeIcon(props) {
-  let {customColor} = props
+  let {customColor} = props;
   return (
     <Svg width={17} height={19} viewBox="0 0 17 19" {...props}>
       <G fill="none" fillRule="evenodd">
@@ -124,15 +119,14 @@ export function HomeIcon(props) {
           stroke={customColor}
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth={2}
-        >
+          strokeWidth={2}>
           <Path d="M1.4 7.2l7.2-5.6 7.2 5.6V16a1.6 1.6 0 01-1.6 1.6H3A1.6 1.6 0 011.4 16V7.2z" />
           <Path d="M6.2 17.6v-8H11v8" />
         </G>
         <Path d="M-1 0h19.2v19.2H-1z" />
       </G>
     </Svg>
-  )
+  );
 }
 export function BottomTabImage(props) {
   return (
@@ -151,7 +145,7 @@ export function BottomTabImage(props) {
         fillRule="evenodd"
       />
     </Svg>
-  )
+  );
 }
 
 export function BackArrowBlack(props) {
@@ -265,7 +259,7 @@ export function EmptyCloudCartSVG(props) {
 
 export function BarzPromotion(props) {
   return (
-    <Svg width={375} height={174} viewBox="0 0 375 174" {...props}>
+    <Svg width={320} height={174} viewBox="0 0 375 174" {...props}>
       <Defs>
         <Rect id="prefix__a" x={0} y={0} width={335} height={134} rx={8} />
       </Defs>
@@ -904,4 +898,151 @@ export function GinSVG(props) {
       />
     </Svg>
   );
+}
+
+export function TaquilaSVG(props) {
+  return (
+    <Svg width={32} height={32} viewBox="0 0 24 24" {...props}>
+      <Defs>
+        <ClipPath id="prefix__a">
+          <Path d="M7 0h10v24H7zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__b">
+          <Path d="M15.516 24H8.78C7.793 24 7 23.36 7 22.559V14c0-2.879.793-4.879 1.484-6.64.496-1.36.993-2.481.993-3.758 0-.641-.297-.883-.399-.883.102-.078 0-.239 0-.32v-.797C9.078.8 9.574 0 10.563 0h2.476c.992 0 1.484.8 1.484 1.602v.796c0 .082-.097.243-.195.32 0 0-.297.321-.297.884 0 1.277.594 2.398 1.188 3.757C16.012 9.121 17 11.121 17 14v8.398C17 23.2 16.504 24 15.516 24zM10.07 2.238c.196.242.492.64.492 1.364 0 1.437-.492 2.718-1.085 4C8.78 9.282 8.09 11.199 8.09 14v8.64c0 .32.297.641.793.641h6.73c.297 0 .496-.48.496-.8V14c0-2.719-.89-4.64-1.683-6.32-.793-1.36-1.387-2.64-1.387-4.078 0-.723.297-1.122.496-1.364v-.636c0-.32-.2-.801-.496-.801h-2.476c-.297 0-.493.48-.493.8zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__c">
+          <Path d="M7 14h10v1H7zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__d">
+          <Path d="M16.5 15h-9c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h9c.3 0 .5.2.5.5s-.2.5-.5.5zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__e">
+          <Path d="M7 20h10v1H7zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__f">
+          <Path d="M16.473 21H7.527C7.211 21 7 20.8 7 20.5s.21-.5.527-.5h8.946c.316 0 .527.2.527.5s-.21.5-.527.5zm0 0" />
+        </ClipPath>
+      </Defs>
+      <G clipPath="url(#prefix__a)">
+        <G clipPath="url(#prefix__b)">
+          <Path d="M2-5h20v34H2zm0 0" fill="#fff" />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__c)">
+        <G clipPath="url(#prefix__d)">
+          <Path d="M2 9h20v11H2zm0 0" fill="#fff" />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__e)">
+        <G clipPath="url(#prefix__f)">
+          <Path d="M2 15h20v11H2zm0 0" fill="#fff" />
+        </G>
+      </G>
+    </Svg>
+  );
+}
+
+export function WineSVG(props) {
+  return (
+    <Svg width={32} height={32} viewBox="0 0 24 24" {...props}>
+      <G
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        stroke="#fff"
+        strokeMiterlimit={10}>
+        <Path d="M13 15.89a3.07 3.07 0 002.406 3.051A3 3 0 0019 16V8.5c0-.277-.223-.5-.5-.5h-5c-.277 0-.5.223-.5.5zm0 0M16 19v4.5M13.5 23.5h5" />
+        <Path d="M13 10.863c0-.234-.082-.46-.23-.64l-2.04-2.446a1.006 1.006 0 01-.23-.64V1.5c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v5.637c0 .234-.082.46-.23.64l-2.04 2.446c-.148.18-.23.406-.23.64V22.5c0 .55.45 1 1 1h5.5M7.5 3.5h3" />
+      </G>
+    </Svg>
+  );
+}
+
+export function BeerSVG(props) {
+  return (
+    <Svg width={32} height={32} viewBox="0 0 24 24" {...props}>
+      <Defs>
+        <ClipPath id="prefix__a">
+          <Path d="M7 0h10v24H7zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__b">
+          <Path d="M15.516 24H8.78C7.793 24 7 23.36 7 22.559V14c0-2.879.793-4.879 1.484-6.64.496-1.36.993-2.481.993-3.758 0-.641-.297-.883-.399-.883.102-.078 0-.239 0-.32v-.797C9.078.8 9.574 0 10.563 0h2.476c.992 0 1.484.8 1.484 1.602v.796c0 .082-.097.243-.195.32 0 0-.297.321-.297.884 0 1.277.594 2.398 1.188 3.757C16.012 9.121 17 11.121 17 14v8.398C17 23.2 16.504 24 15.516 24zM10.07 2.238c.196.242.492.64.492 1.364 0 1.437-.492 2.718-1.085 4C8.78 9.282 8.09 11.199 8.09 14v8.64c0 .32.297.641.793.641h6.73c.297 0 .496-.48.496-.8V14c0-2.719-.89-4.64-1.683-6.32-.793-1.36-1.387-2.64-1.387-4.078 0-.723.297-1.122.496-1.364v-.636c0-.32-.2-.801-.496-.801h-2.476c-.297 0-.493.48-.493.8zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__c">
+          <Path d="M7 12h10v1H7zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__d">
+          <Path d="M16.5 13h-9c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h9c.3 0 .5.2.5.5s-.2.5-.5.5zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__e">
+          <Path d="M7 21h10v1H7zm0 0" />
+        </ClipPath>
+        <ClipPath id="prefix__f">
+          <Path d="M16.473 22H7.527C7.211 22 7 21.8 7 21.5s.21-.5.527-.5h8.946c.316 0 .527.2.527.5s-.21.5-.527.5zm0 0" />
+        </ClipPath>
+      </Defs>
+      <G clipPath="url(#prefix__a)">
+        <G clipPath="url(#prefix__b)">
+          <Path d="M2-5h20v34H2zm0 0" fill="#fff" />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__c)">
+        <G clipPath="url(#prefix__d)">
+          <Path d="M2 7h20v11H2zm0 0" fill="#fff" />
+        </G>
+      </G>
+      <G clipPath="url(#prefix__e)">
+        <G clipPath="url(#prefix__f)">
+          <Path d="M2 16h20v11H2zm0 0" fill="#fff" />
+        </G>
+      </G>
+    </Svg>
+  );
+}
+
+export function NonAlcoholicSVG(props) {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" {...props}>
+      <G fill="none" fillRule="evenodd">
+        <G fill="#FFF" fillRule="nonzero">
+          <Path d="M15.515 24H8.782C7.792 24 7 23.36 7 22.56V14c0-2.88.792-4.88 1.485-6.64.495-1.36.99-2.48.99-3.76 0-.64-.297-.88-.396-.88.1-.08 0-.24 0-.32v-.8c0-.8.495-1.6 1.485-1.6h2.476c.99 0 1.485.8 1.485 1.6v.8c0 .08-.1.24-.198.32 0 0-.297.32-.297.88 0 1.28.594 2.4 1.188 3.76C16.01 9.12 17 11.12 17 14v8.4c0 .8-.495 1.6-1.485 1.6zM10.069 2.24c.198.24.495.64.495 1.36 0 1.44-.495 2.72-1.089 4C8.782 9.28 8.09 11.2 8.09 14v8.64c0 .32.297.64.792.64h6.733c.297 0 .495-.48.495-.8V14c0-2.72-.891-4.64-1.683-6.32-.793-1.36-1.387-2.64-1.387-4.08 0-.72.297-1.12.495-1.36V1.6c0-.32-.198-.8-.495-.8h-2.476c-.297 0-.495.48-.495.8v.64z" />
+          <Path d="M16.5 13h-9c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h9c.3 0 .5.2.5.5s-.2.5-.5.5zm-.026 9H7.526C7.211 22 7 21.8 7 21.5s.21-.5.526-.5h8.948c.315 0 .526.2.526.5s-.21.5-.526.5z" />
+        </G>
+        <Path stroke="#FFF" strokeLinecap="square" d="M23.5.5l-23 23" />
+      </G>
+    </Svg>
+  );
+}
+
+export function MoreSVG(props) {
+  return (
+    <Svg width={24} height={24} viewBox="0 0 24 24" {...props}>
+      <G
+        fill="none"
+        fillRule="evenodd"
+        stroke="#FFF"
+        transform="translate(.5 9)"
+      >
+        <Circle cx={3} cy={3} r={3} />
+        <Circle cx={11.5} cy={3} r={3} />
+        <Circle cx={20} cy={3} r={3} />
+      </G>
+    </Svg>
+  )
+}
+export function BackArrowWhite(props) {
+  return (
+    <Svg width="20pt" height="20pt" viewBox="0 0 20 20" {...props}>
+      <G
+        fill="none"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        stroke="#fff"
+        strokeMiterlimit={10}
+      >
+        <Path d="M1 10h18M6 5l-5 5 5 5" />
+      </G>
+    </Svg>
+  )
 }

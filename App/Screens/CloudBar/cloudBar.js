@@ -1,11 +1,50 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
-
+import {View, TouchableOpacity, ImageBackground} from 'react-native';
+import {
+  SearchSVG,
+  NotificationSVG,
+  BarzWalletSVG,
+  BackArrowWhite,
+  BarzPromotion,
+  ArrowSVG,
+  ShortGlassSVG,
+  GreyArrowSVG,
+  CloudCartSVG,
+  EmptyCloudCartSVG,
+} from '../../Components/allSVG';
 function CloudBar() {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Image source={require('../../Assets/images/emptyCloudbar.png')} />
-    </View>
+      <ImageBackground
+        source={require('../../Assets/images/emptyCloudbar.png')}
+        style={{flex: 1}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginBottom: 18,
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <BackArrowWhite />
+          </TouchableOpacity>
+
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+            }}>
+            <TouchableOpacity onPress={() => navigation.navigate('CloudBar')}>
+              <BarzWalletSVG />
+              <View style={{position: 'absolute', top: 25, right: 30}}>
+                <EmptyCloudCartSVG />
+              </View>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
+            <NotificationSVG />
+          </TouchableOpacity>
+          <View />
+        </View>
+      </ImageBackground>
   );
 }
 

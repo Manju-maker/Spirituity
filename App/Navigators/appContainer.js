@@ -63,6 +63,7 @@ function AppContainer({userInfo, navigation}) {
           <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="OTP" component={OTP} />
           <Stack.Screen name="BoardingScreen" component={BoardingScreen} />
+          <Stack.Screen name="NoRegister" component={TabNavigater} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
