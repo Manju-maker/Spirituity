@@ -30,6 +30,7 @@ import {
 } from '../../Components/allSVG';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import getImage from '../../utils/getImage';
+import ShotGlassModal from '../../Components/shotGlassModal';
 
 function HomeScreen({navigation}) {
   const [visible, setVisibility] = useState(false);
@@ -45,6 +46,10 @@ function HomeScreen({navigation}) {
       <ImageBackground
         style={{flex: 1}}
         source={require('../../Assets/images/homescreen.png')}>
+        <ShotGlassModal
+          visible={visible}
+          setVisible={value => setVisibility(value)}
+        />
         <View
           style={{
             flex: 1,

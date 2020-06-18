@@ -18,6 +18,10 @@ import {
   AM_12_14,
   AR_9_12,
   AB_11_11,
+  AB_20_24,
+  AM_16_18,
+  AR_11_11,
+  AR_11_18,
 } from './fonts';
 import {colors} from './colors';
 
@@ -91,6 +95,16 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: lightGrey,
   },
+
+  AR_11_11_white: {
+    ...AR_11_11,
+    color: lightWhite,
+  },
+  AR_11_18_white: {
+    ...AR_11_18,
+    color: lightWhite,
+  },
+
   text_12: {
     color: lightBlack,
     ...AR_12,
@@ -167,6 +181,14 @@ const styles = StyleSheet.create({
   rowViewWrapperCenter: {
     flexDirection: 'row',
     ...centerText,
+  },
+  shotglassText: {
+    ...AM_16_18,
+    color: white,
+  },
+  faqTitle: {
+    ...AB_20_24,
+    color: darkBlack,
   },
   dot: {
     backgroundColor: 'rgba(255,255,255,.3)',
