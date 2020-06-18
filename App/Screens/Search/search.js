@@ -26,7 +26,11 @@ function Search({navigation}) {
   return (
     <ImageBackground
       source={getImage('searchBackGround')}
-      style={{height: spacing(392), width: Dimensions.get('window').width}}>
+      style={{
+        flex: 1,
+        // height: spacing(392),
+        // width: Dimensions.get('screen').width,
+      }}>
       <View style={{flex: 1}}>
         <View
           style={{
@@ -46,6 +50,8 @@ function Search({navigation}) {
             <View
               style={{
                 flex: 1,
+                borderColor: 'red',
+                borderWidth: 2,
                 alignItems: 'center',
               }}>
               <TouchableOpacity onPress={() => navigation.navigate('CloudBar')}>

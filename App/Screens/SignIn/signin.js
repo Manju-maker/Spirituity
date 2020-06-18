@@ -21,9 +21,9 @@ import CallApi from '../../utils/callApi';
 import {getOtp} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
 import BackgroundImage from '../../Components/backgroundImage';
-
-const height = Dimensions.get('window').height / 3;
-let {purple, offWhite} = colors;
+import {spacing} from '../../Themes/fonts';
+const height = spacing(Dimensions.get('window').height / 3);
+let {purple, offWhite, disableColor} = colors;
 
 function SignIn({navigation, ...restProps}) {
   let eleRef = useRef([]);
@@ -74,26 +74,9 @@ function SignIn({navigation, ...restProps}) {
       });
   };
 
-  // useEffect(() => {
-  //   if (otpResponse && otpResponse.status == true) {
-  //     let data = {
-  //       type: 'SignIn',
-  //       mobile: phoneNumber.replace(/\s/g, ''),
-  //       country_code: countryCode,
-  //     };
-  //     navigation.navigate('OTP', data);
-  //   } else if (otpResponse != null && otpResponse.data.status == false) {
-  //     showSnackBar({
-  //       message:
-  //         otpResponse.data &&
-  //         otpResponse.data.statusMessage &&
-  //         otpResponse.data.statusMessage,
-  //     });
-  //   }
-  // }, [otpResponse]);
-
   useEffect(() => {
     if (phoneNumberError === true) {
+      console.log('Errrrrrrrrrrrrrr', phoneNumberError);
       setState({...state, disable: false});
     } else {
       setState({...state, disable: true});
@@ -101,8 +84,11 @@ function SignIn({navigation, ...restProps}) {
   }, [phoneNumberError]);
 
   let setData = async (field, text) => {
-    let isValid = checkField(field, text.trim());
+    console.log('textttt', text);
     let formatedText = await formatText(text, field);
+    console.log('formatedddtext', formatedText);
+    let isValid = checkField(field, formatedText.trim());
+    console.log('is validdddddddddddddddddddddddd', isValid);
 
     setState({...state, [field]: formatedText, [`${field}Error`]: isValid});
   };
@@ -132,7 +118,7 @@ function SignIn({navigation, ...restProps}) {
           <ImageBackground
             style={{
               flex: 1,
-              height: 150,
+              height: spacing(150),
               justifyContent: 'center',
             }}
             resizeMode={'contain'}
@@ -170,7 +156,9 @@ function SignIn({navigation, ...restProps}) {
                     onChangeText={text => setData('phoneNumber', text)}
                   />
                 </View>
-                {/* <Text style={{color: 'red'}}>{phoneNumberError}</Text> */}
+                <Text style={[styles.regularText, {color: 'red'}]}>
+                  {phoneNumberError}
+                </Text>
                 <Text
                   onPress={() => navigation.navigate('SignInViaEmail')}
                   style={[
@@ -188,7 +176,7 @@ function SignIn({navigation, ...restProps}) {
               style={[
                 styles.button,
                 {marginBottom: 20},
-                disable && {backgroundColor: 'gray'},
+                disable && {backgroundColor: disableColor},
               ]}
               disable={disable}
             />

@@ -121,7 +121,6 @@ function OTP({navigation, ...restProps}) {
           country_code: country_code,
           otp: parseInt(otp),
         };
-        navigation.navigate('ResetPassword', data);
         // Store.dispatch(forgetViaOtp(data));
         callService('post', 'users/otp/verify', data, true); //// api will be provided to verify otp
       }

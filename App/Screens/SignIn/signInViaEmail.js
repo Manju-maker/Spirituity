@@ -29,7 +29,7 @@ import CallApi from '../../utils/callApi';
 const height = Dimensions.get('window').height / 4;
 
 function SignInViaEmail({navigation, ...restProps}) {
-  let {purple, offWhite} = colors;
+  let {purple, offWhite, disableColor} = colors;
   let {userInfo} = restProps;
   let {isLoading = false, loginResponse} = userInfo;
   let eleRef = useRef([]);
@@ -122,7 +122,6 @@ function SignInViaEmail({navigation, ...restProps}) {
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
       <Loader visible={isLoading} />
-      <View style={{height, backgroundColor: colors.mudGrey}} />
       <View
         style={{
           flex: 1,
@@ -146,7 +145,7 @@ function SignInViaEmail({navigation, ...restProps}) {
             </Text>
           </View>
         </View>
-        <View style={{flex: 2, marginHorizontal: 20}}>
+        <View style={{flex: 1, marginHorizontal: 20}}>
           <View style={{flex: 1}}>
             {[
               {
@@ -203,7 +202,9 @@ function SignInViaEmail({navigation, ...restProps}) {
                       </TouchableOpacity>
                     )}
                   </View>
-                  <Text style={{color: 'red'}}>{item.error}</Text>
+                  <Text style={[styles.regularText, {color: 'red'}]}>
+                    {item.error}
+                  </Text>
                 </View>
               );
             })}
@@ -223,7 +224,7 @@ function SignInViaEmail({navigation, ...restProps}) {
             style={[
               styles.button,
               {marginBottom: 0},
-              disable && {backgroundColor: 'gray'},
+              disable && {backgroundColor: disableColor},
             ]}
             disable={disable}
           />

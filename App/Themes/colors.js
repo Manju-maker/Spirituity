@@ -16,5 +16,6 @@ const colors = {
   offBlack: 'rgb(17,36,61)',
   lightWhite: '#ffffff',
   lightPurple: '#6727B4',
+  disableColor: '#dedddd',
 };
 export {colors};

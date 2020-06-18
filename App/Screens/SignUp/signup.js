@@ -35,7 +35,7 @@ import Loader from '../../Components/loader';
 import {GoogleSignUp, FacebookSignUp} from '../../Components/socialSignin';
 import BackgroundImage from '../../Components/backgroundImage';
 
-let {purple, offWhite} = colors;
+let {purple, offWhite, disableColor} = colors;
 
 function SignUp({navigation, userInfo}) {
   const [progress, setProgress] = useState([-1, -1, -1, -1]);
@@ -164,16 +164,17 @@ function SignUp({navigation, userInfo}) {
     return true;
   };
   let setData = async (key, text) => {
-    let isValid = checkField(key, text.trim());
+    let formatedText = await formatText(text, key);
+    let isValid = checkField(key, formatedText.trim());
     if (key == 'password') {
-      isValid = validPassword(key, text.trim());
+      isValid = validPassword(key, formatedText.trim());
       let calculateScore = calculatePasswordScore(text, isValid);
       if (isValid.length == 0) {
         isValid = true;
       }
       setProgress(calculateScore);
     }
-    let formatedText = await formatText(text, key);
+
     setState({
       ...state,
       [key]: formatedText,
@@ -332,7 +333,9 @@ function SignUp({navigation, userInfo}) {
                   </Text>
                 </View>
                 {item.field != 'password' && item.error != true && (
-                  <Text style={{color: 'red'}}>{item.error}</Text>
+                  <Text style={[styles.regularText, {color: 'red'}]}>
+                    {item.error}
+                  </Text>
                 )}
               </View>
             );
@@ -354,7 +357,9 @@ function SignUp({navigation, userInfo}) {
               );
             })}
           </View>
-          <Text style={{color: 'red'}}>{passwordError}</Text>
+          <Text style={[styles.regularText, {color: 'red'}]}>
+            {passwordError}
+          </Text>
           <View style={[styles.rowViewWrapperEnd, styles.marV_24]}>
             <TouchableOpacity
               style={checkArrowStyle}
@@ -380,7 +385,7 @@ function SignUp({navigation, userInfo}) {
           <SigningButton
             text={'SIGN UP'}
             click={() => signUp()}
-            style={[styles.button, disable && {backgroundColor: 'gray'}]}
+            style={[styles.button, disable && {backgroundColor: disableColor}]}
             disable={disable}
           />
         </View>

@@ -3,6 +3,7 @@ import {Modal, Text, View} from 'react-native';
 import Events from 'react-native-simple-events';
 import RNExitApp from 'react-native-exit-app';
 import styles from '../Themes/styles';
+import {AgeModalWavesSVG, AgeModalCirclesSVG} from './allSVG';
 import {colors} from '../Themes/colors';
 import {SigningButton} from '../ReusableComponents/commonComponent';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -64,6 +65,12 @@ class ConfirmationModal extends Component {
               paddingTop: 57,
               paddingBottom: 27,
             }}>
+            <View style={{position: 'absolute', top: 22, left: 0}}>
+              <AgeModalCirclesSVG />
+            </View>
+            <View style={{position: 'absolute', top: 14, right: 0}}>
+              <AgeModalWavesSVG />
+            </View>
             <View style={{alignItems: 'center'}}>
               <Text
                 style={[

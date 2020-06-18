@@ -15,6 +15,42 @@ import Svg, {
   Ellipse,
 } from 'react-native-svg';
 
+export function DiamondSVG(props) {
+  return (
+    <Svg width={25} height={17} viewBox="0 0 25 17" {...props}>
+      <Defs>
+        <LinearGradient
+          id="prefix__b"
+          x1="72.665%"
+          x2="43.439%"
+          y1="29.954%"
+          y2="64.729%">
+          <Stop offset="0%" stopColor="#FFF" />
+          <Stop offset="100%" stopColor="#C2C2C2" />
+        </LinearGradient>
+        <Path
+          id="prefix__a"
+          d="M5.446 0h13a2.823 2.823 0 012.307 4.451l-6.5 9.218a2.824 2.824 0 01-4.615 0l-6.5-9.218A2.825 2.825 0 015.447 0z"
+        />
+      </Defs>
+      <G fill="none" fillRule="evenodd" transform="translate(.5)">
+        <Mask id="prefix__c" fill="#fff">
+          <Use xlinkHref="#prefix__a" />
+        </Mask>
+        <Use fill="url(#prefix__b)" xlinkHref="#prefix__a" />
+        <Path
+          stroke="#ABABAB"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={0.706}
+          d="M8.811 4.588L12.003.353l3.192 4.235M7.412-.353L12 14.471M16.726 0L12 14.471m10.235-9.53H1.765"
+          mask="url(#prefix__c)"
+        />
+      </G>
+    </Svg>
+  );
+}
+
 export function ShotSVG(props) {
   return (
     <Svg width={62} height={49} viewBox="0 0 62 49" {...props}>
@@ -910,6 +946,77 @@ export function RumSVG(props) {
   );
 }
 
+export function EmptyBottleSVG(props) {
+  return (
+    <Svg width={116} height={106} viewBox="0 0 116 106" {...props}>
+      <Path
+        d="M25.755 82.565l1.825-3.72S39.5 54.525 41.71 49.8c7.795-16.615 28.11-12.83 31.91-20.93l8.255-17.595M96.96 14.44c-3.355 7.15-7.87 16.77-9.76 20.805-4.34 9.255 12.57 20.295 4.305 37.92L84.29 88.34M94.63 19.4l-13.575-6.37L86.36 1.71h0a2.499 2.499 0 013.325-1.2l9.06 4.25h0a2.499 2.499 0 011.2 3.325L94.63 19.4zM81.775 58c-1.175 2.5-6.18 2.625-11.18.28-5-2.345-8.095-6.28-6.925-8.78 1.17-2.5 6.175-2.63 11.175-.275 5 2.355 8.105 6.275 6.93 8.775zM46.05 87.7l17.6-38.2m18.1 8.5L67.9 88.35m47.6 16.82c-12.5 2.605-20.3-9.895-20.3-9.895h0a22 22 0 01-18.105 10.275h0A23.036 23.036 0 0159 95.275h0a22.001 22.001 0 01-18.1 10.275h0a23 23 0 01-18.1-10.275h0S12.76 108 .5 105.375"
+        fill="none"
+        fillRule="evenodd"
+        stroke="#FFF"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={4}
+      />
+    </Svg>
+  );
+}
+
+export function AgeModalCirclesSVG(props) {
+  return (
+    <Svg width={57} height={95} viewBox="0 0 57 95" {...props}>
+      <Defs>
+        <Path id="prefix__a" d="M0 0h57v95H0z" />
+        <Path
+          id="prefix__c"
+          d="M24.35 12.908c0 6.63-5.372 12.003-12 12.003-6.627 0-12-5.374-12-12.003C.35 6.28 5.724.911 12.35.911c6.628 0 12 5.368 12 11.997"
+        />
+      </Defs>
+      <G fill="none" fillRule="evenodd">
+        <Mask id="prefix__b" fill="#fff">
+          <Use xlinkHref="#prefix__a" />
+        </Mask>
+        <G mask="url(#prefix__b)">
+          <Path
+            fill="#DE4161"
+            d="M-1.37 23.633a5.71 5.71 0 1010.262-5.007 5.71 5.71 0 00-10.263 5.007m28.37-13.837a5.708 5.708 0 1010.262-5.005 5.709 5.709 0 10-10.262 5.005m-15.477 40.27a5.71 5.71 0 0010.262-5.005c-1.382-2.835-4.8-4.008-7.633-2.626s-4.012 4.797-2.63 7.63"
+          />
+          <G transform="scale(-1 1) rotate(26 -68.27 -99.451)">
+            <Mask id="prefix__d" fill="#fff">
+              <Use xlinkHref="#prefix__c" />
+            </Mask>
+            <G stroke="#DE4161" strokeLinecap="square" mask="url(#prefix__d)">
+              <Path d="M-3.93 22.759L9.221-4.204m-9.34 28.822L13.033-2.346M3.476 26.37L16.628-.592M7.071 28.125L20.223 1.16m-9.422 28.783L23.951 2.98m-9.34 28.822L27.763 4.838M17.307 33.117L30.458 6.154M20.903 34.87l13.15-26.964" />
+            </G>
+          </G>
+          <Path
+            fill="#DE4161"
+            d="M-3.955 90.338a5.709 5.709 0 1010.263-5.006 5.709 5.709 0 00-10.263 5.006"
+          />
+        </G>
+      </G>
+    </Svg>
+  );
+}
+
+export function AgeModalWavesSVG(props) {
+  return (
+    <Svg width={42} height={54} viewBox="0 0 42 54" {...props}>
+      <Defs>
+        <Path id="prefix__a" d="M0 0h42v54H0z" />
+      </Defs>
+      <G fill="none" fillRule="evenodd">
+        <Mask id="prefix__b" fill="#fff">
+          <Use xlinkHref="#prefix__a" />
+        </Mask>
+        <G stroke="#6727B4" strokeWidth={6.4} mask="url(#prefix__b)">
+          <Path d="M3 44.656c0-7.51 6.135-13.562 13.621-13.437l.5.008c7.45.124 13.57-5.871 13.622-13.343l.01-1.35c.051-7.435 6.112-13.415 13.524-13.345l.729.007c7.51.071 13.613-6.064 13.524-13.598-.091-7.688 6.257-13.886 13.918-13.588M12.437 54.122c0-7.51 6.136-13.562 13.622-13.438l.5.009c7.45.124 13.57-5.871 13.62-13.344l.01-1.35c.052-7.434 6.113-13.414 13.526-13.344l.728.007c7.51.07 13.613-6.064 13.524-13.598-.09-7.689 6.257-13.886 13.918-13.588" />
+        </G>
+      </G>
+    </Svg>
+  );
+}
+
 export function GinSVG(props) {
   return (
     <Svg width={24} height={24} viewBox="0 0 24 24" {...props}>
@@ -1042,14 +1149,13 @@ export function MoreSVG(props) {
         fill="none"
         fillRule="evenodd"
         stroke="#FFF"
-        transform="translate(.5 9)"
-      >
+        transform="translate(.5 9)">
         <Circle cx={3} cy={3} r={3} />
         <Circle cx={11.5} cy={3} r={3} />
         <Circle cx={20} cy={3} r={3} />
       </G>
     </Svg>
-  )
+  );
 }
 export function BackArrowWhite(props) {
   return (
@@ -1060,10 +1166,9 @@ export function BackArrowWhite(props) {
         strokeLinecap="round"
         strokeLinejoin="round"
         stroke="#fff"
-        strokeMiterlimit={10}
-      >
+        strokeMiterlimit={10}>
         <Path d="M1 10h18M6 5l-5 5 5 5" />
       </G>
     </Svg>
-  )
+  );
 }
