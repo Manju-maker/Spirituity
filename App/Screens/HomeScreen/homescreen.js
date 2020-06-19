@@ -92,8 +92,10 @@ function HomeScreen({navigation}) {
           </View>
 
           <Swiper
-            style={{height: 190}}
+            style={{height: spacing(160)}}
             activeDot={<View style={styles.activeDot} />}
+            dot={<View style={styles.promotionDot} />}
+            paginationStyle={{bottom: 0}}
             loop={true}
             autoplay={true}>
             {[
@@ -122,7 +124,11 @@ function HomeScreen({navigation}) {
             <Text
               style={[
                 styles.boldWhiteText16,
-                {marginLeft: 5, marginBottom: 13},
+                {
+                  marginLeft: 5,
+                  marginBottom: spacing(13),
+                  marginTop: spacing(23),
+                },
               ]}>
               Build your CloudBar
             </Text>
@@ -163,7 +169,7 @@ function HomeScreen({navigation}) {
           {[
             {header: 'Whiskey', showAll: 'View all'},
             {header: 'Wine', showAll: 'View all'},
-            {header: 'Rum', showAll: 'View all'},
+            {header: 'Brandy', showAll: 'View all'},
           ].map(item => {
             return (
               <>

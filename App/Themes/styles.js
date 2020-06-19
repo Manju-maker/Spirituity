@@ -201,9 +201,17 @@ const styles = StyleSheet.create({
     marginLeft: 7,
     marginRight: 7,
   },
+  promotionDot: {
+    backgroundColor: 'rgba(255,255,255,.3)',
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    marginLeft: 4,
+    marginRight: 4,
+  },
   activeDot: {
     backgroundColor: brightWhite,
-    width: 14,
+    width: 18,
     height: 6,
     borderRadius: 3,
     marginHorizontal: 5,

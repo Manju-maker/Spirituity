@@ -155,27 +155,6 @@ function ForgotPassword({navigation, ...restProps}) {
           </View>
         </View>
 
-        <View style={{alignSelf: 'center', marginBottom: 30}}>
-          <TouchableOpacity
-            style={{marginBottom: 10}}
-            onPress={() => {
-              setState({...state, disable: true});
-              setEmailField(true);
-            }}>
-            <Text style={[styles.colorsText, {textAlign: 'center'}]}>
-              Reset Using Email
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              setState({...state, disable: true});
-              setEmailField(false);
-            }}>
-            <Text style={[styles.colorsText, {textAlign: 'center'}]}>
-              Reset Using Mobile Number
-            </Text>
-          </TouchableOpacity>
-        </View>
         <View style={{flex: 1, marginHorizontal: 20}}>
           <View style={{flex: 1, marginTop: 20}}>
             {showEmailField && (
@@ -248,13 +227,34 @@ function ForgotPassword({navigation, ...restProps}) {
               </View>
             )}
           </View>
+          <View style={{alignSelf: 'center', marginBottom: 30}}>
+            <TouchableOpacity
+              style={{marginBottom: 10}}
+              onPress={() => {
+                setState({...state, disable: true});
+                setEmailField(true);
+              }}>
+              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+                Reset Using Email
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setState({...state, disable: true});
+                setEmailField(false);
+              }}>
+              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+                Reset Using Mobile Number
+              </Text>
+            </TouchableOpacity>
+          </View>
 
           <SigningButton
             text={'SUBMIT'}
             click={() => submit()}
             style={[
               styles.button,
-              {marginBottom: 0},
+              {marginBottom: 10},
               disable && {backgroundColor: disableColor},
             ]}
             disable={disable}

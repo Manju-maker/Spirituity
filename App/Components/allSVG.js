@@ -14,6 +14,7 @@ import Svg, {
   Image,
   Ellipse,
 } from 'react-native-svg';
+import {Dimensions} from 'react-native';
 
 export function DiamondSVG(props) {
   return (
@@ -315,8 +316,10 @@ export function EmptyCloudCartSVG(props) {
 }
 
 export function BarzPromotion(props) {
+  let width = Dimensions.get('screen').width;
+  width = width - 20;
   return (
-    <Svg width={320} height={174} viewBox="0 0 375 174" {...props}>
+    <Svg width={width} height={174} viewBox="0 0 375 174" {...props}>
       <Defs>
         <Rect id="prefix__a" x={0} y={0} width={335} height={134} rx={8} />
       </Defs>
