@@ -31,6 +31,8 @@ import {
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import getImage from '../../utils/getImage';
 import ShotGlassModal from '../../Components/shotGlassModal';
+import {reducer} from '../../Store/reducer/reducer';
+import {spacing} from '../../Themes/fonts';
 
 function HomeScreen({navigation}) {
   const [visible, setVisibility] = useState(false);
@@ -46,10 +48,10 @@ function HomeScreen({navigation}) {
       <ImageBackground
         style={{flex: 1}}
         source={require('../../Assets/images/homescreen.png')}>
-        <ShotGlassModal
+        {/* <ShotGlassModal
           visible={visible}
           setVisible={value => setVisibility(value)}
-        />
+        /> */}
         <View
           style={{
             flex: 1,
@@ -61,11 +63,11 @@ function HomeScreen({navigation}) {
             style={{
               justifyContent: 'center',
               flexDirection: 'row',
-              marginBottom: 18,
+              marginBottom: spacing(18),
             }}>
             <TouchableOpacity
               style={{justifyContent: 'center', flex: 1}}
-              onPress={() => navigation.navigate('Search')}>
+              activeOpacity={1}>
               <SearchSVG />
             </TouchableOpacity>
 
@@ -74,7 +76,7 @@ function HomeScreen({navigation}) {
                 flex: 1,
                 alignItems: 'center',
               }}>
-              <TouchableOpacity onPress={() => navigation.navigate('CloudBar')}>
+              <TouchableOpacity activeOpacity={1}>
                 <BarzWalletSVG />
                 <View style={{position: 'absolute', top: 25, right: 30}}>
                   <EmptyCloudCartSVG />
@@ -83,15 +85,17 @@ function HomeScreen({navigation}) {
             </View>
             <TouchableOpacity
               style={{justifyContent: 'center', flex: 1}}
-              onPress={() => navigation.navigate('Notification')}>
+              activeOpacity={1}>
               <NotificationSVG />
             </TouchableOpacity>
             <View />
           </View>
 
           <Swiper
-            style={{height: 190}}
+            style={{height: spacing(160)}}
             activeDot={<View style={styles.activeDot} />}
+            dot={<View style={styles.promotionDot} />}
+            paginationStyle={{bottom: 0}}
             loop={true}
             autoplay={true}>
             {[
@@ -120,7 +124,11 @@ function HomeScreen({navigation}) {
             <Text
               style={[
                 styles.boldWhiteText16,
-                {marginLeft: 5, marginBottom: 13},
+                {
+                  marginLeft: 5,
+                  marginBottom: spacing(13),
+                  marginTop: spacing(23),
+                },
               ]}>
               Build your CloudBar
             </Text>
@@ -161,7 +169,7 @@ function HomeScreen({navigation}) {
           {[
             {header: 'Whiskey', showAll: 'View all'},
             {header: 'Wine', showAll: 'View all'},
-            {header: 'Rum', showAll: 'View all'},
+            {header: 'Brandy', showAll: 'View all'},
           ].map(item => {
             return (
               <>
@@ -172,7 +180,7 @@ function HomeScreen({navigation}) {
                       flexDirection: 'row',
                       alignItems: 'center',
                     }}
-                    onPress={() => alert('Clicked')}>
+                    activeOpacity={1}>
                     <Text style={styles.viewAll}>{item.showAll}</Text>
                     <ArrowSVG />
                   </TouchableOpacity>
@@ -209,8 +217,7 @@ function HomeScreen({navigation}) {
                             style={{
                               flexDirection: 'row',
                             }}>
-                            <TouchableOpacity
-                              onPress={() => setVisibility(true)}>
+                            <TouchableOpacity activeOpacity={1}>
                               <ShortGlassSVG />
                             </TouchableOpacity>
                             <Image source={item.image} />
@@ -221,11 +228,13 @@ function HomeScreen({navigation}) {
                               alignItems: 'center',
                               justifyContent: 'center',
                             }}>
-                            <Text style={styles.liquorTitle} numberOfLines={1}>
+                            <Text
+                              style={[styles.liquorTitle]}
+                              numberOfLines={1}>
                               Liquor is one line
                             </Text>
-                            <Text style={styles.quantity}>700ml</Text>
-                            <Text style={styles.price}>$167.50</Text>
+                            <Text style={[styles.quantity]}>700ml</Text>
+                            <Text style={[styles.price]}>$167.50</Text>
                             <View style={styles.cloudbarText}>
                               <CloudCartSVG />
                               <Text style={[styles.text_9_B, {marginLeft: 6}]}>
