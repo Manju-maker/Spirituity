@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Image,
 } from 'react-native';
 import {SHOW_LOADING} from '../../utils/constant';
 import {connect} from 'react-redux';
@@ -34,6 +35,7 @@ import {colors} from '../../Themes/colors';
 import Loader from '../../Components/loader';
 import {GoogleSignUp, FacebookSignUp} from '../../Components/socialSignin';
 import BackgroundImage from '../../Components/backgroundImage';
+import getImage from '../../utils/getImage';
 
 let {purple, offWhite, disableColor} = colors;
 
@@ -323,7 +325,13 @@ function SignUp({navigation, userInfo}) {
                       onPress={() =>
                         changeState('isPasswordHide', isPasswordHide)
                       }>
-                      <HidePasswordSVG />
+                      <Image
+                        source={getImage(
+                          isPasswordHide ? 'PasswordOff' : 'PasswordOn',
+                        )}
+                        style={{width: 20, height: 20}}
+                        resizeMode={'contain'}
+                      />
                     </TouchableOpacity>
                   )}
                   <Text>

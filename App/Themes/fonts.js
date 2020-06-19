@@ -120,7 +120,7 @@ const AB_20_24 = {
 
 const AB_11_11 = {
   fontSize: scale(11),
-  lineHeight: 11,
+  lineHeight: 14,
   fontFamily: 'AvenirNextLTPro-Bold',
 };
 
@@ -175,7 +175,7 @@ const AM_10_12 = {
 
 const AM_12_14 = {
   fontSize: scale(12),
-  lineHeight: 10,
+  lineHeight: 14,
   fontFamily: 'AvenirNextLTPro-Medium',
 };
 const AM_16_18 = {
@@ -197,7 +197,7 @@ const QB_10_12 = {
 
 const AR_9_12 = {
   fontSize: scale(9),
-  lineHeight: 8,
+  // lineHeight: 12,
   fontFamily: 'AvenirNextLTPro-Regular',
 };
 

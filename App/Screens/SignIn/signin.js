@@ -159,14 +159,15 @@ function SignIn({navigation, ...restProps}) {
                 <Text style={[styles.regularText, {color: 'red'}]}>
                   {phoneNumberError}
                 </Text>
-                <Text
-                  onPress={() => navigation.navigate('SignInViaEmail')}
-                  style={[
-                    styles.colorsText,
-                    {color: 'blue', textAlign: 'center', marginTop: 20},
-                  ]}>
-                  Sign In via Email
-                </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('SignInViaEmail')}>
+                  <Text
+                    style={[
+                      styles.colorsText,
+                      {color: 'blue', textAlign: 'center', marginTop: 20},
+                    ]}>
+                    Sign In via Email
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
 

@@ -12,8 +12,12 @@ const BoardingScreen2 = require("../Assets/images/boardingScreen1.png")
 const BoardingScreen3 = require("../Assets/images/boardingScreen2.png")
 const MultiColor3  = require("../Assets/images/multicolor3-1.png")
 const MultiColor = require("../Assets/images/multicolor3.png")
+const PasswordOn = require("../Assets/images/paasOn.png")
+const PasswordOff = require("../Assets/images/passOff.png")
  
 export {
+  PasswordOff,
+  PasswordOn,
   MultiColor3,
   MultiColor,
   BoardingScreen1,

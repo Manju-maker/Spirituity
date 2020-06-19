@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   AsyncStorage,
+  Image
 } from 'react-native';
 
 import styles from '../../Themes/styles';
@@ -19,6 +20,7 @@ import {SHOW_LOADING} from '../../utils/constant';
 import {showSnackBar} from '../../Components/snackbar';
 import Store from '../../Store';
 import CallApi from '../../utils/callApi';
+import getImage from '../../utils/getImage';
 
 function ResetPassword({navigation, ...restProps}) {
   let {mobile, country_code, otp} =
@@ -180,7 +182,14 @@ function ResetPassword({navigation, ...restProps}) {
                   onPress={() =>
                     changeState('isNewPasswordHide', isNewPasswordHide)
                   }>
-                  <HidePasswordSVG />
+                  {/* <HidePasswordSVG /> */}
+                  <Image
+                    source={getImage(
+                      isNewPasswordHide ? 'PasswordOff' : 'PasswordOn',
+                    )}
+                    style={{width: 20, height: 20}}
+                    resizeMode={'contain'}
+                  />
                 </TouchableOpacity>
               </View>
               <View
@@ -238,7 +247,14 @@ function ResetPassword({navigation, ...restProps}) {
                   onPress={() =>
                     changeState('isConfirmPasswordHide', isConfirmPasswordHide)
                   }>
-                  <HidePasswordSVG />
+                  {/* <HidePasswordSVG /> */}
+                  <Image
+                    source={getImage(
+                      isConfirmPasswordHide ? 'PasswordOff' : 'PasswordOn',
+                    )}
+                    style={{width: 20, height: 20}}
+                    resizeMode={'contain'}
+                  />
                 </TouchableOpacity>
               </View>
               <Text style={[styles.regularText, {color: 'red'}]}>

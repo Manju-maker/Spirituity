@@ -7,8 +7,10 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {connect} from 'react-redux';
+import getImage from '../../utils/getImage';
 
 import Store from '../../Store/index';
 import {login} from '../../Store/actions/userAction';
@@ -198,7 +200,13 @@ function SignInViaEmail({navigation, ...restProps}) {
                         onPress={() =>
                           changeState('isPasswordHide', isPasswordHide)
                         }>
-                        <HidePasswordSVG />
+                        <Image
+                          source={getImage(
+                            isPasswordHide ? 'PasswordOff' : 'PasswordOn',
+                          )}
+                          style={{width: 20, height: 20}}
+                          resizeMode={'contain'}
+                        />
                       </TouchableOpacity>
                     )}
                   </View>
@@ -208,14 +216,16 @@ function SignInViaEmail({navigation, ...restProps}) {
                 </View>
               );
             })}
-            <Text
-              onPress={() => navigation.navigate('ForgotPassword')}
-              style={[
-                styles.colorsText,
-                {color: 'blue', textAlign: 'center', marginBottom: 20},
-              ]}>
-              Forgot Password
-            </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ForgotPassword')}>
+              <Text
+                style={[
+                  styles.colorsText,
+                  {color: 'blue', textAlign: 'center', marginBottom: 20},
+                ]}>
+                Forgot Password
+              </Text>
+            </TouchableOpacity>
           </View>
 
           <SigningButton
@@ -228,6 +238,13 @@ function SignInViaEmail({navigation, ...restProps}) {
             ]}
             disable={disable}
           />
+           <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
+            <TouchableOpacity
+              style={styles.marL_8}
+              onPress={() => navigation.navigate('SignIn')}>
+              <Text style={styles.colorsText}>Sign In Via Mobile</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>

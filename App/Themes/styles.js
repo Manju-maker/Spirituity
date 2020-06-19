@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     ...AR_9_12,
     color: black,
     textAlign: 'center',
-    marginTop: 3,
+    // marginTop: 3,
     ...space,
   },
   time: {
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     ...AB_11_11,
     textAlign: 'center',
     color: darkBlack,
-    marginVertical: 5,
+    marginVertical: 3,
   },
   cloudbarText: {
     width: 95,

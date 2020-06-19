@@ -259,6 +259,16 @@ function ForgotPassword({navigation, ...restProps}) {
             ]}
             disable={disable}
           />
+          <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
+            <Text style={[styles.bottomText]}>
+              You have an account already?
+            </Text>
+            <TouchableOpacity
+              style={styles.marL_8}
+              onPress={() => navigation.navigate('SignIn')}>
+              <Text style={styles.colorsText}>Sign In</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>
