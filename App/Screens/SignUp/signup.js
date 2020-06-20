@@ -6,9 +6,7 @@ import {
   ScrollView,
   TextInput,
   Image,
-  KeyboardAvoidingView,
 } from 'react-native';
-import {StackActions} from '@react-navigation/native';
 import {SHOW_LOADING} from '../../utils/constant';
 import {connect} from 'react-redux';
 import {CheckArrowSVG, BackArrowBlack} from '../../Components/allSVG';
@@ -18,6 +16,7 @@ import {
   calculatePasswordScore,
   formatText,
 } from '../../utils/validation';
+import {StackActions} from '@react-navigation/native';
 import CallApi from '../../utils/callApi';
 import {showSnackBar} from '../../Components/snackbar';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
@@ -124,8 +123,8 @@ function SignUp({navigation, userInfo}) {
   };
 
   let SignIn = () => {
-    // navigation.navigate('SignIn');
     navigation.dispatch(StackActions.replace('SignIn'));
+    // resetScreen(navigation, 'SignIn');
   };
   let checkValidation = () => {
     if (
@@ -257,7 +256,7 @@ function SignUp({navigation, userInfo}) {
             },
             {
               header: 'Password',
-              placeHolder: '* * * * *',
+              placeHolder: '    *',
               value: password,
               field: 'password',
               autoCapitalize: 'none',
@@ -280,22 +279,31 @@ function SignUp({navigation, userInfo}) {
                   ref={ref => setRef(ref, item.field)}>
                   {item.field === 'phoneNumber' && (
                     <TextInput
-                      style={[{flex: 1, paddingLeft: 16}]}
-                      placeholder={item.placeHolder}
-                      value={item.value}
-                      secureTextEntry={
-                        item.field === 'password' ? isPasswordHide : false
-                      }
-                      autoCapitalize={item.autoCapitalize}
-                      onFocus={() => onFocused(item.field)}
-                      onBlur={() => onBlur(item.field)}
-                      maxLength={item.field === 'phoneNumber' ? 12 : undefined}
-                      keyboardType={
-                        item.field === 'phoneNumber' ? 'number-pad' : undefined
-                      }
-                      onChangeText={text => setData(item.field, text)}
+                      value={countryCode}
+                      style={{
+                        width: 60,
+                        textAlign: 'center',
+                        borderRightWidth: 1,
+                        borderRightColor: offWhite,
+                      }}
                     />
                   )}
+                  <TextInput
+                    style={[{flex: 1, paddingLeft: 16}]}
+                    placeholder={item.placeHolder}
+                    value={item.value}
+                    secureTextEntry={
+                      item.field === 'password' ? isPasswordHide : false
+                    }
+                    autoCapitalize={item.autoCapitalize}
+                    onFocus={() => onFocused(item.field)}
+                    onBlur={() => onBlur(item.field)}
+                    maxLength={item.field === 'phoneNumber' ? 12 : undefined}
+                    keyboardType={
+                      item.field === 'phoneNumber' ? 'number-pad' : undefined
+                    }
+                    onChangeText={text => setData(item.field, text)}
+                  />
                   {item.field === 'password' && (
                     <TouchableOpacity
                       style={{marginHorizontal: 14}}
@@ -319,7 +327,7 @@ function SignUp({navigation, userInfo}) {
                   </Text>
                 </View>
                 {item.field != 'password' && item.error != true && (
-                  <Text style={[styles.regularText, {color: 'red'}]}>
+                  <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
                     {item.error}
                   </Text>
                 )}
@@ -343,7 +351,7 @@ function SignUp({navigation, userInfo}) {
               );
             })}
           </View>
-          <Text style={[styles.regularText, {color: 'red'}]}>
+          <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
             {passwordError}
           </Text>
           <View style={[styles.rowViewWrapperEnd, styles.marV_24]}>
@@ -375,27 +383,11 @@ function SignUp({navigation, userInfo}) {
             disable={disable}
           />
         </View>
-        <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
-          {passwordError}
-        </Text>
-        <View style={[styles.rowViewWrapperEnd, styles.marV_24]}>
-          <TouchableOpacity
-            style={checkArrowStyle}
-            activeOpacity={1}
-            onPress={() => changeState('isChecked', isChecked)}>
-            {isChecked && <CheckArrowSVG />}
-          </TouchableOpacity>
-          <Text style={styles.text_12_B}>I agree with the</Text>
-          <TouchableOpacity>
-            <Text style={styles.colorTextRegular}>{` Terms & Conditions`}</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={[styles.rowViewWrapperEnd, styles.marB_20]}>
-          <TouchableOpacity
-            style={checkArrowStyle}
-            activeOpacity={1}
-            onPress={() => changeState('isOver18', isOver18)}>
-            {isOver18 && <CheckArrowSVG />}
+
+        <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
+          <Text style={[styles.bottomText]}>You have an account already?</Text>
+          <TouchableOpacity style={styles.marL_8} onPress={() => SignIn()}>
+            <Text style={styles.colorsText}>Sign In</Text>
           </TouchableOpacity>
         </View>
       </View>

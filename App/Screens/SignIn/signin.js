@@ -186,7 +186,9 @@ function SignIn({navigation, ...restProps}) {
               <Text style={[styles.bottomText]}>Don't have an account?</Text>
               <TouchableOpacity
                 style={styles.marL_8}
-                onPress={() => resetScreen(navigation, 'SignUp')}>
+                onPress={() =>
+                  navigation.dispatch(StackActions.replace('SignUp'))
+                }>
                 <Text style={styles.colorsText}>Sign Up</Text>
               </TouchableOpacity>
             </View>
