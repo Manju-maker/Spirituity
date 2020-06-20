@@ -20,6 +20,13 @@ import CloudBar from '../Screens/CloudBar/cloudBar';
 import Notification from '../Screens/Notification/notification';
 
 const Stack = createStackNavigator();
+
+const modalOptions = {
+  headerShown: false,
+  cardStyle: {backgroundColor: 'transparent'},
+  cardOverlayEnabled: false,
+};
+
 function AppContainer({userInfo, navigation}) {
   let {loginResponse: data} = userInfo;
   let {token} = data || {};
@@ -57,13 +64,29 @@ function AppContainer({userInfo, navigation}) {
           initialRouteName="BoardingScreen"
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="SignIn" component={SignIn} />
-          <Stack.Screen name="SignInViaEmail" component={SignInViaEmail} />
-          <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-          <Stack.Screen name="ResetPassword" component={ResetPassword} />
-          <Stack.Screen name="OTP" component={OTP} />
           <Stack.Screen name="BoardingScreen" component={BoardingScreen} />
           <Stack.Screen name="NoRegister" component={TabNavigater} />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={modalOptions}
+          />
+          <Stack.Screen
+            name="SignInViaEmail"
+            component={SignInViaEmail}
+            options={modalOptions}
+          />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={modalOptions}
+          />
+          <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
+            options={modalOptions}
+          />
+          <Stack.Screen name="OTP" component={OTP} options={modalOptions} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

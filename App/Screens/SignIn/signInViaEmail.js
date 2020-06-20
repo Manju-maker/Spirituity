@@ -120,134 +120,134 @@ function SignInViaEmail({navigation, ...restProps}) {
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={{flexGrow: 1}}
-      keyboardShouldPersistTaps={'always'}>
-      <Loader visible={isLoading} />
-      <View
-        style={{
-          flex: 1,
-          marginBottom: 20,
-        }}>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        keyboardShouldPersistTaps={'always'}>
+        <Loader visible={isLoading} />
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
-            marginTop: 43,
-            marginBottom: 30,
+            marginBottom: 20,
           }}>
-          <BackgroundImage top={0} />
           <View
             style={{
+              flex: 1,
               justifyContent: 'center',
-              alignItems: 'center',
+              marginTop: 43,
+              marginBottom: 30,
             }}>
-            <Text style={[styles.boldText, styles.mar_13]}>
-              Enter your Email
-            </Text>
-          </View>
-        </View>
-        <View style={{flex: 1, marginHorizontal: 20}}>
-          <View style={{flex: 1}}>
-            {[
-              {
-                header: 'Email address',
-                placeHolder: 'Enter email address',
-                value: email,
-                field: 'email',
-                autoCapitalize: 'none',
-                error: emailError,
-              },
-              {
-                header: 'Password',
-                placeHolder: '* * * * *',
-                value: password,
-                field: 'password',
-                autoCapitalize: 'none',
-                error: passwordError,
-              },
-            ].map((item, index) => {
-              return (
-                <View style={styles.textInputWrapper} key={index}>
-                  <Text style={[styles.text, styles.marB_9]}>
-                    {item.header}
-                  </Text>
-                  <View
-                    style={[
-                      styles.inputBox,
-                      {
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        paddingHorizontal: 5,
-                      },
-                    ]}
-                    ref={ref => setRef(ref, item.field)}>
-                    <TextInput
-                      style={{flex: 1}}
-                      placeholder={item.placeHolder}
-                      value={item.value}
-                      secureTextEntry={
-                        item.field === 'password' ? isPasswordHide : undefined
-                      }
-                      onFocus={() => onFocus(item.field)}
-                      onBlur={() => onBlur(item.field)}
-                      onChangeText={text => setData(item.field, text)}
-                    />
-                    {item.field === 'password' && (
-                      <TouchableOpacity
-                        style={{marginHorizontal: 14}}
-                        activeOpacity={0.8}
-                        onPress={() =>
-                          changeState('isPasswordHide', isPasswordHide)
-                        }>
-                        <Image
-                          source={getImage(
-                            isPasswordHide ? 'PasswordOff' : 'PasswordOn',
-                          )}
-                          style={{width: 20, height: 20}}
-                          resizeMode={'contain'}
-                        />
-                      </TouchableOpacity>
-                    )}
-                  </View>
-                  <Text style={[styles.regularText, {color: 'red'}]}>
-                    {item.error}
-                  </Text>
-                </View>
-              );
-            })}
-            <TouchableOpacity
-              onPress={() => navigation.navigate('ForgotPassword')}>
-              <Text
-                style={[
-                  styles.colorsText,
-                  {color: 'blue', textAlign: 'center', marginBottom: 20},
-                ]}>
-                Forgot Password
+            <BackgroundImage top={0} />
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={[styles.boldText, styles.mar_13]}>
+                Enter your Email
               </Text>
-            </TouchableOpacity>
+            </View>
           </View>
+          <View style={{flex: 1, marginHorizontal: 20}}>
+            <View style={{flex: 1}}>
+              {[
+                {
+                  header: 'Email address',
+                  placeHolder: 'Enter email address',
+                  value: email,
+                  field: 'email',
+                  autoCapitalize: 'none',
+                  error: emailError,
+                },
+                {
+                  header: 'Password',
+                  placeHolder: '* * * * *',
+                  value: password,
+                  field: 'password',
+                  autoCapitalize: 'none',
+                  error: passwordError,
+                },
+              ].map((item, index) => {
+                return (
+                  <View style={styles.textInputWrapper} key={index}>
+                    <Text style={[styles.text, styles.marB_9]}>
+                      {item.header}
+                    </Text>
+                    <View
+                      style={[
+                        styles.inputBox,
+                        {
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          paddingHorizontal: 5,
+                        },
+                      ]}
+                      ref={ref => setRef(ref, item.field)}>
+                      <TextInput
+                        style={{flex: 1}}
+                        placeholder={item.placeHolder}
+                        value={item.value}
+                        secureTextEntry={
+                          item.field === 'password' ? isPasswordHide : undefined
+                        }
+                        onFocus={() => onFocus(item.field)}
+                        onBlur={() => onBlur(item.field)}
+                        onChangeText={text => setData(item.field, text)}
+                      />
+                      {item.field === 'password' && (
+                        <TouchableOpacity
+                          style={{marginHorizontal: 14}}
+                          activeOpacity={0.8}
+                          onPress={() =>
+                            changeState('isPasswordHide', isPasswordHide)
+                          }>
+                          <Image
+                            source={getImage(
+                              isPasswordHide ? 'PasswordOff' : 'PasswordOn',
+                            )}
+                            style={{width: 20, height: 20}}
+                            resizeMode={'contain'}
+                          />
+                        </TouchableOpacity>
+                      )}
+                    </View>
+                    <Text style={[styles.regularText, {color: 'red'}]}>
+                      {item.error}
+                    </Text>
+                  </View>
+                );
+              })}
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ForgotPassword')}>
+                <Text
+                  style={[
+                    styles.colorsText,
+                    {color: 'blue', textAlign: 'center', marginBottom: 20},
+                  ]}>
+                  Forgot Password
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-          <SigningButton
-            text={'SIGN IN'}
-            click={() => signIn()}
-            style={[
-              styles.button,
-              {marginBottom: 0},
-              disable && {backgroundColor: disableColor},
-            ]}
-            disable={disable}
-          />
-           <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
-            <TouchableOpacity
-              style={styles.marL_8}
-              onPress={() => navigation.navigate('SignIn')}>
-              <Text style={styles.colorsText}>Sign In Via Mobile</Text>
-            </TouchableOpacity>
+            <SigningButton
+              text={'SIGN IN'}
+              click={() => signIn()}
+              style={[
+                styles.button,
+                {marginBottom: 0},
+                disable && {backgroundColor: disableColor},
+              ]}
+              disable={disable}
+            />
+            <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
+              <TouchableOpacity
+                style={styles.marL_8}
+                onPress={() => navigation.navigate('SignIn')}>
+                <Text style={styles.colorsText}>Sign In Via Mobile</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
   );
 }
 const mapStateToProps = state => {

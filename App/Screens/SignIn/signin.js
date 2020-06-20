@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+import {StackActions} from '@react-navigation/native';
 import {connect} from 'react-redux';
 import Store from '../../Store/index';
 import styles from '../../Themes/styles';
@@ -107,13 +108,12 @@ function SignIn({navigation, ...restProps}) {
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
       <Loader visible={isLoading} />
-      <View style={styles.container}>
-        <View style={{height, backgroundColor: colors.mudGrey}} />
+      <View style={[styles.container, {backgroundColor: 'rgba(0,0,0,.1)'}]}>
+        <View style={{height}} />
         <View
           style={{
             flex: 1,
-            marginTop: 10,
-            marginBottom: 20,
+            backgroundColor: 'white',
           }}>
           <ImageBackground
             style={{
@@ -159,7 +159,10 @@ function SignIn({navigation, ...restProps}) {
                 <Text style={[styles.regularText, {color: 'red'}]}>
                   {phoneNumberError}
                 </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('SignInViaEmail')}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.dispatch(StackActions.replace('SignInViaEmail'))
+                  }>
                   <Text
                     style={[
                       styles.colorsText,
@@ -186,7 +189,9 @@ function SignIn({navigation, ...restProps}) {
               <Text style={[styles.bottomText]}>Don't have an account?</Text>
               <TouchableOpacity
                 style={styles.marL_8}
-                onPress={() => navigation.navigate('SignUp')}>
+                onPress={() =>
+                  navigation.dispatch(StackActions.replace('SignUp'))
+                }>
                 <Text style={styles.colorsText}>Sign Up</Text>
               </TouchableOpacity>
             </View>
