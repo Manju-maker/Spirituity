@@ -7,17 +7,18 @@ import {
   ScrollView,
   TouchableOpacity,
   AsyncStorage,
-  Image
+  Image,
 } from 'react-native';
 
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
-import {HidePasswordSVG} from '../../Components/allSVG';
+import BackgroundImage from '../../Components/backgroundImage';
 import {validPassword, calculatePasswordScore} from '../../utils/validation';
 import {login} from '../../Store/actions/userAction';
 import {SHOW_LOADING} from '../../utils/constant';
 import {showSnackBar} from '../../Components/snackbar';
+import {BackArrowBlack} from '../../Components/allSVG';
 import Store from '../../Store';
 import CallApi from '../../utils/callApi';
 import getImage from '../../utils/getImage';
@@ -131,20 +132,31 @@ function ResetPassword({navigation, ...restProps}) {
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('BoardingScreen')}
+        style={{
+          position: 'absolute',
+          top: 20,
+          left: 20,
+          width: 20,
+          height: 20,
+        }}>
+        <BackArrowBlack />
+      </TouchableOpacity>
       <View
         style={{
           flex: 1,
           marginTop: 10,
           marginBottom: 20,
         }}>
-        <ImageBackground
+        <View
           style={{
             flex: 1,
-            height: 150,
             justifyContent: 'center',
-          }}
-          resizeMode={'contain'}
-          source={require('../../Assets/images/BG.png')}>
+            marginTop: 43,
+            marginBottom: 20,
+          }}>
+          <BackgroundImage top={0} />
           <View
             style={{
               justifyContent: 'center',
@@ -152,11 +164,12 @@ function ResetPassword({navigation, ...restProps}) {
             }}>
             <Text style={[styles.boldText, styles.mar_13]}>Reset Password</Text>
           </View>
-        </ImageBackground>
+        </View>
+
         <View style={{flex: 2, marginHorizontal: 20}}>
           <View style={{flex: 1}}>
             <View style={styles.textInputWrapper}>
-              <Text style={[styles.text, styles.marB_9]}>New Psssword</Text>
+              <Text style={[styles.text, styles.marB_9]}>New Passsword</Text>
               <View
                 style={[
                   styles.inputBox,
@@ -182,7 +195,6 @@ function ResetPassword({navigation, ...restProps}) {
                   onPress={() =>
                     changeState('isNewPasswordHide', isNewPasswordHide)
                   }>
-                  {/* <HidePasswordSVG /> */}
                   <Image
                     source={getImage(
                       isNewPasswordHide ? 'PasswordOff' : 'PasswordOn',
@@ -216,7 +228,7 @@ function ResetPassword({navigation, ...restProps}) {
                   );
                 })}
               </View>
-              <Text style={[styles.regularText, {color: 'red'}]}>
+              <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
                 {newPasswordError}
               </Text>
             </View>
@@ -247,7 +259,6 @@ function ResetPassword({navigation, ...restProps}) {
                   onPress={() =>
                     changeState('isConfirmPasswordHide', isConfirmPasswordHide)
                   }>
-                  {/* <HidePasswordSVG /> */}
                   <Image
                     source={getImage(
                       isConfirmPasswordHide ? 'PasswordOff' : 'PasswordOn',
@@ -257,7 +268,7 @@ function ResetPassword({navigation, ...restProps}) {
                   />
                 </TouchableOpacity>
               </View>
-              <Text style={[styles.regularText, {color: 'red'}]}>
+              <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
                 {confirmPasswordError}
               </Text>
             </View>

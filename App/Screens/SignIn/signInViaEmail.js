@@ -210,22 +210,12 @@ function SignInViaEmail({navigation, ...restProps}) {
                       </TouchableOpacity>
                     )}
                   </View>
-                  <Text style={[styles.regularText, {color: 'red'}]}>
+                  <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
                     {item.error}
                   </Text>
                 </View>
               );
             })}
-            <TouchableOpacity
-              onPress={() => navigation.navigate('ForgotPassword')}>
-              <Text
-                style={[
-                  styles.colorsText,
-                  {color: 'blue', textAlign: 'center', marginBottom: 20},
-                ]}>
-                Forgot Password
-              </Text>
-            </TouchableOpacity>
           </View>
 
           <SigningButton
@@ -238,13 +228,16 @@ function SignInViaEmail({navigation, ...restProps}) {
             ]}
             disable={disable}
           />
-           <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
-            <TouchableOpacity
-              style={styles.marL_8}
-              onPress={() => navigation.navigate('SignIn')}>
-              <Text style={styles.colorsText}>Sign In Via Mobile</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ForgotPassword')}>
+            <Text
+              style={[
+                styles.colorsText,
+                {color: purple, textAlign: 'center', marginTop: 20},
+              ]}>
+              Forgot Password
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>

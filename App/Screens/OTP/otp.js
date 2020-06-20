@@ -1,6 +1,15 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {View, Text, TextInput, AsyncStorage, ScrollView} from 'react-native';
-import SmsRetriever from 'react-native-sms-retriever';
+import {
+  View,
+  Text,
+  TextInput,
+  AsyncStorage,
+  ScrollView,
+  Keyboard,
+  TouchableOpacity,
+} from 'react-native';
+
+import RNOtpVerify from 'react-native-otp-verify';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import Timer from './timer';
@@ -9,6 +18,7 @@ import {showSnackBar} from '../../Components/snackbar';
 import CallApi from '../../utils/callApi';
 import {connect} from 'react-redux';
 import Store from '../../Store/index';
+import {BackArrowBlack} from '../../Components/allSVG';
 import {SHOW_LOADING} from '../../utils/constant';
 import {
   OtpVerifyAndSignup,
@@ -50,6 +60,47 @@ function OTP({navigation, ...restProps}) {
 
   let {isLoading = false} = userInfo;
 
+  useEffect(() => {
+    RNOtpVerify.getOtp()
+      .then(p => {
+        console.log('PTPPPPPPPPPPPPPPPPPPPPP', p);
+        RNOtpVerify.addListener(otpHandler);
+      })
+      .catch(err => console.log('err of otp verigy>>>>>>>>>', err));
+
+    return () => {
+      RNOtpVerify.removeListener();
+    };
+  }, []);
+
+  let handleOTP = otp => {
+    return new Promise((resolve, reject) => {
+      let a = otp;
+      let c = a.toString();
+      console.log('C>>>>>>>>>>>', c);
+      let b = [];
+      let j = 0;
+      for (let i of c) {
+        console.log('indexinggg', c.indexOf(i), '===========', i);
+        b[j] = i;
+        j++;
+      }
+      resolve(b);
+    });
+  };
+
+  let otpHandler = async message => {
+    const otp = /(\d{4})/g.exec(message)[1];
+    console.log('otpppppp', otp);
+
+    let finalOTP = await handleOTP(otp);
+    console.log('final otpppp', finalOTP);
+
+    setOtpArray(finalOTP);
+
+    Keyboard.dismiss();
+  };
+
   let callService = (method, route, data, reset = false) => {
     let headers = {
       'content-type': 'application/json',
@@ -75,11 +126,16 @@ function OTP({navigation, ...restProps}) {
         }
       })
       .catch(error => {
+        console.log('err>>>>>>>>>>>>>', error.response.status);
         let {status} = error.response || {};
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 400) {
           showSnackBar({
             message: 'Invalid OTP',
+          });
+        } else if (status === 409) {
+          showSnackBar({
+            message: 'Email already  registered',
           });
         } else if (error.message === 'Network Error') {
           showSnackBar({
@@ -93,6 +149,7 @@ function OTP({navigation, ...restProps}) {
 
   let onSubmit = () => {
     let otp = otpArray[0] + otpArray[1] + otpArray[2] + otpArray[3];
+    console.log('otpppp*******************', otp);
     if (stopTime === false) {
       if (type === 'signup') {
         let data = {
@@ -136,7 +193,9 @@ function OTP({navigation, ...restProps}) {
     return final;
   };
   useEffect(() => {
+    console.log('otppppp???????????????', otpArray);
     let valid = validateOtp(otpArray);
+    console.log('valid', valid);
     if (valid) {
       onSubmit();
     }
@@ -178,6 +237,17 @@ function OTP({navigation, ...restProps}) {
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('BoardingScreen')}
+        style={{
+          position: 'absolute',
+          top: 20,
+          left: 20,
+          width: 20,
+          height: 20,
+        }}>
+        <BackArrowBlack />
+      </TouchableOpacity>
       <View style={[styles.container]}>
         <Loader visible={isLoading} />
         <View

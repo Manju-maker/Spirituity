@@ -9,12 +9,7 @@ import {
 } from 'react-native';
 import {SHOW_LOADING} from '../../utils/constant';
 import {connect} from 'react-redux';
-import {
-  CircleSVG,
-  HidePasswordSVG,
-  CheckArrowSVG,
-  WavesSVG,
-} from '../../Components/allSVG';
+import {CheckArrowSVG, BackArrowBlack} from '../../Components/allSVG';
 import {
   checkField,
   validPassword,
@@ -23,11 +18,7 @@ import {
 } from '../../utils/validation';
 import CallApi from '../../utils/callApi';
 import {showSnackBar} from '../../Components/snackbar';
-import {
-  GoogleFacebookLogin,
-  SigningButton,
-  InputField,
-} from '../../ReusableComponents/commonComponent';
+import {SigningButton} from '../../ReusableComponents/commonComponent';
 import Store from '../../Store/index';
 import {getOtp, resetOtpResponse} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
@@ -36,6 +27,7 @@ import Loader from '../../Components/loader';
 import {GoogleSignUp, FacebookSignUp} from '../../Components/socialSignin';
 import BackgroundImage from '../../Components/backgroundImage';
 import getImage from '../../utils/getImage';
+import {resetScreen} from '../../Components/resetStack';
 
 let {purple, offWhite, disableColor} = colors;
 
@@ -129,27 +121,8 @@ function SignUp({navigation, userInfo}) {
       });
   };
 
-  let facebookLogin = () => {
-    FacebookSignUp()
-      .then(res => {
-        console.log('res', res);
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
-  };
-  let googleLogin = () => {
-    GoogleSignUp()
-      .then(res => {
-        console.log('response', res);
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
-  };
-
   let SignIn = () => {
-    navigation.navigate('SignIn');
+    resetScreen(navigation, 'SignIn');
   };
   let checkValidation = () => {
     if (
@@ -223,6 +196,17 @@ function SignUp({navigation, userInfo}) {
       keyboardShouldPersistTaps={'always'}
       showsVerticalScrollIndicator={false}>
       <Loader visible={isLoading} />
+      <TouchableOpacity
+        onPress={() => resetScreen(navigation, 'SignIn')}
+        style={{
+          position: 'absolute',
+          top: 20,
+          left: 20,
+          width: 20,
+          height: 20,
+        }}>
+        <BackArrowBlack />
+      </TouchableOpacity>
       <BackgroundImage />
       <View style={styles.signinChildContainer}>
         <View style={styles.titleContainer}>
@@ -341,7 +325,7 @@ function SignUp({navigation, userInfo}) {
                   </Text>
                 </View>
                 {item.field != 'password' && item.error != true && (
-                  <Text style={[styles.regularText, {color: 'red'}]}>
+                  <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
                     {item.error}
                   </Text>
                 )}
@@ -365,7 +349,7 @@ function SignUp({navigation, userInfo}) {
               );
             })}
           </View>
-          <Text style={[styles.regularText, {color: 'red'}]}>
+          <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
             {passwordError}
           </Text>
           <View style={[styles.rowViewWrapperEnd, styles.marV_24]}>

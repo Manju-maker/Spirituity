@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
+  Modal,
 } from 'react-native';
 import {connect} from 'react-redux';
 import Store from '../../Store/index';
@@ -22,6 +23,8 @@ import {getOtp} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
 import BackgroundImage from '../../Components/backgroundImage';
 import {spacing} from '../../Themes/fonts';
+import getImage from '../../utils/getImage';
+import {resetScreen} from '../../Components/resetStack';
 const height = spacing(Dimensions.get('window').height / 3);
 let {purple, offWhite, disableColor} = colors;
 
@@ -103,97 +106,109 @@ function SignIn({navigation, ...restProps}) {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
   return (
-    <ScrollView
-      contentContainerStyle={{flexGrow: 1}}
-      keyboardShouldPersistTaps={'always'}>
-      <Loader visible={isLoading} />
-      <View style={styles.container}>
-        <View style={{height, backgroundColor: colors.mudGrey}} />
-        <View
-          style={{
-            flex: 1,
-            marginTop: 10,
-            marginBottom: 20,
-          }}>
-          <ImageBackground
-            style={{
-              flex: 1,
-              height: spacing(150),
-              justifyContent: 'center',
-            }}
-            resizeMode={'contain'}
-            source={require('../../Assets/images/BG.png')}>
+    <Modal transparent={true} visible={true} animationType={'slide'}>
+      <View
+        style={{
+          flex: 1,
+          borderWidth: 2,
+          borderColor: 'red',
+          backgroundColor: 'rgba(0,0,0,0.5)',
+        }}>
+        {/* <ScrollView
+          contentContainerStyle={{flexGrow: 1}}
+          keyboardShouldPersistTaps={'always'}>
+          <Loader visible={isLoading} />
+          <View style={{height}} />
+          <View style={styles.container}>
             <View
               style={{
-                justifyContent: 'center',
-                alignItems: 'center',
+                flex: 1,
+                marginTop: 10,
+                marginBottom: 20,
               }}>
-              <Text style={[styles.boldText, styles.mar_13]}>Enter your </Text>
-              <Text style={[styles.boldText, styles.mar_13]}>phone number</Text>
-            </View>
-          </ImageBackground>
-          <View style={{flex: 2, marginHorizontal: 20}}>
-            <View style={{flex: 1}}>
-              <View style={styles.textInputWrapper}>
-                <View
-                  style={[
-                    styles.inputBox,
-                    {flexDirection: 'row', paddingLeft: 0},
-                  ]}
-                  ref={ref => setRef(ref, 'phoneNumber')}>
-                  <TextInput
-                    value={countryCode}
-                    style={{width: 40, textAlign: 'right'}}
-                  />
-                  <TextInput
-                    style={[{flex: 1}]}
-                    placeholder="Enter phone number"
-                    keyboardType={'number-pad'}
-                    value={phoneNumber}
-                    onFocus={() => onFocus('phoneNumber')}
-                    onBlur={() => onBlur('phoneNumber')}
-                    maxLength={12}
-                    onChangeText={text => setData('phoneNumber', text)}
-                  />
-                </View>
-                <Text style={[styles.regularText, {color: 'red'}]}>
-                  {phoneNumberError}
+              <BackgroundImage />
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: spacing(43),
+                  marginBottom: spacing(36),
+                }}>
+                <Text style={[styles.boldText, styles.mar_13]}>
+                  Enter your{' '}
                 </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('SignInViaEmail')}>
+                <Text style={[styles.boldText, styles.mar_13]}>
+                  phone number
+                </Text>
+              </View>
+
+              <View style={{flex: 2, marginHorizontal: 20}}>
+                <View style={{flex: 1}}>
+                  <View style={styles.textInputWrapper}>
+                    <View
+                      style={[
+                        styles.inputBox,
+                        {flexDirection: 'row', paddingLeft: 0},
+                      ]}
+                      ref={ref => setRef(ref, 'phoneNumber')}>
+                      <TextInput
+                        value={countryCode}
+                        style={{width: 40, textAlign: 'right'}}
+                      />
+                      <TextInput
+                        style={[{flex: 1}]}
+                        placeholder="Enter phone number"
+                        keyboardType={'number-pad'}
+                        value={phoneNumber}
+                        onFocus={() => onFocus('phoneNumber')}
+                        onBlur={() => onBlur('phoneNumber')}
+                        maxLength={12}
+                        onChangeText={text => setData('phoneNumber', text)}
+                      />
+                    </View>
+                    <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
+                      {phoneNumberError}
+                    </Text>
+                  </View>
+                </View>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('SignInViaEmail')}>
                   <Text
                     style={[
                       styles.colorsText,
-                      {color: 'blue', textAlign: 'center', marginTop: 20},
+                      {color: purple, textAlign: 'center', marginBottom: 20},
                     ]}>
                     Sign In via Email
                   </Text>
                 </TouchableOpacity>
+
+                <SigningButton
+                  text={'SIGN IN'}
+                  click={() => signIn()}
+                  style={[
+                    styles.button,
+                    {marginBottom: 20},
+                    disable && {backgroundColor: disableColor},
+                  ]}
+                  disable={disable}
+                />
+
+                <View style={[styles.rowViewWrapperCenter]}>
+                  <Text style={[styles.bottomText]}>
+                    Don't have an account?
+                  </Text>
+                  <TouchableOpacity
+                    style={styles.marL_8}
+                    onPress={() => resetScreen(navigation, 'SignUp')}>
+                    <Text style={styles.colorsText}>Sign Up</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-
-            <SigningButton
-              text={'SIGN IN'}
-              click={() => signIn()}
-              style={[
-                styles.button,
-                {marginBottom: 20},
-                disable && {backgroundColor: disableColor},
-              ]}
-              disable={disable}
-            />
-
-            <View style={[styles.rowViewWrapperCenter]}>
-              <Text style={[styles.bottomText]}>Don't have an account?</Text>
-              <TouchableOpacity
-                style={styles.marL_8}
-                onPress={() => navigation.navigate('SignUp')}>
-                <Text style={styles.colorsText}>Sign Up</Text>
-              </TouchableOpacity>
-            </View>
           </View>
-        </View>
+        </ScrollView> */}
       </View>
-    </ScrollView>
+    </Modal>
   );
 }
 const mapStateToProps = state => {
