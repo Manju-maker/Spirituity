@@ -13,6 +13,7 @@ import ResetPassword from '../Screens/ResetPassword/resetPassword';
 import AsyncStorage from '@react-native-community/async-storage';
 import TabNavigater from './tabNavigator';
 import Events from 'react-native-simple-events';
+import RNOtpVerify from 'react-native-otp-verify';
 
 import {login} from '../Store/actions/userAction';
 import Search from '../Screens/Search/search';
@@ -31,6 +32,14 @@ function AppContainer({userInfo, navigation}) {
   let {loginResponse: data} = userInfo;
   let {token} = data || {};
   useEffect(() => {
+    RNOtpVerify.getHash()
+      .then(res => {
+        console.log('hashcode is>>>>>>>>>>>>', res);
+      })
+      .catch(err => {
+        console.log('err>>>>', err);
+      });
+
     AsyncStorage.multiGet(['userInfo', 'showAgeModal']).then(res => {
       console.log('resposneeeee', res);
       if (res[1][1] == null) {

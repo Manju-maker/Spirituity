@@ -20,6 +20,7 @@ import {SHOW_LOADING} from '../../utils/constant';
 import CallApi from '../../utils/callApi';
 import {formatText} from '../../utils/validation';
 import BackgroundImage from '../../Components/backgroundImage';
+import {BackArrowBlack} from '../../Components/allSVG';
 
 function ForgotPassword({navigation, ...restProps}) {
   let {purple, offWhite, disableColor} = colors;
@@ -132,6 +133,17 @@ function ForgotPassword({navigation, ...restProps}) {
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('BoardingScreen')}
+        style={{
+          position: 'absolute',
+          top: 20,
+          left: 20,
+          width: 20,
+          height: 20,
+        }}>
+        <BackArrowBlack />
+      </TouchableOpacity>
       <View
         style={{
           flex: 1,
@@ -221,7 +233,7 @@ function ForgotPassword({navigation, ...restProps}) {
                   />
                   <Text>{phoneNumberError === true && <CheckArrowSVG />}</Text>
                 </View>
-                <Text style={[styles.regularText, {color: 'red'}]}>
+                <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
                   {phoneNumberError}
                 </Text>
               </View>
@@ -260,13 +272,11 @@ function ForgotPassword({navigation, ...restProps}) {
             disable={disable}
           />
           <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
-            <Text style={[styles.bottomText]}>
-              You have an account already?
-            </Text>
+            <Text style={[styles.bottomText]}>Don't have an account?</Text>
             <TouchableOpacity
               style={styles.marL_8}
-              onPress={() => navigation.navigate('SignIn')}>
-              <Text style={styles.colorsText}>Sign In</Text>
+              onPress={() => navigation.navigate('SignUp')}>
+              <Text style={styles.colorsText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
         </View>

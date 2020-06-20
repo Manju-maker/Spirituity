@@ -85,7 +85,15 @@ function SigningButton({
   );
 }
 
-function OnBoardingScreen({image, text, navigation}) {
+function OnBoardingScreen({
+  image,
+  text,
+  navigation,
+  leftImageStyle,
+  rightImageStyle,
+  leftImage,
+  rightImage,
+}) {
   return (
     <ImageBackground style={{flex: 1}} source={getImage(image)}>
       <View style={{alignItems: 'center', marginTop: spacing(50)}}>
@@ -106,28 +114,13 @@ function OnBoardingScreen({image, text, navigation}) {
         }}>
         <Image
           source={getImage('wineGlass')}
-          style={{flex: 1, position: 'absolute', bottom: spacing(-67)}}
+          style={{flex: 1, position: 'absolute', bottom: spacing(-80)}}
         />
-        <Image
-          source={getImage('MultiColor3')}
-          style={{
-            width: 84,
-            height: 84,
-            position: 'absolute',
-            left: 0,
-            top: spacing(280),
-          }}
-        />
-        <Image
-          source={getImage('MultiColor')}
-          style={{
-            width: 49,
-            height: 80,
-            position: 'absolute',
-            top: spacing(160),
-            right: 30,
-          }}
-        />
+
+        <Image source={getImage(leftImage)} style={{...leftImageStyle}} />
+
+        <Image source={getImage(rightImage)} style={{...rightImageStyle}} />
+
         <TouchableOpacity
           style={styles.barzButton}
           onPress={() => navigation.navigate('SignUp')}>

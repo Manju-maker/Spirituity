@@ -11,12 +11,7 @@ import {
 import {StackActions} from '@react-navigation/native';
 import {SHOW_LOADING} from '../../utils/constant';
 import {connect} from 'react-redux';
-import {
-  CircleSVG,
-  HidePasswordSVG,
-  CheckArrowSVG,
-  WavesSVG,
-} from '../../Components/allSVG';
+import {CheckArrowSVG, BackArrowBlack} from '../../Components/allSVG';
 import {
   checkField,
   validPassword,
@@ -25,11 +20,7 @@ import {
 } from '../../utils/validation';
 import CallApi from '../../utils/callApi';
 import {showSnackBar} from '../../Components/snackbar';
-import {
-  GoogleFacebookLogin,
-  SigningButton,
-  InputField,
-} from '../../ReusableComponents/commonComponent';
+import {SigningButton} from '../../ReusableComponents/commonComponent';
 import Store from '../../Store/index';
 import {getOtp, resetOtpResponse} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
@@ -38,6 +29,7 @@ import Loader from '../../Components/loader';
 import {GoogleSignUp, FacebookSignUp} from '../../Components/socialSignin';
 import BackgroundImage from '../../Components/backgroundImage';
 import getImage from '../../utils/getImage';
+import {resetScreen} from '../../Components/resetStack';
 
 let {purple, offWhite, disableColor} = colors;
 
@@ -131,25 +123,6 @@ function SignUp({navigation, userInfo}) {
       });
   };
 
-  let facebookLogin = () => {
-    FacebookSignUp()
-      .then(res => {
-        console.log('res', res);
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
-  };
-  let googleLogin = () => {
-    GoogleSignUp()
-      .then(res => {
-        console.log('response', res);
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
-  };
-
   let SignIn = () => {
     // navigation.navigate('SignIn');
     navigation.dispatch(StackActions.replace('SignIn'));
@@ -221,95 +194,91 @@ function SignUp({navigation, userInfo}) {
     marginRight: 9,
   };
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
-      style={{flex: 1}}>
-      <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
-        keyboardShouldPersistTaps={'always'}
-        showsVerticalScrollIndicator={false}>
-        <Loader visible={isLoading} />
-        <BackgroundImage />
-        <View style={styles.signinChildContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={[styles.boldText, styles.marB_13]}>
-              Let's Get Started
-            </Text>
-            <Text style={styles.regularText}>Sign up to start building</Text>
-            <Text style={styles.regularText}> your CloudBar</Text>
-          </View>
-          <View style={{flex: 1, marginBottom: 19}}>
-            {[
-              {
-                header: 'Phone number',
-                code: countryCode,
-                field: 'phoneNumber',
-                placeHolder: 'Enter phone number',
-                value: phoneNumber,
-                keyboardType: 'number-pad',
-                autoCapitalize: 'none',
-                error: phoneNumberError,
-              },
-              {
-                header: 'First Name',
-                placeHolder: 'Enter FirstName',
-                value: firstName,
-                field: 'firstName',
-                autoCapitalize: 'none',
-                error: firstNameError,
-              },
-              {
-                header: 'Last Name',
-                placeHolder: 'Enter LastName',
-                value: lastName,
-                field: 'lastName',
-                autoCapitalize: 'none',
-                error: lastNameError,
-              },
-              {
-                header: 'Email address',
-                placeHolder: 'Enter email address',
-                value: email,
-                field: 'email',
-                autoCapitalize: 'none',
-                error: emailError,
-              },
-              {
-                header: 'Password',
-                placeHolder: '* * * * *',
-                value: password,
-                field: 'password',
-                autoCapitalize: 'none',
-                error: passwordError,
-              },
-            ].map((item, index) => {
-              return (
-                <View style={[styles.textInputWrapper]} key={index}>
-                  <Text style={[styles.text, styles.marB_9]}>
-                    {item.header}
-                  </Text>
-                  <View
-                    style={[
-                      styles.inputBox,
-                      {
-                        flexDirection: 'row',
-                        paddingLeft: 0,
-                        alignItems: 'center',
-                        paddingHorizontal: 5,
-                      },
-                    ]}
-                    ref={ref => setRef(ref, item.field)}>
-                    {item.field === 'phoneNumber' && (
-                      <TextInput
-                        value={countryCode}
-                        style={{
-                          width: 60,
-                          textAlign: 'center',
-                          borderRightWidth: 1,
-                          borderRightColor: offWhite,
-                        }}
-                      />
-                    )}
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1}}
+      keyboardShouldPersistTaps={'always'}
+      showsVerticalScrollIndicator={false}>
+      <Loader visible={isLoading} />
+      <TouchableOpacity
+        onPress={() => resetScreen(navigation, 'SignIn')}
+        style={{
+          position: 'absolute',
+          top: 20,
+          left: 20,
+          width: 20,
+          height: 20,
+        }}>
+        <BackArrowBlack />
+      </TouchableOpacity>
+      <BackgroundImage />
+      <View style={styles.signinChildContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={[styles.boldText, styles.marB_13]}>
+            Let's Get Started
+          </Text>
+          <Text style={styles.regularText}>Sign up to start building</Text>
+          <Text style={styles.regularText}> your CloudBar</Text>
+        </View>
+        <View style={{flex: 1, marginBottom: 19}}>
+          {[
+            {
+              header: 'Phone number',
+              code: countryCode,
+              field: 'phoneNumber',
+              placeHolder: 'Enter phone number',
+              value: phoneNumber,
+              keyboardType: 'number-pad',
+              autoCapitalize: 'none',
+              error: phoneNumberError,
+            },
+            {
+              header: 'First Name',
+              placeHolder: 'Enter FirstName',
+              value: firstName,
+              field: 'firstName',
+              autoCapitalize: 'none',
+              error: firstNameError,
+            },
+            {
+              header: 'Last Name',
+              placeHolder: 'Enter LastName',
+              value: lastName,
+              field: 'lastName',
+              autoCapitalize: 'none',
+              error: lastNameError,
+            },
+            {
+              header: 'Email address',
+              placeHolder: 'Enter email address',
+              value: email,
+              field: 'email',
+              autoCapitalize: 'none',
+              error: emailError,
+            },
+            {
+              header: 'Password',
+              placeHolder: '* * * * *',
+              value: password,
+              field: 'password',
+              autoCapitalize: 'none',
+              error: passwordError,
+            },
+          ].map((item, index) => {
+            return (
+              <View style={[styles.textInputWrapper]} key={index}>
+                <Text style={[styles.text, styles.marB_9]}>{item.header}</Text>
+                <View
+                  style={[
+                    styles.inputBox,
+                    {
+                      flexDirection: 'row',
+                      paddingLeft: 0,
+                      alignItems: 'center',
+                      paddingHorizontal: 5,
+                    },
+                  ]}
+                  ref={ref => setRef(ref, item.field)}>
+                  {item.field === 'phoneNumber' && (
                     <TextInput
                       style={[{flex: 1, paddingLeft: 16}]}
                       placeholder={item.placeHolder}
@@ -326,100 +295,111 @@ function SignUp({navigation, userInfo}) {
                       }
                       onChangeText={text => setData(item.field, text)}
                     />
-                    {item.field === 'password' && (
-                      <TouchableOpacity
-                        style={{marginHorizontal: 14}}
-                        activeOpacity={0.8}
-                        onPress={() =>
-                          changeState('isPasswordHide', isPasswordHide)
-                        }>
-                        <Image
-                          source={getImage(
-                            isPasswordHide ? 'PasswordOff' : 'PasswordOn',
-                          )}
-                          style={{width: 20, height: 20}}
-                          resizeMode={'contain'}
-                        />
-                      </TouchableOpacity>
-                    )}
-                    <Text>
-                      {item.error === true && item.field != 'password' && (
-                        <CheckArrowSVG />
-                      )}
-                    </Text>
-                  </View>
-                  {item.field != 'password' && item.error != true && (
-                    <Text style={[styles.regularText, {color: 'red'}]}>
-                      {item.error}
-                    </Text>
                   )}
+                  {item.field === 'password' && (
+                    <TouchableOpacity
+                      style={{marginHorizontal: 14}}
+                      activeOpacity={0.8}
+                      onPress={() =>
+                        changeState('isPasswordHide', isPasswordHide)
+                      }>
+                      <Image
+                        source={getImage(
+                          isPasswordHide ? 'PasswordOff' : 'PasswordOn',
+                        )}
+                        style={{width: 20, height: 20}}
+                        resizeMode={'contain'}
+                      />
+                    </TouchableOpacity>
+                  )}
+                  <Text>
+                    {item.error === true && item.field != 'password' && (
+                      <CheckArrowSVG />
+                    )}
+                  </Text>
                 </View>
+                {item.field != 'password' && item.error != true && (
+                  <Text style={[styles.regularText, {color: 'red'}]}>
+                    {item.error}
+                  </Text>
+                )}
+              </View>
+            );
+          })}
+
+          <View style={[styles.rowViewWrapperCenter]}>
+            {progress.map((item, index) => {
+              return (
+                <View
+                  key={index}
+                  style={{
+                    flex: 1,
+                    height: 2,
+                    borderRadius: 2,
+                    marginRight: 2,
+                    backgroundColor: item == -1 ? offWhite : 'green',
+                  }}
+                />
               );
             })}
-
-            <View style={[styles.rowViewWrapperCenter]}>
-              {progress.map((item, index) => {
-                return (
-                  <View
-                    key={index}
-                    style={{
-                      flex: 1,
-                      height: 2,
-                      borderRadius: 2,
-                      marginRight: 2,
-                      backgroundColor: item == -1 ? offWhite : 'green',
-                    }}
-                  />
-                );
-              })}
-            </View>
-            <Text style={[styles.regularText, {color: 'red'}]}>
-              {passwordError}
-            </Text>
-            <View style={[styles.rowViewWrapperEnd, styles.marV_24]}>
-              <TouchableOpacity
-                style={checkArrowStyle}
-                activeOpacity={1}
-                onPress={() => changeState('isChecked', isChecked)}>
-                {isChecked && <CheckArrowSVG />}
-              </TouchableOpacity>
-              <Text style={styles.text_12_B}>I agree with the</Text>
-              <TouchableOpacity>
-                <Text
-                  style={styles.colorTextRegular}>{` Terms & Conditions`}</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.rowViewWrapperEnd, styles.marB_20]}>
-              <TouchableOpacity
-                style={checkArrowStyle}
-                activeOpacity={1}
-                onPress={() => changeState('isOver18', isOver18)}>
-                {isOver18 && <CheckArrowSVG />}
-              </TouchableOpacity>
-              <Text style={styles.text_12_B}>I am 18 years or older</Text>
-            </View>
-            <SigningButton
-              text={'SIGN UP'}
-              click={() => signUp()}
-              style={[
-                styles.button,
-                disable && {backgroundColor: disableColor},
-              ]}
-              disable={disable}
-            />
           </View>
-
-          <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
-            <Text style={[styles.bottomText]}>
-              You have an account already?
-            </Text>
-            <TouchableOpacity style={styles.marL_8} onPress={() => SignIn()}>
-              <Text style={styles.colorsText}>Sign In</Text>
+          <Text style={[styles.regularText, {color: 'red'}]}>
+            {passwordError}
+          </Text>
+          <View style={[styles.rowViewWrapperEnd, styles.marV_24]}>
+            <TouchableOpacity
+              style={checkArrowStyle}
+              activeOpacity={1}
+              onPress={() => changeState('isChecked', isChecked)}>
+              {isChecked && <CheckArrowSVG />}
+            </TouchableOpacity>
+            <Text style={styles.text_12_B}>I agree with the</Text>
+            <TouchableOpacity>
+              <Text
+                style={styles.colorTextRegular}>{` Terms & Conditions`}</Text>
             </TouchableOpacity>
           </View>
+          <View style={[styles.rowViewWrapperEnd, styles.marB_20]}>
+            <TouchableOpacity
+              style={checkArrowStyle}
+              activeOpacity={1}
+              onPress={() => changeState('isOver18', isOver18)}>
+              {isOver18 && <CheckArrowSVG />}
+            </TouchableOpacity>
+            <Text style={styles.text_12_B}>I am 18 years or older</Text>
+          </View>
+          <SigningButton
+            text={'SIGN UP'}
+            click={() => signUp()}
+            style={[styles.button, disable && {backgroundColor: disableColor}]}
+            disable={disable}
+          />
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
+          {passwordError}
+        </Text>
+        <View style={[styles.rowViewWrapperEnd, styles.marV_24]}>
+          <TouchableOpacity
+            style={checkArrowStyle}
+            activeOpacity={1}
+            onPress={() => changeState('isChecked', isChecked)}>
+            {isChecked && <CheckArrowSVG />}
+          </TouchableOpacity>
+          <Text style={styles.text_12_B}>I agree with the</Text>
+          <TouchableOpacity>
+            <Text style={styles.colorTextRegular}>{` Terms & Conditions`}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={[styles.rowViewWrapperEnd, styles.marB_20]}>
+          <TouchableOpacity
+            style={checkArrowStyle}
+            activeOpacity={1}
+            onPress={() => changeState('isOver18', isOver18)}>
+            {isOver18 && <CheckArrowSVG />}
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 const mapStateToProps = state => {

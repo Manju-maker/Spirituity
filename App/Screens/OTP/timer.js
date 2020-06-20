@@ -68,7 +68,7 @@ function Timer({
     setTimeLeft(0);
   };
   let extendsTime = () => {
-    setMessage('You have exceed the limit.. Please wait for ');
+    setMessage('You have exceed the limit, please wait for ');
     isExpired(true);
     setDisable(true);
     setMinutes(15);

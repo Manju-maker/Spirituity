@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
+  Modal,
 } from 'react-native';
 import {StackActions} from '@react-navigation/native';
 import {connect} from 'react-redux';
@@ -23,6 +24,8 @@ import {getOtp} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
 import BackgroundImage from '../../Components/backgroundImage';
 import {spacing} from '../../Themes/fonts';
+import getImage from '../../utils/getImage';
+import {resetScreen} from '../../Components/resetStack';
 const height = spacing(Dimensions.get('window').height / 3);
 let {purple, offWhite, disableColor} = colors;
 
@@ -108,30 +111,26 @@ function SignIn({navigation, ...restProps}) {
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
       <Loader visible={isLoading} />
-      <View style={[styles.container, {backgroundColor: 'rgba(0,0,0,.1)'}]}>
-        <View style={{height}} />
+      <View style={{height}} />
+      <View style={styles.container}>
         <View
           style={{
             flex: 1,
-            backgroundColor: 'white',
+            marginTop: 10,
+            marginBottom: 20,
           }}>
-          <ImageBackground
+          <BackgroundImage />
+          <View
             style={{
-              flex: 1,
-              height: spacing(150),
               justifyContent: 'center',
-            }}
-            resizeMode={'contain'}
-            source={require('../../Assets/images/BG.png')}>
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={[styles.boldText, styles.mar_13]}>Enter your </Text>
-              <Text style={[styles.boldText, styles.mar_13]}>phone number</Text>
-            </View>
-          </ImageBackground>
+              alignItems: 'center',
+              marginTop: spacing(43),
+              marginBottom: spacing(36),
+            }}>
+            <Text style={[styles.boldText, styles.mar_13]}>Enter your </Text>
+            <Text style={[styles.boldText, styles.mar_13]}>phone number</Text>
+          </View>
+
           <View style={{flex: 2, marginHorizontal: 20}}>
             <View style={{flex: 1}}>
               <View style={styles.textInputWrapper}>
@@ -156,23 +155,21 @@ function SignIn({navigation, ...restProps}) {
                     onChangeText={text => setData('phoneNumber', text)}
                   />
                 </View>
-                <Text style={[styles.regularText, {color: 'red'}]}>
+                <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
                   {phoneNumberError}
                 </Text>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.dispatch(StackActions.replace('SignInViaEmail'))
-                  }>
-                  <Text
-                    style={[
-                      styles.colorsText,
-                      {color: 'blue', textAlign: 'center', marginTop: 20},
-                    ]}>
-                    Sign In via Email
-                  </Text>
-                </TouchableOpacity>
               </View>
             </View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('SignInViaEmail')}>
+              <Text
+                style={[
+                  styles.colorsText,
+                  {color: purple, textAlign: 'center', marginBottom: 20},
+                ]}>
+                Sign In via Email
+              </Text>
+            </TouchableOpacity>
 
             <SigningButton
               text={'SIGN IN'}
@@ -189,9 +186,7 @@ function SignIn({navigation, ...restProps}) {
               <Text style={[styles.bottomText]}>Don't have an account?</Text>
               <TouchableOpacity
                 style={styles.marL_8}
-                onPress={() =>
-                  navigation.dispatch(StackActions.replace('SignUp'))
-                }>
+                onPress={() => resetScreen(navigation, 'SignUp')}>
                 <Text style={styles.colorsText}>Sign Up</Text>
               </TouchableOpacity>
             </View>
