@@ -1,9 +1,8 @@
 import React, {useState, useEffect, Component} from 'react';
 import {Modal, Text, View, TouchableOpacity} from 'react-native';
 import styles from '../Themes/styles';
-import {colors} from '../Themes/colors';
 import {scale} from '../Themes/fonts';
-import {BackArrowBlack, QuestionmarkSVG, CrossSVG, ShotSVG} from './allSVG';
+import {QuestionmarkSVG, CrossSVG, ShotSVG} from './allSVG';
 
 function ShotGlassModal({navigation, ...restprops}) {
   console.log('modallllllllllllllllllllllllllll', restprops);

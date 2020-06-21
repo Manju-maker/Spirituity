@@ -20,13 +20,10 @@ import {checkField, formatText} from '../../utils/validation';
 import {showSnackBar} from '../../Components/snackbar';
 import {SHOW_LOADING} from '../../utils/constant';
 import CallApi from '../../utils/callApi';
-import {getOtp} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
 import BackgroundImage from '../../Components/backgroundImage';
 import {spacing} from '../../Themes/fonts';
-import getImage from '../../utils/getImage';
-import {resetScreen} from '../../Components/resetStack';
-const height = spacing(Dimensions.get('window').height / 3);
+const height = spacing(Dimensions.get('window').height / 4);
 let {purple, offWhite, disableColor} = colors;
 
 function SignIn({navigation, ...restProps}) {
@@ -161,7 +158,9 @@ function SignIn({navigation, ...restProps}) {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => navigation.navigate('SignInViaEmail')}>
+              onPress={() =>
+                navigation.dispatch(StackActions.replace('SignInViaEmail'))
+              }>
               <Text
                 style={[
                   styles.colorsText,

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, {Component} from 'react';
 import {Modal, Text, View} from 'react-native';
 import Events from 'react-native-simple-events';
 import RNExitApp from 'react-native-exit-app';

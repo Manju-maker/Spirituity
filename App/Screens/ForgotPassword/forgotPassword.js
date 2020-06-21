@@ -7,8 +7,11 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {connect} from 'react-redux';
+
+import {StackActions} from '@react-navigation/native';
 import {CircleSVG, CheckArrowSVG, WavesSVG} from '../../Components/allSVG';
 import Store from '../../Store/index';
 import styles from '../../Themes/styles';
@@ -21,6 +24,8 @@ import CallApi from '../../utils/callApi';
 import {formatText} from '../../utils/validation';
 import BackgroundImage from '../../Components/backgroundImage';
 import {BackArrowBlack} from '../../Components/allSVG';
+import {spacing} from '../../Themes/fonts';
+const height = spacing(Dimensions.get('window').height / 4);
 
 function ForgotPassword({navigation, ...restProps}) {
   let {purple, offWhite, disableColor} = colors;
@@ -133,154 +138,154 @@ function ForgotPassword({navigation, ...restProps}) {
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('BoardingScreen')}
-        style={{
-          position: 'absolute',
-          top: 20,
-          left: 20,
-          width: 20,
-          height: 20,
-        }}>
-        <BackArrowBlack />
-      </TouchableOpacity>
-      <View
-        style={{
-          flex: 1,
-          marginBottom: 20,
-        }}>
+      <View style={{height}} />
+
+      <KeyboardAvoidingView style={styles.container}>
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
-            marginTop: 43,
+            marginBottom: 20,
           }}>
-          <BackgroundImage top={0} />
+          <TouchableOpacity
+            onPress={() => navigation.navigate('BoardingScreen')}
+            style={{
+              position: 'absolute',
+              top: 10,
+              left: 20,
+              width: 20,
+              height: 20,
+            }}>
+            <BackArrowBlack />
+          </TouchableOpacity>
           <View
             style={{
+              flex: 1,
               justifyContent: 'center',
-              alignItems: 'center',
+              marginTop: 43,
             }}>
-            <Text style={[styles.boldText, styles.mar_13]}>
-              Enter your Email
-            </Text>
-          </View>
-        </View>
-
-        <View style={{flex: 1, marginHorizontal: 20}}>
-          <View style={{flex: 1, marginTop: 20}}>
-            {showEmailField && (
-              <View style={styles.textInputWrapper}>
-                <Text style={[styles.text, styles.marB_9]}>Email address</Text>
-                <View
-                  style={[
-                    styles.inputBox,
-                    {
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      paddingHorizontal: 5,
-                    },
-                  ]}
-                  ref={ref => setRef(ref, 'email')}>
-                  <TextInput
-                    style={{flex: 1}}
-                    placeholder="Enter email address"
-                    value={email}
-                    autoCapitalize={'none'}
-                    onFocus={() => onFocus('email')}
-                    onBlur={() => onBlur('email')}
-                    onChangeText={text => setData('email', text)}
-                  />
-                  <Text>{emailError === true && <CheckArrowSVG />}</Text>
-                </View>
-                <Text style={[styles.regularText, {color: 'red'}]}>
-                  {emailError}
-                </Text>
-              </View>
-            )}
-            {!showEmailField && (
-              <View style={styles.textInputWrapper}>
-                <Text style={[styles.text, styles.marB_9]}>Phone number</Text>
-                <View
-                  style={[
-                    styles.inputBox,
-                    {
-                      flexDirection: 'row',
-                      paddingLeft: 0,
-                      alignItems: 'center',
-                      paddingHorizontal: 5,
-                    },
-                  ]}
-                  ref={ref => setRef(ref, 'phoneNumber')}>
-                  <TextInput
-                    value={countryCode}
-                    style={{
-                      width: 60,
-                      textAlign: 'center',
-                      borderRightWidth: 1,
-                      borderRightColor: offWhite,
-                    }}
-                  />
-                  <TextInput
-                    style={[{flex: 1, paddingLeft: 16}]}
-                    placeholder="Enter phone number"
-                    value={phoneNumber}
-                    onFocus={() => onFocus('phoneNumber')}
-                    onBlur={() => onBlur('phoneNumber')}
-                    keyboardType={'number-pad'}
-                    onChangeText={text => setData('phoneNumber', text)}
-                    maxLength={12}
-                  />
-                  <Text>{phoneNumberError === true && <CheckArrowSVG />}</Text>
-                </View>
-                <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
-                  {phoneNumberError}
-                </Text>
-              </View>
-            )}
-          </View>
-          <View style={{alignSelf: 'center', marginBottom: 30}}>
-            <TouchableOpacity
-              style={{marginBottom: 10}}
-              onPress={() => {
-                setState({...state, disable: true});
-                setEmailField(true);
+            <BackgroundImage top={0} />
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
               }}>
-              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
-                Reset Using Email
+              <Text style={[styles.boldText, styles.mar_13]}>
+                Enter your Email
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setState({...state, disable: true});
-                setEmailField(false);
-              }}>
-              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
-                Reset Using Mobile Number
-              </Text>
-            </TouchableOpacity>
+            </View>
           </View>
 
-          <SigningButton
-            text={'SUBMIT'}
-            click={() => submit()}
-            style={[
-              styles.button,
-              {marginBottom: 10},
-              disable && {backgroundColor: disableColor},
-            ]}
-            disable={disable}
-          />
-          <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
-            <Text style={[styles.bottomText]}>Don't have an account?</Text>
-            <TouchableOpacity
-              style={styles.marL_8}
-              onPress={() => navigation.navigate('SignUp')}>
-              <Text style={styles.colorsText}>Sign Up</Text>
-            </TouchableOpacity>
+          <View style={{flex: 1, marginHorizontal: 20}}>
+            <View style={{flex: 1, marginTop: 20}}>
+              {showEmailField && (
+                <View style={styles.textInputWrapper}>
+                  <Text style={[styles.text, styles.marB_9]}>
+                    Email address
+                  </Text>
+                  <View
+                    style={[
+                      styles.inputBox,
+                      {
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingHorizontal: 5,
+                      },
+                    ]}
+                    ref={ref => setRef(ref, 'email')}>
+                    <TextInput
+                      style={{flex: 1}}
+                      placeholder="Enter email address"
+                      value={email}
+                      autoCapitalize={'none'}
+                      onFocus={() => onFocus('email')}
+                      onBlur={() => onBlur('email')}
+                      onChangeText={text => setData('email', text)}
+                    />
+                    <Text>{emailError === true && <CheckArrowSVG />}</Text>
+                  </View>
+                  <Text style={[styles.regularText, {color: 'red'}]}>
+                    {emailError}
+                  </Text>
+                </View>
+              )}
+              {!showEmailField && (
+                <View style={styles.textInputWrapper}>
+                  <Text style={[styles.text, styles.marB_9]}>Phone number</Text>
+                  <View
+                    style={[
+                      styles.inputBox,
+                      {
+                        flexDirection: 'row',
+                        paddingLeft: 0,
+                        alignItems: 'center',
+                        paddingHorizontal: 5,
+                      },
+                    ]}
+                    ref={ref => setRef(ref, 'phoneNumber')}>
+                    <TextInput
+                      value={countryCode}
+                      style={{
+                        width: 60,
+                        textAlign: 'center',
+                        borderRightWidth: 1,
+                        borderRightColor: offWhite,
+                      }}
+                    />
+                    <TextInput
+                      style={[{flex: 1, paddingLeft: 16}]}
+                      placeholder="Enter phone number"
+                      value={phoneNumber}
+                      onFocus={() => onFocus('phoneNumber')}
+                      onBlur={() => onBlur('phoneNumber')}
+                      keyboardType={'number-pad'}
+                      onChangeText={text => setData('phoneNumber', text)}
+                      maxLength={12}
+                    />
+                    <Text>
+                      {phoneNumberError === true && <CheckArrowSVG />}
+                    </Text>
+                  </View>
+                  <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
+                    {phoneNumberError}
+                  </Text>
+                </View>
+              )}
+            </View>
+            <View style={{alignSelf: 'center', marginBottom: 30}}>
+              <TouchableOpacity
+                style={{marginBottom: 10}}
+                onPress={() => {
+                  setState({...state, disable: true});
+                  setEmailField(true);
+                }}>
+                <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+                  Reset Using Email
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setState({...state, disable: true});
+                  setEmailField(false);
+                }}>
+                <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+                  Reset Using Mobile Number
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <SigningButton
+              text={'SUBMIT'}
+              click={() => submit()}
+              style={[
+                styles.button,
+                {marginBottom: 10},
+                disable && {backgroundColor: disableColor},
+              ]}
+              disable={disable}
+            />
           </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 }

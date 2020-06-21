@@ -1,12 +1,10 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, {useState} from 'react';
 import {Modal, Text, View, TouchableOpacity} from 'react-native';
 import styles from '../Themes/styles';
-import {colors} from '../Themes/colors';
-import {scale} from '../Themes/fonts';
+import {spacing} from '../Themes/fonts';
 import {BackArrowBlack} from './allSVG';
 
 function FAQmodal({navigation, ...restprops}) {
-  console.log('responseeeeeeee>>>>>>>>>>', restprops);
   let {visible} = restprops;
   const [modalVisible, setVisible] = useState(visible);
   return (
@@ -23,8 +21,8 @@ function FAQmodal({navigation, ...restprops}) {
             width: 300,
             backgroundColor: 'rgb(229,229,229)',
             borderRadius: 8,
-            height: scale(365),
-            width: scale(274),
+            height: spacing(365),
+            width: spacing(274),
           }}>
           <TouchableOpacity
             onPress={() => setVisible(false)}

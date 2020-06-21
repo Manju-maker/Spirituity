@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  KeyboardAvoidingView,
   Image,
 } from 'react-native';
 import {SHOW_LOADING} from '../../utils/constant';
@@ -28,7 +29,6 @@ import Loader from '../../Components/loader';
 import {GoogleSignUp, FacebookSignUp} from '../../Components/socialSignin';
 import BackgroundImage from '../../Components/backgroundImage';
 import getImage from '../../utils/getImage';
-import {resetScreen} from '../../Components/resetStack';
 
 let {purple, offWhite, disableColor} = colors;
 
@@ -199,7 +199,7 @@ function SignUp({navigation, userInfo}) {
       showsVerticalScrollIndicator={false}>
       <Loader visible={isLoading} />
       <TouchableOpacity
-        onPress={() => resetScreen(navigation, 'SignIn')}
+        onPress={() => navigation.goBack()}
         style={{
           position: 'absolute',
           top: 20,
@@ -210,7 +210,7 @@ function SignUp({navigation, userInfo}) {
         <BackArrowBlack />
       </TouchableOpacity>
       <BackgroundImage />
-      <View style={styles.signinChildContainer}>
+      <KeyboardAvoidingView style={styles.signinChildContainer}>
         <View style={styles.titleContainer}>
           <Text style={[styles.boldText, styles.marB_13]}>
             Let's Get Started
@@ -232,7 +232,7 @@ function SignUp({navigation, userInfo}) {
             },
             {
               header: 'First Name',
-              placeHolder: 'Enter FirstName',
+              placeHolder: 'Enter firstname',
               value: firstName,
               field: 'firstName',
               autoCapitalize: 'none',
@@ -240,7 +240,7 @@ function SignUp({navigation, userInfo}) {
             },
             {
               header: 'Last Name',
-              placeHolder: 'Enter LastName',
+              placeHolder: 'Enter lastname',
               value: lastName,
               field: 'lastName',
               autoCapitalize: 'none',
@@ -256,7 +256,7 @@ function SignUp({navigation, userInfo}) {
             },
             {
               header: 'Password',
-              placeHolder: '    *',
+              placeHolder: '* * * * *',
               value: password,
               field: 'password',
               autoCapitalize: 'none',
@@ -390,7 +390,7 @@ function SignUp({navigation, userInfo}) {
             <Text style={styles.colorsText}>Sign In</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 }

@@ -7,6 +7,7 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  KeyboardAvoidingView,
   Image,
 } from 'react-native';
 import {connect} from 'react-redux';
@@ -23,12 +24,14 @@ import {HidePasswordSVG} from '../../Components/allSVG';
 import {SHOW_LOADING} from '../../utils/constant';
 import {checkField} from '../../utils/validation';
 import Loader from '../../Components/loader';
+import {spacing} from '../../Themes/fonts';
 
+import {StackActions} from '@react-navigation/native';
 import {showSnackBar} from '../../Components/snackbar';
 import BackgroundImage from '../../Components/backgroundImage';
 import CallApi from '../../utils/callApi';
 
-const height = Dimensions.get('window').height / 4;
+const height = spacing(Dimensions.get('window').height / 4);
 
 function SignInViaEmail({navigation, ...restProps}) {
   let {purple, offWhite, disableColor} = colors;
@@ -123,91 +126,30 @@ function SignInViaEmail({navigation, ...restProps}) {
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
+      <View style={{height}} />
       <Loader visible={isLoading} />
-      <View
-        style={{
-          flex: 1,
-          marginBottom: 20,
-        }}>
+      <KeyboardAvoidingView style={styles.container}>
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
-            marginTop: 43,
-            marginBottom: 30,
+            marginBottom: 20,
           }}>
-          <Text style={[styles.boldText, styles.mar_13]}>Enter your Email</Text>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              marginTop: 43,
+              marginBottom: 30,
+            }}>
+            <BackgroundImage top={0} />
+            <Text
+              style={[styles.boldText, styles.mar_13, {textAlign: 'center'}]}>
+              Enter your Email
+            </Text>
+          </View>
         </View>
-      </View>
-      <View style={{flex: 1, marginHorizontal: 20}}>
-        <View style={{flex: 1}}>
-          {[
-            {
-              header: 'Email address',
-              placeHolder: 'Enter email address',
-              value: email,
-              field: 'email',
-              autoCapitalize: 'none',
-              error: emailError,
-            },
-            {
-              header: 'Password',
-              placeHolder: '* * * * *',
-              value: password,
-              field: 'password',
-              autoCapitalize: 'none',
-              error: passwordError,
-            },
-          ].map((item, index) => {
-            return (
-              <View style={styles.textInputWrapper} key={index}>
-                <Text style={[styles.text, styles.marB_9]}>{item.header}</Text>
-                <View
-                  style={[
-                    styles.inputBox,
-                    {
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      paddingHorizontal: 5,
-                    },
-                  ]}
-                  ref={ref => setRef(ref, item.field)}>
-                  <TextInput
-                    style={{flex: 1}}
-                    placeholder={item.placeHolder}
-                    value={item.value}
-                    secureTextEntry={
-                      item.field === 'password' ? isPasswordHide : undefined
-                    }
-                    onFocus={() => onFocus(item.field)}
-                    onBlur={() => onBlur(item.field)}
-                    onChangeText={text => setData(item.field, text)}
-                  />
-                  {item.field === 'password' && (
-                    <TouchableOpacity
-                      style={{marginHorizontal: 14}}
-                      activeOpacity={0.8}
-                      onPress={() =>
-                        changeState('isPasswordHide', isPasswordHide)
-                      }>
-                      <Image
-                        source={getImage(
-                          isPasswordHide ? 'PasswordOff' : 'PasswordOn',
-                        )}
-                        style={{width: 20, height: 20}}
-                        resizeMode={'contain'}
-                      />
-                    </TouchableOpacity>
-                  )}
-                </View>
-                <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
-                  {item.error}
-                </Text>
-              </View>
-            );
-          })}
-        </View>
-        <View style={{flex: 1, marginHorizontal: 20}}>
+
+        <View style={{flex: 1, marginHorizontal: 20, marginBottom: 20}}>
           <View style={{flex: 1}}>
             {[
               {
@@ -277,11 +219,13 @@ function SignInViaEmail({navigation, ...restProps}) {
               );
             })}
             <TouchableOpacity
-              onPress={() => navigation.navigate('ForgotPassword')}>
+              onPress={() =>
+                navigation.dispatch(StackActions.replace('ForgotPassword'))
+              }>
               <Text
                 style={[
                   styles.colorsText,
-                  {color: 'blue', textAlign: 'center', marginBottom: 20},
+                  {color: 'purple', textAlign: 'center', marginBottom: 20},
                 ]}>
                 Forgot Password
               </Text>
@@ -298,18 +242,8 @@ function SignInViaEmail({navigation, ...restProps}) {
             ]}
             disable={disable}
           />
-          <TouchableOpacity
-            onPress={() => navigation.navigate('ForgotPassword')}>
-            <Text
-              style={[
-                styles.colorsText,
-                {color: purple, textAlign: 'center', marginTop: 20},
-              ]}>
-              Forgot Password
-            </Text>
-          </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 }

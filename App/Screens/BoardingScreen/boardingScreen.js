@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, StatusBar, ScrollView} from 'react-native';
+import {View, StatusBar, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {spacing} from '../../Themes/fonts';
 import Swiper from 'react-native-swiper';
 import {OnBoardingScreen} from '../../ReusableComponents/commonComponent';
@@ -8,7 +8,7 @@ import styles from '../../Themes/styles';
 export default function BoardingScreen({navigation}) {
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container}>
         <StatusBar barStyle="light-content" />
         <Swiper
           dot={<View style={styles.dot} />}
@@ -97,7 +97,7 @@ export default function BoardingScreen({navigation}) {
             rightImage={'Boarding3Right'}
           />
         </Swiper>
-      </View>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 }

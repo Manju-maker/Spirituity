@@ -126,7 +126,7 @@ function OTP({navigation, ...restProps}) {
         }
       })
       .catch(error => {
-        console.log('err>>>>>>>>>>>>>', error.response.status);
+        console.log('err>>>>>>>>>>>>>', error.response.data);
         let {status} = error.response || {};
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 400) {

@@ -90,11 +90,7 @@ function AppContainer({userInfo, navigation}) {
             component={ForgotPassword}
             options={modalOptions}
           />
-          <Stack.Screen
-            name="ResetPassword"
-            component={ResetPassword}
-            options={modalOptions}
-          />
+          <Stack.Screen name="ResetPassword" component={ResetPassword} />
           <Stack.Screen name="OTP" component={OTP} options={modalOptions} />
         </Stack.Navigator>
       )}

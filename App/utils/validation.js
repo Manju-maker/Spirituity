@@ -113,8 +113,13 @@ let formatText = (text, field) => {
   let finalText = '';
   return new Promise((resolve, reject) => {
     if (field === 'firstName' || field === 'lastName') {
-      finalText = upperFirst(text);
-      resolve(finalText);
+      let isAlphabet = /^[A-Za-z]+$/;
+      if (isAlphabet.test(text)) {
+        finalText = text.charAt(0).toUpperCase() + text.slice(1);
+        resolve(finalText);
+      } else {
+        return `${field} accepts only alphabet`;
+      }
     } else if (field === 'email') {
       finalText = text.toLowerCase();
       resolve(finalText);
