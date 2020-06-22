@@ -17,7 +17,7 @@
 
     <!-- Adds the splash screen definition -->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-             <item name="android:background">@layout/launch_screen</item>
+             <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
 </resources>
