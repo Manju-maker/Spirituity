@@ -33,7 +33,7 @@ function ResetPassword({navigation, ...restProps}) {
   let {isLoading = false} = restProps.userInfo;
   let {mobile, country_code, otp} =
     (restProps.route && restProps.route.params && restProps.route.params) || {};
-  let {purple, offWhite, transparent, disableColor} = colors;
+  let {purple, offWhite, disableColor} = colors;
   let eleRef = useRef([]);
   const [progress, setProgress] = useState([-1, -1, -1, -1]);
   let [state, setState] = useState({

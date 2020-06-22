@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Text, Button, ImageBackground, View, Image} from 'react-native';
+import React from 'react';
+import {Text, ImageBackground, View, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {login} from '../../Store/actions/userAction';
 import Store from '../../Store/index';
@@ -30,18 +30,10 @@ import {
 } from '../../Components/allSVG';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import getImage from '../../utils/getImage';
-import ShotGlassModal from '../../Components/shotGlassModal';
-import {reducer} from '../../Store/reducer/reducer';
 import {spacing} from '../../Themes/fonts';
 
 function HomeScreen({navigation}) {
-  const [visible, setVisibility] = useState(false);
-  const logout = () => {
-    AsyncStorage.removeItem('userInfo').then(res => {
-      console.log('logut>>>', res);
-      Store.dispatch(login(res));
-    });
-  };
+  // const [visible, setVisibility] = useState(false);
 
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>

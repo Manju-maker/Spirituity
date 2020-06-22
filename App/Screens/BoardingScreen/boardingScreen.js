@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, StatusBar, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {spacing} from '../../Themes/fonts';
 import Swiper from 'react-native-swiper';
@@ -31,26 +31,25 @@ export default function BoardingScreen({navigation}) {
           }}
           loop={false}>
           <OnBoardingScreen
-            image={'BoardingScreen1'}
-            text={`Your friends are already here! \n Elevate life with Barz`}
+            image={'BoardingScreen3'}
+            text={' Come on board with Barz to enjoy your virtual bar!'}
             navigation={navigation}
             leftImageStyle={{
-              width: spacing(84),
-              height: spacing(84),
+              width: 84,
+              height: 84,
               position: 'absolute',
-              left: spacing(-15),
-              top: spacing(100),
+              left: -5,
+              bottom: spacing(60),
             }}
             rightImageStyle={{
-              width: spacing(120),
-              height: spacing(120),
               position: 'absolute',
-              top: spacing(40),
-              right: spacing(-42),
+              top: spacing(110),
+              right: spacing(25),
             }}
-            leftImage={'Boarding3Left'}
-            rightImage={'Boarding3Right'}
+            leftImage={'MultiColor3'}
+            rightImage={'MultiColor'}
           />
+
           <OnBoardingScreen
             image={'BoardingScreen2'}
             text={
@@ -74,24 +73,27 @@ export default function BoardingScreen({navigation}) {
             leftImage={'Triangle'}
             rightImage={'Straw'}
           />
+
           <OnBoardingScreen
-            image={'BoardingScreen3'}
-            text={' Come on board with Barz to enjoy your virtual bar!'}
+            image={'BoardingScreen1'}
+            text={`Your friends are already here! \n Elevate life with Barz`}
             navigation={navigation}
             leftImageStyle={{
-              width: 84,
-              height: 84,
+              width: spacing(84),
+              height: spacing(84),
               position: 'absolute',
-              left: -5,
-              bottom: spacing(60),
+              left: spacing(-15),
+              top: spacing(100),
             }}
             rightImageStyle={{
+              width: spacing(120),
+              height: spacing(120),
               position: 'absolute',
-              top: spacing(110),
-              right: spacing(25),
+              top: spacing(40),
+              right: spacing(-42),
             }}
-            leftImage={'MultiColor3'}
-            rightImage={'MultiColor'}
+            leftImage={'Boarding3Left'}
+            rightImage={'Boarding3Right'}
           />
         </Swiper>
       </KeyboardAvoidingView>

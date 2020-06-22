@@ -118,8 +118,8 @@ function OTP({navigation, ...restProps}) {
         }
       })
       .catch(error => {
-        let {data,status} = error.response || {};
-        console.log("Error >>>>>>",data)
+        let {data, status} = error.response || {};
+        console.log('Error >>>>>>', data);
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 400) {
           showSnackBar({
@@ -129,13 +129,11 @@ function OTP({navigation, ...restProps}) {
           showSnackBar({
             message: 'Email already  registered',
           });
-        } 
-        else if(status === 404){
+        } else if (status === 404) {
           showSnackBar({
             message: data.statusMessage,
           });
-        }
-        else if (error.message === 'Network Error') {
+        } else if (error.message === 'Network Error') {
           showSnackBar({
             message: 'No Internet Connection,Please check!',
           });
@@ -188,7 +186,6 @@ function OTP({navigation, ...restProps}) {
 
   useEffect(() => {
     let valid = validateOtp(otpArray);
-    console.log('validvalidvalidvalidvalid', valid);
     if (valid) {
       onSubmit();
     }
@@ -323,7 +320,7 @@ function OTP({navigation, ...restProps}) {
               setMaxLimit(maxLimit + 1);
               setOtpArray(['', '', '', '']);
               setExpired(false);
-              setTimerClose(false)
+              setTimerClose(false);
             }}
             closeTimer={closeTimer}
             setLimit={() => setMaxLimit(0)}

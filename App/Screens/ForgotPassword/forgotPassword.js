@@ -10,23 +10,18 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import {connect} from 'react-redux';
-
 import Loader from '../../Components/loader';
 import Header from '../../Components/Header';
 import {CheckArrowSVG} from '../../Components/allSVG';
-
 import Store from '../../Store/index';
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
-
 import {SigningButton} from '../../ReusableComponents/commonComponent';
 import {checkField} from '../../utils/validation';
 import {showSnackBar} from '../../Components/snackbar';
-
 import {SHOW_LOADING} from '../../utils/constant';
 import CallApi from '../../utils/callApi';
 import {formatText} from '../../utils/validation';
-
 import BackgroundImage from '../../Components/backgroundImage';
 import {spacing} from '../../Themes/fonts';
 const height = spacing(Dimensions.get('window').height / 4);
@@ -105,15 +100,14 @@ function ForgotPassword({navigation, ...restProps}) {
       .then(res => {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (res.status === 200) {
-          console.log('response>>>>>', res.data);
           if (showEmailField === false) {
-            let data = {
+            let otpData = {
               country_code: countryCode,
               mobile: phoneNumber.replace(/\s/g, ''),
               type: 'reset',
             };
             navigation.pop();
-            setTimeout(() => navigation.navigate('OTP', data), 500);
+            setTimeout(() => navigation.navigate('OTP', otpData), 500);
           } else {
             showSnackBar({
               message: 'Email sent successfully.',
@@ -144,12 +138,12 @@ function ForgotPassword({navigation, ...restProps}) {
       data = {email};
       callService('post', 'users/reset-password/email', data);
     } else if (showEmailField === false) {
-      let data = {
+      let otpData = {
         mobile: phoneNumber.replace(/\s/g, ''),
         country_code: countryCode,
         type: 'reset',
       };
-      callService('post', 'users/otp', data);
+      callService('post', 'users/otp', otpData);
     }
   };
 

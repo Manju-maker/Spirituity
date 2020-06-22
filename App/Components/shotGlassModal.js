@@ -1,11 +1,10 @@
-import React, {useState, useEffect, Component} from 'react';
+import React from 'react';
 import {Modal, Text, View, TouchableOpacity} from 'react-native';
 import styles from '../Themes/styles';
-import {scale} from '../Themes/fonts';
+import {spacing} from '../Themes/fonts';
 import {QuestionmarkSVG, CrossSVG, ShotSVG} from './allSVG';
 
 function ShotGlassModal({navigation, ...restprops}) {
-  console.log('modallllllllllllllllllllllllllll', restprops);
   let {visible, setVisible} = restprops;
 
   return (
@@ -21,8 +20,8 @@ function ShotGlassModal({navigation, ...restprops}) {
           style={{
             backgroundColor: '#9852eb',
             borderRadius: 8,
-            height: scale(365),
-            width: scale(274),
+            height: spacing(365),
+            width: spacing(274),
           }}>
           <View
             style={{

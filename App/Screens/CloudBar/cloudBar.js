@@ -1,11 +1,8 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, ImageBackground} from 'react-native';
 import {
-  SearchSVG,
-  NotificationSVG,
   BarzWalletSVG,
   BackArrowWhite,
-  CloudCartSVG,
   EmptyCloudCartSVG,
   DiamondSVG,
   EmptyBottleSVG,

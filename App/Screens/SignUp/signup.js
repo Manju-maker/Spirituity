@@ -199,7 +199,7 @@ function SignUp({navigation, userInfo}) {
       keyboardShouldPersistTaps={'always'}
       showsVerticalScrollIndicator={false}>
       <Loader visible={isLoading} />
-      <Header navigation={navigation} />
+      <Header navigation={navigation} showCross={false} />
       <BackgroundImage top={70} />
       <View style={[styles.signinChildContainer, {marginVertical: 15}]}>
         <View style={styles.titleContainer}>

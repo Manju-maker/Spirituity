@@ -117,7 +117,7 @@ function SignIn({navigation, ...restProps}) {
           marginTop: 10,
           backgroundColor: 'white',
         }}>
-        <Header navigation={navigation} />
+        <Header navigation={navigation} showCross={false} />
         <BackgroundImage top={50} />
         <View
           style={{

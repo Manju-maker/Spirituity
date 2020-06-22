@@ -18,7 +18,6 @@ function FAQmodal({navigation, ...restprops}) {
         }}>
         <View
           style={{
-            width: 300,
             backgroundColor: 'rgb(229,229,229)',
             borderRadius: 8,
             height: spacing(365),
@@ -38,11 +37,11 @@ function FAQmodal({navigation, ...restprops}) {
           </TouchableOpacity>
           <View
             style={{
-              marginTop: scale(59),
+              marginTop: spacing(59),
               justifyContent: 'center',
               alignItems: 'center',
-              marginLeft: scale(34),
-              marginRight: scale(30),
+              marginLeft: spacing(34),
+              marginRight: spacing(30),
               marginBottom: 24,
             }}>
             <Text style={[styles.faqTitle, {marginBottom: 11}]}>FAQ Card</Text>
@@ -70,12 +69,3 @@ function FAQmodal({navigation, ...restprops}) {
   );
 }
 export default FAQmodal;
-
-//<Text
-// style={[
-//     styles.boldText,
-//     styles.marB_13,
-//     {width: 200, textAlign: 'center'},
-//   ]}>
-//   {header}
-// </Text>

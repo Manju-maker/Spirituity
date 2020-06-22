@@ -2,23 +2,14 @@ import {all, put, takeLatest, call} from 'redux-saga/effects';
 import {
   LOGIN_REQUEST,
   OTP_REQUEST_STATUS, /// chedked
-  SIGNUP_REQUEST,
-  LOGIN_SUCCESS,
   SIGNUP_REQUEST_MOBILE, /// checked
   GET_OTP, /// checked
-  OTP_REQUEST_SUCCESS,
-  OTP_REQUEST_FAILED,
   SHOW_LOADING,
-  SIGNUP_SUCCESS,
-  SIGNUP_FAILED,
-  LOGIN_FAILED,
-  LOGIN_SUCCESSS,
   RESEND_OTP_SUCCESS,
   RESND_OTP_FAILED,
   RESEND_OTP,
   FORGOT_PASSWORD_STATUS,
   FORGOT_PASSWORD_REQUEST,
-  FORGOT_PASSWORD_FAILED,
   LOGIN_REQUEST_MOBILE_STATUS, //// checked   //// Checked
   LOGIN_REQUEST_MOBILE, /// checked
   LOGIN_STATUS, /// checked
@@ -86,6 +77,7 @@ export function* signupViaOtp(payload) {
       payload.payload,
       headers,
     );
+    console.log(response);
     yield put({type: LOGIN_REQUEST_MOBILE_STATUS, payload: {Success: true}});
   } catch (err) {
     yield put({type: SHOW_LOADING, payload: false});

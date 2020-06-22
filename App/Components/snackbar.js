@@ -13,6 +13,7 @@ export const showSnackBar = (data = {}) => {
 
 const Snackbar = (data = {}) => {
   let [isConnected, setIsConnected] = useState(true);
+  console.log(data);
   useEffect(() => {
     let unsubscribe = NetInfo.addEventListener(state => {
       setIsConnected(state.isConnected);

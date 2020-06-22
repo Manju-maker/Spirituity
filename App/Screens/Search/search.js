@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ImageBackground, Dimensions, Image} from 'react-native';
+import {View, Text, ImageBackground, Image} from 'react-native';
 import getImage from '../../utils/getImage';
 import {
   ScrollView,
@@ -14,7 +14,6 @@ import {
   NotificationSVG,
   BarzWalletSVG,
   BackArrowWhite,
-  BarzPromotion,
   ArrowSVG,
   ShortGlassSVG,
   GreyArrowSVG,

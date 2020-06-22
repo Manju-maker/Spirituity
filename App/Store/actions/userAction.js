@@ -1,9 +1,7 @@
 import {
-  LOGIN_SUCCESS, /// checked
   LOGIN_REQUEST,
   GET_OTP, //// checked
   SHOW_LOADING,
-  SIGNUP_REQUEST,
   SIGNUP_REQUEST_MOBILE, ///// checked
   RESEND_OTP,
   FORGOT_PASSWORD_REQUEST,
@@ -11,7 +9,7 @@ import {
   RESTE_OTP_RESPONSE, //// checked
   LOGIN_STATUS, //// checked
   GET_OTP_FORGET,
-  FORGET_VIA_OTP
+  FORGET_VIA_OTP,
 } from '../../utils/constant';
 
 const forgetViaOtp = payload => {
@@ -64,13 +62,15 @@ const OtpVerifyAndSignup = payload => {
   };
 };
 
-const signinViaEmail = payload => {   //// checked ----- done
+const signinViaEmail = payload => {
+  //// checked ----- done
   return {
     type: LOGIN_REQUEST,
     payload,
   };
 };
-const forgot = payload => {    //// checked ----- done
+const forgot = payload => {
+  //// checked ----- done
   return {
     type: FORGOT_PASSWORD_REQUEST,
     payload,

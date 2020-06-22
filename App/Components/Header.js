@@ -1,9 +1,12 @@
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {BackArrowBlack, CrossSVG} from './allSVG';
-import {StackActions} from '@react-navigation/native';
 
-export default function Header({navigation, previousScreen = 'none'}) {
+export default function Header({
+  navigation,
+  previousScreen = 'none',
+  showCross = true,
+}) {
   return (
     <View
       style={{
@@ -18,7 +21,7 @@ export default function Header({navigation, previousScreen = 'none'}) {
             navigation.pop();
           } else {
             navigation.pop();
-            setTimeout(() => navigation.navigate(previousScreen), 500);
+            setTimeout(() => navigation.navigate(previousScreen), 100);
           }
         }}
         style={{
@@ -29,16 +32,18 @@ export default function Header({navigation, previousScreen = 'none'}) {
         }}>
         <BackArrowBlack />
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.pop()}
-        style={{
-          width: 22,
-          height: 20,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <CrossSVG />
-      </TouchableOpacity>
+      {showCross && (
+        <TouchableOpacity
+          onPress={() => navigation.pop()}
+          style={{
+            width: 22,
+            height: 20,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <CrossSVG />
+        </TouchableOpacity>
+      )}
     </View>
   );
 }

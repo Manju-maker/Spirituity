@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {BackArrowBlack} from '../../Components/allSVG';
 import {scale} from '../../Themes/fonts';
 import styles from '../../Themes/styles';

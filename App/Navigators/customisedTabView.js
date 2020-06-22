@@ -4,10 +4,8 @@ import {
   TouchableOpacity,
   Text,
   ImageBackground,
-  Dimensions,
-  Image
+  Image,
 } from 'react-native';
-import {BottomTabImage} from '../Components/allSVG';
 // import TabSvg from '../../Components/TabBar';
 // import {SvgUri} from 'react-native-svg';
 function CustomisedTabView({state, descriptors, navigation}) {
@@ -65,7 +63,8 @@ function CustomisedTabView({state, descriptors, navigation}) {
               style={{flex: 1}}>
               <Image
                 source={require('../Assets/images/ICON_ACCOUNTtab.png')}
-                style={{width: 20, height: 20}}></Image>
+                style={{width: 20, height: 20}}
+              />
               <Text style={{color: isFocused ? '#673ab7' : '#222'}}>
                 {label}
               </Text>

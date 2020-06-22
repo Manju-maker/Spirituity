@@ -102,8 +102,8 @@ function isValidPhoneNumber(number) {
   if (number.length != 10) {
     return 'Phone number should be of 10 digit';
   }
-  if (!/^[789]\d{9}$/.test(number)) {
-    return 'Phone Number must start with 7, 8 or 9';
+  if (!/^[6789]\d{9}$/.test(number)) {
+    return 'Phone Number must start with 6, 7, 8 or 9';
   }
   return true;
 }
@@ -112,7 +112,7 @@ let formatText = (text, field) => {
   let finalText = '';
   return new Promise((resolve, reject) => {
     if (field === 'firstName' || field === 'lastName') {
-      text = upperFirst(text);
+      // text = upperFirst(text);
       resolve(text);
     } else if (field === 'email') {
       finalText = text.toLowerCase();
