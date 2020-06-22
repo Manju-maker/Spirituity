@@ -3,27 +3,34 @@ import {
   Text,
   View,
   TextInput,
-  ImageBackground,
   ScrollView,
   TouchableOpacity,
   AsyncStorage,
   Image,
+  BackHandler,
 } from 'react-native';
+import {connect} from 'react-redux';
+import Header from '../../Components/Header';
 
+import Loader from '../../Components/loader';
+import {spacing} from '../../Themes/fonts';
 import styles from '../../Themes/styles';
+
 import {colors} from '../../Themes/colors';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
 import BackgroundImage from '../../Components/backgroundImage';
+
 import {validPassword, calculatePasswordScore} from '../../utils/validation';
 import {login} from '../../Store/actions/userAction';
 import {SHOW_LOADING} from '../../utils/constant';
+
 import {showSnackBar} from '../../Components/snackbar';
-import {BackArrowBlack} from '../../Components/allSVG';
 import Store from '../../Store';
 import CallApi from '../../utils/callApi';
 import getImage from '../../utils/getImage';
 
 function ResetPassword({navigation, ...restProps}) {
+  let {isLoading = false} = restProps.userInfo;
   let {mobile, country_code, otp} =
     (restProps.route && restProps.route.params && restProps.route.params) || {};
   let {purple, offWhite, transparent, disableColor} = colors;
@@ -49,6 +56,20 @@ function ResetPassword({navigation, ...restProps}) {
   } = state;
 
   useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
+
+  const backAction = () => {
+    navigation.pop();
+    setTimeout(() => navigation.navigate('ForgotPassword'), 500);
+    return true;
+  };
+
+  useEffect(() => {
     if (newPasswordError === true && confirmPasswordError === true) {
       setState({...state, disable: false});
     } else {
@@ -72,6 +93,7 @@ function ResetPassword({navigation, ...restProps}) {
 
     setState({...state, [field]: text, [`${field}Error`]: isValid});
   };
+
   let setRef = (ref, field) => {
     eleRef.current[field] = ref;
   };
@@ -79,6 +101,7 @@ function ResetPassword({navigation, ...restProps}) {
   let onFocus = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: purple}});
   };
+
   let onBlur = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
@@ -95,7 +118,6 @@ function ResetPassword({navigation, ...restProps}) {
         otp,
         password: newPassword,
       };
-      console.log('data to send to server>>>', data);
       Store.dispatch({type: SHOW_LOADING, payload: true});
       CallApi('put', 'users/reset-password/otp', data)
         .then(res => {
@@ -107,14 +129,15 @@ function ResetPassword({navigation, ...restProps}) {
             AsyncStorage.setItem('userInfo', JSON.stringify(userData));
             Store.dispatch(login(userData));
           }
-          console.log('response>>>>', res.data);
         })
         .catch(error => {
-          console.log('Error>>>>', error);
           let {data, status} = error.response || {};
-          console.log('Error>>>>>>', data);
           Store.dispatch({type: SHOW_LOADING, payload: false});
-          if (error.message === 'Network Error') {
+          if (status === 404) {
+            showSnackBar({
+              message: 'Mobile number not found',
+            });
+          } else if (error.message === 'Network Error') {
             showSnackBar({
               message: 'No Internet Connection,Please check!',
             });
@@ -126,44 +149,29 @@ function ResetPassword({navigation, ...restProps}) {
       showSnackBar({message: 'Password mismatched'});
     }
   };
-  console.log('errrrrrrr', newPasswordError);
 
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('BoardingScreen')}
-        style={{
-          position: 'absolute',
-          top: 20,
-          left: 20,
-          width: 20,
-          height: 20,
-        }}>
-        <BackArrowBlack />
-      </TouchableOpacity>
       <View
         style={{
           flex: 1,
           marginTop: 10,
           marginBottom: 20,
         }}>
+        <Loader visible={isLoading} />
+
+        <Header navigation={navigation} previousScreen={'ForgotPassword'} />
+        <BackgroundImage top={50} />
         <View
           style={{
-            flex: 1,
             justifyContent: 'center',
-            marginTop: 43,
-            marginBottom: 20,
+            alignItems: 'center',
+            marginTop: spacing(20),
+            marginBottom: spacing(36),
           }}>
-          <BackgroundImage top={0} />
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={[styles.boldText, styles.mar_13]}>Reset Password</Text>
-          </View>
+          <Text style={[styles.boldText, styles.mar_13]}>Reset Password</Text>
         </View>
 
         <View style={{flex: 2, marginHorizontal: 20}}>
@@ -289,5 +297,7 @@ function ResetPassword({navigation, ...restProps}) {
     </ScrollView>
   );
 }
-
-export default ResetPassword;
+const mapStateToProps = state => {
+  return {userInfo: state.reducer};
+};
+export default connect(mapStateToProps)(ResetPassword);

@@ -92,7 +92,7 @@ const Snackbar = (data = {}) => {
                   OK
                 </Text>
               ) : (
-                <CrossSVG />
+                <CrossSVG fillColor={'#FFF'} />
               )}
             </View>
           </View>

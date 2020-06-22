@@ -7,7 +7,9 @@ import styles from '../../Themes/styles';
 
 export default function BoardingScreen({navigation}) {
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+    <ScrollView
+      contentContainerStyle={{flexGrow: 1}}
+      showsVerticalScrollIndicator={false}>
       <KeyboardAvoidingView style={styles.container}>
         <StatusBar barStyle="light-content" />
         <Swiper
@@ -25,10 +27,7 @@ export default function BoardingScreen({navigation}) {
             />
           }
           paginationStyle={{
-            bottom: spacing(270),
-          }}
-          paginationStyle={{
-            bottom: spacing(270),
+            top: spacing(50),
           }}
           loop={false}>
           <OnBoardingScreen
@@ -36,21 +35,21 @@ export default function BoardingScreen({navigation}) {
             text={`Your friends are already here! \n Elevate life with Barz`}
             navigation={navigation}
             leftImageStyle={{
-              width: 84,
-              height: 84,
+              width: spacing(84),
+              height: spacing(84),
               position: 'absolute',
-              left: -5,
-              bottom: spacing(110),
+              left: spacing(-15),
+              top: spacing(100),
             }}
             rightImageStyle={{
-              width: 49,
-              height: 80,
+              width: spacing(120),
+              height: spacing(120),
               position: 'absolute',
-              bottom: spacing(235),
-              right: 41,
+              top: spacing(40),
+              right: spacing(-42),
             }}
-            leftImage={'MultiColor3'}
-            rightImage={'MultiColor'}
+            leftImage={'Boarding3Left'}
+            rightImage={'Boarding3Right'}
           />
           <OnBoardingScreen
             image={'BoardingScreen2'}
@@ -59,18 +58,18 @@ export default function BoardingScreen({navigation}) {
             }
             navigation={navigation}
             leftImageStyle={{
-              width: 84,
-              height: 84,
+              width: spacing(120),
+              height: spacing(120),
               position: 'absolute',
-              left: 0,
-              bottom: spacing(100),
+              left: -spacing(60),
+              bottom: spacing(45),
             }}
             rightImageStyle={{
               // width: 49,
               // height: 80,
               position: 'absolute',
               bottom: spacing(250),
-              right: 41,
+              right: spacing(30),
             }}
             leftImage={'Triangle'}
             rightImage={'Straw'}
@@ -84,17 +83,15 @@ export default function BoardingScreen({navigation}) {
               height: 84,
               position: 'absolute',
               left: -5,
-              bottom: spacing(197),
+              bottom: spacing(60),
             }}
             rightImageStyle={{
-              // width: 49,
-              // height: 80,
               position: 'absolute',
-              bottom: spacing(263),
-              right: 0,
+              top: spacing(110),
+              right: spacing(25),
             }}
-            leftImage={'Boarding3Left'}
-            rightImage={'Boarding3Right'}
+            leftImage={'MultiColor3'}
+            rightImage={'MultiColor'}
           />
         </Swiper>
       </KeyboardAvoidingView>

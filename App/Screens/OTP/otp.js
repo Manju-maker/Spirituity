@@ -6,28 +6,25 @@ import {
   AsyncStorage,
   ScrollView,
   Keyboard,
-  TouchableOpacity,
 } from 'react-native';
-
+import {StackActions} from '@react-navigation/native';
 import RNOtpVerify from 'react-native-otp-verify';
+
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import Timer from './timer';
+
 import {spacing} from '../../Themes/fonts';
 import {showSnackBar} from '../../Components/snackbar';
 import CallApi from '../../utils/callApi';
+
 import {connect} from 'react-redux';
 import Store from '../../Store/index';
-import {BackArrowBlack} from '../../Components/allSVG';
-import {SHOW_LOADING} from '../../utils/constant';
-import {
-  OtpVerifyAndSignup,
-  login,
-  signinViaOtp,
-  forgetViaOtp,
-} from '../../Store/actions/userAction';
-import Loader from '../../Components/loader';
 import {SquareSVG, StrawSvg} from '../../Components/allSVG';
+
+import {SHOW_LOADING} from '../../utils/constant';
+import {login} from '../../Store/actions/userAction';
+import Loader from '../../Components/loader';
 
 function OTP({navigation, ...restProps}) {
   let {
@@ -44,16 +41,20 @@ function OTP({navigation, ...restProps}) {
   let eleRef = useRef([]);
   let {purple, offWhite} = colors;
   const [state, setState] = useState({one: '', two: '', three: '', four: ''});
+  const [closeTimer, setTimerClose] = useState(false);
   const [maxLimit, setMaxLimit] = useState(0);
   const [otpArray, setOtpArray] = useState(['', '', '', '']);
   const [stopTime, setExpired] = useState(false);
   const {one, two, three, four} = state;
+
   let setRef = (ref, field) => {
     eleRef.current[field] = ref;
   };
+
   let onFocus = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: purple}});
   };
+
   let onBlur = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
@@ -61,27 +62,16 @@ function OTP({navigation, ...restProps}) {
   let {isLoading = false} = userInfo;
 
   useEffect(() => {
-    RNOtpVerify.getOtp()
-      .then(p => {
-        console.log('PTPPPPPPPPPPPPPPPPPPPPP', p);
-        RNOtpVerify.addListener(otpHandler);
-      })
-      .catch(err => console.log('err of otp verigy>>>>>>>>>', err));
-
-    return () => {
-      RNOtpVerify.removeListener();
-    };
+    readOtp();
   }, []);
 
   let handleOTP = otp => {
     return new Promise((resolve, reject) => {
       let a = otp;
       let c = a.toString();
-      console.log('C>>>>>>>>>>>', c);
       let b = [];
       let j = 0;
       for (let i of c) {
-        console.log('indexinggg', c.indexOf(i), '===========', i);
         b[j] = i;
         j++;
       }
@@ -90,15 +80,15 @@ function OTP({navigation, ...restProps}) {
   };
 
   let otpHandler = async message => {
-    const otp = /(\d{4})/g.exec(message)[1];
-    console.log('otpppppp', otp);
-
-    let finalOTP = await handleOTP(otp);
-    console.log('final otpppp', finalOTP);
-
-    setOtpArray(finalOTP);
-
-    Keyboard.dismiss();
+    try {
+      const otp = /(\d{4})/g.exec(message)[1];
+      let finalOTP = await handleOTP(otp);
+      setOtpArray(finalOTP);
+      Keyboard.dismiss();
+      RNOtpVerify.removeListener();
+    } catch (error) {
+      console.log('Error raeding otp');
+    }
   };
 
   let callService = (method, route, data, reset = false) => {
@@ -111,11 +101,13 @@ function OTP({navigation, ...restProps}) {
       .then(res => {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (res.status === 200) {
+          setTimerClose(true);
           if (reset) {
-            console.log('response for otp resest>>>>', res.data);
             let {mobile, country_code, otp} = data;
             let dataToSend = {mobile, country_code, otp};
-            navigation.navigate('ResetPassword', dataToSend);
+            navigation.dispatch(
+              StackActions.replace('ResetPassword', dataToSend),
+            );
           } else {
             let {response} = res.data;
             let {data, token} = response;
@@ -126,8 +118,8 @@ function OTP({navigation, ...restProps}) {
         }
       })
       .catch(error => {
-        console.log('err>>>>>>>>>>>>>', error.response.data);
-        let {status} = error.response || {};
+        let {data,status} = error.response || {};
+        console.log("Error >>>>>>",data)
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 400) {
           showSnackBar({
@@ -137,7 +129,13 @@ function OTP({navigation, ...restProps}) {
           showSnackBar({
             message: 'Email already  registered',
           });
-        } else if (error.message === 'Network Error') {
+        } 
+        else if(status === 404){
+          showSnackBar({
+            message: data.statusMessage,
+          });
+        }
+        else if (error.message === 'Network Error') {
           showSnackBar({
             message: 'No Internet Connection,Please check!',
           });
@@ -149,7 +147,6 @@ function OTP({navigation, ...restProps}) {
 
   let onSubmit = () => {
     let otp = otpArray[0] + otpArray[1] + otpArray[2] + otpArray[3];
-    console.log('otpppp*******************', otp);
     if (stopTime === false) {
       if (type === 'signup') {
         let data = {
@@ -161,7 +158,6 @@ function OTP({navigation, ...restProps}) {
           otp: parseInt(otp),
           country_code: country_code,
         };
-        // Store.dispatch(OtpVerifyAndSignup(data));
         callService('post', 'users/signup', data);
       } else if (type === 'signin') {
         let data = {
@@ -169,8 +165,6 @@ function OTP({navigation, ...restProps}) {
           country_code: '+91',
           otp: parseInt(otp),
         };
-        console.log('sign iva otp>>>>>>>>>>>');
-        // Store.dispatch(signinViaOtp(data));
         callService('post', 'users/signin/otp-verify', data);
       } else if (type === 'reset') {
         let data = {
@@ -178,8 +172,7 @@ function OTP({navigation, ...restProps}) {
           country_code: country_code,
           otp: parseInt(otp),
         };
-        // Store.dispatch(forgetViaOtp(data));
-        callService('post', 'users/otp/verify', data, true); //// api will be provided to verify otp
+        callService('post', 'users/otp/verify', data, true);
       }
     } else {
       showSnackBar({message: 'Otp Expired'});
@@ -192,10 +185,10 @@ function OTP({navigation, ...restProps}) {
     });
     return final;
   };
+
   useEffect(() => {
-    console.log('otppppp???????????????', otpArray);
     let valid = validateOtp(otpArray);
-    console.log('valid', valid);
+    console.log('validvalidvalidvalidvalid', valid);
     if (valid) {
       onSubmit();
     }
@@ -215,6 +208,7 @@ function OTP({navigation, ...restProps}) {
       }
     }
   };
+
   let onOtpKeyPress = (index, field) => {
     return ({nativeEvent: {key: value}}) => {
       if (value === 'Backspace' && otpArray[index] === '') {
@@ -227,27 +221,26 @@ function OTP({navigation, ...restProps}) {
         }
         if (index > 0) {
           const otpArrayCopy = otpArray.concat();
-          otpArrayCopy[index - 1] = ''; // clear the previous box which will be in focus
+          otpArrayCopy[index - 1] = '';
           setOtpArray(otpArrayCopy);
         }
       }
     };
   };
+
+  let readOtp = () => {
+    RNOtpVerify.getOtp()
+      .then(p => {
+        RNOtpVerify.addListener(otpHandler);
+      })
+      .catch(err => console.log('err of otp verigy>>>>>>>>>', err));
+    return () => RNOtpVerify.removeListener();
+  };
+
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('BoardingScreen')}
-        style={{
-          position: 'absolute',
-          top: 20,
-          left: 20,
-          width: 20,
-          height: 20,
-        }}>
-        <BackArrowBlack />
-      </TouchableOpacity>
       <View style={[styles.container]}>
         <Loader visible={isLoading} />
         <View
@@ -325,13 +318,14 @@ function OTP({navigation, ...restProps}) {
           </View>
           <Timer
             onRefresh={() => {
+              eleRef.current['one'].focus();
+              readOtp();
               setMaxLimit(maxLimit + 1);
               setOtpArray(['', '', '', '']);
               setExpired(false);
+              setTimerClose(false)
             }}
-            refreshFocus={() => {
-              eleRef.current['one'].focus();
-            }}
+            closeTimer={closeTimer}
             setLimit={() => setMaxLimit(0)}
             maxLimit={maxLimit}
             data={{country_code, mobile, type}}

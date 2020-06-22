@@ -6,24 +6,28 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-  ImageBackground,
-  Modal,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {StackActions} from '@react-navigation/native';
 import {connect} from 'react-redux';
 import Store from '../../Store/index';
+
 import styles from '../../Themes/styles';
 import {colors} from '../../Themes/colors';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
-import {checkField, formatText} from '../../utils/validation';
 
+import Header from '../../Components/Header';
+import {checkField, formatText} from '../../utils/validation';
 import {showSnackBar} from '../../Components/snackbar';
+
 import {SHOW_LOADING} from '../../utils/constant';
 import CallApi from '../../utils/callApi';
 import Loader from '../../Components/loader';
+
 import BackgroundImage from '../../Components/backgroundImage';
 import {spacing} from '../../Themes/fonts';
 const height = spacing(Dimensions.get('window').height / 4);
+
 let {purple, offWhite, disableColor} = colors;
 
 function SignIn({navigation, ...restProps}) {
@@ -44,7 +48,6 @@ function SignIn({navigation, ...restProps}) {
       country_code: countryCode,
       type: 'signin',
     };
-    // Store.dispatch(getOtp(data));
     let headers = {
       'content-type': 'application/json',
       token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
@@ -54,7 +57,8 @@ function SignIn({navigation, ...restProps}) {
       .then(response => {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (response.status === 200) {
-          navigation.navigate('OTP', data);
+          navigation.pop();
+          setTimeout(() => navigation.navigate('OTP', data), 500);
         }
       })
       .catch(error => {
@@ -77,7 +81,6 @@ function SignIn({navigation, ...restProps}) {
 
   useEffect(() => {
     if (phoneNumberError === true) {
-      console.log('Errrrrrrrrrrrrrr', phoneNumberError);
       setState({...state, disable: false});
     } else {
       setState({...state, disable: true});
@@ -85,12 +88,8 @@ function SignIn({navigation, ...restProps}) {
   }, [phoneNumberError]);
 
   let setData = async (field, text) => {
-    console.log('textttt', text);
     let formatedText = await formatText(text, field);
-    console.log('formatedddtext', formatedText);
     let isValid = checkField(field, formatedText.trim());
-    console.log('is validdddddddddddddddddddddddd', isValid);
-
     setState({...state, [field]: formatedText, [`${field}Error`]: isValid});
   };
 
@@ -106,91 +105,94 @@ function SignIn({navigation, ...restProps}) {
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
-      keyboardShouldPersistTaps={'always'}>
+      keyboardShouldPersistTaps={'always'}
+      showsVerticalScrollIndicator={false}>
       <Loader visible={isLoading} />
-      <View style={{height}} />
-      <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={() => navigation.pop()}>
+        <View style={{height}} />
+      </TouchableWithoutFeedback>
+      <View
+        style={{
+          flex: 1,
+          marginTop: 10,
+          backgroundColor: 'white',
+        }}>
+        <Header navigation={navigation} />
+        <BackgroundImage top={50} />
         <View
           style={{
-            flex: 1,
-            marginTop: 10,
-            marginBottom: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: spacing(20),
+            marginBottom: spacing(36),
           }}>
-          <BackgroundImage />
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: spacing(43),
-              marginBottom: spacing(36),
-            }}>
-            <Text style={[styles.boldText, styles.mar_13]}>Enter your </Text>
-            <Text style={[styles.boldText, styles.mar_13]}>phone number</Text>
-          </View>
+          <Text style={[styles.boldText, styles.mar_13]}>Enter your </Text>
+          <Text style={[styles.boldText, styles.mar_13]}>phone number</Text>
+        </View>
 
-          <View style={{flex: 2, marginHorizontal: 20}}>
-            <View style={{flex: 1}}>
-              <View style={styles.textInputWrapper}>
-                <View
-                  style={[
-                    styles.inputBox,
-                    {flexDirection: 'row', paddingLeft: 0},
-                  ]}
-                  ref={ref => setRef(ref, 'phoneNumber')}>
-                  <TextInput
-                    value={countryCode}
-                    style={{width: 40, textAlign: 'right'}}
-                  />
-                  <TextInput
-                    style={[{flex: 1}]}
-                    placeholder="Enter phone number"
-                    keyboardType={'number-pad'}
-                    value={phoneNumber}
-                    onFocus={() => onFocus('phoneNumber')}
-                    onBlur={() => onBlur('phoneNumber')}
-                    maxLength={12}
-                    onChangeText={text => setData('phoneNumber', text)}
-                  />
-                </View>
-                <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
-                  {phoneNumberError}
-                </Text>
-              </View>
-            </View>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.dispatch(StackActions.replace('SignInViaEmail'))
-              }>
-              <Text
+        <View style={{flex: 2, marginHorizontal: 20, marginBottom: 14}}>
+          <View style={{flex: 1}}>
+            <View style={styles.textInputWrapper}>
+              <View
                 style={[
-                  styles.colorsText,
-                  {color: purple, textAlign: 'center', marginBottom: 20},
-                ]}>
-                Sign In via Email
+                  styles.inputBox,
+                  {flexDirection: 'row', paddingLeft: 0},
+                ]}
+                ref={ref => setRef(ref, 'phoneNumber')}>
+                <TextInput
+                  value={countryCode}
+                  style={{width: 40, textAlign: 'right'}}
+                />
+                <TextInput
+                  style={[{flex: 1}]}
+                  placeholder="Enter phone number"
+                  keyboardType={'number-pad'}
+                  value={phoneNumber}
+                  onFocus={() => onFocus('phoneNumber')}
+                  onBlur={() => onBlur('phoneNumber')}
+                  maxLength={12}
+                  onChangeText={text => setData('phoneNumber', text)}
+                />
+              </View>
+              <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
+                {phoneNumberError}
               </Text>
-            </TouchableOpacity>
-
-            <SigningButton
-              text={'SIGN IN'}
-              click={() => signIn()}
-              style={[
-                styles.button,
-                {marginBottom: 20},
-                disable && {backgroundColor: disableColor},
-              ]}
-              disable={disable}
-            />
-
-            <View style={[styles.rowViewWrapperCenter]}>
-              <Text style={[styles.bottomText]}>Don't have an account?</Text>
-              <TouchableOpacity
-                style={styles.marL_8}
-                onPress={() =>
-                  navigation.dispatch(StackActions.replace('SignUp'))
-                }>
-                <Text style={styles.colorsText}>Sign Up</Text>
-              </TouchableOpacity>
             </View>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.pop();
+              setTimeout(() => navigation.navigate('SignInViaEmail'), 500);
+            }}>
+            <Text
+              style={[
+                styles.colorsText,
+                {color: purple, textAlign: 'center', marginBottom: 14},
+              ]}>
+              Sign In via Email
+            </Text>
+          </TouchableOpacity>
+
+          <SigningButton
+            text={'SIGN IN'}
+            click={() => signIn()}
+            style={[
+              styles.button,
+              {marginBottom: 20},
+              disable && {backgroundColor: disableColor},
+            ]}
+            disable={disable}
+          />
+
+          <View style={[styles.rowViewWrapperCenter]}>
+            <Text style={[styles.bottomText]}>Don't have an account?</Text>
+            <TouchableOpacity
+              style={styles.marL_8}
+              onPress={() =>
+                navigation.dispatch(StackActions.replace('SignUp'))
+              }>
+              <Text style={styles.colorsText}>Sign Up</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

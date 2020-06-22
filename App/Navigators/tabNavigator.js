@@ -9,8 +9,7 @@ import {
   SvgAccount,
   HomeIcon,
 } from '../Components/allSVG';
-import Account from "../Screens/Account"
-import MyTabBar from './customisedTabView';
+import Account from '../Screens/Account';
 const Tab = createBottomTabNavigator();
 
 function MyTab() {

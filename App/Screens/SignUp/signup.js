@@ -5,28 +5,30 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
-  KeyboardAvoidingView,
   Image,
 } from 'react-native';
-import {SHOW_LOADING} from '../../utils/constant';
 import {connect} from 'react-redux';
-import {CheckArrowSVG, BackArrowBlack} from '../../Components/allSVG';
+import {StackActions} from '@react-navigation/native';
+
+import {SHOW_LOADING} from '../../utils/constant';
+import {CheckArrowSVG} from '../../Components/allSVG';
 import {
   checkField,
   validPassword,
   calculatePasswordScore,
   formatText,
 } from '../../utils/validation';
-import {StackActions} from '@react-navigation/native';
+
+import Header from '../../Components/Header';
 import CallApi from '../../utils/callApi';
 import {showSnackBar} from '../../Components/snackbar';
+
 import {SigningButton} from '../../ReusableComponents/commonComponent';
 import Store from '../../Store/index';
-import {getOtp, resetOtpResponse} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
+
 import {colors} from '../../Themes/colors';
 import Loader from '../../Components/loader';
-import {GoogleSignUp, FacebookSignUp} from '../../Components/socialSignin';
 import BackgroundImage from '../../Components/backgroundImage';
 import getImage from '../../utils/getImage';
 
@@ -124,7 +126,6 @@ function SignUp({navigation, userInfo}) {
 
   let SignIn = () => {
     navigation.dispatch(StackActions.replace('SignIn'));
-    // resetScreen(navigation, 'SignIn');
   };
   let checkValidation = () => {
     if (
@@ -198,19 +199,9 @@ function SignUp({navigation, userInfo}) {
       keyboardShouldPersistTaps={'always'}
       showsVerticalScrollIndicator={false}>
       <Loader visible={isLoading} />
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={{
-          position: 'absolute',
-          top: 20,
-          left: 20,
-          width: 20,
-          height: 20,
-        }}>
-        <BackArrowBlack />
-      </TouchableOpacity>
-      <BackgroundImage />
-      <KeyboardAvoidingView style={styles.signinChildContainer}>
+      <Header navigation={navigation} />
+      <BackgroundImage top={70} />
+      <View style={[styles.signinChildContainer, {marginVertical: 15}]}>
         <View style={styles.titleContainer}>
           <Text style={[styles.boldText, styles.marB_13]}>
             Let's Get Started
@@ -390,7 +381,7 @@ function SignUp({navigation, userInfo}) {
             <Text style={styles.colorsText}>Sign In</Text>
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
+      </View>
     </ScrollView>
   );
 }

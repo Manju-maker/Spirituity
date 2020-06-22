@@ -99,7 +99,6 @@ function isValidEmailFormat(email) {
 }
 
 function isValidPhoneNumber(number) {
-  console.log('numberrrr', number);
   if (number.length != 10) {
     return 'Phone number should be of 10 digit';
   }
@@ -113,13 +112,8 @@ let formatText = (text, field) => {
   let finalText = '';
   return new Promise((resolve, reject) => {
     if (field === 'firstName' || field === 'lastName') {
-      let isAlphabet = /^[A-Za-z]+$/;
-      if (isAlphabet.test(text)) {
-        finalText = text.charAt(0).toUpperCase() + text.slice(1);
-        resolve(finalText);
-      } else {
-        return `${field} accepts only alphabet`;
-      }
+      text = upperFirst(text);
+      resolve(text);
     } else if (field === 'email') {
       finalText = text.toLowerCase();
       resolve(finalText);
@@ -137,7 +131,6 @@ let formatText = (text, field) => {
 export {
   formatText,
   calculatePasswordScore,
-  // isValidFullname,
   checkField,
   isValidPhoneNumber,
   isValidEmailFormat,

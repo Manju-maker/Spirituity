@@ -56,71 +56,70 @@ function HomeScreen({navigation}) {
           style={{
             flex: 1,
             marginTop: 48,
-            marginHorizontal: 24,
             marginBottom: 20,
           }}>
-          <View
-            style={{
-              justifyContent: 'center',
-              flexDirection: 'row',
-              marginBottom: spacing(18),
-            }}>
-            <TouchableOpacity
-              style={{justifyContent: 'center', flex: 1}}
-              activeOpacity={1}>
-              <SearchSVG />
-            </TouchableOpacity>
-
+          <View style={{marginHorizontal: 24}}>
             <View
               style={{
-                flex: 1,
-                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+                marginBottom: spacing(18),
               }}>
-              <TouchableOpacity activeOpacity={1}>
-                <BarzWalletSVG />
-                <View style={{position: 'absolute', top: 25, right: 30}}>
-                  <EmptyCloudCartSVG />
-                </View>
+              <TouchableOpacity
+                style={{justifyContent: 'center', flex: 1}}
+                activeOpacity={1}>
+                <SearchSVG />
               </TouchableOpacity>
+
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'center',
+                }}>
+                <TouchableOpacity activeOpacity={1}>
+                  <BarzWalletSVG />
+                  <View style={{position: 'absolute', top: 25, right: 30}}>
+                    <EmptyCloudCartSVG />
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                style={{justifyContent: 'center', flex: 1}}
+                activeOpacity={1}>
+                <NotificationSVG />
+              </TouchableOpacity>
+              <View />
             </View>
-            <TouchableOpacity
-              style={{justifyContent: 'center', flex: 1}}
-              activeOpacity={1}>
-              <NotificationSVG />
-            </TouchableOpacity>
-            <View />
-          </View>
 
-          <Swiper
-            style={{height: spacing(160)}}
-            activeDot={<View style={styles.activeDot} />}
-            dot={<View style={styles.promotionDot} />}
-            paginationStyle={{bottom: 0}}
-            loop={true}
-            autoplay={true}>
-            {[
-              <BarzPromotion />,
-              <BarzPromotion />,
-              <BarzPromotion />,
-              <BarzPromotion />,
-              <BarzPromotion />,
-              <BarzPromotion />,
-              <BarzPromotion />,
-            ].map(item => {
-              return (
-                <View
-                  style={{
-                    borderRadius: 8,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  {item}
-                </View>
-              );
-            })}
-          </Swiper>
+            <Swiper
+              style={{height: spacing(160)}}
+              activeDot={<View style={styles.activeDot} />}
+              dot={<View style={styles.promotionDot} />}
+              paginationStyle={{bottom: 0}}
+              loop={true}
+              autoplay={true}>
+              {[
+                <BarzPromotion />,
+                <BarzPromotion />,
+                <BarzPromotion />,
+                <BarzPromotion />,
+                <BarzPromotion />,
+                <BarzPromotion />,
+                <BarzPromotion />,
+              ].map(item => {
+                return (
+                  <View
+                    style={{
+                      borderRadius: 8,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    {item}
+                  </View>
+                );
+              })}
+            </Swiper>
 
-          <View style={{}}>
             <Text
               style={[
                 styles.boldWhiteText16,
@@ -173,7 +172,7 @@ function HomeScreen({navigation}) {
           ].map(item => {
             return (
               <>
-                <View style={styles.title}>
+                <View style={[styles.title, {marginHorizontal: 25}]}>
                   <Text style={styles.titleText}>{item.header}</Text>
                   <TouchableOpacity
                     style={{
@@ -187,19 +186,19 @@ function HomeScreen({navigation}) {
                 </View>
                 <ScrollView
                   horizontal={true}
-                  contentContainerStyle={{flexGrow: 1}}>
+                  contentContainerStyle={{flexGrow: 1, paddingHorizontal: 10}}>
                   {[
                     {image: getImage('Liquor')},
                     {image: getImage('wine')},
                     {image: getImage('Liquor')},
                     {image: getImage('wine')},
-                  ].map(item => {
+                  ].map((item, index) => {
                     return (
                       <View
                         style={{
                           width: 109,
                           height: 145,
-                          marginRight: 8,
+                          marginRight: index < 3 ? 8 : undefined,
                           borderRadius: 7,
                           backgroundColor: 'rgb(255,255,255)',
                           shadowColor: '#26000000',

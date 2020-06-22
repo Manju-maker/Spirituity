@@ -3,28 +3,25 @@ import {Text, View, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 
 import styles from '../../Themes/styles';
-import {resendOtp} from '../../Store/actions/userAction';
-import Store from '../../Store';
 import CallApi from '../../utils/callApi';
-// import {} from '../../Store/actions/userAction';
 
 function Timer({
   onRefresh = () => {},
-  refreshFocus = () => {},
   data = {},
   isExpired = () => {},
   maxLimit,
   setLimit = () => {},
-  userInfo,
+  closeTimer,
 }) {
   const [timeLeft, setTimeLeft] = useState(0);
   const [minutes, setMinutes] = useState(3);
   const [disable, setDisable] = useState(false);
   const [message, setMessage] = useState('OTP Expires in ');
+  const [ref, setTimerReference] = useState(null);
   useEffect(() => {
     if (timeLeft == 0) {
       if (minutes == 0) {
-        if (maxLimit === 4) {
+        if (maxLimit === 3) {
           setMessage('OTP Expires in');
           isExpired(false);
           setDisable(false);
@@ -38,11 +35,19 @@ function Timer({
       setMinutes(minutes - 1);
       return;
     }
-    const intervalId = setInterval(() => {
+    let timerRef = setInterval(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);
-    return () => clearInterval(intervalId);
+    setTimerReference(timerRef);
+    return () => clearInterval(timerRef);
   }, [timeLeft, minutes]);
+
+  useEffect(() => {
+    console.log('timer ref >>>>creted>>>', ref);
+    if (closeTimer === true) {
+      clearInterval(ref);
+    }
+  }, [closeTimer]);
 
   let CallService = () => {
     let headers = {
@@ -60,10 +65,8 @@ function Timer({
   };
 
   let resendOTP = () => {
-    // Store.dispatch(resendOtp(data));
     CallService();
     onRefresh();
-    refreshFocus();
     setMinutes(3);
     setTimeLeft(0);
   };
@@ -74,6 +77,7 @@ function Timer({
     setMinutes(15);
     setTimeLeft(0);
   };
+  console.log("timer is running")
   return (
     <>
       <View style={{marginTop: 29, alignItems: 'center'}}>
@@ -97,7 +101,7 @@ function Timer({
             alignItems: 'center',
           }}
           disabled={disable}
-          onPress={maxLimit === 4 ? () => extendsTime() : () => resendOTP()}>
+          onPress={maxLimit === 3 ? () => extendsTime() : () => resendOTP()}>
           <Text style={styles.colorsText}>Resend OTP Code</Text>
         </TouchableOpacity>
       </View>

@@ -95,7 +95,7 @@ function OnBoardingScreen({
   rightImage,
 }) {
   return (
-    <ImageBackground style={{flex: 1}} source={getImage(image)}>
+    <ImageBackground style={{width:"100%",height:"100%"}} source={getImage(image)} resizeMode={"cover"}>
       <View style={{alignItems: 'center', marginTop: spacing(50)}}>
         <BarzWhiteSVG />
         <Text style={styles.boardingTitle}> Your Barz Anywhere</Text>
@@ -114,8 +114,9 @@ function OnBoardingScreen({
         }}>
         <Image
           source={getImage('wineGlass')}
-          style={{flex: 1, position: 'absolute', bottom: spacing(-80)}}
-        />
+          style={{width:spacing(282),height:spacing(305), position: 'absolute', bottom: spacing(-80)}}
+          resizeMode={"contain"}
+       />
 
         <Image source={getImage(leftImage)} style={{...leftImageStyle}} />
 

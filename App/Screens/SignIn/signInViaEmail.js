@@ -7,8 +7,9 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
-  KeyboardAvoidingView,
+  BackHandler,
   Image,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {connect} from 'react-redux';
 import getImage from '../../utils/getImage';
@@ -18,15 +19,14 @@ import {login} from '../../Store/actions/userAction';
 import styles from '../../Themes/styles';
 
 import {colors} from '../../Themes/colors';
+import Header from '../../Components/Header';
 import {SigningButton} from '../../ReusableComponents/commonComponent';
-import {HidePasswordSVG} from '../../Components/allSVG';
 
 import {SHOW_LOADING} from '../../utils/constant';
 import {checkField} from '../../utils/validation';
 import Loader from '../../Components/loader';
 import {spacing} from '../../Themes/fonts';
 
-import {StackActions} from '@react-navigation/native';
 import {showSnackBar} from '../../Components/snackbar';
 import BackgroundImage from '../../Components/backgroundImage';
 import CallApi from '../../utils/callApi';
@@ -36,7 +36,7 @@ const height = spacing(Dimensions.get('window').height / 4);
 function SignInViaEmail({navigation, ...restProps}) {
   let {purple, offWhite, disableColor} = colors;
   let {userInfo} = restProps;
-  let {isLoading = false, loginResponse} = userInfo;
+  let {isLoading = false} = userInfo;
   let eleRef = useRef([]);
   let [state, setState] = useState({
     email: '',
@@ -54,6 +54,20 @@ function SignInViaEmail({navigation, ...restProps}) {
     isPasswordHide,
     disable,
   } = state;
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
+
+  const backAction = () => {
+    navigation.pop();
+    setTimeout(() => navigation.navigate('SignIn'), 500);
+    return true;
+  };
 
   let signIn = () => {
     let data = {email, password};
@@ -75,7 +89,6 @@ function SignInViaEmail({navigation, ...restProps}) {
       })
       .catch(error => {
         let {data, status} = error.response || {};
-        console.log('data', data, 'status', status);
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 401) {
           showSnackBar({
@@ -107,6 +120,7 @@ function SignInViaEmail({navigation, ...restProps}) {
     let isValid = checkField(field, text.trim());
     setState({...state, [field]: text, [`${field}Error`]: isValid});
   };
+
   let setRef = (ref, field) => {
     eleRef.current[field] = ref;
   };
@@ -114,6 +128,7 @@ function SignInViaEmail({navigation, ...restProps}) {
   let onFocus = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: purple}});
   };
+
   let onBlur = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
@@ -126,30 +141,32 @@ function SignInViaEmail({navigation, ...restProps}) {
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
       keyboardShouldPersistTaps={'always'}>
-      <View style={{height}} />
+      <TouchableWithoutFeedback onPress={() => navigation.pop()}>
+        <View style={{height}} />
+      </TouchableWithoutFeedback>
       <Loader visible={isLoading} />
-      <KeyboardAvoidingView style={styles.container}>
+      <View
+        style={{
+          flex: 1,
+          marginTop: 10,
+          backgroundColor: 'white',
+        }}>
+        <Header navigation={navigation} previousScreen={'SignIn'} />
+        <BackgroundImage />
+
         <View
           style={{
-            flex: 1,
-            marginBottom: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: spacing(20),
+            marginBottom: spacing(36),
           }}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              marginTop: 43,
-              marginBottom: 30,
-            }}>
-            <BackgroundImage top={0} />
-            <Text
-              style={[styles.boldText, styles.mar_13, {textAlign: 'center'}]}>
-              Enter your Email
-            </Text>
-          </View>
+          <Text style={[styles.boldText, styles.mar_13, {textAlign: 'center'}]}>
+            Enter your Email
+          </Text>
         </View>
 
-        <View style={{flex: 1, marginHorizontal: 20, marginBottom: 20}}>
+        <View style={{flex: 2, marginHorizontal: 20, marginBottom: 20}}>
           <View style={{flex: 1}}>
             {[
               {
@@ -219,9 +236,10 @@ function SignInViaEmail({navigation, ...restProps}) {
               );
             })}
             <TouchableOpacity
-              onPress={() =>
-                navigation.dispatch(StackActions.replace('ForgotPassword'))
-              }>
+              onPress={() => {
+                navigation.pop();
+                setTimeout(() => navigation.navigate('ForgotPassword'), 500);
+              }}>
               <Text
                 style={[
                   styles.colorsText,
@@ -243,7 +261,7 @@ function SignInViaEmail({navigation, ...restProps}) {
             disable={disable}
           />
         </View>
-      </KeyboardAvoidingView>
+      </View>
     </ScrollView>
   );
 }

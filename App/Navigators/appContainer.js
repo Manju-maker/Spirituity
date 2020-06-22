@@ -1,22 +1,27 @@
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+
 import SignUp from '../Screens/SignUp/signup';
 import SignIn from '../Screens/SignIn/signin';
 import OTP from '../Screens/OTP/otp';
+
 import BoardingScreen from '../Screens/BoardingScreen/boardingScreen';
 import {connect} from 'react-redux';
 import Store from '../Store/index';
+
 import SignInViaEmail from '../Screens/SignIn/signInViaEmail';
 import ForgotPassword from '../Screens/ForgotPassword/forgotPassword';
 import ResetPassword from '../Screens/ResetPassword/resetPassword';
+
 import AsyncStorage from '@react-native-community/async-storage';
 import TabNavigater from './tabNavigator';
 import Events from 'react-native-simple-events';
-import RNOtpVerify from 'react-native-otp-verify';
 
+import RNOtpVerify from 'react-native-otp-verify';
 import {login} from '../Store/actions/userAction';
 import Search from '../Screens/Search/search';
+
 import CloudBar from '../Screens/CloudBar/cloudBar';
 import Notification from '../Screens/Notification/notification';
 
@@ -41,7 +46,6 @@ function AppContainer({userInfo, navigation}) {
       });
 
     AsyncStorage.multiGet(['userInfo', 'showAgeModal']).then(res => {
-      console.log('resposneeeee', res);
       if (res[1][1] == null) {
         Events.trigger('showConfirmationModal', {
           header: 'Age Verification',
@@ -71,6 +75,7 @@ function AppContainer({userInfo, navigation}) {
       ) : (
         <Stack.Navigator
           initialRouteName="BoardingScreen"
+          mode={'modal'}
           screenOptions={{headerShown: false}}>
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="BoardingScreen" component={BoardingScreen} />
