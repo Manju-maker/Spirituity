@@ -25,6 +25,9 @@ import {
   AR_11_10,
   QB_18_20,
   AR_14,
+  QB_22_26,
+  QR_16_26,
+  AR_14_19,
 } from './fonts';
 import {colors} from './colors';
 
@@ -35,6 +38,7 @@ const {
   greyBlack,
   darkBlack,
   black,
+  bringle,
   purple,
   offWhite,
   lightBlack,
@@ -135,6 +139,10 @@ const styles = StyleSheet.create({
     color: black,
     ...QB_24,
   },
+  productDetailQuantity: {
+    ...QR_16_26,
+    color: bringle,
+  },
   boldTextWhite: {
     color: brightWhite,
     ...QB_24,
@@ -188,6 +196,10 @@ const styles = StyleSheet.create({
   shotglassText: {
     ...AM_16_18,
     color: white,
+  },
+  productDetailTitle: {
+    ...QB_22_26,
+    color: bringle,
   },
   faqTitle: {
     ...AB_20_24,
@@ -291,6 +303,10 @@ const styles = StyleSheet.create({
   AR_14_white: {
     ...AR_14,
     color: lightWhite,
+  },
+  AR_14_black: {
+    ...AR_14_19,
+    color: black,
   },
   price: {
     ...AB_11_11,

@@ -1,14 +1,23 @@
-import React from 'react';
-import {Modal, Text, View, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {Modal, Text, View, TouchableOpacity, Image} from 'react-native';
 import styles from '../Themes/styles';
 import {spacing} from '../Themes/fonts';
 import {QuestionmarkSVG, CrossSVG, ShotSVG} from './allSVG';
+import FAQmodal from '../Components/FAQmodal';
 
 function ShotGlassModal({navigation, ...restprops}) {
-  let {visible, setVisible} = restprops;
+  let {visible = false, setVisible = {}} = restprops;
+  console.log('props', navigation);
+
+  const [faqVisible, setFaqVisible] = useState(false);
+  console.log('faq Visile in shotglass', faqVisible);
+
+  let handlePress = () => {
+    setFaqVisible(!faqVisible);
+  };
 
   return (
-    <Modal animationType={'slide'} visible={visible} transparent={true}>
+    <Modal animationType={'fade'} visible={visible} transparent={true}>
       <View
         style={{
           justifyContent: 'center',
@@ -16,6 +25,10 @@ function ShotGlassModal({navigation, ...restprops}) {
           flex: 1,
           backgroundColor: 'rgba(0,0,0,0.5)',
         }}>
+        <FAQmodal
+          faqVisible={faqVisible}
+          setVisible={value => setFaqVisible(value)}
+        />
         <View
           style={{
             backgroundColor: '#9852eb',
@@ -27,19 +40,15 @@ function ShotGlassModal({navigation, ...restprops}) {
             style={{
               flex: 1,
               marginHorizontal: 18,
-              borderWidth: 1,
-              borderColor: 'black',
             }}>
             <View
               style={{
-                borderWidth: 2,
-                borderColor: 'red',
                 top: 10,
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <TouchableOpacity onPress={() => navigation.navigate('FAQmodal')}>
+              <TouchableOpacity onPress={() => handlePress()}>
                 <QuestionmarkSVG />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setVisible(false)}>
@@ -49,11 +58,9 @@ function ShotGlassModal({navigation, ...restprops}) {
 
             <View
               style={{
-                marginTop: scale(26),
+                marginTop: spacing(26),
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderColor: 'green',
-                borderWidth: 0.5,
                 marginVertical: 13,
               }}>
               <Text
@@ -65,26 +72,31 @@ function ShotGlassModal({navigation, ...restprops}) {
               </Text>
               <Text style={styles.shotglassText}>per 700ml bottle</Text>
             </View>
-            <View style={{borderColor: 'yellow', borderWidth: 5}}>
-              {[1, 2, 3].map(item => {
-                return (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      height: 49,
-                      borderColor: 'pink',
-                      borderWidth: 0.5,
-                    }}>
-                    <View>
-                      <View style={{width: 80, height: 35}} />
-                      <Text style={styles.AR_11_18_white}>BAR TIER</Text>
-                    </View>
-                    <ShotSVG />
+            {/* <View style={{borderColor: 'yellow', borderWidth: 5}}> */}
+            {[1, 2, 3].map(item => {
+              return (
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    height: 49,
+                    marginBottom: 6,
+                    marginLeft: 6,
+                    marginRight: 11,
+                  }}>
+                  <View>
+                    <View style={{width: 80, height: 35}} />
+                    <Text style={styles.AR_11_18_white}>BAR TIER</Text>
                   </View>
-                );
-              })}
-            </View>
+                  <Image
+                    source={require('../Assets/images/shots.png')}
+                    style={{width: 62, height: 49}}
+                  />
+                </View>
+              );
+            })}
+            {/* </View> */}
             <Text
               style={[
                 styles.AR_11_11_white,

@@ -49,8 +49,7 @@ function Search({navigation}) {
             <View
               style={{
                 flex: 1,
-                borderColor: 'red',
-                borderWidth: 2,
+
                 alignItems: 'center',
               }}>
               <TouchableOpacity onPress={() => navigation.navigate('CloudBar')}>

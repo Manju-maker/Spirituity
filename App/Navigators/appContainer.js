@@ -24,6 +24,7 @@ import Search from '../Screens/Search/search';
 
 import CloudBar from '../Screens/CloudBar/cloudBar';
 import Notification from '../Screens/Notification/notification';
+import ProductDetail from '../Screens/ProductDetail/productDetail';
 
 const Stack = createStackNavigator();
 
@@ -71,6 +72,7 @@ function AppContainer({userInfo, navigation}) {
           <Stack.Screen name="Search" component={Search} />
           <Stack.Screen name="CloudBar" component={CloudBar} />
           <Stack.Screen name="Notification" component={Notification} />
+          <Stack.Screen name="ProductDetail" component={ProductDetail} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator

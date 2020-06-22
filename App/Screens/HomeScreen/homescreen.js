@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, ImageBackground, View, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {login} from '../../Store/actions/userAction';
@@ -31,19 +31,21 @@ import {
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import getImage from '../../utils/getImage';
 import {spacing} from '../../Themes/fonts';
+import ShotGlassModal from '../../Components/shotGlassModal';
 
 function HomeScreen({navigation}) {
-  // const [visible, setVisibility] = useState(false);
+  const [visible, setVisibility] = useState(false);
 
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <ImageBackground
         style={{flex: 1}}
         source={require('../../Assets/images/homescreen.png')}>
-        {/* <ShotGlassModal
+        <ShotGlassModal
           visible={visible}
           setVisible={value => setVisibility(value)}
-        /> */}
+          navigation={navigation}
+        />
         <View
           style={{
             flex: 1,
@@ -58,6 +60,7 @@ function HomeScreen({navigation}) {
                 marginBottom: spacing(18),
               }}>
               <TouchableOpacity
+                onPress={() => navigation.navigate('Search')}
                 style={{justifyContent: 'center', flex: 1}}
                 activeOpacity={1}>
                 <SearchSVG />
@@ -150,7 +153,11 @@ function HomeScreen({navigation}) {
                       height: 78,
                       marginBottom: 7,
                     }}>
-                    <View style={styles.drinkCategoryStyle}>{item.image}</View>
+                    <TouchableOpacity
+                      style={styles.drinkCategoryStyle}
+                      onFocus={{backgroundColor: 'yellow'}}>
+                      {item.image}
+                    </TouchableOpacity>
                     <Text style={styles.drinkName}>{item.drink}</Text>
                   </View>
                 );
@@ -208,11 +215,19 @@ function HomeScreen({navigation}) {
                             style={{
                               flexDirection: 'row',
                             }}>
-                            <TouchableOpacity activeOpacity={1}>
+                            <TouchableOpacity
+                              activeOpacity={1}
+                              onPress={() => setVisibility(true)}>
                               <ShortGlassSVG />
                             </TouchableOpacity>
                             <Image source={item.image} />
-                            <GreyArrowSVG />
+                            <TouchableOpacity
+                              activeOpacity={1}
+                              onPress={() =>
+                                navigation.navigate('ProductDetail')
+                              }>
+                              <GreyArrowSVG />
+                            </TouchableOpacity>
                           </View>
                           <View
                             style={{

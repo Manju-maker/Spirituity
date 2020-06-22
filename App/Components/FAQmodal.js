@@ -5,10 +5,9 @@ import {spacing} from '../Themes/fonts';
 import {BackArrowBlack} from './allSVG';
 
 function FAQmodal({navigation, ...restprops}) {
-  let {visible} = restprops;
-  const [modalVisible, setVisible] = useState(visible);
+  let {faqVisible, setVisible} = restprops;
   return (
-    <Modal animationType={'slide'} visible={modalVisible} transparent={true}>
+    <Modal animationType={'fade'} visible={faqVisible} transparent={true}>
       <View
         style={{
           justifyContent: 'center',
@@ -31,7 +30,6 @@ function FAQmodal({navigation, ...restprops}) {
               top: 14,
               width: 20,
               height: 20,
-              backgroundColor: 'yellow',
             }}>
             <BackArrowBlack />
           </TouchableOpacity>
