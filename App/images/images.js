@@ -13,8 +13,10 @@ const Boarding3Left = require('../Assets/images/multi-color.png');
 const Boarding3Right = require('../Assets/images/magenta.png');
 const Triangle = require('../Assets/images/triangle.png');
 const Straw = require('../Assets/images/straw.png');
+const pallet = require("../Assets/images/pallet.png")
 
 export {
+  pallet,
   PasswordOff,
   PasswordOn,
   MultiColor3,
