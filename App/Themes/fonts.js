@@ -126,7 +126,7 @@ const AB_20_24 = {
 
 const AB_11_11 = {
   fontSize: scale(11),
-  lineHeight: 14,
+  lineHeight: 11,
   fontFamily: 'AvenirNextLTPro-Bold',
 };
 
@@ -186,7 +186,7 @@ const AM_10_12 = {
 
 const AM_12_14 = {
   fontSize: scale(12),
-  lineHeight: 14,
+  lineHeight: 10,
   fontFamily: 'AvenirNextLTPro-Medium',
 };
 const AM_16_18 = {
@@ -206,9 +206,9 @@ const QB_10_12 = {
   fontFamily: 'Quicksand-Bold',
 };
 
-const AR_9_12 = {
+const AR_9_8 = {
   fontSize: scale(9),
-  // lineHeight: 12,
+  lineHeight: 8,
   fontFamily: 'AvenirNextLTPro-Regular',
 };
 
@@ -248,7 +248,7 @@ export {
   QB_12_14,
   QB_10_12,
   AM_12_14,
-  AR_9_12,
+  AR_9_8,
   AB_11_11,
   AB_20_24,
   AM_16_18,
