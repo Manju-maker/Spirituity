@@ -214,6 +214,7 @@ function HomeScreen({navigation}) {
                           <View
                             style={{
                               flexDirection: 'row',
+                              marginBottom: 4,
                             }}>
                             <TouchableOpacity
                               activeOpacity={1}
@@ -235,20 +236,11 @@ function HomeScreen({navigation}) {
                               justifyContent: 'center',
                             }}>
                             <Text
-                              style={[
-                                styles.liquorTitle,
-                                {borderWidth: 1, borderColor: 'red'},
-                              ]}
+                              style={[styles.liquorTitle]}
                               numberOfLines={1}>
                               Liquor is one line
                             </Text>
-                            <Text
-                              style={[
-                                styles.quantity,
-                                {borderWidth: 1, borderColor: 'green'},
-                              ]}>
-                              700ml
-                            </Text>
+                            <Text style={[styles.quantity]}>700ml</Text>
                             <Text style={[styles.price]}>$167.50</Text>
                             <View style={styles.cloudbarText}>
                               <CloudCartSVG />

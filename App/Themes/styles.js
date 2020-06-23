@@ -275,8 +275,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 1,
     paddingVertical: 2,
-    borderColor: 'red',
-    borderWidth: 1,
     ...space,
   },
   time: {
