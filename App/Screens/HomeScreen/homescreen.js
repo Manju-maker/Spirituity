@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, ImageBackground, View, Image} from 'react-native';
 import {connect} from 'react-redux';
-import {login} from '../../Store/actions/userAction';
+import {getCategory} from '../../Store/actions/userAction';
 import Store from '../../Store/index';
 import styles from '../../Themes/styles';
 
@@ -36,11 +36,19 @@ import ShotGlassModal from '../../Components/shotGlassModal';
 function HomeScreen({navigation}) {
   const [visible, setVisibility] = useState(false);
 
+  useEffect(() => {
+    try {
+      Store.dispatch(getCategory());
+    } catch (err) {
+      console.log('err of catch', err);
+    }
+  }, []);
+
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
-      <ImageBackground
-        style={{flex: 1}}
-        source={require('../../Assets/images/homescreen.png')}>
+    <ImageBackground
+      style={{flex: 1}}
+      source={require('../../Assets/images/homescreen.png')}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <ShotGlassModal
           visible={visible}
           setVisible={value => setVisibility(value)}
@@ -266,8 +274,8 @@ function HomeScreen({navigation}) {
             );
           })}
         </View>
-      </ImageBackground>
-    </ScrollView>
+      </ScrollView>
+    </ImageBackground>
   );
 }
 const mapStateToProps = state => {

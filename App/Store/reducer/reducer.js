@@ -22,8 +22,7 @@ let initialState = {
   forgetResponse: null,
 };
 
-export const reducer = (state, action) => {
-  state = initialState;
+export const reducer = (state = initialState, action) => {
   console.log('state>>>action>>>>>>>>>>>>', action);
   switch (action.type) {
     case RESTE_OTP_RESPONSE: //// checked

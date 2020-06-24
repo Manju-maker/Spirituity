@@ -9,13 +9,12 @@ import {
   RESTE_OTP_RESPONSE, //// checked
   LOGIN_STATUS, //// checked
   GET_OTP_FORGET,
-  FORGET_VIA_OTP,
+  GET_CATEGORY,
 } from '../../utils/constant';
 
-const forgetViaOtp = payload => {
+const getCategory = () => {
   return {
-    type: FORGET_VIA_OTP,
-    payload,
+    type: GET_CATEGORY,
   };
 };
 
@@ -42,7 +41,6 @@ const login = payload => {
 };
 
 const getOtp = payload => {
-  //// checked
   return {
     type: GET_OTP,
     payload,
@@ -90,10 +88,8 @@ const signinViaOtp = payload => {
     payload,
   };
 };
-
-const updatePassword = () => {};
 export {
-  forgetViaOtp,
+  getCategory,
   getOtpForFoget,
   resetOtpResponse,
   login,
