@@ -288,7 +288,11 @@ function Search({navigation}) {
                         <Text style={styles.price}>$167.50</Text>
                         <View style={styles.cloudbarText}>
                           <CloudCartSVG />
-                          <Text style={[styles.text_9_B, {marginLeft: 6}]}>
+                          <Text
+                            style={[
+                              styles.text_9_B,
+                              {marginLeft: 6, paddingTop: 7, paddingBottom: 7},
+                            ]}>
                             CLOUDBAR
                           </Text>
                         </View>

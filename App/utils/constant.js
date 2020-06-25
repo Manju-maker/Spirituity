@@ -23,12 +23,12 @@ const RESTE_OTP_RESPONSE = 'RESTE_OTP_RESPONSE'; /// checked
 const LOGIN_STATUS = 'LOGIN_STATUS';
 const GET_OTP_FORGET = 'GET_OTP_FORGET'; /// checked
 const FORGET_OTP_REQUEST_STATUS = 'FORGET_OTP_REQUEST_STATUS'; ////checked
-const FORGET_VIA_OTP = 'FORGET_VIA_OTP'; //// checked
+const GET_CATEGORY = 'GET_CATEGORY';
 const FORGET_VIA_OTP_STATUS = 'FORGET_VIA_OTP_STATUS'; /// checked
 
 export {
   FORGET_VIA_OTP_STATUS, /// checked
-  FORGET_VIA_OTP, //// checked
+  GET_CATEGORY,
   FORGET_OTP_REQUEST_STATUS, //// checked
   GET_OTP_FORGET, //// checked
   LOGIN_STATUS, ////  cheked

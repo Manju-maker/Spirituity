@@ -25,9 +25,24 @@ const width = Dimensions.get('screen').width;
 
 let buttonWidth = width / 2 - 20;
 const ProductDetail = ({navigation}) => {
+  let notes = [
+    {
+      data:
+        ' Taste pallet infobox. Distinctively fresh and fruity with a hint of pear. Beautifully crafted single malt with adelicately balanced',
+    },
+    {
+      data: 'More tasting notes components here',
+    },
+  ];
   return (
     <View
-      style={{flex: 1, borderColor: 'red', borderWidth: 5, marginBottom: 20}}>
+      style={{
+        flex: 1,
+        borderColor: 'red',
+        borderWidth: 5,
+        marginBottom: 20,
+        backgroundColor: '#FFFFFF',
+      }}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <ImageBackground
           style={{height: 369, width, borderWidth: 3, borderColor: 'black'}}
@@ -106,8 +121,8 @@ const ProductDetail = ({navigation}) => {
         </ImageBackground>
         <View
           style={{
-            borderWidth: 2,
-            borderColor: 'red',
+            // borderWidth: 2,
+            // borderColor: 'red',
             flex: 1,
             marginHorizontal: 20,
           }}>
@@ -125,8 +140,8 @@ const ProductDetail = ({navigation}) => {
           <View
             style={{
               marginTop: 23,
-              borderColor: 'green',
-              borderWidth: 2,
+              // borderColor: 'green',
+              // borderWidth: 2,
               flex: 1,
               marginBottom: 14,
             }}>
@@ -141,12 +156,13 @@ const ProductDetail = ({navigation}) => {
               ]}>{`With a unique freshness from the same Highland spring water they’ve used since 1887, its distinctive fruitiness comes from the high cut point William Grant always insisted upon. \n\n Carefully matured in the finest American oak and European oak sherry casks for at least 12 years, it is mellowed in oak marrying tuns to create its sweet and subtle oak flavours.`}</Text>
             <View
               style={{
-                marginTop: 15,
+                marginTop: 24,
                 flexDirection: 'row',
-                borderWidth: 5,
-                borderColor: 'red',
                 alignItems: 'center',
                 paddingHorizontal: 24,
+                paddingVertical: 17,
+                borderRadius: 8,
+                backgroundColor: '#F6F4F4',
               }}>
               <Image
                 source={getImage('pallet')}
@@ -159,8 +175,6 @@ const ProductDetail = ({navigation}) => {
                     flex: 1,
                     flexWrap: 'wrap',
                     marginLeft: 24,
-                    borderColor: 'red',
-                    borderWidth: 5,
                   },
                 ]}>
                 This liquor is a specialty item. You can only consume this in
@@ -170,79 +184,62 @@ const ProductDetail = ({navigation}) => {
             <View
               style={{
                 marginTop: 8,
-                borderWidth: 2,
-                borderColor: 'red',
+                // borderWidth: 2,
+                // borderColor: 'red',
               }}>
-              <Text style={{marginTop: 28, marginBottom: 16}}>
+              <Text
+                style={[
+                  styles.boldWhiteText16,
+                  {marginTop: 28, marginBottom: 16, color: '#2F0B47'},
+                ]}>
                 Tasting Notes
               </Text>
-              <View
-                style={{
-                  marginTop: 16,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  paddingHorizontal: 24,
-                  height: 77,
-                  borderWidth: 5,
-                  borderColor: 'red',
-                  backgroundColor: '#F6F4F4',
-                }}>
-                <Image
-                  source={getImage('pallet')}
-                  style={{width: 20, height: 20}}
-                />
-                <Text
-                  style={[
-                    styles.text_12,
-                    {
-                      flex: 1,
-                      flexWrap: 'wrap',
-                      marginLeft: 24,
-                      borderColor: 'red',
-                      borderWidth: 5,
-                    },
-                  ]}>
-                  Taste pallet infobox. Distinctively fresh and fruity with a
-                  hint of pear. Beautifully crafted single malt with a
-                  delicately balanced
-                </Text>
-              </View>
-              <View
-                style={{
-                  marginTop: 8,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  paddingHorizontal: 24,
-                  height: 77,
-                  borderWidth: 5,
-                  borderColor: 'red',
-                  backgroundColor: '#F6F4F4',
-                  marginBottom: 24,
-                }}>
-                <Image
-                  source={getImage('pallet')}
-                  style={{width: 20, height: 20}}
-                />
-                <Text
-                  style={[
-                    styles.text_12,
-                    {
-                      flex: 1,
-                      flexWrap: 'wrap',
-                      marginLeft: 24,
-                      borderColor: 'red',
-                      borderWidth: 5,
-                    },
-                  ]}>
-                  Taste pallet infobox. Distinctively fresh and fruity with a
-                  hint of pear. Beautifully crafted single malt with a
-                  delicately balanced
-                </Text>
-              </View>
+              {notes.map((item, index) => {
+                return (
+                  <View
+                    style={{
+                      marginBottom: 8,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      paddingHorizontal: 24,
+                      height: 77,
+                      borderRadius: 8,
+                      // borderWidth: 5,
+                      // borderColor: 'red',
+                      backgroundColor: '#F6F4F4',
+                    }}>
+                    <Image
+                      source={getImage('pallet')}
+                      style={{width: 20, height: 20}}
+                    />
+                    <Text
+                      style={[
+                        styles.text_12,
+                        {
+                          flex: 1,
+                          flexWrap: 'wrap',
+                          marginLeft: 24,
+                          // borderColor: 'red',
+                          // borderWidth: 5,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        },
+                      ]}>
+                      {item.data}
+                    </Text>
+                  </View>
+                );
+              })}
             </View>
             <View style={{marginTop: 8}}>
-              <Text style={{marginTop: 24}}>Yield</Text>
-              <Text style={{marginTop: 14}}>
+              <Text
+                style={[
+                  styles.boldWhiteText16,
+                  {marginTop: 24, color: '#2F0B47'},
+                ]}>
+                Yield
+              </Text>
+              <Text style={[styles.AR_14_black, {marginTop: 14}]}>
                 Approximate number of shots per bottle in bar class level
               </Text>
               <View
@@ -276,7 +273,20 @@ const ProductDetail = ({navigation}) => {
                   }}>
                   <Text>1000 ml</Text>
                 </View>
-                <View></View>
+                <View />
+              </View>
+              <View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    width: 146,
+                    height: 30,
+                    borderWidth: 1,
+                    borderColor: 'red',
+                  }}>
+                  <View style={{width: 90, height: 20}} />
+                  <Text style={{fontSize: 12}}>12 shots</Text>
+                </View>
               </View>
             </View>
           </View>
@@ -292,7 +302,6 @@ const ProductDetail = ({navigation}) => {
         <TouchableOpacity
           style={{
             flex: 1,
-            backgroundColor: 'white',
             borderWidth: 2,
             borderColor: '#9852eb',
             borderTopLeftRadius: 28,
