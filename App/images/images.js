@@ -13,9 +13,15 @@ const Boarding3Left = require('../Assets/images/multi-color.png');
 const Boarding3Right = require('../Assets/images/magenta.png');
 const Triangle = require('../Assets/images/triangle.png');
 const Straw = require('../Assets/images/straw.png');
-const pallet = require("../Assets/images/pallet.png")
+const pallet = require('../Assets/images/pallet.png');
+const Diamond = require('../Assets/images/diamond.png');
+const edit = require('../Assets/images/iconEdit.png');
+const RightArrow = require('../Assets/images/rightArrow.png');
 
 export {
+  RightArrow,
+  edit,
+  Diamond,
   pallet,
   PasswordOff,
   PasswordOn,

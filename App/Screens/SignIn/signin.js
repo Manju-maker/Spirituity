@@ -26,6 +26,7 @@ import Loader from '../../Components/loader';
 
 import BackgroundImage from '../../Components/backgroundImage';
 import {spacing} from '../../Themes/fonts';
+import config from '../../Config/config';
 const height = spacing(Dimensions.get('window').height / 4);
 
 let {purple, offWhite, disableColor} = colors;
@@ -35,7 +36,7 @@ function SignIn({navigation, ...restProps}) {
   let [state, setState] = useState({
     phoneNumber: '',
     phoneNumberError: '',
-    countryCode: '+91',
+    countryCode: config.countryCode,
     disable: true,
   });
   let {phoneNumber, phoneNumberError, countryCode, disable} = state;
@@ -50,7 +51,7 @@ function SignIn({navigation, ...restProps}) {
     };
     let headers = {
       'content-type': 'application/json',
-      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+      token: config.headerToken,
     };
     Store.dispatch({type: SHOW_LOADING, payload: true});
     CallApi('post', 'users/otp', data, headers)
@@ -63,15 +64,14 @@ function SignIn({navigation, ...restProps}) {
       })
       .catch(error => {
         let {data, status} = error.response || {};
-        console.log('Error in sign in???', data);
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 404) {
           showSnackBar({
-            message: 'Mobile number not found.',
+            message: 'phone number not registered',
           });
         } else if (error.message === 'Network Error') {
           showSnackBar({
-            message: 'No Internet Connection,Please check!',
+            message: 'Internet connection is required to proceed',
           });
         } else {
           showSnackBar({message: 'Something Went Wrong'});
@@ -141,10 +141,15 @@ function SignIn({navigation, ...restProps}) {
                 ref={ref => setRef(ref, 'phoneNumber')}>
                 <TextInput
                   value={countryCode}
-                  style={{width: 40, textAlign: 'right'}}
+                  style={{
+                    width: 60,
+                    textAlign: 'center',
+                    borderRightWidth: 1,
+                    borderRightColor: offWhite,
+                  }}
                 />
                 <TextInput
-                  style={[{flex: 1}]}
+                  style={[{flex: 1, paddingLeft: 16}]}
                   placeholder="Enter phone number"
                   keyboardType={'number-pad'}
                   value={phoneNumber}
@@ -191,7 +196,7 @@ function SignIn({navigation, ...restProps}) {
               onPress={() =>
                 navigation.dispatch(StackActions.replace('SignUp'))
               }>
-              <Text style={styles.colorsText}>Sign Up</Text>
+              <Text style={styles.colorsText}>Sign up</Text>
             </TouchableOpacity>
           </View>
         </View>

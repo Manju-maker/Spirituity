@@ -76,7 +76,7 @@ export default function BoardingScreen({navigation}) {
 
           <OnBoardingScreen
             image={'BoardingScreen1'}
-            text={`Your friends are already here! \n Elevate life with Barz`}
+            text={`Your friends are already here! \n \n Elevate life with Barz`}
             navigation={navigation}
             leftImageStyle={{
               width: spacing(84),

@@ -31,6 +31,7 @@ import {colors} from '../../Themes/colors';
 import Loader from '../../Components/loader';
 import BackgroundImage from '../../Components/backgroundImage';
 import getImage from '../../utils/getImage';
+import config from '../../Config/config';
 
 let {purple, offWhite, disableColor} = colors;
 
@@ -61,7 +62,7 @@ function SignUp({navigation, userInfo}) {
     phoneNumberError: '',
     lastNameError: '',
     disable: true,
-    countryCode: '+91',
+    countryCode: config.countryCode,
   });
   const {
     email,
@@ -88,7 +89,7 @@ function SignUp({navigation, userInfo}) {
     };
     let headers = {
       'content-type': 'application/json',
-      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+      token: config.headerToken,
     };
     Store.dispatch({type: SHOW_LOADING, payload: true});
     CallApi('post', 'users/otp', data, headers)
@@ -112,11 +113,11 @@ function SignUp({navigation, userInfo}) {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 409) {
           showSnackBar({
-            message: 'This Number or email is already in use',
+            message: 'phone number or email is already in use',
           });
         } else if (error.message === 'Network Error') {
           showSnackBar({
-            message: 'No Internet Connection,Please check!',
+            message: 'Internet connection is required to proceed',
           });
         } else {
           showSnackBar({message: 'Something Went Wrong'});
@@ -378,7 +379,7 @@ function SignUp({navigation, userInfo}) {
         <View style={[styles.rowViewWrapperCenter, styles.marT_10]}>
           <Text style={[styles.bottomText]}>You have an account already?</Text>
           <TouchableOpacity style={styles.marL_8} onPress={() => SignIn()}>
-            <Text style={styles.colorsText}>Sign In</Text>
+            <Text style={styles.colorsText}>Sign in</Text>
           </TouchableOpacity>
         </View>
       </View>

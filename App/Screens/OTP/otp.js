@@ -25,6 +25,9 @@ import {SquareSVG, StrawSvg} from '../../Components/allSVG';
 import {SHOW_LOADING} from '../../utils/constant';
 import {login} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
+import config from '../../Config/config';
+
+import {digit} from '../../utils/validation';
 
 function OTP({navigation, ...restProps}) {
   let {
@@ -94,7 +97,7 @@ function OTP({navigation, ...restProps}) {
   let callService = (method, route, data, reset = false) => {
     let headers = {
       'content-type': 'application/json',
-      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+      token: config.headerToken,
     };
     Store.dispatch({type: SHOW_LOADING, payload: true});
     CallApi(method, route, data, headers)
@@ -135,7 +138,7 @@ function OTP({navigation, ...restProps}) {
           });
         } else if (error.message === 'Network Error') {
           showSnackBar({
-            message: 'No Internet Connection,Please check!',
+            message: 'Internet connection is required to proceed',
           });
         } else {
           showSnackBar({message: 'Something Went Wrong'});
@@ -160,7 +163,7 @@ function OTP({navigation, ...restProps}) {
       } else if (type === 'signin') {
         let data = {
           mobile,
-          country_code: '+91',
+          country_code: config.countryCode,
           otp: parseInt(otp),
         };
         callService('post', 'users/signin/otp-verify', data);
@@ -192,16 +195,18 @@ function OTP({navigation, ...restProps}) {
   }, [otpArray]);
 
   let handleChange = (text, index) => {
-    const otpArrayCopy = otpArray.concat();
-    otpArrayCopy[index] = text;
-    setOtpArray(otpArrayCopy);
-    if (text != '') {
-      if (index === 0) {
-        eleRef.current['two'].focus();
-      } else if (index === 1) {
-        eleRef.current['three'].focus();
-      } else if (index === 2) {
-        eleRef.current['four'].focus();
+    if (digit(text) || text === '') {
+      const otpArrayCopy = otpArray.concat();
+      otpArrayCopy[index] = text;
+      setOtpArray(otpArrayCopy);
+      if (text != '') {
+        if (index === 0) {
+          eleRef.current['two'].focus();
+        } else if (index === 1) {
+          eleRef.current['three'].focus();
+        } else if (index === 2) {
+          eleRef.current['four'].focus();
+        }
       }
     }
   };
@@ -278,7 +283,7 @@ function OTP({navigation, ...restProps}) {
                 marginTop: 12,
                 marginHorizontal: spacing(44),
               },
-            ]}>{`OTP has been sent to you on your  mobile phone. Please enter it below`}</Text>
+            ]}>{`An OTP has been sent to you on your  mobile phone. Please enter it below`}</Text>
         </View>
         <View
           style={{

@@ -1,3 +1,7 @@
+import Config from 'react-native-config';
+
 export default {
-  serverURL: 'https://devapi.spirituity.cloudzmall.com/api/v1/auth/',
+  serverURL: Config.SERVER_URL,
+  headerToken: Config.HEADERS_TOKEN,
+  countryCode: Config.COUNTRY_CODE,
 };

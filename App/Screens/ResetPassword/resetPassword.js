@@ -139,7 +139,7 @@ function ResetPassword({navigation, ...restProps}) {
             });
           } else if (error.message === 'Network Error') {
             showSnackBar({
-              message: 'No Internet Connection,Please check!',
+              message: 'Internet connection is required to proceed',
             });
           } else {
             showSnackBar({message: 'Something Went Wrong'});

@@ -1,18 +1,16 @@
-import {upperFirst} from 'lodash';
-
 function checkField(field, data) {
   if (data === '') {
-    if (field == 'phoneNumber') field = 'Phone Number';
-    if (field == 'firstName') field = 'Firstname';
-    if (field == 'lastName') field = 'Lastname';
-    if (field == 'email') field = 'Email';
-    if (field == 'password') field = 'Password';
+    if (field == 'phoneNumber') field = 'phone number';
+    if (field == 'firstName') field = 'first name';
+    if (field == 'lastName') field = 'last name';
+    if (field == 'email') field = 'email';
+    if (field == 'password') field = 'password';
 
-    return `${field} cannot be empty`;
+    return `${field} is required`;
   }
   if (field === 'email') {
     if (!isValidEmailFormat(data)) {
-      return 'Enter valid email address';
+      return 'enter valid email address';
     }
     return true;
   }
@@ -44,7 +42,7 @@ function calculatePasswordScore(text, isValid) {
 function validPassword(field, data) {
   let finalMessage = '';
   if (data === '') {
-    return 'Password cannot be empty';
+    return 'password is required';
   }
   if (!digit(data)) {
     if (finalMessage.length !== 0) {
@@ -71,7 +69,7 @@ function validPassword(field, data) {
     finalMessage = finalMessage.concat('min 8 characters');
   }
   if (finalMessage.length > 0) {
-    finalMessage = 'Should contain at least ' + finalMessage;
+    finalMessage = 'should contain at least ' + finalMessage;
   }
   return finalMessage;
 }
@@ -100,10 +98,10 @@ function isValidEmailFormat(email) {
 
 function isValidPhoneNumber(number) {
   if (number.length != 10) {
-    return 'Phone number should be of 10 digit';
+    return 'phone number should be of 10 digit';
   }
   if (!/^[6789]\d{9}$/.test(number)) {
-    return 'Phone Number must start with 6, 7, 8 or 9';
+    return 'phone number should start with 6, 7, 8 or 9';
   }
   return true;
 }
@@ -111,10 +109,7 @@ function isValidPhoneNumber(number) {
 let formatText = (text, field) => {
   let finalText = '';
   return new Promise((resolve, reject) => {
-    if (field === 'firstName' || field === 'lastName') {
-      // text = upperFirst(text);
-      resolve(text);
-    } else if (field === 'email') {
+    if (field === 'email') {
       finalText = text.toLowerCase();
       resolve(finalText);
     } else if (field === 'phoneNumber') {
@@ -135,4 +130,5 @@ export {
   isValidPhoneNumber,
   isValidEmailFormat,
   validPassword,
+  digit,
 };

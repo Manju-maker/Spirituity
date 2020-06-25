@@ -107,12 +107,6 @@ const QB_14_18 = {
   fontFamily: 'Quicksand-Bold',
 };
 
-const QB_22_26 = {
-  fontSize: scale(22),
-  lineHeight: 26,
-  fontFamily: 'Quicksand-Bold',
-};
-
 const AB_14 = {
   fontSize: scale(14),
   lineHeight: 18,
@@ -126,7 +120,7 @@ const AB_20_24 = {
 
 const AB_11_11 = {
   fontSize: scale(11),
-  lineHeight: 11,
+  lineHeight: 14,
   fontFamily: 'AvenirNextLTPro-Bold',
 };
 
@@ -162,11 +156,6 @@ const QR_14_18 = {
   lineHeight: 18,
   fontFamily: 'Quicksand-Regular',
 };
-const QR_16_26 = {
-  fontSize: scale(16),
-  lineHeight: 26,
-  fontFamily: 'Quicksand-Regular',
-};
 const QB_16_20 = {
   fontSize: scale(16),
   lineHeight: 20,
@@ -186,7 +175,7 @@ const AM_10_12 = {
 
 const AM_12_14 = {
   fontSize: scale(12),
-  lineHeight: 10,
+  lineHeight: 14,
   fontFamily: 'AvenirNextLTPro-Medium',
 };
 const AM_16_18 = {
@@ -203,6 +192,11 @@ const QB_12_14 = {
 const QB_10_12 = {
   fontSize: scale(10),
   lineHeight: 12,
+  fontFamily: 'Quicksand-Bold',
+};
+const QB_18_18 = {
+  fontSize: scale(18),
+  lineHeight: 18,
   fontFamily: 'Quicksand-Bold',
 };
 
@@ -223,12 +217,8 @@ const AR_11_10 = {
   fontFamily: 'AvenirNextLTPro-Regular',
 };
 const AR_14 = {
-  fontSize: scale(11),
-  fontFamily: 'AvenirNextLTPro-Regular',
-};
-const AR_14_19 = {
   fontSize: scale(14),
-  lineHeight: 19,
+  lineHeight: 18,
   fontFamily: 'AvenirNextLTPro-Regular',
 };
 
@@ -257,7 +247,5 @@ export {
   AR_11_10,
   QB_18_20,
   AR_14,
-  QB_22_26,
-  QR_16_26,
-  AR_14_19,
+  QB_18_18,
 };

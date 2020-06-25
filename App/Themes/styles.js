@@ -25,9 +25,7 @@ import {
   AR_11_10,
   QB_18_20,
   AR_14,
-  QB_22_26,
-  QR_16_26,
-  AR_14_19,
+  QB_18_18,
 } from './fonts';
 import {colors} from './colors';
 
@@ -38,7 +36,6 @@ const {
   greyBlack,
   darkBlack,
   black,
-  bringle,
   purple,
   offWhite,
   lightBlack,
@@ -139,10 +136,6 @@ const styles = StyleSheet.create({
     color: black,
     ...QB_24,
   },
-  productDetailQuantity: {
-    ...QR_16_26,
-    color: bringle,
-  },
   boldTextWhite: {
     color: brightWhite,
     ...QB_24,
@@ -197,10 +190,6 @@ const styles = StyleSheet.create({
     ...AM_16_18,
     color: white,
   },
-  productDetailTitle: {
-    ...QB_22_26,
-    color: bringle,
-  },
   faqTitle: {
     ...AB_20_24,
     color: darkBlack,
@@ -212,6 +201,32 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginLeft: 7,
     marginRight: 7,
+  },
+  diamond: {
+    width: 24,
+    height: 17,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    transform: [{translateY: 5}],
+  },
+  logout: {
+    height: spacing(31),
+    width: 117,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: '#FFFFFF',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
+  round: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   promotionDot: {
     backgroundColor: 'rgba(255,255,255,.3)',
@@ -301,13 +316,14 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     color: lightWhite,
   },
+
+  QB_18_18_white: {
+    ...QB_18_18,
+    color: lightWhite,
+  },
   AR_14_white: {
     ...AR_14,
     color: lightWhite,
-  },
-  AR_14_black: {
-    ...AR_14_19,
-    color: black,
   },
   price: {
     ...AB_11_11,

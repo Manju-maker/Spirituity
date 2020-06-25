@@ -49,7 +49,8 @@ function Search({navigation}) {
             <View
               style={{
                 flex: 1,
-
+                borderColor: 'red',
+                borderWidth: 2,
                 alignItems: 'center',
               }}>
               <TouchableOpacity onPress={() => navigation.navigate('CloudBar')}>
@@ -288,11 +289,7 @@ function Search({navigation}) {
                         <Text style={styles.price}>$167.50</Text>
                         <View style={styles.cloudbarText}>
                           <CloudCartSVG />
-                          <Text
-                            style={[
-                              styles.text_9_B,
-                              {marginLeft: 6, paddingTop: 7, paddingBottom: 7},
-                            ]}>
+                          <Text style={[styles.text_9_B, {marginLeft: 6}]}>
                             CLOUDBAR
                           </Text>
                         </View>

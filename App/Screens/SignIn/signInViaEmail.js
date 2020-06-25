@@ -30,6 +30,7 @@ import {spacing} from '../../Themes/fonts';
 import {showSnackBar} from '../../Components/snackbar';
 import BackgroundImage from '../../Components/backgroundImage';
 import CallApi from '../../utils/callApi';
+import config from '../../Config/config';
 
 const height = spacing(Dimensions.get('window').height / 4);
 
@@ -73,8 +74,9 @@ function SignInViaEmail({navigation, ...restProps}) {
     let data = {email, password};
     let headers = {
       'content-type': 'application/json',
-      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+      token: config.headerToken,
     };
+    console.log('headers_______________________', headers);
     Store.dispatch({type: SHOW_LOADING, payload: true});
     CallApi('post', 'users/signin', data, headers)
       .then(res => {
@@ -100,7 +102,7 @@ function SignInViaEmail({navigation, ...restProps}) {
           });
         } else if (error.message === 'Network Error') {
           showSnackBar({
-            message: 'No Internet Connection,Please check!',
+            message: 'Internet connection is required to proceed',
           });
         } else {
           showSnackBar({message: 'Something Went Wrong'});

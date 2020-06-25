@@ -87,6 +87,7 @@ function HomeScreen({navigation}) {
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
+                onPress={() => navigation.navigate('Notification')}
                 style={{justifyContent: 'center', flex: 1}}
                 activeOpacity={1}>
                 <NotificationSVG />

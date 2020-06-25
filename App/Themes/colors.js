@@ -17,6 +17,5 @@ const colors = {
   lightWhite: '#ffffff',
   lightPurple: '#6727B4',
   disableColor: '#dedddd',
-  bringle: '#2f0b47',
 };
 export {colors};

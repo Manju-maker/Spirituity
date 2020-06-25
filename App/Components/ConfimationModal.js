@@ -7,6 +7,7 @@ import {AgeModalWavesSVG, AgeModalCirclesSVG} from './allSVG';
 import {colors} from '../Themes/colors';
 import {SigningButton} from '../ReusableComponents/commonComponent';
 import AsyncStorage from '@react-native-community/async-storage';
+import {StackActions} from '@react-navigation/native';
 
 class ConfirmationModal extends Component {
   constructor() {
@@ -26,19 +27,29 @@ class ConfirmationModal extends Component {
       buttonText = '',
       showExit = false,
       showArrow = true,
+      exitModal = false,
+      navigation,
     } = data;
+    console.log('exit modal>>>>>', exitModal);
     let finalData = {
       header,
       message,
       buttonText,
       showExit,
       showArrow,
+      exitModal,
+      navigation,
     };
     this.setState({modalVisible: true, modalData: finalData});
   };
   onClick = () => {
     this.setState({modalVisible: false});
     AsyncStorage.setItem('showAgeModal', JSON.stringify(true));
+  };
+  signup = () => {
+    console.log('functn called signuo');
+    this.setState({modalVisible: false});
+    this.state.modalData.navigation.dispatch(StackActions.replace('SignUp'));
   };
   render() {
     let {
@@ -47,6 +58,7 @@ class ConfirmationModal extends Component {
       buttonText,
       showExit,
       showArrow,
+      exitModal,
     } = this.state.modalData;
     return (
       <Modal animationType={'fade'} visible={this.state.modalVisible}>
@@ -91,7 +103,7 @@ class ConfirmationModal extends Component {
             <SigningButton
               text={buttonText}
               style={[styles.button, {marginHorizontal: 71}]}
-              click={this.onClick}
+              click={exitModal ? this.signup : this.onClick}
               showArrow={showArrow}
             />
             {showExit && (
@@ -100,9 +112,20 @@ class ConfirmationModal extends Component {
                   styles.buttonText,
                   {color: 'black', textAlign: 'center'},
                 ]}
-                onPress={() => {
-                  RNExitApp.exitApp();
-                }}>
+                onPress={
+                  !exitModal
+                    ? () => {
+                        RNExitApp.exitApp();
+                      }
+                    : () =>
+                        this.setState({modalVisible: false}, () => {
+                          this.state.modalData.navigation.dispatch(
+                            StackActions.replace('NoRegister', {
+                              screen: 'Home',
+                            }),
+                          );
+                        })
+                }>
                 EXIT
               </Text>
             )}

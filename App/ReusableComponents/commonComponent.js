@@ -131,7 +131,9 @@ function OnBoardingScreen({
         <TouchableOpacity
           style={styles.barzButton}
           onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.barzButtonText}>JOIN BARZ</Text>
+          <Text style={[styles.barzButtonText, {letterSpacing: 1}]}>
+            JOIN BARZ
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -140,11 +142,16 @@ function OnBoardingScreen({
               backgroundColor: transparent,
               borderWidth: 1,
               borderColor: brightWhite,
+              flexDirection: 'row',
               marginBottom: spacing(29),
             },
           ]}
           onPress={() => navigation.navigate('SignIn')}>
-          <Text style={styles.barzButtonText}>SIGN IN</Text>
+          <Text
+            style={[styles.barzButtonText, {marginRight: 8, letterSpacing: 1}]}>
+            SIGN IN
+          </Text>
+          <ForwardArrowSVG />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('NoRegister')}>
           <Text style={styles.barzButtonText}>EXPLORE APP</Text>

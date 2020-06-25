@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import styles from '../../Themes/styles';
 import CallApi from '../../utils/callApi';
+import config from '../../Config/config';
 
 function Timer({
   onRefresh = () => {},
@@ -22,7 +23,7 @@ function Timer({
     if (timeLeft == 0) {
       if (minutes == 0) {
         if (maxLimit === 3) {
-          setMessage('OTP Expires in');
+          setMessage('OTP expires in');
           isExpired(false);
           setDisable(false);
           setLimit();
@@ -52,7 +53,7 @@ function Timer({
   let CallService = () => {
     let headers = {
       'content-type': 'application/json',
-      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+      token: config.headerToken,
     };
     console.log('data for resed >>>', data);
     CallApi('put', 'users/otp/resend', data, headers)
@@ -77,7 +78,7 @@ function Timer({
     setMinutes(15);
     setTimeLeft(0);
   };
-  console.log("timer is running")
+  console.log('timer is running');
   return (
     <>
       <View style={{marginTop: 29, alignItems: 'center'}}>

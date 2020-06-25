@@ -24,6 +24,7 @@ import CallApi from '../../utils/callApi';
 import {formatText} from '../../utils/validation';
 import BackgroundImage from '../../Components/backgroundImage';
 import {spacing} from '../../Themes/fonts';
+import config from '../../Config/config';
 const height = spacing(Dimensions.get('window').height / 4);
 
 function ForgotPassword({navigation, ...restProps}) {
@@ -35,7 +36,7 @@ function ForgotPassword({navigation, ...restProps}) {
     emailError: '',
     phoneNumber: '',
     phoneNumberError: '',
-    countryCode: '+91',
+    countryCode: config.countryCode,
     disable: true,
   });
   let [showEmailField, setEmailField] = useState(false);
@@ -93,7 +94,7 @@ function ForgotPassword({navigation, ...restProps}) {
   let callService = (method, route, data) => {
     let headers = {
       'content-type': 'application/json',
-      token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+      token: config.headerToken,
     };
     Store.dispatch({type: SHOW_LOADING, payload: true});
     CallApi(method, route, data, headers)
@@ -124,7 +125,7 @@ function ForgotPassword({navigation, ...restProps}) {
           });
         } else if (error.message === 'Network Error') {
           showSnackBar({
-            message: 'No Internet Connection,Please check!',
+            message: 'Internet connection is required to proceed',
           });
         } else {
           showSnackBar({message: 'Something Went Wrong'});
@@ -168,9 +169,12 @@ function ForgotPassword({navigation, ...restProps}) {
             justifyContent: 'center',
             alignItems: 'center',
             marginTop: spacing(20),
+            height: 20,
             marginBottom: spacing(36),
           }}>
-          <Text style={[styles.boldText, styles.mar_13]}>Enter your Email</Text>
+          <Text style={[styles.boldText, styles.mar_13, {textAlign: 'center'}]}>
+            {showEmailField ? `Enter your Email` : `Enter your \n phone number`}
+          </Text>
         </View>
 
         <View style={{flex: 2, marginHorizontal: 20}}>
@@ -246,25 +250,27 @@ function ForgotPassword({navigation, ...restProps}) {
             )}
           </View>
           <View style={{alignSelf: 'center', marginBottom: 30}}>
-            <TouchableOpacity
-              style={{marginBottom: 10}}
-              onPress={() => {
-                setState({...state, disable: true});
-                setEmailField(true);
-              }}>
-              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
-                Reset Using Email
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setState({...state, disable: true});
-                setEmailField(false);
-              }}>
-              <Text style={[styles.colorsText, {textAlign: 'center'}]}>
-                Reset Using Mobile Number
-              </Text>
-            </TouchableOpacity>
+            {!showEmailField ? (
+              <TouchableOpacity
+                onPress={() => {
+                  setState({...state, disable: true});
+                  setEmailField(true);
+                }}>
+                <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+                  Reset using email
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={() => {
+                  setState({...state, disable: true});
+                  setEmailField(false);
+                }}>
+                <Text style={[styles.colorsText, {textAlign: 'center'}]}>
+                  Reset using phone number
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           <SigningButton
@@ -272,7 +278,7 @@ function ForgotPassword({navigation, ...restProps}) {
             click={() => submit()}
             style={[
               styles.button,
-              {marginBottom: 10},
+              {marginBottom: 14},
               disable && {backgroundColor: disableColor},
             ]}
             disable={disable}
