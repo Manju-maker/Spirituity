@@ -146,7 +146,7 @@ function ResetPassword({navigation, ...restProps}) {
           }
         });
     } else {
-      showSnackBar({message: 'Password mismatched'});
+      showSnackBar({message: `Passwords doesn't match`});
     }
   };
 

@@ -97,10 +97,10 @@ function SignUp({navigation, userInfo}) {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (response.status === 200) {
           let data = {
-            firstName,
-            lastName,
+            firstname: firstName.trim(),
+            lastname: lastName.trim(),
             country_code: countryCode,
-            email,
+            email: email.trim(),
             password,
             mobile: phoneNumber.replace(/\s/g, ''),
             type: 'signup',
@@ -290,7 +290,13 @@ function SignUp({navigation, userInfo}) {
                     autoCapitalize={item.autoCapitalize}
                     onFocus={() => onFocused(item.field)}
                     onBlur={() => onBlur(item.field)}
-                    maxLength={item.field === 'phoneNumber' ? 12 : undefined}
+                    maxLength={
+                      item.field === 'phoneNumber'
+                        ? 12
+                        : item.field === 'email'
+                        ? 50
+                        : 30
+                    }
                     keyboardType={
                       item.field === 'phoneNumber' ? 'number-pad' : undefined
                     }

@@ -284,6 +284,10 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     ...space,
   },
+  AM_12_14: {
+    ...AM_12_14,
+    color: lightWhite,
+  },
   quantity: {
     ...AR_9_8,
     color: black,
@@ -324,6 +328,10 @@ const styles = StyleSheet.create({
   AR_14_white: {
     ...AR_14,
     color: lightWhite,
+  },
+  AB_14_bold: {
+    ...AB_14,
+    color: darkBlack,
   },
   price: {
     ...AB_11_11,

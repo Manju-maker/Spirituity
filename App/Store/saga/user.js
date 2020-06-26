@@ -1,5 +1,5 @@
 import {all, put, takeLatest, call} from 'redux-saga/effects';
-import {SHOW_LOADING, GET_CATEGORY} from '../../utils/constant';
+import {SHOW_LOADING, GET_CATEGORY, ALL_CATEGORY} from '../../utils/constant';
 import CallApi from '../../utils/callApi';
 
 let headers = {
@@ -18,7 +18,8 @@ export function* getCategory() {
       {},
       headers,
     );
-    console.log('ressssssssssssss>>>>>>>', response.data.response);
+    let data = response.data.response;
+    yield put({type: ALL_CATEGORY, payload: data});
   } catch (err) {
     // yield put({type: SHOW_LOADING, payload: false});
     console.log('errrrr>>>>>>>', err);

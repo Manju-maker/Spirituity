@@ -12,6 +12,7 @@ import {
   Modal,
   Button,
   TextInput,
+  ImageBackground,
 } from 'react-native';
 import {spacing} from '../Themes/fonts';
 import getImage from '../utils/getImage';
@@ -21,6 +22,7 @@ import {
   CrossSVG,
   ForwardArrowSVG,
   PurpleForwardArrowSVG,
+  BackArrowWhite,
 } from '../Components/allSVG';
 
 let {lightBlack, offWhite, darkBlack, lightWhite} = colors;
@@ -35,15 +37,6 @@ function ProfileSettings({navigation, userInfo}) {
   }, [selectedScreen]);
 
   let fields = {
-    // changeEmail: [
-    //   {
-    //     // headerText: 'Change or Verify Email',
-    //     email: 'manju@gmail.com',
-    //     password: '22334656',
-    //     // buttonText: 'SAVE & VERIFY EMAIL',
-    //   },
-    // ],
-
     changeEmail: [
       {value: 'manju@gmail.com', title: 'Email'},
       {value: '22334656', title: 'Enter Password'},
@@ -73,8 +66,6 @@ function ProfileSettings({navigation, userInfo}) {
       buttonText: 'SAVE CHANGES',
     },
   };
-  // console.log('editing enabled', fields[selectedScreen]);
-
   let commonTextInputStyle = {
     marginTop: 10,
     borderWidth: 1,
@@ -99,209 +90,236 @@ function ProfileSettings({navigation, userInfo}) {
       contentContainerStyle={{flexGrow: 1}}
       showsVerticalScrollIndicator={false}>
       <View style={{flex: 1}}>
-        <View
-          style={{height: spacing(100), borderColor: 'red', borderWidth: 5}}
-        />
-        <View
-          style={{
-            paddingVertical: 24,
-            paddingHorizontal: 20,
-            borderBottomWidth: 1,
-            borderBottomColor: '#EDEDED',
-            backgroundColor: lightWhite,
-          }}>
+        <ImageBackground
+          style={{flex: 1}}
+          source={getImage('searchBackGround')}>
           <View
             style={{
-              justifyContent: 'center',
+              height: spacing(108),
               alignItems: 'center',
             }}>
-            <View style={styles.round}>
-              <Text style={styles.QB_18_18_white}>MS</Text>
-              <Image source={getImage('Diamond')} style={styles.diamond} />
-            </View>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={{position: 'absolute', left: 20, bottom: 22}}>
+              <BackArrowWhite />
+            </TouchableOpacity>
+
             <Text
-              style={{
-                marginTop: 16,
-                color: 'rgb(103,39,180)',
-                fontSize: 18,
-                fontFamily: 'Quicksand-Bold',
-                lineHeight: 20,
-              }}>
-              Miguel Salvador
+              style={[
+                styles.AM_12_14,
+                {
+                  lineHeight: 16,
+                  marginTop: 66,
+                },
+              ]}>
+              Account
             </Text>
           </View>
-          <View style={{marginTop: 35}}>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={[styles.boldWhiteText16, {color: 'rgb(47,11,71)'}]}>
-                Profile Settings
-              </Text>
-              <TouchableOpacity
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}
-                onPress={() => setEditing(value => !value)}>
-                <Image source={getImage('edit')} />
-                <Text
-                  style={{
-                    marginLeft: 5,
-                    color: isEditing ? 'rgb(194,194,194)' : 'rgb(103,39,180)',
-                    fontFamily: 'Quicksand-Bold',
-                    fontSize: 12,
-                  }}>
-                  {isEditing ? 'EDITING SETTINGS' : 'EDIT'}
-                </Text>
-              </TouchableOpacity>
-            </View>
+          <View
+            style={{
+              paddingVertical: 24,
+              paddingHorizontal: 20,
+              borderBottomWidth: 1,
+              borderBottomColor: '#EDEDED',
+              backgroundColor: lightWhite,
+            }}>
             <View
               style={{
-                marginTop: 24,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}>
-              <Text style={[styles.AR_14_white, {color: lightBlack}]}>
-                Email
+              <View style={styles.round}>
+                <Text style={styles.QB_18_18_white}>MS</Text>
+                <Image source={getImage('Diamond')} style={styles.diamond} />
+              </View>
+              <Text
+                style={{
+                  marginTop: 16,
+                  color: 'rgb(103,39,180)',
+                  fontSize: 18,
+                  fontFamily: 'Quicksand-Bold',
+                  lineHeight: 20,
+                }}>
+                Miguel Salvador
               </Text>
+            </View>
+            <View style={{marginTop: 35}}>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text
+                  style={[styles.boldWhiteText16, {color: 'rgb(47,11,71)'}]}>
+                  Profile Settings
+                </Text>
+                <TouchableOpacity
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}
+                  onPress={() => setEditing(value => !value)}>
+                  <Image source={getImage('edit')} />
+                  <Text
+                    style={{
+                      marginLeft: 5,
+                      color: isEditing ? 'rgb(194,194,194)' : 'rgb(103,39,180)',
+                      fontFamily: 'Quicksand-Bold',
+                      fontSize: 12,
+                    }}>
+                    {isEditing ? 'EDITING SETTINGS' : 'EDIT'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
               <View
                 style={{
-                  width: 75,
-                  height: 23,
-                  borderRadius: 8,
-                  backgroundColor: 'rgb(204,240,202)',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  marginTop: 24,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <Text style={[styles.AR_14_white, {color: lightBlack}]}>
+                  Email
+                </Text>
+                <View
+                  style={{
+                    width: 75,
+                    height: 23,
+                    borderRadius: 8,
+                    backgroundColor: 'rgb(204,240,202)',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text
+                    style={{
+                      color: 'rgb(8,141,0)',
+                      fontFamily: 'AvenirNext-DemiBold',
+                      fontSize: 11,
+                    }}>
+                    VERIFIED
+                  </Text>
+                </View>
+              </View>
+              <TouchableOpacity
+                activeOpacity={1}
+                style={commonTextInputStyle}
+                onPress={() => {
+                  isEditing ? setModalVisible(true) : undefined;
+                  setSelectedScreen('changeEmail');
                 }}>
                 <Text
-                  style={{
-                    color: 'rgb(8,141,0)',
-                    fontFamily: 'AvenirNext-DemiBold',
-                    fontSize: 11,
-                  }}>
-                  VERIFIED
+                  style={[
+                    isEditing ? styles.AB_14_bold : styles.AR_14_white,
+                    {color: darkBlack},
+                  ]}>
+                  emailusedforregistration@gmail.com
                 </Text>
+              </TouchableOpacity>
+              <View style={{marginTop: 24}}>
+                <Text style={[styles.AR_14_white, {color: lightBlack}]}>
+                  Phone number
+                </Text>
+                <TouchableOpacity
+                  activeOpacity={1}
+                  style={commonTextInputStyle}
+                  onPress={() => {
+                    isEditing ? setModalVisible(true) : undefined;
+                    setSelectedScreen('changePhoneNumber');
+                  }}>
+                  <Text style={[styles.AR_14_white, {color: darkBlack}]}>
+                    {mobile}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={{marginTop: 24}}>
+                <Text style={[styles.AR_14_white, {color: lightBlack}]}>
+                  Password
+                </Text>
+                <TouchableOpacity
+                  activeOpacity={1}
+                  style={commonTextInputStyle}
+                  onPress={() => {
+                    isEditing ? setModalVisible(true) : undefined;
+                    setSelectedScreen('changePassword');
+                  }}>
+                  <Text
+                    style={[styles.AR_14_white, {color: darkBlack}]}
+                    secureTextEntry={true}>
+                    * * * * *
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
-            <TouchableOpacity
-              activeOpacity={1}
-              style={commonTextInputStyle}
-              onPress={() => {
-                isEditing ? setModalVisible(true) : undefined;
-                setSelectedScreen('changeEmail');
-              }}>
-              <Text style={[styles.AR_14_white, {color: darkBlack}]}>
-                emailusedforregistration@gmail.com
-              </Text>
-            </TouchableOpacity>
-            <View style={{marginTop: 24}}>
-              <Text style={[styles.AR_14_white, {color: lightBlack}]}>
-                Phone number
-              </Text>
-              <TouchableOpacity
-                activeOpacity={1}
-                style={commonTextInputStyle}
-                onPress={() => {
-                  isEditing ? setModalVisible(true) : undefined;
-                  setSelectedScreen('changePhoneNumber');
-                }}>
-                <Text style={[styles.AR_14_white, {color: darkBlack}]}>
-                  {mobile}
-                </Text>
-              </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              backgroundColor: 'rgb(248,248,248)',
+              marginTop: 9,
+              marginHorizontal: 8,
+              marginBottom: spacing(50),
+            }}>
+            <View style={commonField}>
+              <Text style={styles.colorsText}>View Membership Status</Text>
+              <PurpleForwardArrowSVG />
             </View>
-            <View style={{marginTop: 24}}>
-              <Text style={[styles.AR_14_white, {color: lightBlack}]}>
-                Password
-              </Text>
-              <TouchableOpacity
-                activeOpacity={1}
-                style={commonTextInputStyle}
-                onPress={() => {
-                  isEditing ? setModalVisible(true) : undefined;
-                  setSelectedScreen('changePassword');
-                }}>
-                <Text
-                  style={[styles.AR_14_white, {color: darkBlack}]}
-                  secureTextEntry={true}>
-                  * * * * *
-                </Text>
-              </TouchableOpacity>
+            <View style={commonField}>
+              <Text style={styles.colorsText}>View Saved Payment Methods</Text>
+              <PurpleForwardArrowSVG />
             </View>
           </View>
-        </View>
-        <View
-          style={{
-            backgroundColor: 'rgb(248,248,248)',
-            marginTop: 9,
-            marginHorizontal: 8,
-            marginBottom: spacing(50),
-          }}>
-          <View style={commonField}>
-            <Text style={styles.colorsText}>View Membership Status</Text>
-            <PurpleForwardArrowSVG />
-          </View>
-          <View style={commonField}>
-            <Text style={styles.colorsText}>View Saved Payment Methods</Text>
-            <PurpleForwardArrowSVG />
-          </View>
-        </View>
-        <Modal
-          visible={showModal}
-          transparent={true}
-          animationType={'slide'}
-          onRequestClose={() => {
-            setEditing(false);
-            setModalVisible(false);
-          }}>
-          <View style={{flex: 1, justifyContent: 'flex-end'}}>
-            <View
-              style={{
-                // height: 200,
-                backgroundColor: 'white',
-
-                borderWidth: 2,
-                borderColor: 'red',
-              }}>
-              <Header
-                header={
-                  selectedScreen.length > 0 &&
-                  headerText[selectedScreen].headerTitle
-                }
-                closeModal={value => setModalVisible(value)}
-              />
+          <Modal
+            visible={showModal}
+            transparent={true}
+            animationType={'slide'}
+            onRequestClose={() => {
+              setEditing(false);
+              setModalVisible(false);
+            }}>
+            <View style={{flex: 1, justifyContent: 'flex-end'}}>
               <View
                 style={{
-                  marginHorizontal: 20,
-                  marginBottom: 14,
+                  // height: 200,
+                  backgroundColor: 'white',
+
                   borderWidth: 2,
-                  borderColor: 'green',
-                  paddingTop: 25,
+                  borderColor: 'red',
                 }}>
-                {selectedScreen.length > 0 &&
-                  fields[selectedScreen].map((item, index) => {
-                    console.log('item>>>>>>>>>>>>>>>>>', item);
-                    return (
-                      <View>
-                        <Text
-                          style={[
-                            styles.AR_14_white,
-                            {color: lightBlack, marginVertical: 13},
-                          ]}>
-                          {item.title}
-                        </Text>
-                        <View style={[styles.inputBox, {paddingLeft: 0}]}>
-                          <TextInput
-                            style={{
-                              height: 50,
-                              borderRadius: 8,
-                              paddingLeft: 16,
-                              borderColor: 'red',
-                              borderWidth: 2,
-                            }}
-                            value={item.value}
-                          />
-                        </View>
-                        {/* <Text
+                <Header
+                  header={
+                    selectedScreen.length > 0 &&
+                    headerText[selectedScreen].headerTitle
+                  }
+                  closeModal={value => setModalVisible(value)}
+                />
+                <View
+                  style={{
+                    marginHorizontal: 20,
+                    marginBottom: 14,
+                    borderWidth: 2,
+                    borderColor: 'green',
+                    paddingTop: 25,
+                  }}>
+                  {selectedScreen.length > 0 &&
+                    fields[selectedScreen].map((item, index) => {
+                      console.log('item>>>>>>>>>>>>>>>>>', item);
+                      return (
+                        <View>
+                          <Text
+                            style={[
+                              styles.AR_14_white,
+                              {color: lightBlack, marginVertical: 13},
+                            ]}>
+                            {item.title}
+                          </Text>
+                          <View style={[styles.inputBox, {paddingLeft: 0}]}>
+                            <TextInput
+                              style={{
+                                height: 50,
+                                borderRadius: 8,
+                                paddingLeft: 16,
+                                borderColor: 'red',
+                                borderWidth: 2,
+                              }}
+                              value={item.value}
+                            />
+                          </View>
+                          {/* <Text
                         style={[
                           styles.AR_14_white,
                           {color: lightBlack, marginTop: 12, marginBottom: 10},
@@ -320,33 +338,34 @@ function ProfileSettings({navigation, userInfo}) {
                           value={item.password}
                         />
                       </View> */}
-                      </View>
-                    );
-                  })}
-                <TouchableOpacity
-                  style={{
-                    height: 56,
-                    backgroundColor: 'purple',
-                    borderRadius: 28,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: 25,
-                  }}>
-                  <Text
-                    style={[
-                      styles.barzButtonText,
-                      {letterSpacing: 1, marginRight: 7},
-                    ]}>
-                    {selectedScreen.length > 0 &&
-                      headerText[selectedScreen].buttonText}
-                  </Text>
-                  <ForwardArrowSVG />
-                </TouchableOpacity>
+                        </View>
+                      );
+                    })}
+                  <TouchableOpacity
+                    style={{
+                      height: 56,
+                      backgroundColor: 'purple',
+                      borderRadius: 28,
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: 25,
+                    }}>
+                    <Text
+                      style={[
+                        styles.barzButtonText,
+                        {letterSpacing: 1, marginRight: 7},
+                      ]}>
+                      {selectedScreen.length > 0 &&
+                        headerText[selectedScreen].buttonText}
+                    </Text>
+                    <ForwardArrowSVG />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-        </Modal>
+          </Modal>
+        </ImageBackground>
       </View>
     </ScrollView>
   );

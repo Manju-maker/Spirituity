@@ -15,6 +15,7 @@ import {
   BackArrowWhite,
   ProductDetailWavesSVG,
   YellowCircleSVG,
+  SpecialLiqourSVG,
 } from '../../Components/allSVG';
 import {spacing} from '../../Themes/fonts';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -164,10 +165,11 @@ const ProductDetail = ({navigation}) => {
                 borderRadius: 8,
                 backgroundColor: '#F6F4F4',
               }}>
-              <Image
+              {/* <Image
                 source={getImage('pallet')}
                 style={{width: 20, height: 20}}
-              />
+              /> */}
+              <SpecialLiqourSVG />
               <Text
                 style={[
                   styles.text_12,

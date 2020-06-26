@@ -33,17 +33,21 @@ import getImage from '../../utils/getImage';
 import {spacing} from '../../Themes/fonts';
 import ShotGlassModal from '../../Components/shotGlassModal';
 
-function HomeScreen({navigation}) {
+function HomeScreen({navigation, userInfo}) {
   const [visible, setVisibility] = useState(false);
+  const [allCategories, setAllCategories] = useState([]);
+
+  let {allCategory} = userInfo;
 
   useEffect(() => {
-    try {
-      Store.dispatch(getCategory());
-    } catch (err) {
-      console.log('err of catch', err);
-    }
+    Store.dispatch(getCategory());
   }, []);
 
+  useEffect(() => {
+    setAllCategories(allCategory);
+  }, [userInfo]);
+
+  console.log('allcategory>>>>>>>>>>>>>>>', allCategories);
   return (
     <ImageBackground
       style={{flex: 1}}
@@ -87,7 +91,7 @@ function HomeScreen({navigation}) {
                 </TouchableOpacity>
               </View>
               <TouchableOpacity
-                onPress={() => navigation.navigate('Notification')}
+                onPress={() => navigation.navigate('ProductDetail')}
                 style={{justifyContent: 'center', flex: 1}}
                 activeOpacity={1}>
                 <NotificationSVG />
@@ -142,145 +146,140 @@ function HomeScreen({navigation}) {
                 flexWrap: 'wrap',
                 justifyContent: 'space-between',
               }}>
-              {[
-                {drink: 'Vodka', image: <VodkaSVG />},
-                {drink: 'Brandy', image: <BrandySVG />},
-                {drink: 'Whiskey', image: <WhiskeySVG />},
-                {drink: 'Rum', image: <RumSVG />},
-                {drink: 'Gin', image: <GinSVG />},
-                {drink: 'Tequila', image: <TaquilaSVG />},
-                {drink: 'Wine', image: <WineSVG />},
-                {drink: 'Beer', image: <BeerSVG />},
-                {drink: 'Non Alcoholic', image: <NonAlcoholicSVG />},
-                {drink: 'Non Alcoholic', image: <MoreSVG />},
-              ].map(item => {
-                return (
-                  <View
-                    style={{
-                      width: 52,
-                      marginHorizontal: 7,
-                      height: 78,
-                      marginBottom: 7,
-                    }}>
-                    <TouchableOpacity
-                      style={styles.drinkCategoryStyle}
-                      onFocus={{backgroundColor: 'yellow'}}>
-                      {item.image}
-                    </TouchableOpacity>
-                    <Text style={styles.drinkName}>{item.drink}</Text>
-                  </View>
-                );
-              })}
+              {allCategories.length > 0 &&
+                allCategories.map(item => {
+                  return (
+                    <View
+                      style={{
+                        width: 52,
+                        marginHorizontal: 7,
+                        height: 78,
+                        marginBottom: 7,
+                      }}>
+                      <TouchableOpacity
+                        style={styles.drinkCategoryStyle}
+                        onFocus={{backgroundColor: 'yellow'}}>
+                        <Image
+                          source={{
+                            uri: item.img_key,
+                          }}
+                          style={{width: 25, height: 25}}
+                        />
+                      </TouchableOpacity>
+                      <Text style={styles.drinkName}>{item.category_name}</Text>
+                    </View>
+                  );
+                })}
             </View>
           </View>
-          {[
-            {header: 'Whiskey', showAll: 'View all'},
-            {header: 'Wine', showAll: 'View all'},
-            {header: 'Brandy', showAll: 'View all'},
-          ].map(item => {
-            return (
-              <>
-                <View style={[styles.title, {marginHorizontal: 25}]}>
-                  <Text style={styles.titleText}>{item.header}</Text>
-                  <TouchableOpacity
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}
-                    activeOpacity={1}>
-                    <Text style={styles.viewAll}>{item.showAll}</Text>
-                    <ArrowSVG />
-                  </TouchableOpacity>
-                </View>
-                <ScrollView
-                  horizontal={true}
-                  contentContainerStyle={{flexGrow: 1, paddingHorizontal: 10}}>
-                  {[
-                    {image: getImage('Liquor')},
-                    {image: getImage('wine')},
-                    {image: getImage('Liquor')},
-                    {image: getImage('wine')},
-                  ].map((item, index) => {
-                    return (
-                      <View
-                        style={{
-                          width: 109,
-                          height: 145,
-                          marginRight: index < 3 ? 8 : undefined,
-                          borderRadius: 7,
-                          backgroundColor: 'rgb(255,255,255)',
-                          shadowColor: '#26000000',
-                          shadowOffset: {height: 5, width: 0},
-                          shadowOpacity: 1,
-                          shadowRadius: 1,
-                          elevation: 5,
-                        }}>
+          {allCategories.length > 0 &&
+            allCategories.map(item => {
+              return (
+                <>
+                  <View style={[styles.title, {marginHorizontal: 25}]}>
+                    <Text style={styles.titleText}>{item.category_name}</Text>
+                    <TouchableOpacity
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
+                      activeOpacity={1}>
+                      <Text style={styles.viewAll}>View all</Text>
+                      <ArrowSVG />
+                    </TouchableOpacity>
+                  </View>
+                  <ScrollView
+                    horizontal={true}
+                    contentContainerStyle={{
+                      flexGrow: 1,
+                      paddingHorizontal: 10,
+                    }}>
+                    {[
+                      {image: getImage('Liquor')},
+                      {image: getImage('wine')},
+                      {image: getImage('Liquor')},
+                      {image: getImage('wine')},
+                    ].map((item, index) => {
+                      return (
                         <View
                           style={{
-                            paddingHorizontal: 6,
-                            paddingVertical: 5,
+                            width: 109,
+                            height: 145,
+                            marginRight: index < 3 ? 8 : undefined,
+                            borderRadius: 7,
+                            backgroundColor: 'rgb(255,255,255)',
+                            shadowColor: '#26000000',
+                            shadowOffset: {height: 5, width: 0},
+                            shadowOpacity: 1,
+                            shadowRadius: 1,
+                            elevation: 5,
                           }}>
                           <View
                             style={{
-                              flexDirection: 'row',
-                              marginBottom: 4,
+                              paddingHorizontal: 6,
+                              paddingVertical: 5,
                             }}>
-                            <TouchableOpacity
-                              activeOpacity={1}
-                              onPress={() => setVisibility(true)}>
-                              <ShortGlassSVG />
-                            </TouchableOpacity>
-                            <Image source={item.image} />
-                            <TouchableOpacity
-                              activeOpacity={1}
-                              onPress={() =>
-                                navigation.navigate('ProductDetail')
-                              }>
-                              <GreyArrowSVG />
-                            </TouchableOpacity>
-                          </View>
-                          <View
-                            style={{
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                            }}>
-                            <Text
-                              style={[styles.liquorTitle]}
-                              numberOfLines={1}>
-                              Liquor is one line
-                            </Text>
-                            <Text style={[styles.quantity]}>700ml</Text>
-                            <Text style={[styles.price]}>$167.50</Text>
-                            <View style={styles.cloudbarText}>
-                              <CloudCartSVG />
+                            <View
+                              style={{
+                                flexDirection: 'row',
+                                marginBottom: 4,
+                              }}>
+                              <TouchableOpacity
+                                activeOpacity={1}
+                                onPress={() => setVisibility(true)}>
+                                <ShortGlassSVG />
+                              </TouchableOpacity>
+                              <Image source={item.image} />
+                              <TouchableOpacity
+                                activeOpacity={1}
+                                onPress={() =>
+                                  navigation.navigate('ProductDetail')
+                                }>
+                                <GreyArrowSVG />
+                              </TouchableOpacity>
+                            </View>
+                            <View
+                              style={{
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}>
                               <Text
-                                style={[
-                                  styles.text_9_B,
-                                  {
-                                    marginLeft: 6,
-                                    paddingTop: 7,
-                                    paddingBottom: 7,
-                                  },
-                                ]}>
-                                CLOUDBAR
+                                style={[styles.liquorTitle]}
+                                numberOfLines={1}>
+                                Liquor is one line
                               </Text>
+                              <Text style={[styles.quantity]}>700ml</Text>
+                              <Text style={[styles.price]}>$167.50</Text>
+                              <View style={styles.cloudbarText}>
+                                <CloudCartSVG />
+                                <Text
+                                  style={[
+                                    styles.text_9_B,
+                                    {
+                                      marginLeft: 6,
+                                      paddingTop: 7,
+                                      paddingBottom: 7,
+                                    },
+                                  ]}>
+                                  CLOUDBAR
+                                </Text>
+                              </View>
                             </View>
                           </View>
                         </View>
-                      </View>
-                    );
-                  })}
-                </ScrollView>
-              </>
-            );
-          })}
+                      );
+                    })}
+                  </ScrollView>
+                </>
+              );
+            })}
         </View>
       </ScrollView>
     </ImageBackground>
   );
 }
 const mapStateToProps = state => {
-  return {state};
+  return {userInfo: state.reducer};
 };
 
 export default connect(mapStateToProps)(HomeScreen);

@@ -86,7 +86,16 @@ function OTP({navigation, ...restProps}) {
     try {
       const otp = /(\d{4})/g.exec(message)[1];
       let finalOTP = await handleOTP(otp);
-      setOtpArray(finalOTP);
+      setOtpArray(otp => {
+        let final = otp.every(item => {
+          return item.length == 0;
+        });
+        if (final) {
+          return finalOTP;
+        }
+        return otp;
+      });
+
       Keyboard.dismiss();
       RNOtpVerify.removeListener();
     } catch (error) {

@@ -23,6 +23,7 @@ import {showSnackBar} from '../../Components/snackbar';
 import {SHOW_LOADING} from '../../utils/constant';
 import CallApi from '../../utils/callApi';
 import Loader from '../../Components/loader';
+import {CheckArrowSVG} from '../../Components/allSVG';
 
 import BackgroundImage from '../../Components/backgroundImage';
 import {spacing} from '../../Themes/fonts';
@@ -67,7 +68,7 @@ function SignIn({navigation, ...restProps}) {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 404) {
           showSnackBar({
-            message: 'phone number not registered',
+            message: 'Phone number not registered',
           });
         } else if (error.message === 'Network Error') {
           showSnackBar({
@@ -136,7 +137,12 @@ function SignIn({navigation, ...restProps}) {
               <View
                 style={[
                   styles.inputBox,
-                  {flexDirection: 'row', paddingLeft: 0},
+                  {
+                    flexDirection: 'row',
+                    paddingLeft: 0,
+                    alignItems: 'center',
+                    paddingRight: 5,
+                  },
                 ]}
                 ref={ref => setRef(ref, 'phoneNumber')}>
                 <TextInput
@@ -158,6 +164,7 @@ function SignIn({navigation, ...restProps}) {
                   maxLength={12}
                   onChangeText={text => setData('phoneNumber', text)}
                 />
+                <Text>{phoneNumberError === true && <CheckArrowSVG />}</Text>
               </View>
               <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
                 {phoneNumberError}

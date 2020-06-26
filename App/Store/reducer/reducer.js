@@ -9,11 +9,14 @@ import {
   FORGOT_PASSWORD_STATUS, /// checked
   FORGET_OTP_REQUEST_STATUS, /// CHECKED
   FORGET_VIA_OTP_STATUS,
+  ALL_CATEGORY,
 } from '../../utils/constant';
+import {act} from 'react-test-renderer';
 let initialState = {
   user: '',
   isLoading: false,
   otpResponse: null, //// checked
+  allCategory: [],
   signupResponse: null,
   loginResponse: null,
   resendOtpResponse: null,
@@ -23,12 +26,15 @@ let initialState = {
 };
 
 export const reducer = (state = initialState, action) => {
-  console.log('state>>>action>>>>>>>>>>>>', action);
+  console.log('state>>>action>>>>>>>>>>>>', action.type, 'payload', action);
   switch (action.type) {
     case RESTE_OTP_RESPONSE: //// checked
       return {...state, otpResponse: null};
     case LOGIN_STATUS:
       return {...state, loginResponse: action.payload};
+
+    case ALL_CATEGORY:
+      return {...state, allCategory: action.payload};
     // case LOGIN_FAILED:
     //   return {...state, loginResponse: action.payload};
     case FORGET_VIA_OTP_STATUS:

@@ -121,7 +121,10 @@ function ForgotPassword({navigation, ...restProps}) {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 404) {
           showSnackBar({
-            message: data.statusMessage,
+            message:
+              data.statusCode === 'mobileNotFound'
+                ? 'Phone number not registered'
+                : 'Email not registered',
           });
         } else if (error.message === 'Network Error') {
           showSnackBar({
@@ -136,7 +139,7 @@ function ForgotPassword({navigation, ...restProps}) {
   let submit = () => {
     let data = {};
     if (showEmailField === true) {
-      data = {email};
+      data = {email: email.trim()};
       callService('post', 'users/reset-password/email', data);
     } else if (showEmailField === false) {
       let otpData = {
@@ -196,6 +199,7 @@ function ForgotPassword({navigation, ...restProps}) {
                     style={{flex: 1}}
                     placeholder="Enter email address"
                     value={email}
+                    maxLength={50}
                     autoCapitalize={'none'}
                     onFocus={() => onFocus('email')}
                     onBlur={() => onBlur('email')}

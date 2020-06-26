@@ -71,7 +71,7 @@ function SignInViaEmail({navigation, ...restProps}) {
   };
 
   let signIn = () => {
-    let data = {email, password};
+    let data = {email: email.trim(), password};
     let headers = {
       'content-type': 'application/json',
       token: config.headerToken,
@@ -94,11 +94,11 @@ function SignInViaEmail({navigation, ...restProps}) {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 401) {
           showSnackBar({
-            message: 'Password is not Valid',
+            message: 'Password is invalid',
           });
         } else if (status === 404) {
           showSnackBar({
-            message: 'Email id not found.',
+            message: 'Email not registered',
           });
         } else if (error.message === 'Network Error') {
           showSnackBar({
@@ -120,6 +120,9 @@ function SignInViaEmail({navigation, ...restProps}) {
 
   let setData = (field, text) => {
     let isValid = checkField(field, text.trim());
+    if (text.trim().length < 8) {
+      isValid = false;
+    }
     setState({...state, [field]: text, [`${field}Error`]: isValid});
   };
 
@@ -207,6 +210,7 @@ function SignInViaEmail({navigation, ...restProps}) {
                       style={{flex: 1}}
                       placeholder={item.placeHolder}
                       value={item.value}
+                      maxLength={item.length === 'email' ? 50 : 30}
                       secureTextEntry={
                         item.field === 'password' ? isPasswordHide : undefined
                       }
@@ -231,7 +235,7 @@ function SignInViaEmail({navigation, ...restProps}) {
                       </TouchableOpacity>
                     )}
                   </View>
-                  <Text style={[styles.regularText, {color: 'red'}]}>
+                  <Text style={[styles.text, {color: 'red', marginTop: 5}]}>
                     {item.error}
                   </Text>
                 </View>

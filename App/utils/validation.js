@@ -1,16 +1,16 @@
 function checkField(field, data) {
   if (data === '') {
-    if (field == 'phoneNumber') field = 'phone number';
-    if (field == 'firstName') field = 'first name';
-    if (field == 'lastName') field = 'last name';
-    if (field == 'email') field = 'email';
-    if (field == 'password') field = 'password';
+    if (field == 'phoneNumber') field = 'Phone number';
+    if (field == 'firstName') field = 'First name';
+    if (field == 'lastName') field = 'Last name';
+    if (field == 'email') field = 'Email';
+    if (field == 'password') field = 'Password';
 
     return `${field} is required`;
   }
   if (field === 'email') {
     if (!isValidEmailFormat(data)) {
-      return 'enter valid email address';
+      return 'Email is required';
     }
     return true;
   }
@@ -42,7 +42,7 @@ function calculatePasswordScore(text, isValid) {
 function validPassword(field, data) {
   let finalMessage = '';
   if (data === '') {
-    return 'password is required';
+    return 'Password is required';
   }
   if (!digit(data)) {
     if (finalMessage.length !== 0) {
@@ -69,7 +69,7 @@ function validPassword(field, data) {
     finalMessage = finalMessage.concat('min 8 characters');
   }
   if (finalMessage.length > 0) {
-    finalMessage = 'should contain at least ' + finalMessage;
+    finalMessage = 'Should contain at least ' + finalMessage;
   }
   return finalMessage;
 }
@@ -88,7 +88,7 @@ function char(data) {
   return re.test(data);
 }
 function maxMin(data) {
-  var re = /^.{8,50}$/;
+  var re = /^.{8,30}$/;
   return re.test(data);
 }
 function isValidEmailFormat(email) {
@@ -98,10 +98,10 @@ function isValidEmailFormat(email) {
 
 function isValidPhoneNumber(number) {
   if (number.length != 10) {
-    return 'phone number should be of 10 digit';
+    return 'Phone number should be of 10 digit';
   }
   if (!/^[6789]\d{9}$/.test(number)) {
-    return 'phone number should start with 6, 7, 8 or 9';
+    return 'Phone number should start with 6, 7, 8 or 9';
   }
   return true;
 }
