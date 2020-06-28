@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import {Text, ImageBackground, View, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {getCategory} from '../../Store/actions/userAction';
+import LinearGradient from 'react-native-linear-gradient';
 import Store from '../../Store/index';
 import styles from '../../Themes/styles';
 
 import Swiper from 'react-native-swiper';
-import AsyncStorage from '@react-native-community/async-storage';
 import {
   BarzPromotion,
   ArrowSVG,
@@ -17,27 +17,17 @@ import {
   SearchSVG,
   NotificationSVG,
   BarzWalletSVG,
-  VodkaSVG,
-  BrandySVG,
-  WhiskeySVG,
-  RumSVG,
-  GinSVG,
-  TaquilaSVG,
-  WineSVG,
-  BeerSVG,
-  NonAlcoholicSVG,
-  MoreSVG,
 } from '../../Components/allSVG';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import getImage from '../../utils/getImage';
 import {spacing} from '../../Themes/fonts';
 import ShotGlassModal from '../../Components/shotGlassModal';
 
-function HomeScreen({navigation, userInfo}) {
+function HomeScreen({navigation, category}) {
   const [visible, setVisibility] = useState(false);
   const [allCategories, setAllCategories] = useState([]);
 
-  let {allCategory} = userInfo;
+  let {allCategory} = category;
 
   useEffect(() => {
     Store.dispatch(getCategory());
@@ -45,13 +35,13 @@ function HomeScreen({navigation, userInfo}) {
 
   useEffect(() => {
     setAllCategories(allCategory);
-  }, [userInfo]);
+  }, [category]);
 
-  console.log('allcategory>>>>>>>>>>>>>>>', allCategories);
   return (
     <ImageBackground
       style={{flex: 1}}
-      source={require('../../Assets/images/homescreen.png')}>
+      source={require('../../Assets/images/homescreen.png')}
+      resizeMode={'cover'}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <ShotGlassModal
           visible={visible}
@@ -100,7 +90,7 @@ function HomeScreen({navigation, userInfo}) {
             </View>
 
             <Swiper
-              style={{height: spacing(160)}}
+              style={{height: 160}}
               activeDot={<View style={styles.activeDot} />}
               dot={<View style={styles.promotionDot} />}
               paginationStyle={{bottom: 0}}
@@ -144,7 +134,7 @@ function HomeScreen({navigation, userInfo}) {
                 flex: 1,
                 flexDirection: 'row',
                 flexWrap: 'wrap',
-                justifyContent: 'space-between',
+                justifyContent: 'space-evenly',
               }}>
               {allCategories.length > 0 &&
                 allCategories.map(item => {
@@ -156,16 +146,26 @@ function HomeScreen({navigation, userInfo}) {
                         height: 78,
                         marginBottom: 7,
                       }}>
-                      <TouchableOpacity
-                        style={styles.drinkCategoryStyle}
-                        onFocus={{backgroundColor: 'yellow'}}>
+                      <LinearGradient
+                        start={{x: 1, y: 0}}
+                        end={{x: 0, y: 1}}
+                        colors={['rgb(229,153,0)', 'rgb(255,57,132)']}
+                        style={styles.drinkCategoryStyle}>
                         <Image
                           source={{
                             uri: item.img_key,
                           }}
                           style={{width: 25, height: 25}}
                         />
-                      </TouchableOpacity>
+                      </LinearGradient>
+                      {/* <TouchableOpacity style={styles.drinkCategoryStyle}>
+                        <Image
+                          source={{
+                            uri: item.img_key,
+                          }}
+                          style={{width: 25, height: 25}}
+                        />
+                      </TouchableOpacity> */}
                       <Text style={styles.drinkName}>{item.category_name}</Text>
                     </View>
                   );
@@ -204,7 +204,7 @@ function HomeScreen({navigation, userInfo}) {
                         <View
                           style={{
                             width: 109,
-                            height: 145,
+                            height: 150,
                             marginRight: index < 3 ? 8 : undefined,
                             borderRadius: 7,
                             backgroundColor: 'rgb(255,255,255)',
@@ -223,6 +223,7 @@ function HomeScreen({navigation, userInfo}) {
                               style={{
                                 flexDirection: 'row',
                                 marginBottom: 4,
+                                justifyContent: 'space-evenly',
                               }}>
                               <TouchableOpacity
                                 activeOpacity={1}
@@ -279,7 +280,8 @@ function HomeScreen({navigation, userInfo}) {
   );
 }
 const mapStateToProps = state => {
-  return {userInfo: state.reducer};
+  console.log('State>>>>>>>>>>>>>>>>>', state);
+  return {category: state.Category};
 };
 
 export default connect(mapStateToProps)(HomeScreen);

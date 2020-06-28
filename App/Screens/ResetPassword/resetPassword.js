@@ -28,6 +28,7 @@ import {showSnackBar} from '../../Components/snackbar';
 import Store from '../../Store';
 import CallApi from '../../utils/callApi';
 import getImage from '../../utils/getImage';
+import config from "../../Config/config"
 
 function ResetPassword({navigation, ...restProps}) {
   let {isLoading = false} = restProps.userInfo;
@@ -118,11 +119,16 @@ function ResetPassword({navigation, ...restProps}) {
         otp,
         password: newPassword,
       };
+      let headers = {
+        'content-type': 'application/json',
+        token: config.headerToken,
+      };
       Store.dispatch({type: SHOW_LOADING, payload: true});
-      CallApi('put', 'users/reset-password/otp', data)
+      CallApi('put', 'auth/users/reset-password/otp', data, headers)
         .then(res => {
           Store.dispatch({type: SHOW_LOADING, payload: true});
           if (res.status === 200) {
+            Store.dispatch({type: SHOW_LOADING, payload: false});
             let {response} = res.data;
             let {data, token} = response;
             let userData = {data, token};
@@ -132,6 +138,7 @@ function ResetPassword({navigation, ...restProps}) {
         })
         .catch(error => {
           let {data, status} = error.response || {};
+          console.log('error>>>>>', data);
           Store.dispatch({type: SHOW_LOADING, payload: false});
           if (status === 404) {
             showSnackBar({
@@ -298,6 +305,6 @@ function ResetPassword({navigation, ...restProps}) {
   );
 }
 const mapStateToProps = state => {
-  return {userInfo: state.reducer};
+  return {userInfo: state.User};
 };
 export default connect(mapStateToProps)(ResetPassword);

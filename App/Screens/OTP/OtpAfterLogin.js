@@ -23,22 +23,14 @@ import Store from '../../Store/index';
 import {SquareSVG, StrawSvg} from '../../Components/allSVG';
 
 import {SHOW_LOADING} from '../../utils/constant';
-import {login} from '../../Store/actions/userAction';
 import Loader from '../../Components/loader';
+import {UPDATE_USER_DATA_SUCCESS} from '../../utils/constant';
 import config from '../../Config/config';
 
 import {digit} from '../../utils/validation';
 
 function OTP({navigation, ...restProps}) {
-  let {
-    firstName = '',
-    lastName = '',
-    country_code = '',
-    email = '',
-    password = '',
-    mobile = '',
-    type = '',
-  } =
+  let {country_code = '', mobile = '', type = ''} =
     (restProps.route && restProps.route.params && restProps.route.params) || {};
   let {userInfo} = restProps;
   let eleRef = useRef([]);
@@ -61,8 +53,9 @@ function OTP({navigation, ...restProps}) {
   let onBlur = field => {
     eleRef.current[field].setNativeProps({style: {borderColor: offWhite}});
   };
-
-  let {isLoading = false} = userInfo;
+  console.log('userInfouserInfouserInfouserInfouserInfo', userInfo);
+  let {isLoading = false, loginResponse} = userInfo;
+  let {token = ''} = loginResponse;
 
   useEffect(() => {
     readOtp();
@@ -103,35 +96,35 @@ function OTP({navigation, ...restProps}) {
     }
   };
 
-  let callService = (method, route, data, reset = false, type = '') => {
+  let callService = (method, route, data) => {
     let headers = {
       'content-type': 'application/json',
-      token: config.headerToken,
+      token: token,
     };
     Store.dispatch({type: SHOW_LOADING, payload: true});
     CallApi(method, route, data, headers)
       .then(res => {
-        Store.dispatch({type: SHOW_LOADING, payload: false});
         if (res.status === 200) {
           setTimerClose(true);
-          if (reset) {
-            let {mobile, country_code, otp} = data;
-            let dataToSend = {mobile, country_code, otp};
-            navigation.dispatch(
-              StackActions.replace('ResetPassword', dataToSend),
-            );
-          }  else {
-            let {response} = res.data;
-            let {data, token} = response;
-            let userData = {data, token};
-            AsyncStorage.setItem('userInfo', JSON.stringify(userData));
-            Store.dispatch(login(userData));
-          }
+          CallApi('get', 'users/home/profile', {}, headers)
+            .then(response => {
+              if (response.status === 200) {
+                Store.dispatch({type: SHOW_LOADING, payload: false});
+                Store.dispatch({
+                  type: UPDATE_USER_DATA_SUCCESS,
+                  payload: response.data.response,
+                });
+                navigation.pop();
+              }
+            })
+            .catch(error => {
+              Store.dispatch({type: SHOW_LOADING, payload: true});
+            });
+          console.log('Suucess>>>>>>>', res);
         }
       })
       .catch(error => {
         let {data, status} = error.response || {};
-        console.log('Error >>>>>>', data);
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (status === 400) {
           showSnackBar({
@@ -158,32 +151,12 @@ function OTP({navigation, ...restProps}) {
   let onSubmit = () => {
     let otp = otpArray[0] + otpArray[1] + otpArray[2] + otpArray[3];
     if (stopTime === false) {
-      if (type === 'signup') {
-        let data = {
-          first_name: firstName,
-          last_name: lastName,
-          password,
-          mobile,
-          email,
-          otp: parseInt(otp),
-          country_code: country_code,
-        };
-        callService('post', 'auth/users/signup', data);
-      } else if (type === 'signin') {
-        let data = {
-          mobile,
-          country_code: config.countryCode,
-          otp: parseInt(otp),
-        };
-        callService('post', 'auth/users/signin/otp-verify', data);
-      } else if (type === 'reset') {
-        let data = {
-          mobile,
-          country_code: country_code,
-          otp: parseInt(otp),
-        };
-        callService('post', 'auth/users/otp/verify', data, true);
-      }
+      let data = {
+        mobile,
+        country_code: country_code,
+        otp,
+      };
+      callService('put', 'auth/users/profile', data);
     } else {
       showSnackBar({message: 'Otp Expired'});
     }

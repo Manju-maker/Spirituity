@@ -76,9 +76,8 @@ function SignInViaEmail({navigation, ...restProps}) {
       'content-type': 'application/json',
       token: config.headerToken,
     };
-    console.log('headers_______________________', headers);
     Store.dispatch({type: SHOW_LOADING, payload: true});
-    CallApi('post', 'users/signin', data, headers)
+    CallApi('post', 'auth/users/signin', data, headers)
       .then(res => {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (res.status === 200) {
@@ -272,7 +271,7 @@ function SignInViaEmail({navigation, ...restProps}) {
   );
 }
 const mapStateToProps = state => {
-  return {userInfo: state.reducer};
+  return {userInfo: state.User};
 };
 
 export default connect(mapStateToProps)(SignInViaEmail);

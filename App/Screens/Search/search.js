@@ -23,12 +23,13 @@ import {
 
 function Search({navigation}) {
   return (
+    <ScrollView
+    contentContainerStyle={{flexGrow: 1}}
+    showsVerticalScrollIndicator={false}>
     <ImageBackground
       source={getImage('searchBackGround')}
       style={{
         flex: 1,
-        // height: spacing(392),
-        // width: Dimensions.get('screen').width,
       }}>
       <View style={{flex: 1}}>
         <View
@@ -226,9 +227,7 @@ function Search({navigation}) {
               </View>
             </View>
           </View>
-          <ScrollView
-            contentContainerStyle={{flexGrow: 1}}
-            showsVerticalScrollIndicator={false}>
+        
             <View
               style={{
                 flex: 1,
@@ -299,10 +298,10 @@ function Search({navigation}) {
                 );
               })}
             </View>
-          </ScrollView>
         </View>
       </View>
     </ImageBackground>
+    </ScrollView>
   );
 }
 

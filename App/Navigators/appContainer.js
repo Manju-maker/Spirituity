@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SignUp from '../Screens/SignUp/signup';
 import SignIn from '../Screens/SignIn/signin';
 import OTP from '../Screens/OTP/otp';
+import OTPSCREEN from '../Screens/OTP/OtpAfterLogin';
 
 import BoardingScreen from '../Screens/BoardingScreen/boardingScreen';
 import {connect} from 'react-redux';
@@ -66,6 +67,11 @@ function AppContainer({userInfo, navigation}) {
           <Stack.Screen name="Notification" component={Notification} />
           <Stack.Screen name="ProfileSettings" component={ProfileSettings} />
           <Stack.Screen name="ProductDetail" component={ProductDetail} />
+          <Stack.Screen
+            name="OTPSCREEN"
+            component={OTPSCREEN}
+            options={modalOptions}
+          />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator
@@ -98,7 +104,8 @@ function AppContainer({userInfo, navigation}) {
   );
 }
 const mapStateToProps = state => {
-  return {userInfo: state.reducer};
+  console.log('State in app container>>>>', state);
+  return {userInfo: state.User};
 };
 
 export default connect(mapStateToProps)(AppContainer);

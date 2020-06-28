@@ -8,18 +8,13 @@ const CallApi = (
   data,
   headers = {
     'content-type': 'application/json',
-    token: 'jj2njndejn1oi3ien3ndono11inn3nfy8r7',
+    Accept: 'application/json',
   },
 ) => {
-  console.log('headers>>>>>', headers);
   return new Promise((resolve, reject) => {
-    console.log('confiddd', config.serverURL);
-
     if (method === 'get' && !isEmpty(data)) {
       let queryParams = encodeURI(JSON.stringify(data));
       url = `${config.serverURL}${url}?params=${queryParams}`;
-    } else if (method === 'get') {
-      url = `https://devapi.spirituity.cloudzmall.com/api/v1/${url}`;
     } else {
       url = `${config.serverURL}${url}`;
     }

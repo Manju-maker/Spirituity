@@ -56,7 +56,7 @@ function Timer({
       token: config.headerToken,
     };
     console.log('data for resed >>>', data);
-    CallApi('put', 'users/otp/resend', data, headers)
+    CallApi('put', 'auth/users/otp/resend', data, headers)
       .then(res => {
         console.log('response for resend otp>>>', res.data);
       })
@@ -110,6 +110,6 @@ function Timer({
   );
 }
 const mapStateToProps = state => {
-  return {userInfo: state.reducer};
+  return {userInfo: state.User};
 };
 export default connect(mapStateToProps)(Timer);

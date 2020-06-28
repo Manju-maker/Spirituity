@@ -11,7 +11,8 @@ export const isIphoneX = () => {
   return isIos
     ? dimen.height === 812 ||
         dimen.width === 812 ||
-        (dimen.height === 896 || dimen.width === 896)
+        dimen.height === 896 ||
+        dimen.width === 896
     : dimen.height > 736;
 };
 
@@ -199,7 +200,6 @@ const QB_18_18 = {
   lineHeight: 18,
   fontFamily: 'Quicksand-Bold',
 };
-
 const AR_9_8 = {
   fontSize: scale(9),
   lineHeight: 8,
@@ -222,7 +222,13 @@ const AR_14 = {
   fontFamily: 'AvenirNextLTPro-Regular',
 };
 
+const QS_12 = {
+  fontFamily: 'Quicksand-Bold',
+  fontSize: scale(12),
+};
+
 export {
+  QS_12,
   QB_9_9,
   AR_12_18,
   QB_13,

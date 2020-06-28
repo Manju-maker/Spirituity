@@ -1,31 +1,49 @@
 import {all, put, takeLatest, call} from 'redux-saga/effects';
-import {SHOW_LOADING, GET_CATEGORY, ALL_CATEGORY} from '../../utils/constant';
+import {
+  SHOW_LOADING,
+  UPDATE_USER_DATA,
+  UPDATE_USER_DATA_SUCCESS,
+} from '../../utils/constant';
+import {showSnackBar} from '../../Components/snackbar';
 import CallApi from '../../utils/callApi';
 
-let headers = {
-  'content-type': 'application/json',
-  token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtb2JpbGUiOiI3NjE4NDAzNTk5IiwiZW1haWwiOiJtYW5qdUBnbWFpbC5jb20iLCJyb2xlX25hbWUiOiJVU0VSIiwiaWF0IjoxNTkzMDU5OTk0LCJleHAiOjE1OTU2NTE5OTR9.RO7Og3eYXUsz4BiTiK498oMpA5Kg6KpqWi_NM-re9Bk',
-};
-
-export function* getCategory() {
+export function* updateUserData(payload) {
   try {
-    // yield put({type: SHOW_LOADING, payload: true});
+    console.log('Call Received for update data ?????>>>>', payload);
     const response = yield call(
       CallApi,
-      'get',
-      'users/home/categories',
-      {},
-      headers,
+      'put',
+      'auth/users/profile',
+      payload.payload,
+      payload.headers,
     );
-    let data = response.data.response;
-    yield put({type: ALL_CATEGORY, payload: data});
+    console.log('after response from Server>>>', response.status);
+    const getData = yield call(
+      CallApi,
+      'get',
+      'users/home/profile',
+      {},
+      payload.headers,
+    );
+    if (getData.status === 200) {
+      showSnackBar({message: 'Data Updated Successfully.'});
+    }
+    yield put({type: UPDATE_USER_DATA_SUCCESS, payload: getData.data.response});
   } catch (err) {
-    // yield put({type: SHOW_LOADING, payload: false});
-    console.log('errrrr>>>>>>>', err);
+    let {data, status} = err.response || {};
+    console.log("error >>>>>>>",data)
+    if (status === 401) {
+      showSnackBar({
+        message: 'Password is not Valid.',
+      });
+    } else if (err.message === 'Network Error') {
+      showSnackBar({
+        message: 'Internet connection is required to proceed',
+      });
+    }
   }
 }
 
 export default function* root() {
-  yield all([takeLatest(GET_CATEGORY, getCategory)]);
+  yield all([takeLatest(UPDATE_USER_DATA, updateUserData)]);
 }

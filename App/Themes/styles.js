@@ -45,6 +45,7 @@ const {
   offBlack,
   white,
   lightWhite,
+  lightBlue
 } = colors;
 
 const styles = StyleSheet.create({
@@ -293,7 +294,7 @@ const styles = StyleSheet.create({
     color: black,
     textAlign: 'center',
     marginTop: 1,
-    paddingVertical: 2,
+    paddingTop: 3,
     ...space,
   },
   time: {
@@ -344,7 +345,7 @@ const styles = StyleSheet.create({
     width: 95,
     // height: 24,
     borderRadius: 10.5,
-    backgroundColor: '#9852eb',
+    backgroundColor: 'rgb(152,82,235)',
     flexDirection: 'row',
     ...centerText,
   },
@@ -356,6 +357,10 @@ const styles = StyleSheet.create({
     ...centerText,
     borderRadius: 8,
     marginBottom: 7,
+  },
+  profileScreenText: {
+    color: lightBlue,
+    ...QB_18_20,
   },
   barzButtonText: {
     color: brightWhite,

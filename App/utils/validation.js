@@ -5,7 +5,9 @@ function checkField(field, data) {
     if (field == 'lastName') field = 'Last name';
     if (field == 'email') field = 'Email';
     if (field == 'password') field = 'Password';
-
+    if (field === 'oldPassword') field = 'Old Password';
+    if (field === 'newPassword') field = 'New Password';
+    if (field === 'confirmPassword') field = 'Confirm Password';
     return `${field} is required`;
   }
   if (field === 'email') {
@@ -41,8 +43,17 @@ function calculatePasswordScore(text, isValid) {
 
 function validPassword(field, data) {
   let finalMessage = '';
-  if (data === '') {
+  if (data === '' && field === "password") {
     return 'Password is required';
+  }
+  if(data === '' && field === "newPassword"){
+    return 'New Password is required'
+  }
+  if(data === '' && field === 'confirmPassword'){
+    return 'Confirm Password is required'
+  }
+  if(data === '' && field === 'oldPassword'){
+    return 'Old Password is required'
   }
   if (!digit(data)) {
     if (finalMessage.length !== 0) {

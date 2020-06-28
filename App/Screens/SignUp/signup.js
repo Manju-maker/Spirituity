@@ -92,7 +92,7 @@ function SignUp({navigation, userInfo}) {
       token: config.headerToken,
     };
     Store.dispatch({type: SHOW_LOADING, payload: true});
-    CallApi('post', 'users/otp', data, headers)
+    CallApi('post', 'auth/users/otp', data, headers)
       .then(response => {
         Store.dispatch({type: SHOW_LOADING, payload: false});
         if (response.status === 200) {
@@ -393,7 +393,7 @@ function SignUp({navigation, userInfo}) {
   );
 }
 const mapStateToProps = state => {
-  return {userInfo: state.reducer};
+  return {userInfo: state.User};
 };
 
 export default connect(mapStateToProps)(SignUp);

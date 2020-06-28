@@ -140,14 +140,14 @@ function ForgotPassword({navigation, ...restProps}) {
     let data = {};
     if (showEmailField === true) {
       data = {email: email.trim()};
-      callService('post', 'users/reset-password/email', data);
+      callService('post', 'auth/users/reset-password/email', data);
     } else if (showEmailField === false) {
       let otpData = {
         mobile: phoneNumber.replace(/\s/g, ''),
         country_code: countryCode,
         type: 'reset',
       };
-      callService('post', 'users/otp', otpData);
+      callService('post', 'auth/users/otp', otpData);
     }
   };
 
@@ -294,7 +294,7 @@ function ForgotPassword({navigation, ...restProps}) {
 }
 
 const mapStateToProps = state => {
-  return {userInfo: state.reducer};
+  return {userInfo: state.User};
 };
 
 export default connect(mapStateToProps)(ForgotPassword);

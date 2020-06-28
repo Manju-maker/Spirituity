@@ -17,5 +17,6 @@ const colors = {
   lightWhite: '#ffffff',
   lightPurple: '#6727B4',
   disableColor: '#dedddd',
+  lightBlue: 'rgb(103,39,180)',
 };
 export {colors};
